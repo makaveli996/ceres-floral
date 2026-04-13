@@ -1,32 +1,41 @@
-// Import fonts
+// Wix Madefor Display — static woff2 (_dev/fonts). Replaces former PT Sans stack.
+
 @font-face {
-  font-family: "PT Sans";
-  src: url("~_dev/fonts/PTSans-Regular.woff2") format("woff2");
+  font-family: "Wix Madefor Display";
+  src: url("~_dev/fonts/WixMadeforDisplay-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "PT Sans";
-  src: url("~_dev/fonts/PTSans-Italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
+  font-family: "Wix Madefor Display";
+  src: url("~_dev/fonts/WixMadeforDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "PT Sans";
-  src: url("~_dev/fonts/PTSans-Bold.woff2") format("woff2");
+  font-family: "Wix Madefor Display";
+  src: url("~_dev/fonts/WixMadeforDisplay-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Wix Madefor Display";
+  src: url("~_dev/fonts/WixMadeforDisplay-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "PT Sans";
-  src: url("~_dev/fonts/PTSans-BoldItalic.woff2") format("woff2");
-  font-weight: 700;
-  font-style: italic;
+  font-family: "Wix Madefor Display";
+  src: url("~_dev/fonts/WixMadeforDisplay-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
   font-display: swap;
 }

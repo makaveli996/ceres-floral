@@ -1,12 +1,12 @@
 ---
-description: Typografia SCSS — mixiny z _mixins.scss (PT Sans, skale z designu)
+description: Typografia SCSS — mixiny z _mixins.scss (Wix Madefor Display, skale z designu)
 globs: _dev/css/**/*.scss
 alwaysApply: false
 ---
 
 # Typografia — preferuj mixiny z `_dev/css/custom/utils/_mixins.scss`
 
-- **Źródło prawdy** dla rodziny czcionki (`"PT Sans"`), rozmiarów, `line-height` i wag w stylu projektu to mixiny w `_dev/css/custom/utils/_mixins.scss`: m.in. `sign-regular` / `sign-bold`, `body-regular` / `body-bold`, `heading-5-*` … `heading-1-*`.
+- **Źródło prawdy** dla rodziny czcionki (`"Wix Madefor Display"`), rozmiarów, `line-height` i wag w stylu projektu to mixiny w `_dev/css/custom/utils/_mixins.scss`: m.in. `sign-regular` / `sign-bold`, `body-regular` / `body-bold`, `heading-5-*` … `heading-1-*`.
 - **Zawsze najpierw** dopasuj tekst do istniejącego mixina (np. body 18px/1.4 → `body-regular`; H5 20px → `heading-5-bold`). Unikaj ręcznego powielania `font-size` + `line-height` + `font-family`, jeśli mixin już to definiuje.
 - Gdy rozmiar z Figmy **nie ma** odpowiednika 1:1 w mixinach, użyj **najbliższego** mixina jako bazy (`font-family`, `letter-spacing`, często `line-height`), a **tylko różnicę** ustaw jawnie (np. `font-size`, `font-weight`), albo dodaj nowy mixin w `_mixins.scss`, jeśli token ma się powtarzać w wielu miejscach.
 - Pliki sekcji mają już `@use "../utils" as *;` — mixiny są dostępne bez dodatkowego importu.

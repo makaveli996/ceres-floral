@@ -36,7 +36,7 @@ services:
       # kluczowe: nie kasuj DB w trakcie auto-install
       PS_ERASE_DB: 0
     entrypoint: ["/docker-entrypoint-prestashop.sh"]
-    command: ["apache2-foreground"]
+    # CMD from image: /tmp/docker_run.sh (PS_INSTALL_AUTO, then apache). Do not override with apache2-foreground only.
     volumes:
       - ./prestashop:/var/www/html
       - ./scripts/docker-entrypoint-prestashop.sh:/docker-entrypoint-prestashop.sh:ro

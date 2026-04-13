@@ -3,7 +3,7 @@
 .container-xl {
   width: 100%;
   height: 100%;
-  max-width: 1710px;
+  max-width: 1464px;
   padding: 0 $grid-padding;
   margin: 0 auto;
 
@@ -15,7 +15,7 @@
 .container-lg {
   width: 100%;
   height: 100%;
-  max-width: 1510px;
+  max-width: 1410px;
   padding: 0 $grid-padding;
   margin: 0 auto;
 
@@ -24,22 +24,22 @@
   }
 }
 
-.container-lg-right {
-  width: 100%;
-  height: 100%;
-  max-width: calc(100% - ((100% - 1510px) / 2));
-  padding: 0 0 0 $grid-padding;
-  margin: 0 0 0 auto;
+// .container-lg-right {
+//   width: 100%;
+//   height: 100%;
+//   max-width: calc(100% - ((100% - 1510px) / 2));
+//   padding: 0 0 0 $grid-padding;
+//   margin: 0 0 0 auto;
 
-  @include md(lg) {
-    padding: 0 $grid-padding--mobile;
-  }
-}
+//   @include md(lg) {
+//     padding: 0 $grid-padding--mobile;
+//   }
+// }
 
 .container-md {
   width: 100%;
   height: 100%;
-  max-width: 1040px;
+  max-width: 1300px;
   padding: 0 $grid-padding;
   margin: 0 auto;
 
@@ -57,10 +57,4 @@
   &::after {
     display: none;
   }
-}
-
-// FO system pages: cart, checkout, account (tc-layout--system-page-container-lg.tpl on #content-wrapper)
-#content-wrapper.tc-system-page {
-  padding-top: 20px;
-  padding-bottom: 50px;
 }
