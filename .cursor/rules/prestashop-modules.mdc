@@ -1,0 +1,75 @@
+---
+description: Conventions for writing and editing PrestaShop modules in this project
+globs: prestashop/modules/**/*.php
+alwaysApply: false
+---
+
+# PrestaShop module authoring
+
+- **Do not modify core.** Extend via hooks, Symfony services, and module code only.
+- **Module structure:** One main class file (e.g. `ps_webp.php`), and a `config.xml` with `<name>`, `<displayName>`, `<description>`, `<version>`, `<author>`, `<is_configurable>`, `<need_instance>`. Keep `displayName` and `description` in sync with the class `$this->displayName` / `$this->description` (use `$this->trans('...', [], 'Modules.Modulename.Admin')` in the class).
+- **Author:** Always set `$this->author = 'Rafal Majdan';` in the module class and `<author><![CDATA[Rafal Majdan]]></author>` in `config.xml`. Do not use a different author name.
+- **Logo:** Every created module must include a `logo.png` image in the module root (used in the module list in BO). Copy it from `prestashop/modules/tc_stickybar/logo.png`.
+- **After creating a new module:** Run `make perms-cache` in the project root terminal so the container (www-data) has write access to `prestashop/modules` and related paths; required for config, uploads, and cache.
+- **Security:** Add an `index.php` in each folder that only contains headers and `exit;` so directories are not listable (see `prestashop/modules/ps_webp/index.php` and `config/index.php`).
+- **Configurable modules:** Use `HelperForm` for the config form, `Configuration::get()` / `Configuration::updateValue()` for settings, and a dedicated key prefix (e.g. `PS_WEBP_*`). On save, persist any data needed by standalone scripts (e.g. JSON in `config/`) if the script does not bootstrap PrestaShop.
+- **Hooks:** Register only the hooks you use; implement the corresponding `hookDisplay*` / `hookAction*` methods. Prefer existing hooks over overrides.
+- **Front-office display (widgets):** If the module renders content on display hooks (e.g. `displayHome`, `displayLeftColumn`), implement `PrestaShop\PrestaShop\Core\Module\WidgetInterface`: add `renderWidget($hookName, array $configuration)` (return HTML from template) and `getWidgetVariables($hookName, array $configuration)` (return array for template). Use the logical path `module:modulename/template_name.tpl` (file lives under `views/templates/hook/` or module root). See e.g. `ps_banner`, `ps_featuredproducts`.
+- **Partials and reusable components (global, in theme):** All partials and reusable UI components (e.g. product-tile, button) must be **global** and stored in the **theme**, not in modules. Create them under `prestashop/themes/<theme>/templates/_partials/` (e.g. `_partials/product-tile.tpl`, `_partials/button.tpl`). Modules must **not** ship their own `views/templates/_partials/` for FO; instead they include theme partials via `{include file='_partials/name.tpl' ...}` and pass variables from `getWidgetVariables()`. This keeps one source of truth in the theme and allows reuse across modules and pages.
+- **Buttons (CTA / link as button):** Never write a button or link-styled-as-button by hand in a template. Always use the theme component `_partials/button.tpl`. Example: `{include file='_partials/button.tpl' url=$button_url label=$button_text btn_class='tc-mymodule__button' target=$button_new_tab}`. See `prestashop/themes/meblowosk/templates/_partials/product-slider.tpl` for usage. Parameters: `url`, `label`, `btn_class` (optional), `target` (truthy = open in new tab), `icon_type` (e.g. `'arrow-right'`, `'arrow-left'`, `'none'`).
+- **Translations:** Use the domain `Modules.<TechnicalName>.Admin` (e.g. `Modules.Ps_webp.Admin`) for back-office strings. Optional: add `translations/index.php` that redirects to parent for security.
+- **Version:** Set `$this->ps_versions_compliancy` (e.g. `['min' => '1.7.7.0', 'max' => _PS_VERSION_]`) and match version in `config.xml`.
+- **Module list shows technical name / "invalid":** If the main class file has a **PHP parse error** (e.g. duplicate or incomplete method, method declared inside another method), PrestaShop cannot load the module: the "Other" list shows only the technical name (e.g. `ps_webp`) with empty author/version/description, and installation fails with "Moduł jest nieprawidłowy" (module invalid). Fix: run `php -l prestashop/modules/<name>/<name>.php` to find the syntax error and correct it; then the display name and install will work.
+
+---
+
+## Front-office CSS and JavaScript (must live in _dev)
+
+- **All frontend CSS and JS for modules must be written in `_dev/`**, not in the module’s `views/` directory. Do not put FO styles or scripts in `modules/<name>/views/css/` or `views/js/`, and do not register them via `registerJavascript()` / `registerStylesheet()` from the module.
+- **SCSS:** Add section styles in `_dev/css/custom/sections/` (e.g. `_banner-tabs.scss`) and forward them in `_dev/css/custom/sections/_index.scss`. The theme build compiles them into the theme assets.
+- **JavaScript:** Add section scripts in `_dev/js/custom/Sections/` (e.g. `BannerTabs.js`). Import and run the initialiser from `_dev/js/custom/theme.js` (e.g. `import initBannerTabs from './Sections/BannerTabs'; runWhenReady(initBannerTabs);`). The theme build bundles them; the module only renders the HTML (e.g. via `views/templates/hook/`).
+
+---
+
+## Translations — default Polish
+
+- **Default language in BO:** All Back Office strings in this project are **Polish by default**. In code use Polish as the first argument to `$this->trans()`, e.g. `$this->trans('Ikona', [], 'Modules.Tc_stickybar.Admin')`, `$this->trans('Zapisz', [], 'Modules.Tc_stickybar.Admin')`.
+- **Domain:** Use `Modules.<TechnicalName>.Admin` (e.g. `Modules.Tc_stickybar.Admin`) for the module. In Smarty templates: `{l s='Dodaj plik' d='Modules.Tc_stickybar.Admin'}`.
+- **XLF files:** In `translations/pl-PL/Modules<TechnicalName>Admin.pl-PL.xlf` put Polish strings as both `<source>` and `<target>` for pl-PL. Add a separate locale folder for English if needed.
+- **Consistency:** Form labels, buttons, error/success messages, list actions (Edit, Delete, Add new, etc.) — all via `trans()` / `{l s='...' d='...'}` with Polish as the default string.
+
+---
+
+## Repeater (list of items in BO)
+
+- **Full repeater pattern** (JSON storage, form, POST, JS add/remove/reorder, image per row): **`.cursor/docs/prestashop/07_REPEATER_IN_MODULES.md`**. Reference module: `tc_collections`.
+
+---
+
+## Image input in a repeater (list of items with icon/photo)
+
+- **Form:** Use **HelperForm** with `'type' => 'file'`, `'name' => 'icon'` (or another name). HelperForm sets `enctype="multipart/form-data"` automatically. Do **not** set `override_folder` on the helper — then the template loads from `modules/<name>/views/templates/admin/_configure/helpers/form/form.tpl`.
+- **Image preview in BO:** The default form template outputs the `image` value (URL) as plain text. To show an actual **image** (`<img>`):
+  1. Add a template override: `views/templates/admin/_configure/helpers/form/form.tpl` extending `helpers/form/form.tpl`.
+  2. In `{block name="field"}` handle `$input.type == 'file' && $input.name == 'icon'`: output `<img src="{$icon_preview_url}" class="img-thumbnail" />` when preview exists, then the `type="file"` input and an “Add file” button.
+  3. In PHP: pass the **full URL** for the preview in `$helper->tpl_vars['icon_preview_url']` (e.g. `rtrim($this->context->link->getBaseLink(), '/') . '/' . ltrim($this->_path, '/') . 'views/img/icons/' . $item->icon`). On save: `move_uploaded_file()` to a directory in the module (e.g. `views/img/icons/`) and store the filename in the entity/configuration.
+- **Reference modules:** `ps_iconbar` and `tc_stickybar` — repeater with icon, HelperForm + custom `form.tpl` for preview; `ps_banner` — single image with `type => 'file_lang'` and custom template.
+
+---
+
+## WYSIWYG fields (rich text in BO)
+
+- **Single key (one HTML value):** Save with third param `true`: `Configuration::updateValue('KEY', (string) Tools::getValue('KEY'), true);` — so PrestaShop does not run `strip_tags()` on the value. No `strip_tags()`, `sanitize*`, or “normalize” (they remove e.g. `<br>`).
+- **Repeater / one key with JSON containing HTML:** Do **not** use third param `true` (that runs `purifyHTML()` on the whole JSON and corrupts/empties data). Instead: before `json_encode($saved)` entity-encode only the HTML field(s), e.g. `htmlspecialchars($item['description'], ENT_QUOTES | ENT_HTML5, 'UTF-8')`; save with 2 params; in `getStoredItems()` decode with `html_entity_decode()`. Ref: **tc_contentrows**, and `.cursor/docs/prestashop/06_WYSIWYG_FIELDS.md` (section B + “Why: PrestaShop behaviour”).
+- **Form (HelperForm):** Use `'type' => 'textarea'`, `'autoload_rte' => true`. Do **not** override this textarea in custom `form.tpl` (only override other field types like file); let the default template render it so TinyMCE initialises.
+- **Form (custom repeater / no HelperForm):** Use a `<textarea>` with **class `autoload_rte`**. In the admin template script: (1) on DOM ready call `tinySetup({ editor_selector: 'autoload_rte', ... });` if `typeof tinySetup === 'function'`; (2) after adding a new row, call `tinySetup(...)` again; (3) on form submit call `tinyMCE.triggerSave()`. Optionally in PHP register TinyMCE scripts on the config page. Example: **tc_contentrows** (repeater description field).
+- **FO output:** In the Smarty template use `{$variable nofilter}` so HTML is rendered.
+- **Full reference:** `.cursor/docs/prestashop/06_WYSIWYG_FIELDS.md`. Single field example: **tc_cta**; repeater with WYSIWYG: **tc_contentrows**.
+
+---
+
+## File permissions and image input
+
+- **Common cause of issues:** When saving/uploading an image in a module fails, the cause is **often write permissions** on directories (BO shows “Set write permissions for folder modules / cache / img…”).
+- **Fix:** On the host (project root) run: `make perms` (file ownership), then **`make perms-cache`** — it sets write access for `prestashop/modules`, `prestashop/config`, `prestashop/img`, `prestashop/var/cache`, `prestashop/translations`, `prestashop/upload`, `prestashop/download`, `prestashop/mails`, `prestashop/app/config`, `prestashop/app/Resources/translations`, so the container (www-data) can write there.
+- **After `make cache-clear`:** If the permissions error reappears in BO, run `make perms-cache` again.

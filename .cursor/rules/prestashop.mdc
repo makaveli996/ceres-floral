@@ -1,0 +1,14 @@
+---
+description: PrestaShop 8.2.3 project conventions and constraints
+globs: 
+alwaysApply: true
+---
+
+# PrestaShop 8.2.3 — Project Rules
+
+- **Stack:** PrestaShop 8.2.3, PHP 8.x, Docker (Apache) + MariaDB 10.11.
+- **Do NOT modify PrestaShop core files.** Customise via modules, hooks, and Symfony services only.
+- **Prefer:** modules + hooks + Symfony services. Use overrides only when unavoidable; when suggesting overrides, explain why and document them.
+- **Use Makefile commands** when suggesting steps: `make init`, `make up`, `make down`, `make perms`, `make cache-clear`, `make reset`, `make db-dump`, `make db-import`, `make admin-path`.
+- **Cache:** Remember Symfony container and Smarty cache implications; suggest `make cache-clear` when changes affect config, templates, or services.
+- **Instructions:** Provide step-by-step guidance with concrete file paths and exact code snippets where applicable.

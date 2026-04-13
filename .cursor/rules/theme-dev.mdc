@@ -1,0 +1,17 @@
+# Theme assets: _dev only + design system
+
+## CSS class naming
+
+- **Never use camelCase** for class names (e.g. `cardTitle`, `cardDesc`).
+- **Use kebab-case** for all class names: `card-title`, `card-desc`, `tc-benefitsicons__card-title`. Applies to BEM modifiers and elements as well (e.g. `block__element-name`, `block--modifier-name`).
+
+## General
+
+- All SCSS and JS must be written only in `_dev/` (no inline styles or scripts in `.tpl` beyond what’s required for hooks).
+- Follow the design system: use variables and mixins from `_dev/css/base/` (e.g. colors, typography, layout) and `_dev/css/utils/`; keep components in `_dev/css/components/`, pages in `_dev/css/pages/`, sections in `_dev/css/sections/`.
+- Build output goes only to `prestashop/themes/meblowosk/assets/`. Do not add source files under the theme except templates and config.
+- **Sliders/carousels:** Always use `Splide.js` as the slider library (no Swiper/Slick/custom slider engines unless explicitly approved for a specific case).
+
+## Button component
+
+- **Always use the button component** for link-style buttons (CTA, "see more", etc.): `{include file='_partials/button.tpl' url=$url label=$label}`. Do not use raw `<a class="button">` in theme or module templates. Optional: `btn_class`, `icon_type` ('arrow-right'|'arrow-left'|'none'), `target` (boolean for _blank).

@@ -1,0 +1,57 @@
+---
+description: SCSS conventions — CSS custom properties, BEM nesting, color palette
+globs: _dev/css/**/*.scss
+alwaysApply: false
+---
+
+# SCSS Conventions
+
+## Color palette — use CSS custom properties
+
+All colors from `_dev/css/custom/base/_colors.scss` are available as CSS vars generated in `_global.scss`:
+
+```scss
+// ❌ BAD — hardcoded hex
+background: #f7a626;
+color: #1e1e1e;
+border: 1px solid #c5c5c5;
+
+// ✅ GOOD — CSS custom property from palette
+background: var(--clr-yellow);
+color: var(--clr-black-3);
+border: 1px solid var(--clr-gray-4);
+```
+
+Available vars (from `$palette`):
+`--clr-white`, `--clr-black`, `--clr-black-2`, `--clr-black-3`,
+`--clr-yellow`, `--clr-gray`, `--clr-gray-2`, `--clr-gray-3`, `--clr-gray-4`,
+`--clr-green`, `--clr-green-2`
+
+Never hardcode a hex that exists in the palette. If a color is not in the palette, leave it as hex or add it to `$palette` first.
+
+## BEM nesting — use `&` for elements and modifiers
+
+```scss
+// ❌ BAD — flat CSS-style selectors
+.block { ... }
+.block__element { ... }
+.block__element--modifier { ... }
+
+// ✅ GOOD — nested SCSS with &
+.block {
+  ...
+  &__element {
+    ...
+    &--modifier { ... }
+  }
+}
+```
+
+## File structure
+
+- Each section partial starts with `@use "../base" as *;` and `@use "../utils" as *;`.
+- Group responsive overrides at the bottom inside `@include md(...)` blocks, nesting with `&` where applicable.
+
+## Typography
+
+Prefer design tokens as mixins in `_dev/css/custom/utils/_mixins.scss` — see [`scss-typography-mixins.mdc`](scss-typography-mixins.mdc).

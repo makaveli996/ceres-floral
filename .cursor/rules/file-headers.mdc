@@ -1,0 +1,14 @@
+---
+description: Require short file headers for new files
+alwaysApply: true
+---
+
+When creating a NEW file, always add a short header comment at the top (8–15 lines max) that includes:
+
+- Purpose (1 sentence)
+- Where it is used/called from (hook/controller/service/template)
+- Inputs/Outputs or key variables
+- Side effects (DB writes, cache, external calls) if any
+
+Do not add headers to generated files or tiny style partials unless requested.
+Keep headers factual and project-specific.

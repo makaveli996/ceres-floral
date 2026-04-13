@@ -1,0 +1,11 @@
+---
+description: Do not patch third-party/licensed modules in modules/; use overrides. tc_* modules are project-owned and editable.
+alwaysApply: true
+---
+
+# Licencjonowane i moduły firm trzecich — tylko override, nie edycja w `modules/`
+
+- **Nie edytuj bezpośrednio** plików modułów **licencjonowanych lub firm trzecich** w `prestashop/modules/<nazwa>/` (np. `ets_blog`, inne komercyjne / marketplace, moduły dostarczone przez dostawcę). Aktualizacje modułu **nadpiszą** takie zmiany i łamią zasady licencyjne typu „nie modyfikuj plików”.
+- **Dostosowania:** `prestashop/override/` (klasy, kontrolery modułów zgodnie z `Dispatcher`), **szablony i assety w motywie** (`prestashop/themes/meblowosk/modules/<modul>/…`), **hooki**, **własny moduł `tc_*`** jako warstwa — w zależności od przypadku.
+- **Wyjątek — moduły własne projektu:** moduły o nazwie technicznej z prefiksem **`tc_`** (`prestashop/modules/tc_*`) to **customowe moduły tego repozytorium** — **wolno je modyfikować bezpośrednio** w `prestashop/modules/tc_*/` (PHP, szablony w module, konfiguracja), bez konieczności przenoszenia logiki do override z wyjątkiem sytuacji, gdy celowo dzielicie warstwę (np. tylko FO w `_dev` + motyw).
+- **Rdzeń PrestaShop** nadal bez zmian — to osobna zasada w `prestashop.mdc` (core ≠ `modules/`).

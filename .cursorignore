@@ -1,0 +1,32 @@
+# Dependencies
+**/node_modules/**
+/vendor/**
+
+# Presta cache & logs (anywhere in tree, e.g. prestashop/)
+**/var/cache/**
+**/var/logs/**
+**/app/cache/**
+
+# Generated assets (jeśli masz build output)
+**/dist/**
+**/build/**
+**/.parcel-cache/**
+**/.vite/**
+**/.next/**
+**/.turbo/**
+**/coverage/**
+
+# Uploads / images / heavy binaries
+**/img/**
+**/download/**
+**/mails/**
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# IDE / system
+**/.idea/**
+**/.vscode/**
+**/.DS_Store

@@ -1,0 +1,44 @@
+---
+description: Kitchen configurator module — architecture, AJAX, anti-bot, and Smarty JS caveats
+globs: prestashop/modules/tc_kitchenconfigurator/**
+alwaysApply: false
+---
+
+# tc_kitchenconfigurator module
+
+## Architecture
+
+- **PHP:** `tc_kitchenconfigurator.php` — `GROUPS_DEF` constant, `processBoSave()`, `normalizeRows()`, `handleBoImageUpload()`.
+- **AJAX controller:** `controllers/front/ajax.php` — JSON endpoint for FO form; calls `$this->module->handleFrontFormSubmit()`.
+- **BO template:** `views/templates/admin/configure.tpl` — Smarty repeater with inline `<script>` (no external JS file).
+- **FO template:** `views/templates/hook/kitchenconfigurator.tpl` — front-office form with `data-tc-kcfg-ajax-url` attribute.
+- **FO JS:** `_dev/js/custom/Sections/TcKitchenConfigurator.js` — card interactions + AJAX submit.
+- **Config storage:** `Configuration::updateValue()` with JSON-encoded groups.
+- **Emails:** `inquiry.html/.txt` (to shop), `inquiry_confirmation.html/.txt` (to customer).
+
+## Anti-bot / CSRF
+
+- Cookie token (`COOKIE_TOKEN`, `COOKIE_TOKEN_TTL`) — 10 min TTL, rotated after every submit.
+- Honeypot field `tc_kcfg_url` (hidden, must stay empty).
+- Token hidden input `tc_kcfg_token` matched against cookie value.
+- PSGDPR consent checked when module is enabled.
+
+## BO repeater — JS in Smarty templates
+
+The add/remove/reindex logic is inline JS in `configure.tpl`.
+
+When writing `new RegExp()` inside a Smarty `.tpl` file, do **not** double-escape backslashes for Smarty — Smarty does not process `\`:
+
+```javascript
+// ❌ BAD — over-escaped, regex never matches [0], [1] etc.
+name.replace(new RegExp('kcfg_' + g + '\\\\[\\\\d+\\\\]'), ...)
+
+// ✅ GOOD — standard JS escaping only
+name.replace(new RegExp('kcfg_' + g + '\\[\\d+\\]'), ...)
+```
+
+## PHP — normalizeRows()
+
+- Rows with empty `title` are silently dropped.
+- `id` is auto-generated as `{groupKey}_{idx+1}` if not provided.
+- Images use `$_FILES['kcfg_image_{groupKey}'][index]`.
