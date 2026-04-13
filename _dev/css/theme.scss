@@ -1,0 +1,9 @@
+/**
+ * Main CSS entry — source (Classic) first, then custom overrides.
+ * Used by: webpack via _dev/js/theme.js.
+ * Order: source = base layer; custom = overrides (loaded after).
+ */
+/* stylelint-disable */
+@import "source/theme";
+/* stylelint-enable */
+@import "custom/theme";

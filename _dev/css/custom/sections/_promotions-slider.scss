@@ -1,0 +1,30 @@
+/**
+ * Promotions slider section (tc_promotionsslider). Same layout as bestsellers slider.
+ * Wrapper: .tc-promotions-slider; inner uses global .tc-product-slider (ProductSlider.js).
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-promotions-slider {
+  .tc-product-slider {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 60px;
+    padding-bottom: 90px;
+    background: var(--clr-gray-3);
+
+    @include md(lg) {
+      padding-top: 30px;
+      padding-bottom: 45px;
+    }
+  }
+
+  .tc-slider-arrows__btn {
+    border: 1px solid var(--clr-white) !important;
+
+    &:before {
+      background: var(--clr-white);
+    }
+  }
+}

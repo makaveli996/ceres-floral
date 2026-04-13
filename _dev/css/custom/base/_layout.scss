@@ -1,0 +1,66 @@
+@use "../utils" as *;
+
+.container-xl {
+  width: 100%;
+  height: 100%;
+  max-width: 1710px;
+  padding: 0 $grid-padding;
+  margin: 0 auto;
+
+  @include md(lg) {
+    padding: 0 $grid-padding--mobile;
+  }
+}
+
+.container-lg {
+  width: 100%;
+  height: 100%;
+  max-width: 1510px;
+  padding: 0 $grid-padding;
+  margin: 0 auto;
+
+  @include md(lg) {
+    padding: 0 $grid-padding--mobile;
+  }
+}
+
+.container-lg-right {
+  width: 100%;
+  height: 100%;
+  max-width: calc(100% - ((100% - 1510px) / 2));
+  padding: 0 0 0 $grid-padding;
+  margin: 0 0 0 auto;
+
+  @include md(lg) {
+    padding: 0 $grid-padding--mobile;
+  }
+}
+
+.container-md {
+  width: 100%;
+  height: 100%;
+  max-width: 1040px;
+  padding: 0 $grid-padding;
+  margin: 0 auto;
+
+  @include md(lg) {
+    padding: 0 $grid-padding--mobile;
+  }
+}
+
+.container-fluid {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+
+  &::after {
+    display: none;
+  }
+}
+
+// FO system pages: cart, checkout, account (tc-layout--system-page-container-lg.tpl on #content-wrapper)
+#content-wrapper.tc-system-page {
+  padding-top: 20px;
+  padding-bottom: 50px;
+}

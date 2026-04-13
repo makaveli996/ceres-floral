@@ -1,0 +1,155 @@
+/**
+ * Content Rows section (displayAboutUs). Repeater of alternating image/text rows.
+ * Used by tc_contentrows module (tc_contentrows.tpl). Figma: two-column, title (MW_H2_bold), body (MW_Body), rounded image, generous spacing.
+ * Odd rows: image left, text right; even rows (.is-reversed): text left, image right.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-contentrows {
+  width: 100%;
+  background: var(--clr-white);
+  margin: 96px 0 63px;
+  position: relative;
+
+  &::after {
+    content: url("../img/wood-decor.png");
+    position: absolute;
+    top: 7%;
+    left: 0;
+    width: 590px;
+    aspect-ratio: 590/788;
+    pointer-events: none;
+
+    @include md(lg) {
+      display: none;
+    }
+  }
+
+  @include md(lg) {
+    margin: 50px 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+
+    @include md(lg) {
+      gap: 50px;
+    }
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+
+    @include md(lg) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 24px;
+    }
+
+    &.is-reversed {
+      @include mu(lg) {
+        .tc-contentrows__media {
+          order: 2;
+        }
+        .tc-contentrows__content {
+          order: 1;
+        }
+      }
+    }
+  }
+
+  &__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+
+    @include md(lg) {
+      order: 1;
+    }
+  }
+
+  &__image {
+    @include img-cover;
+    display: block;
+    width: 100%;
+    aspect-ratio: 692 / 527;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding: 0 60px;
+
+    @include md(xxl) {
+      padding: 0;
+    }
+
+    @include md(lg) {
+      order: 2;
+      padding: 0;
+    }
+
+    .is-reversed & {
+      padding: 10px 60px 10px 0;
+
+      @include md(xxl) {
+        padding: 0;
+      }
+
+      @include md(lg) {
+        padding: 0;
+      }
+    }
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-black-3);
+    margin: 0 0 24px;
+
+    @include md(lg) {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__description {
+    @include body-regular;
+    color: var(--clr-black-3);
+
+    p {
+      margin: 0 0 2em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    strong,
+    b {
+      font-weight: 700;
+    }
+
+    ul,
+    ol {
+      margin: 0.5em 0;
+      padding-left: 1.25em;
+    }
+
+    li {
+      margin-bottom: 0.25em;
+    }
+
+    a {
+      color: var(--clr-yellow);
+      text-decoration: underline;
+    }
+  }
+}

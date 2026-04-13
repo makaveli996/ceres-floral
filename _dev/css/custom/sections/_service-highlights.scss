@@ -1,0 +1,94 @@
+/**
+ * Service highlights section (displayHome). Figma: "Dbamy o wygodne zakupy" — title, 3-column grid of cards (icon, title, description).
+ * Used by tc_servicehighlights module template (tc_servicehighlights.tpl). No JS.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-servicehighlights {
+  width: 100%;
+  margin: 100px 0;
+  position: relative;
+
+  @include md(lg) {
+    margin: 50px 0;
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-black);
+    text-align: center;
+    margin: 0 auto 57px;
+    max-width: 829px;
+    position: relative;
+
+    @include md(lg) {
+      margin: 0 auto 30px;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: stretch;
+
+    @include md(lg) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background: var(--clr-gray-3);
+    border-radius: 8px;
+    padding: 30px;
+    min-height: 0;
+    align-items: flex-start;
+
+    @include md(md) {
+      padding: 24px;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 51px;
+    height: 44px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__card-title {
+    @include heading-5-bold;
+    color: var(--clr-black-3);
+    margin: 0;
+  }
+
+  &__card-description {
+    @include body-regular;
+    color: var(--clr-black-3);
+    margin: 0;
+  }
+}

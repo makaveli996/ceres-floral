@@ -1,0 +1,141 @@
+/**
+ * Benefit Cards section (displayDesignerZone). Figma: section title, 2-col grid of cards (image left, content right with check icon), CTA button.
+ * Used by tc_benefitcards module (benefitcards.tpl). No JS.
+ * Design: MW_H2_bold title, card bg #F2F2F2, rounded 7.5px, padding 30px, gap 20px; card title MW_H4_bold 25px, body 18px; orange check icon; button pill #F7A626.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-benefitcards {
+  width: 100%;
+  margin: 88px 0 83px;
+  position: relative;
+
+  @include md(lg) {
+    margin: 50px 0;
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-black-3, #1e1e1e);
+    text-align: center;
+    margin: 0 auto 60px;
+    max-width: 829px;
+    line-height: 1.2;
+
+    @include md(lg) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    align-items: stretch;
+    margin-bottom: 50px;
+
+    @include md(md) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__card {
+    display: grid;
+    grid-template-columns: 34.5% 1fr;
+    background: var(--clr-gray-3);
+    border-radius: 8px;
+    min-height: 0;
+
+    @include md(xxl) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 20px;
+      padding: 24px;
+    }
+  }
+
+  &__image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+
+    @include md(xxl) {
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  &__img {
+    @include img-cover;
+  }
+
+  &__content {
+    display: flex;
+    height: 100%;
+    padding: 30px;
+    gap: 20px;
+
+    @include md(xxl) {
+      padding: 0;
+    }
+  }
+
+  &__content-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+
+    @include md(xxl) {
+      order: 2;
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    background: var(--clr-yellow);
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    color: #1e1e1e;
+
+    svg {
+      width: 12px;
+      height: 10px;
+    }
+  }
+
+  &__card-title {
+    @include heading-4-bold;
+    color: var(--clr-black-3, #1e1e1e);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  &__description {
+    @include body-regular;
+    color: var(--clr-black-3, #1e1e1e);
+    margin: 0;
+    line-height: 1.4;
+
+    p {
+      margin: 0 0 0.5em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

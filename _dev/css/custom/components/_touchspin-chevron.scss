@@ -1,0 +1,38 @@
+/**
+ * Bootstrap TouchSpin chevrons: stroke SVGs instead of Material Icons (product.js verticalupclass/downclass).
+ * Overrides _commons.scss ::after glyph on i.touchspin-up / i.touchspin-down.
+ * Assets: prestashop/themes/ceres_floral/assets/img/touchspin-up.svg, touchspin-down.svg
+ */
+.bootstrap-touchspin .input-group-btn-vertical {
+  i.material-icons.touchspin-up,
+  i.material-icons.touchspin-down {
+    position: static;
+    top: auto;
+    left: auto;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    width: 12px;
+    height: 7px;
+    min-width: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 7px;
+  }
+
+  i.material-icons.touchspin-up {
+    background-image: url("../img/touchspin-up.svg");
+  }
+
+  i.material-icons.touchspin-down {
+    background-image: url("../img/touchspin-down.svg");
+  }
+
+  .touchspin-up::after,
+  .touchspin-down::after {
+    content: none !important;
+  }
+}

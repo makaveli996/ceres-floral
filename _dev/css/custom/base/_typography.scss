@@ -1,0 +1,28 @@
+@use "../utils" as *;
+
+$font-family-base: "PT Sans", sans-serif;
+$font-size-base: 16px;
+
+h1 {
+  @include heading-1-regular;
+}
+
+h2 {
+  @include heading-2-bold;
+}
+
+h3 {
+  @include heading-3-bold;
+}
+
+h4 {
+  @include heading-4-regular;
+}
+
+h5 {
+  @include heading-5-regular;
+}
+
+h6 {
+  @include heading-5-regular;
+}

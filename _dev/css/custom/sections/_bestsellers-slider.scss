@@ -1,0 +1,14 @@
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-product-slider {
+  $r: &;
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  @include md(lg) {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}

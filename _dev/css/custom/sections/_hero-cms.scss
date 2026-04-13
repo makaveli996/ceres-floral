@@ -1,0 +1,146 @@
+/**
+ * Hero CMS section (displayAboutUs, displayDesignerZone).
+ * Full-width hero with background image, overlay, centered content: subtitle, title, description, CTA.
+ * Used by tc_herocms module (tc_herocms.tpl). Aligned with _hero-home.scss conventions.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-herocms {
+  $r: &;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 500px;
+  background-color: var(--clr-neutral-900, #1e1e1e);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  @include md(xxl) {
+    min-height: 600px;
+  }
+
+  &[style*="--tc-herocms-bg"] {
+    background-image: var(--tc-herocms-bg);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    padding: 2rem 1.5rem;
+
+    @include md(lg) {
+      padding: 3rem 2rem;
+    }
+  }
+
+  &__subtitle {
+    @include heading-4-regular;
+    color: var(--clr-white);
+    margin: 0 0 17px;
+    text-transform: uppercase;
+
+    @include md(lg) {
+      @include heading-5-regular;
+    }
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-white);
+    text-align: center;
+
+    @include md(lg) {
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  &__description {
+    @include heading-5-regular;
+    color: var(--clr-white);
+    margin: 27px 0 0;
+    text-align: center;
+    max-width: 645px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__button-wrapper {
+    margin-top: 50px;
+
+    @include md(lg) {
+      margin-top: 27px;
+    }
+  }
+
+  &__configurator-items {
+    display: flex;
+    margin-top: 40px;
+    gap: 40px;
+
+    @include md(xl) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__configurator-item {
+    color: var(--clr-white);
+    display: flex;
+    gap: 35px;
+    text-align: start;
+    width: calc(33.33% - 2 / 3 * 40px);
+
+    @include md(xl) {
+      width: 50%;
+    }
+
+    @include md(lg) {
+      width: 100%;
+    }
+  }
+
+  &__configurator-title {
+    @include heading-5-bold;
+    margin-bottom: 15px;
+  }
+
+  &__configurator-number {
+    @include heading-1-regular;
+  }
+
+  &__configurator-number-inner {
+    position: relative;
+
+    &:after {
+      content: "";
+      display: block;
+      background: var(--clr-yellow);
+      position: absolute;
+      top: 15%;
+      left: 2px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      z-index: -1;
+    }
+  }
+
+  &--configurator {
+    min-height: 540px;
+
+    #{$r}__content {
+      padding: 2rem 0;
+
+      @include md(lg) {
+        padding: 3rem 0;
+      }
+    }
+  }
+}

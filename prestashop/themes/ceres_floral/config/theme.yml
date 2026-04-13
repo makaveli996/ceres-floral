@@ -1,0 +1,60 @@
+# Ceres Floral — minimal child theme (fresh project, no code copied from other shops).
+# Used by: PrestaShop BO → Wygląd → Motyw; after `make copy-core` Classic must exist as parent.
+# Declares parent + built webpack assets under assets/. No custom modules required in repo.
+# Side effects: theme import enables listed assets; hooks stay default until you extend theme.yml.
+
+name: ceres_floral
+display_name: Ceres Floral
+parent: classic
+version: 1.0.0
+author:
+  name: "Ceres Floral"
+  email: ""
+  url: ""
+
+meta:
+  compatibility:
+    from: 8.2.1
+    to: ~
+
+  available_layouts:
+    layout-full-width:
+      name: Full Width
+      description: No side columns, ideal for distraction-free pages such as product pages.
+    layout-both-columns:
+      name: Three Columns
+      description: One large central column and 2 side columns.
+    layout-left-column:
+      name: Two Columns, small left column
+      description: Two columns with a small left column
+    layout-right-column:
+      name: Two Columns, small right column
+      description: Two columns with a small right column
+
+assets:
+  use_parent_assets: true
+  css:
+    all:
+      - id: ceres-theme
+        path: assets/css/theme.css
+        media: all
+        priority: 200
+  js:
+    all:
+      - id: ceres-theme
+        path: assets/js/theme.js
+        priority: 200
+        server: remote
+
+global_settings:
+  configuration:
+    PS_IMAGE_QUALITY: png
+
+theme_settings:
+  default_layout: layout-full-width
+  layouts:
+    category: layout-left-column
+    best-sales: layout-left-column
+    new-products: layout-left-column
+    prices-drop: layout-left-column
+    contact: layout-left-column

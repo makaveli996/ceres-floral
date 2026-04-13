@@ -1,0 +1,9 @@
+/**
+ * tc_pdpcollectionslider — PDP full width; product-slider bez CTA (jak tc_pdprelatedslider).
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-pdp-collection-slider {
+  width: 100%;
+}

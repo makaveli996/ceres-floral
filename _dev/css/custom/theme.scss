@@ -1,0 +1,12 @@
+@use "utils";
+@use "base";
+@use "components";
+@use "pages";
+@use "sections";
+@use "parts";
+
+// Splide slider styles
+@import "@splidejs/splide/css";
+
+// GLightbox styles
+@import "glightbox/dist/css/glightbox.css";

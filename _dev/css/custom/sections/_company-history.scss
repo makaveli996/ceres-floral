@@ -1,0 +1,262 @@
+/**
+ * Company History section (displayAboutUs). Timeline: section title, year badge on divider line,
+ * alternating left/right layout (media + content). Slider per item, read more toggle. Figma: MW_H2_bold, year badge #F7A626, MW_H3, MW_Body.
+ * Used by tc_companyhistory module (companyhistory.tpl). FO JS: TcCompanyHistory.js.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-companyhistory {
+  width: 100%;
+  background: var(--clr-white);
+  margin: 96px 0 105px;
+  position: relative;
+
+  @include md(lg) {
+    margin: 50px 0;
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-black-3);
+    text-align: center;
+    margin: 0 0 50px;
+
+    @include md(lg) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+
+    @include md(lg) {
+      gap: 48px;
+    }
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__year-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 40px;
+
+    &::before,
+    &::after {
+      content: "";
+      width: 75px;
+      height: 1px;
+      background: var(--clr-gray-4);
+
+      @include md(lg) {
+        width: 40px;
+      }
+    }
+  }
+
+  &__year {
+    @include body-bold;
+    color: var(--clr-black-3, #000);
+    background: var(--clr-yellow, #f7a626);
+    padding: 5px 20px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+    align-items: start;
+
+    @include md(lg) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  &__item--left &__body {
+    @include mu(lg) {
+      .tc-companyhistory__media {
+        order: 1;
+      }
+      .tc-companyhistory__content {
+        order: 2;
+        padding-left: 40px;
+
+        @include md(xxl) {
+          padding-left: 24px;
+        }
+      }
+    }
+  }
+
+  &__item--right &__body {
+    @include mu(lg) {
+      .tc-companyhistory__media {
+        order: 2;
+      }
+      .tc-companyhistory__content {
+        order: 1;
+        padding-right: 40px;
+
+        @include md(xxl) {
+          padding-right: 24px;
+        }
+      }
+    }
+  }
+
+  @include md(lg) {
+    &__item--left &__body,
+    &__item--right &__body {
+      .tc-companyhistory__media {
+        order: 1;
+      }
+      .tc-companyhistory__content {
+        order: 2;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  &__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  &__splide {
+    position: relative;
+  }
+
+  &__img {
+    @include img-cover;
+    display: block;
+    width: 100%;
+    aspect-ratio: 691 / 450;
+  }
+
+  .splide__track {
+    overflow: hidden;
+  }
+
+  .splide__list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .splide__slide {
+    flex: 0 0 100%;
+  }
+
+  &__pagination {
+    bottom: 33px !important;
+    gap: 11px !important;
+
+    .splide__pagination__page {
+      opacity: 1 !important;
+      margin: 0 !important;
+      width: 10px !important;
+      height: 10px !important;
+      background: var(--clr-white);
+      transform: none !important;
+
+      &.is-active {
+        background-color: var(--clr-yellow);
+      }
+    }
+  }
+
+  .tc-slider-arrows {
+    &__btn {
+      &--prev {
+        left: 24px !important;
+        transform: translate(0, -50%) !important;
+      }
+
+      &--next {
+        right: 24px !important;
+        transform: translate(0, -50%) !important;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    gap: 20px;
+  }
+
+  &__item-title {
+    @include heading-3-regular;
+    color: var(--clr-black-3, #000);
+    margin: 0;
+    line-height: 1.2;
+
+    @include md(lg) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__description-wrap {
+    position: relative;
+  }
+
+  &__description {
+    @include body-regular;
+    color: var(--clr-black-3, #000);
+    transition: max-height 0.35s ease;
+
+    p {
+      margin: 0 0 1em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    a {
+      color: var(--clr-yellow, #f7a626);
+      text-decoration: underline;
+    }
+  }
+
+  &__toggle-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  &__toggle {
+    @include body-regular;
+    color: var(--clr-black-3, #1e1e1e);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+
+    &:hover {
+      color: var(--clr-yellow, #f7a626);
+    }
+  }
+
+  &__toggle-text {
+    display: inline;
+  }
+}

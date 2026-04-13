@@ -1,0 +1,260 @@
+/**
+ * Designer registration section (displayDesignerZone). Two-column: image left, form right.
+ * Used by tc_designerregister module (designerregister.tpl). Figma: 876-7263.
+ * No FO JS in module. Reuses contact-section patterns and project variables.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-designerregister {
+  width: 100%;
+  background: var(--clr-white);
+  padding: 86px 0 139px;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: url("../img/wood-decor.png");
+    position: absolute;
+    bottom: -22%;
+    left: 0;
+    width: 590px;
+    aspect-ratio: 590 / 788;
+    pointer-events: none;
+
+    @include md(lg) {
+      display: none;
+    }
+  }
+
+  .container-lg {
+    position: relative;
+    z-index: 1;
+  }
+
+  @include md(lg) {
+    padding: 50px 0;
+  }
+
+  &__inner {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+
+    @include md(lg) {
+      gap: 10px;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+  }
+
+  &__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    padding-top: 20px;
+
+    @include md(lg) {
+      order: 1;
+    }
+  }
+
+  &__image {
+    @include img-cover;
+  }
+
+  &__form-col {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding-left: 35px;
+
+    @include md(lg) {
+      order: 2;
+      padding-left: 0;
+    }
+  }
+
+  &__title {
+    @include heading-2-bold;
+    margin: 0 auto 42px;
+    text-align: center;
+    max-width: 978px;
+
+    @include md(lg) {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 661px;
+
+    @include md(lg) {
+      max-width: 100%;
+    }
+  }
+
+  &__form-messages {
+    margin: 0;
+  }
+
+  &__alert {
+    padding: 12px 16px;
+    border-radius: 5px;
+    list-style: none;
+    margin: 0;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      margin-bottom: 0.25em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &--error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    &--success {
+      background: #d4edda;
+      color: #155724;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &--checkbox {
+      gap: 8px;
+    }
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    @include md(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__label {
+    @include body-bold;
+    color: var(--clr-black-3, #0e0f11);
+    margin: 0;
+    text-align: start;
+  }
+
+  &__required {
+    color: var(--clr-yellow, #f7a626);
+  }
+
+  &__input {
+    @include body-regular;
+    width: 100%;
+    padding: 8px 12px;
+    min-height: 28px;
+    border: 1px solid var(--clr-gray-4, #c5c5c5);
+    border-radius: 6px;
+    background: var(--clr-white);
+    color: var(--clr-black-3, #1e1e1e);
+    font-size: 16px;
+    line-height: 1.75;
+
+    &::placeholder {
+      color: var(--clr-gray, #838d95);
+    }
+  }
+
+  &__privacy {
+    @include sign-regular;
+    color: var(--clr-black-3, #1e1e1e);
+    margin: 0;
+
+    p {
+      margin: 0 0 0.5em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    a {
+      color: var(--clr-black-3, #1e1e1e);
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__gdpr {
+    margin: 0;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0;
+  }
+
+  &__honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__submit {
+    @include body-bold;
+    background: var(--clr-yellow, #f7a626);
+    color: var(--clr-black-3, #1e1e1e);
+    border: 1px solid var(--clr-yellow, #f7a626);
+    padding: 13px 30px;
+    border-radius: 100px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+
+    &:hover {
+      background-color: var(--clr-black-3, #1e1e1e);
+      color: var(--clr-white);
+      border-color: var(--clr-black-3, #1e1e1e);
+    }
+  }
+
+  .psgdpr_consent_message {
+    span:nth-child(3) {
+      a {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: var(--clr-yellow);
+        }
+      }
+    }
+  }
+}

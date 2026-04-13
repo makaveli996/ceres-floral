@@ -1,0 +1,184 @@
+@use "sass:map";
+
+$grid-padding: 50px;
+$grid-padding--mobile: 15px;
+$gap: 30px;
+
+$grid-breakpoints: (
+  xxs: 319.98px,
+  sm: 575.98px,
+  md: 749.98px,
+  lg: 991.98px,
+  xl: 1199.98px,
+  xxl: 1399.98px,
+  xxxl: 1920.98px,
+) !default;
+
+@mixin mu($name) {
+  $min: map.get($grid-breakpoints, $name);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin md($name) {
+  $max: map.get($grid-breakpoints, $name);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin img-cover {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+@mixin img-fluid {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@mixin img-fluid-fw {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@mixin sign-bold {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin sign-regular {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin body-bold {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+@mixin body-regular {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+@mixin heading-5-bold {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin heading-5-regular {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin heading-4-bold {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin heading-4-regular {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin heading-3-bold {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 39px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin heading-3-regular {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-size: 39px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin heading-2-bold {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 49px;
+  line-height: 1.2;
+  letter-spacing: 0;
+
+  @include md(xxl) {
+    font-size: 42px;
+  }
+
+  @include md(lg) {
+    font-size: 32px;
+  }
+}
+
+@mixin heading-2-regular {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-size: 49px;
+  line-height: 1.2;
+  letter-spacing: 0;
+
+  @include md(xxl) {
+    font-size: 42px;
+  }
+
+  @include md(lg) {
+    font-size: 32px;
+  }
+}
+
+@mixin heading-1-bold {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin heading-1-regular {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-size: 61px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}

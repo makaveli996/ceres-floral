@@ -1,0 +1,77 @@
+/**
+ * Image Cards section (displayAboutUs). Grid of cards: image, title, description.
+ * Used by tc_imagecards module (imagecards.tpl). Figma: 3 columns desktop, card image ratio ~453×262,
+ * content block #f2f2f2, padding 30px, gap 20px, title 25px bold, body 18px; rounded bottom 7.5px.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-imagecards {
+  width: 100%;
+  background: var(--clr-gray-3, #f2f2f2);
+  padding: 93px 0 93px;
+  position: relative;
+
+  @include md(lg) {
+    padding: 50px 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    align-items: stretch;
+
+    @include md(xl) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include md(md) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &__image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 453 / 262;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  &__img {
+    @include img-cover;
+  }
+
+  &__content {
+    padding: 30px 30px 0 0;
+    flex: 1;
+    min-height: 0;
+
+    @include md(lg) {
+      padding: 20px 0 0 0;
+    }
+  }
+
+  &__card-title {
+    @include heading-4-bold;
+    color: var(--clr-black);
+    margin: 0 0 20px;
+  }
+
+  &__description {
+    @include body-regular;
+    color: var(--clr-black);
+    margin: 0;
+    line-height: 1.4;
+  }
+}

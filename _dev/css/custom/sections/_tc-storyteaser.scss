@@ -1,0 +1,107 @@
+/**
+ * Story teaser section (displayHome). Figma: two-column layout — image left, content right (title, WYSIWYG text, button).
+ * Used by tc_storyteaser module template (tc_storyteaser.tpl). No JS.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-storyteaser {
+  width: 100%;
+  background: var(--clr-white);
+  margin: 100px 0;
+
+  @include md(lg) {
+    margin: 50px 0;
+  }
+
+  &__inner {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    z-index: 1;
+
+    @include md(lg) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+  }
+
+  &__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+
+    @include md(lg) {
+      order: 1;
+    }
+  }
+
+  &__image {
+    @include img-cover;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 60px;
+    background: var(--clr-white);
+
+    @include md(xxl) {
+      padding: 0;
+    }
+
+    @include md(lg) {
+      order: 2;
+    }
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-black-3);
+    margin: 0 0 34px;
+
+    @include md(lg) {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__text {
+    @include body-regular;
+    color: var(--clr-black-3);
+    margin-bottom: 34px;
+    max-width: 575px;
+
+    @include md(lg) {
+      max-width: 100%;
+    }
+
+    p {
+      margin: 0 0 2em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    strong,
+    b {
+      font-weight: 700;
+    }
+
+    ul,
+    ol {
+      margin: 0.5em 0;
+      padding-left: 1.25em;
+    }
+
+    li {
+      margin-bottom: 0.25em;
+    }
+
+    a {
+      color: var(--clr-yellow);
+      text-decoration: underline;
+    }
+  }
+}

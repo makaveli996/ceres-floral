@@ -1,0 +1,87 @@
+/**
+ * Reset / Normalize
+ * Custom reset without Bootstrap dependencies
+ */
+
+@use "typography" as *;
+
+// Define missing variables if not already defined
+$line-height-base: 1.5 !default;
+$color-text: #000000 !default;
+$color-bg: #ffffff !default;
+$color-primary: #000000 !default;
+$color-accent: #000000 !default;
+$transition-base: 0.3s ease !default;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size-base;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text;
+  background-color: $color-bg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Remove default margins
+h1, h2, h3, h4, h5, h6,
+p, ul, ol, dl,
+blockquote, pre,
+figure, hr {
+  margin: 0;
+}
+
+// Lists
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
+// Links
+a {
+  color: $color-primary;
+  text-decoration: none;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Forms
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}
+

@@ -1,0 +1,180 @@
+/**
+ * Wspólna paginacja list (blog ets_blog .results + .links, kolekcje tc_collectionpages).
+ * Theme: blog-pagination.tpl (wrapper) + markup .blog-pagination > .links (jak ets_blog).
+ * Strzałki prev/next: chevron z bordera (nie SVG — SVG jest na sortowaniu kolekcji).
+ * Side effects: none.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+@mixin pagination-sr-only-inner {
+  > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@mixin pagination-chevron-after {
+  &::after {
+    content: "";
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid currentcolor;
+    border-bottom: 2px solid currentcolor;
+    flex-shrink: 0;
+  }
+}
+
+.blog-pagination {
+  margin: 30px 0 40px;
+
+  @include md(lg) {
+    margin: 40px 0;
+  }
+
+  &.blog-paggination {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .results {
+    display: none;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &:not(:has(> .prev)) {
+      justify-content: center;
+    }
+
+    &:has(> .prev) > .prev + b,
+    &:has(> .prev) > .prev + a:not(.next),
+    &:has(> .prev) > .prev + p.paginration_vv {
+      margin-left: auto;
+    }
+
+    > a.frist,
+    > .prev {
+      order: 1;
+    }
+
+    > b,
+    > p.paginration_vv,
+    > a:not(.frist):not(.prev):not(.next) {
+      order: 2;
+    }
+
+    > .next {
+      order: 3;
+    }
+
+    b:first-child {
+      margin-left: auto;
+    }
+  }
+
+  .links a,
+  .links b,
+  .links p.paginration_vv,
+  .links > span.prev,
+  .links > span.next {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    border-radius: 6.25px;
+    border: none;
+    @include body-regular;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--clr-black-3, #1e1e1e);
+    text-decoration: none;
+    background: var(--clr-gray-3, #f2f2f2);
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      opacity 0.2s ease;
+    flex-shrink: 0;
+    cursor: pointer;
+    font-family: "PT Sans", sans-serif;
+  }
+
+  .links a:hover {
+    background: var(--clr-yellow, #f7a626);
+    color: var(--clr-white, #fff);
+  }
+
+  .links b {
+    background: var(--clr-yellow, #f7a626);
+    color: var(--clr-white, #fff);
+    font-weight: 700;
+    cursor: default;
+  }
+
+  .links p.paginration_vv {
+    cursor: default;
+    letter-spacing: 0.05em;
+  }
+
+  .links > span.prev,
+  .links > span.next {
+    opacity: 0.38;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .links > a.frist,
+  .links > a.prev,
+  .links > a.next {
+    position: relative;
+    color: var(--clr-black-3, #1e1e1e);
+
+    @include pagination-sr-only-inner;
+    @include pagination-chevron-after;
+
+    &:hover {
+      color: var(--clr-white, #fff);
+    }
+  }
+
+  .links > span.prev,
+  .links > span.next {
+    position: relative;
+    color: var(--clr-black-3, #1e1e1e);
+
+    @include pagination-sr-only-inner;
+    @include pagination-chevron-after;
+  }
+
+  .links {
+    > .next::after {
+      transform: rotate(-45deg);
+    }
+
+    > .prev::after {
+      transform: rotate(135deg);
+    }
+  }
+}

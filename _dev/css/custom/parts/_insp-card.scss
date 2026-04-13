@@ -1,0 +1,102 @@
+/**
+ * Inspiration card component (.insp-card). Full-image editorial card with gradient overlay.
+ * Used by: tc_inspirationsslider.tpl (homepage Splide slider), blog_list_inspiration.tpl (archive grid).
+ * Inputs: image, title, optional "Zobacz aranżację" button. Outputs: overlay card with hover effect.
+ * No side effects — styling only.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.insp-card {
+  $r: &;
+  display: block;
+  position: relative;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  aspect-ratio: 692 / 437;
+
+  @include md(lg) {
+    aspect-ratio: 4 / 3;
+  }
+
+  &:hover {
+    #{$r}__title {
+      transform: translateY(0);
+    }
+
+    #{$r}__button {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    #{$r}__img {
+      transform: scale(1.04);
+    }
+  }
+
+  &__media {
+    position: absolute;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+  }
+
+  &__img {
+    @include img-cover;
+    transition: transform 0.4s ease;
+  }
+
+  &__overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 55%;
+    background: linear-gradient(180deg, rgba(39, 26, 20, 0) 0%, #271a14 100%);
+    pointer-events: none;
+  }
+
+  &__content {
+    position: absolute;
+    left: 38px;
+    bottom: 29px;
+
+    @include md(lg) {
+      left: 20px;
+      bottom: 20px;
+    }
+  }
+
+  &__title {
+    @include heading-3-bold;
+    color: var(--clr-white);
+    z-index: 1;
+    display: block;
+    transform: translateY(61px);
+    transition: transform 0.4s ease-in-out;
+
+    @include md(lg) {
+      transform: none;
+      font-size: 24px;
+    }
+  }
+
+  &__button {
+    margin-top: 20px;
+    transform: translateY(81px);
+    opacity: 0;
+    transition:
+      transform 0.4s ease-in-out,
+      opacity 0.4s ease-in-out,
+      background-color 0.3s ease-in-out,
+      color 0.3s ease-in-out,
+      border-color 0.3s ease-in-out;
+
+    @include md(lg) {
+      transform: none;
+      opacity: 1;
+    }
+  }
+}

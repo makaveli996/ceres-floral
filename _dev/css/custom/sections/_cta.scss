@@ -1,0 +1,137 @@
+/**
+ * CTA section (displayHome). Figma: full-width background image, left content (title, description, two buttons).
+ * Used by tc_cta module template (tc_cta.tpl). No JS.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-cta {
+  position: relative;
+  width: 100%;
+  min-height: 549px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  @include md(lg) {
+    min-height: 400px;
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--tc-cta-bg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    transform: translateX(15%);
+
+    @include md(lg) {
+      transform: translateX(0);
+    }
+  }
+
+  &::before {
+    content: "";
+    height: 100.1%;
+    position: absolute;
+    inset: 0;
+    width: 49.5%;
+    background: linear-gradient(
+      -90deg,
+      rgba(242, 242, 242, 0.75) 10%,
+      rgba(242, 242, 242, 1) 70%,
+      rgba(242, 242, 242, 1) 100%
+    );
+    backdrop-filter: blur(5px);
+    pointer-events: none;
+    z-index: 0;
+    min-width: 720px;
+
+    @include md(lg) {
+      width: 100%;
+      max-width: none;
+      background: rgba(242, 242, 242, 0.85);
+    }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  &__content {
+    position: relative;
+    max-width: 692px;
+    padding: 88px 0 88px;
+    padding-left: 0;
+    z-index: 1;
+
+    @include md(lg) {
+      padding: 40px 0 40px;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-black-3);
+    margin: 0 0 50px;
+
+    @include md(lg) {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__description {
+    @include body-regular;
+    color: var(--clr-black-3,);
+    margin-bottom: 35px;
+    max-width: 573px;
+
+    @include md(lg) {
+      max-width: 100%;
+      margin-bottom: 24px;
+    }
+
+    p {
+      margin: 0 0 1.5em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    strong,
+    b {
+      font-weight: 700;
+    }
+
+    ul,
+    ol {
+      margin: 0.5em 0;
+      padding-left: 1.25em;
+    }
+
+    li {
+      margin-bottom: 0.25em;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+
+    @include md(lg) {
+      gap: 10px;
+      justify-content: center;
+    }
+  }
+}

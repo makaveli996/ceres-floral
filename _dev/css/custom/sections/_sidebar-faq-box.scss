@@ -1,0 +1,46 @@
+/**
+ * Sidebar FAQ box section for configurator left column.
+ * Used by module tc_sidebarfaqbox template: sidebarfaqbox.tpl.
+ * Matches the Figma FAQ card (light background, 6px radius, outlined pill CTA).
+ * Inputs: BEM classes from module markup and global button component styles.
+ * Side effects: none; responsive only adjusts spacing for smaller stacked sidebars.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-sidebarfaqbox {
+  border-radius: 6px;
+  background-color: var(--clr-gray-3);
+  color: var(--clr-black-3);
+
+  &__inner {
+    padding: 15px 20px 25px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__overtitle {
+    @include sign-bold;
+    font-size: 15px;
+    color: var(--clr-yellow);
+    margin: 0 0 8px;
+  }
+
+  &__title {
+    @include heading-5-bold;
+    margin: 0;
+  }
+
+  &__footer {
+    margin-top: 17px;
+  }
+
+  &__button {
+    width: 100%;
+    justify-content: center;
+
+    .button__text {
+      font-size: 15px;
+    }
+  }
+}

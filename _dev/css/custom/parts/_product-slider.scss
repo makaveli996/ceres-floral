@@ -1,0 +1,62 @@
+/**
+ * Global product slider component (Splide). Reusable for bestsellers, new products, custom queries.
+ * Used by: theme partial _partials/product-slider.tpl. JS: _dev/js/custom/Sections/ProductSlider.js.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-product-slider {
+  $r: &;
+  width: 100%;
+
+  @media (max-width: 1579.98px) {
+    padding-left: 75px;
+    padding-right: 75px;
+  }
+
+  @include md(sm) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-black);
+    text-align: center;
+    margin: 0 0 34px;
+
+    @include md(md) {
+      margin: 0 0 30px;
+    }
+  }
+
+  &__splide {
+    position: relative;
+    margin-bottom: 56px;
+
+    @include md(md) {
+      margin-bottom: 30px;
+    }
+  }
+
+  .splide__track {
+    overflow: hidden;
+  }
+
+  .splide__list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+  }
+
+  .splide__slide {
+    box-sizing: border-box;
+    list-style: none;
+    display: flex;
+  }
+
+  &__cta {
+    text-align: center;
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "ceres-floral",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "serve": "browser-sync start --config bs-config.js",
+    "start": "npm run watch & npm run serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "autoprefixer": "^10.4.22",
+    "babel-loader": "^10.0.0",
+    "bootstrap": "4.0.0-alpha.5",
+    "bootstrap-touchspin": "^3.1.1",
+    "bourbon": "^7.3.0",
+    "browser-sync": "^3.0.4",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.4",
+    "events": "^3.3.0",
+    "expose-loader": "^5.0.0",
+    "flexibility": "^2.0.1",
+    "jquery-touchswipe": "^1.6",
+    "material-design-icons-iconfont": "^6.7.0",
+    "mini-css-extract-plugin": "^2.9.4",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-loader": "^8.2.0",
+    "sass": "^1.96.0",
+    "sass-loader": "^16.0.6",
+    "terser-webpack-plugin": "^5.3.16",
+    "tether": "^2.0.0",
+    "velocity-animate": "^1.5.2",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "@splidejs/splide": "^4.1.4",
+    "glightbox": "^3.3.1",
+    "sprintf-js": "^1.1.3"
+  }
+}

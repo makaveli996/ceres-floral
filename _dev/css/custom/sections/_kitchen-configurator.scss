@@ -1,0 +1,695 @@
+/**
+ * Kitchen configurator section.
+ * Used by tc_kitchenconfigurator hook template on configurator page.
+ * Mirrors Figma hierarchy: numbered steps, sub-section headers, card grids,
+ * switch toggles, attachment block, dark consultation panel.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+/* ── Root / Form ── */
+
+.tc-kcfg-alert {
+  padding: 16px 20px;
+  border-radius: 7.5px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+
+  ul {
+    margin: 0;
+    padding-left: 18px;
+    list-style: disc;
+  }
+
+  &--success {
+    background: #f6ffed;
+    border: 1px solid #b7eb8f;
+    color: #135200;
+  }
+
+  &--error {
+    background: #fff2f0;
+    border: 1px solid #ffccc7;
+    color: #a8071a;
+  }
+}
+
+.tc-kitchen-configurator {
+  background: var(--clr-gray-3);
+  border-radius: 7.5px;
+  padding: 30px;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    border: 1px solid var(--clr-gray-4);
+    border-radius: 6px;
+    padding: 8px 12px;
+    @include body-regular;
+    color: var(--clr-black-3);
+    background: var(--clr-white);
+  }
+
+  @include md(md) {
+    padding: 20px;
+
+    &__form {
+      gap: 40px;
+    }
+  }
+}
+
+/* ── Step ── */
+
+.tc-kcfg-step {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  textarea {
+    border: 1px solid var(--clr-gray-4);
+    border-radius: 5px;
+    padding: 17px 23px;
+    @include body-regular;
+    color: var(--clr-black-3);
+    resize: vertical;
+    min-height: 186px;
+
+    &::placeholder {
+      color: var(--clr-gray);
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  &__number {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--clr-yellow);
+    align-items: center;
+    justify-content: center;
+    font-size: 54px;
+    line-height: 1;
+    color: var(--clr-black-3);
+  }
+
+  &__number-inner {
+    transform: translate(-25%, 14%);
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__title {
+    @include heading-4-bold;
+    margin: 0;
+    color: var(--clr-black-3);
+  }
+
+  &__desc {
+    @include body-regular;
+    color: var(--clr-gray);
+    margin: 0;
+    text-align: start;
+  }
+
+  &--textarea {
+    gap: 20px;
+  }
+
+  @include md(md) {
+    gap: 24px;
+
+    &__header {
+      gap: 16px;
+    }
+
+    &__number {
+      width: 40px;
+      height: 40px;
+      font-size: 30px;
+    }
+  }
+}
+
+/* ── Sub-section ── */
+
+.tc-kcfg-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 4.5px;
+    background: transparent;
+  }
+
+  &__title {
+    @include heading-5-bold;
+    white-space: nowrap;
+    color: var(--clr-black-3);
+  }
+
+  &__line {
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--clr-gray) 0 1px,
+      transparent 1px 3px
+    );
+  }
+
+  &__label {
+    @include heading-5-regular;
+    color: var(--clr-black-3);
+    margin: 0;
+  }
+
+  @include md(md) {
+    &__header {
+      flex-wrap: wrap;
+    }
+
+    &__line {
+      min-width: 40px;
+    }
+  }
+}
+
+/* ── Card grid ── */
+
+.tc-kcfg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+
+  @include md(xl) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include md(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Card ── */
+
+.tc-kcfg-card {
+  border: 1px solid var(--clr-gray-3);
+  border-radius: 5px;
+  background: var(--clr-white);
+  min-height: 115px;
+  padding: 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  margin: 0;
+  overflow: hidden;
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__content {
+    padding: 20px 20px 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  &--narrow-text {
+    small {
+      max-width: 178px;
+      margin: 0 auto;
+    }
+  }
+
+  &__image-wrap {
+    margin: 0 auto 16px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    img {
+      @include img-fluid;
+    }
+  }
+
+  &__image-flag {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  &__mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid var(--clr-gray);
+    background: var(--clr-white);
+    transition:
+      border-color 0.15s,
+      background 0.15s;
+
+    &::after {
+      content: url("../img/selected.svg");
+      display: block;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+  }
+
+  strong {
+    @include body-bold;
+    color: var(--clr-black-3);
+  }
+
+  small {
+    @include body-regular;
+    color: var(--clr-gray);
+  }
+
+  &__flag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 17px;
+    padding-top: 6px;
+  }
+
+  &__flag-label {
+    @include body-regular;
+    color: var(--clr-gray);
+  }
+
+  &--image {
+    padding: 30px 0 23px;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    strong,
+    small {
+      padding: 0 16px;
+    }
+
+    .tc-kcfg-card__flag {
+      padding: 0 16px;
+    }
+  }
+
+  &--image-cover {
+    padding: 0;
+    gap: 0;
+  }
+
+  &.is-selected {
+    border-color: var(--clr-yellow);
+    box-shadow: 0 0 0 1px var(--clr-yellow) inset;
+
+    .tc-kcfg-card__mark {
+      border-color: var(--clr-yellow);
+      background: var(--clr-yellow);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.is-flagged {
+    .tc-kcfg-card__image-flag {
+      opacity: 1;
+    }
+  }
+
+  &--agd {
+    .tc-kcfg-card__image-wrap {
+      margin-bottom: 28px;
+      height: 104px;
+      justify-content: center;
+    }
+
+    strong {
+      margin-top: auto;
+    }
+
+    .tc-kcfg-card__flag {
+      margin-top: 10px;
+    }
+
+    .tc-kcfg-card__flag-label {
+      text-transform: capitalize;
+    }
+  }
+}
+
+/* ── Switch toggle ── */
+
+.tc-kcfg-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__track {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    background: var(--clr-gray-4);
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--clr-white)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M10 1.4L8.6 0 5 3.6 1.4 0 0 1.4 3.6 5 0 8.6 1.4 10 5 6.4 8.6 10 10 8.6 6.4 5z' fill='%238D8D8D'/%3E%3C/svg%3E")
+        center / 10px 10px no-repeat;
+      transition:
+        transform 0.2s,
+        background-image 0.2s;
+    }
+  }
+
+  input:checked + &__track {
+    background: #52c41a;
+
+    &::after {
+      transform: translateX(22px);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M11.4 1.42L5.6 7.13a2 2 0 01-1.41.58c-.51 0-1.02-.2-1.42-.59L0 4.43 1.39 2.99 4.19 5.7 9.99 0z' fill='%2352C41A'/%3E%3C/svg%3E");
+      background-size: 11px 8px;
+    }
+  }
+}
+
+/* ── Form fields (labeled inputs) ── */
+
+.tc-kcfg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+
+  &__label {
+    @include body-regular;
+    color: var(--clr-gray);
+    text-align: start;
+    margin: 0;
+
+    &--light {
+      @include body-bold;
+      color: var(--clr-white);
+    }
+  }
+}
+
+.tc-kcfg-contact-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+
+  &--half {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  @include md(xl) {
+    grid-template-columns: 1fr;
+  }
+
+  @include md(lg) {
+    grid-template-columns: 1fr;
+
+    &--half {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/* ── Attachment section ── */
+
+.tc-kcfg-attachment {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__title {
+    @include heading-5-bold;
+    margin: 0;
+    color: var(--clr-black-3);
+  }
+
+  &__desc {
+    @include body-regular;
+    color: var(--clr-gray);
+    margin: 0;
+    text-align: left;
+  }
+
+  &__formats {
+    @include body-regular;
+    color: var(--clr-gray);
+    margin: 0;
+  }
+
+  &__btn {
+    background: var(--clr-white);
+    border-color: var(--clr-gray-3);
+
+    input[type="file"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+      height: 0;
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__btn-text {
+    @include body-bold;
+    color: var(--clr-black-3);
+  }
+
+  &__input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__file-name {
+    display: none;
+    @include body-regular;
+    color: var(--clr-black-3);
+
+    &.is-visible {
+      display: inline;
+    }
+  }
+}
+
+/* ── Summary / Contact panel ── */
+
+.tc-kcfg-summary {
+  border-radius: 7.5px;
+  background: var(--clr-black-3) center / cover no-repeat;
+  color: var(--clr-white);
+  padding: 42px 49px 59px;
+  display: flex;
+  gap: 40px;
+  overflow: hidden;
+  position: relative;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    max-width: 524px;
+  }
+
+  &__title {
+    @include heading-3-bold;
+    margin: 0 0 7px;
+    color: var(--clr-white);
+  }
+
+  &__subtitle {
+    @include body-regular;
+    color: var(--clr-white);
+    margin: 0;
+  }
+
+  &__cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-left: auto;
+    min-width: 240px;
+  }
+
+  &__cta-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__cta-title {
+    @include heading-4-bold;
+    color: var(--clr-white);
+    margin: 0;
+  }
+
+  &__cta-sub {
+    @include heading-5-regular;
+    color: var(--clr-white);
+    margin: 0;
+  }
+
+  &__phone {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    text-decoration: none;
+    color: var(--clr-white);
+    @include heading-4-bold;
+    font-size: 28px;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__hours {
+    @include body-regular;
+    color: var(--clr-white);
+    margin: 0;
+  }
+
+  @include md(xxl) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px;
+
+    &__cta {
+      margin-left: 0;
+      min-width: 0;
+    }
+  }
+
+  @include md(lg) {
+    &__title {
+      font-size: 30px;
+    }
+  }
+}
+
+.tc-kcfg-consent {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  @include sign-regular;
+  color: var(--clr-gray-3);
+  margin: 0;
+
+  input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--clr-gray-4);
+    border-radius: 6px;
+    background: var(--clr-white);
+    flex-shrink: 0;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+
+    &:checked {
+      background: var(--clr-yellow);
+      border-color: var(--clr-yellow);
+    }
+  }
+}
+
+.tc-kcfg-submit {
+  width: 100%;
+  justify-content: center;
+
+  &__wrapper {
+    margin: 0 auto;
+    max-width: 383px;
+    width: 100%;
+  }
+}
+
+.tc-kcfg-gdpr {
+  .psgdpr_consent_message {
+    span:last-child {
+      color: var(--clr-gray-3);
+      @include sign-regular;
+    }
+  }
+}

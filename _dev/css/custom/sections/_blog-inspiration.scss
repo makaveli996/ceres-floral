@@ -1,0 +1,630 @@
+/**
+ * Inspiration blog category — archive listing styles.
+ * Used by: blog_list_inspiration.tpl (archive page for "Inspiracje" category).
+ * Inputs: $blog_posts (insp-card tiles), $blog_insp_child_cats (AJAX filter buttons), $blog_paggination.
+ * Outputs: .blog-inspiration block — filter bar, 2-col insp-card grid, pagination.
+ * Side effects: none — rendering only.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+/* =============================================
+   ARCHIVE — blog-inspiration
+   ============================================= */
+
+.blog-inspiration {
+  $r: &;
+  padding-bottom: 80px;
+
+  @include md(lg) {
+    padding-bottom: 48px;
+  }
+
+  /* ── H1 header ── */
+
+  &__header {
+    margin: 25px 0;
+
+    @include md(lg) {
+      margin: 20px 0;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    @include heading-2-bold;
+    color: var(--clr-black);
+  }
+
+  /* ── Filter tabs bar ── */
+
+  &__filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0 0 35px;
+    padding: 0 10px;
+
+    @include md(lg) {
+      margin-bottom: 32px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  &__filter-item {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__filter-btn {
+    @include body-regular;
+    color: var(--clr-black-3);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      font-weight 0.1s;
+    font-family: "PT Sans", sans-serif;
+    text-decoration: none;
+    display: block;
+
+    @include md(md) {
+      padding: 10px 12px;
+      font-size: 16px;
+    }
+
+    &:hover {
+      border-bottom-color: var(--clr-yellow);
+    }
+
+    &--active {
+      border-bottom-color: var(--clr-yellow);
+    }
+  }
+
+  /* ── Grid wrapper (relative for loading overlay) ── */
+
+  &__grid-wrap {
+    position: relative;
+    min-height: 300px;
+  }
+
+  &__loading {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.75);
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+
+    &--visible {
+      display: flex;
+    }
+  }
+
+  &__spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--clr-gray-2);
+    border-top-color: var(--clr-yellow);
+    border-radius: 50%;
+    animation: blog-inspiration-spin 0.7s linear infinite;
+  }
+
+  /* ── 2-column insp-card grid ── */
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+
+    @include md(lg) {
+      gap: 16px;
+    }
+
+    @include md(sm) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  // ── Single post: gallery + furniture ──────────────────────────────────────
+
+  &__section-title {
+    @include heading-3-bold;
+    font-size: 28px;
+    line-height: 1.2;
+    color: var(--clr-black-3);
+    margin: 0 0 24px;
+
+    @include md(lg) {
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__gallery {
+    margin: 48px 0;
+
+    @include md(lg) {
+      margin: 32px 0;
+    }
+  }
+
+  &__gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+
+    @include md(lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include md(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__gallery-item {
+    display: block;
+    overflow: hidden;
+    border-radius: 7.5px;
+    aspect-ratio: 4 / 3;
+
+    &:hover .post-inspiration__gallery-img {
+      transform: scale(1.04);
+    }
+  }
+
+  &__gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  &__furniture {
+    margin: 48px 0;
+
+    @include md(lg) {
+      margin: 32px 0;
+    }
+  }
+
+  &__furniture-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+
+    @include md(xl) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include md(lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include md(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Pagination: themes/ceres_floral/templates/_partials/blog-pagination.tpl + _blog-pagination.scss */
+
+  &__empty {
+    @include body-regular;
+    color: var(--clr-gray);
+    padding: 40px 0;
+    text-align: center;
+  }
+}
+
+@keyframes blog-inspiration-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =============================================
+   SINGLE POST — post-insp
+   ============================================= */
+
+.post-insp {
+  padding-bottom: 0;
+
+  // ── 2-column layout (main content + sidebar) ──
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr 333px;
+    gap: 24px;
+    align-items: start;
+    padding-top: 40px;
+    padding-bottom: 102px;
+
+    @include md(xl) {
+      grid-template-columns: 1fr 300px;
+      gap: 32px;
+    }
+
+    @include md(lg) {
+      grid-template-columns: 1fr;
+      padding-top: 24px;
+      padding-bottom: 48px;
+    }
+  }
+
+  // ── Main content column ──
+  &__main {
+    min-width: 0;
+  }
+
+  // ── Sticky right sidebar ──
+  &__sidebar {
+    height: 100%;
+
+    @include md(lg) {
+      display: none;
+    }
+  }
+
+  &__sidebar-inner {
+    position: sticky;
+    top: calc(var(--sticky-bar-height, 0px) + 90px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  // ── Meta: category badges + date ──
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 29px;
+  }
+
+  &__meta-cat {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    background: var(--clr-gray-3);
+    border-radius: 100px;
+    @include body-bold;
+    color: var(--clr-black-3);
+  }
+
+  &__meta-date {
+    @include body-regular;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--clr-black-3);
+    padding: 4px 10px;
+  }
+
+  // ── Title ──
+  &__title {
+    margin: 0 0 29px;
+    @include heading-3-bold;
+    color: var(--clr-black-3);
+  }
+
+  // ── Lead (short description) — bold text below title ──
+  &__lead {
+    margin: 0 0 28px;
+    @include body-regular;
+    font-weight: 700;
+    color: var(--clr-black-3);
+    line-height: 1.6;
+
+    p {
+      margin: 0;
+      font-weight: 700;
+    }
+  }
+
+  // ── Gallery slider wrapper — gallery-slider component fills this ──
+  &__gallery-wrap {
+    margin-bottom: 32px;
+    border-radius: 7.5px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+
+    // gallery-slider overrides for this context
+    .gallery-slider__pagination {
+      bottom: 12px;
+
+      .splide__pagination__page {
+        background: var(--clr-white);
+      }
+    }
+
+    .tc-slider-arrows {
+      &__btn {
+        &--prev {
+          left: 24px !important;
+          transform: translate(0, -50%) !important;
+        }
+
+        &--next {
+          right: 24px !important;
+          transform: translate(0, -50%) !important;
+        }
+      }
+    }
+  }
+
+  // ── Fallback featured image (no gallery) ──
+  &__featured-img-wrap {
+    margin-bottom: 32px;
+    border-radius: 7.5px;
+    overflow: hidden;
+    aspect-ratio: 932 / 486;
+  }
+
+  &__featured-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  // ── Content body ──
+  &__content {
+    @include body-regular;
+    color: var(--clr-black-3);
+    margin-bottom: 29px;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-bottom: 29px;
+      font-weight: 700;
+    }
+
+    p {
+      @include body-regular;
+      margin-bottom: 1em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 7.5px;
+      margin: 16px 0;
+    }
+
+    ul,
+    ol {
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+  }
+
+  // ── Tags ──
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 32px;
+  }
+
+  &__tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--clr-gray-3);
+    border-radius: 100px;
+    @include body-regular;
+    font-size: 14px;
+    color: var(--clr-black-3);
+    text-decoration: none;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      background: var(--clr-yellow);
+      color: var(--clr-white);
+    }
+  }
+
+  // ── Section titles ──
+  &__section-title {
+    @include heading-4-bold;
+    color: var(--clr-black-3);
+    margin: 0 0 30px;
+
+    @include md(lg) {
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+  }
+
+  // ── Meble w aranżacji ──
+  &__furniture {
+    margin: 48px 0 70px;
+
+    @include md(lg) {
+      margin: 32px 0;
+    }
+  }
+
+  &__furniture-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    @include md(xl) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include md(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // ── Author + Share bar — gray card, matches Figma node 860-16495 ──
+  &__author-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    background: var(--clr-gray-3);
+    border-radius: 7.5px;
+    padding: 32px 40px;
+    margin: 32px 0 0;
+
+    @include md(lg) {
+      padding: 24px;
+      gap: 20px;
+    }
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+  }
+
+  &__author-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    // White border matching Figma (5px solid white)
+    border: 5px solid var(--clr-white);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--placeholder {
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+  }
+
+  &__author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__author-label {
+    @include body-regular;
+    color: var(--clr-black-3);
+  }
+
+  &__author-name {
+    @include body-bold;
+    color: var(--clr-black);
+  }
+
+  // ── Share buttons ──
+  &__share {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    @include md(sm) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__share-label {
+    @include body-regular;
+    color: var(--clr-black-3);
+    white-space: nowrap;
+  }
+
+  &__share-btns {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 53px;
+    height: 53px;
+    background: var(--clr-white);
+    border-radius: 50%;
+    color: var(--clr-black-3);
+    flex-shrink: 0;
+    text-decoration: none;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+
+    svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+      flex-shrink: 0;
+
+      path {
+        transition: fill 0.2s ease;
+      }
+    }
+
+    &:hover {
+      background: var(--clr-yellow);
+      border-color: var(--clr-yellow);
+
+      svg path {
+        fill: var(--clr-white);
+      }
+    }
+  }
+
+  // ── Related posts section — bg & padding only; slider markup via .inspirations-slider component ──
+  &__related {
+    background: var(--clr-gray-3);
+    padding: 86px 0 150px;
+
+    @include md(lg) {
+      padding: 48px 0;
+    }
+
+    .inspirations-slider__header {
+      justify-content: center;
+    }
+
+    .inspirations-slider__title {
+      text-align: center;
+    }
+  }
+}

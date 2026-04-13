@@ -1,0 +1,131 @@
+@use "../base" as *;
+@use "../utils" as *;
+
+.sticky-bar {
+  $r: &;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  min-height: var(--sticky-bar-height);
+  display: flex;
+  align-items: center;
+  background: var(--clr-black-2);
+
+  @include md(lg) {
+    .container-lg {
+      padding: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $gap;
+    min-height: var(--sticky-bar-height);
+
+    @include md(lg) {
+      gap: 0;
+    }
+  }
+
+  &__items {
+    display: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+
+    &:first-child {
+      display: flex;
+    }
+
+    @include md(xl) {
+      display: inline-block !important;
+      animation: 25s slide infinite linear;
+      width: auto;
+      flex: 0 0 auto;
+      min-width: max-content;
+    }
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+
+    @include md(xl) {
+      vertical-align: middle;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
+  &__icon-img {
+    display: block;
+    flex-shrink: 0;
+
+    @include md(xl) {
+      display: inline-block;
+    }
+  }
+
+  &__text {
+    @include sign-bold;
+    color: var(--clr-white);
+  }
+
+  &__contact {
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  &__contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    @include sign-regular;
+    color: var(--clr-white);
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__icon {
+    width: 20px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  &__contact-btn-text {
+    @include sign-regular;
+    color: inherit;
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+body {
+  &:not(.page-index) {
+    .sticky-bar {
+      background: var(--clr-gray-3);
+
+      &__text {
+        color: var(--clr-black);
+      }
+    }
+  }
+}

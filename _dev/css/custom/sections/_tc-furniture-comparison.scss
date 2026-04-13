@@ -1,0 +1,175 @@
+/**
+ * PDP porównanie mebli (tc_furniture_comparison) — Figma 781:5010.
+ * Hook displayProductPdpFullWidth; .container-lg w szablonie modułu.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-furniture-comparison {
+  width: 100%;
+  background: var(--clr-white);
+  margin: 100px 0;
+  color: var(--clr-black-3);
+
+  @include md(md) {
+    margin: 32px 0 48px;
+  }
+
+  &__title {
+    @include heading-2-bold;
+    margin: 0 0 16px;
+    text-align: center;
+    color: var(--clr-black-3);
+
+    @include md(md) {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__intro {
+    @include heading-4-regular;
+    margin: 0 auto 35px;
+    max-width: 920px;
+    text-align: center;
+    color: var(--clr-gray);
+    white-space: pre-line;
+
+    @include md(md) {
+      margin-bottom: 28px;
+    }
+  }
+
+  &__shell {
+    position: relative;
+    max-width: 100%;
+  }
+
+  &__clip {
+    overflow: hidden;
+    transition: max-height 0.45s ease;
+    border-radius: 7.5px;
+  }
+
+  &__scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--clr-white);
+  }
+
+  &__th {
+    @include heading-4-regular;
+    padding: 0 16px 20px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 700;
+    border-bottom: 1px solid var(--clr-gray-3);
+    background: var(--clr-white);
+    color: var(--clr-black-3);
+
+    &--chain {
+      font-weight: 400;
+    }
+
+    @include md(md) {
+      padding: 14px 10px;
+    }
+  }
+
+  &__th--feature {
+    font-weight: 700;
+  }
+
+  &__td {
+    @include body-regular;
+    padding: 15px 38px;
+    text-align: center;
+    vertical-align: middle;
+    color: var(--clr-black-3);
+
+    @include md(md) {
+      padding: 14px 10px;
+    }
+  }
+
+  &__td--feature strong {
+    font-weight: 700;
+  }
+
+  &__tr:last-child .tc-furniture-comparison__td {
+    border-bottom: none;
+  }
+
+  &__tr--alt .tc-furniture-comparison__td {
+    background: var(--clr-gray-3);
+  }
+
+  &__fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 52px;
+    height: 200px;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      var(--clr-white)
+    );
+    opacity: 1;
+    transition: opacity 0.25s ease;
+  }
+
+  &.is-expanded &__fade {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &--static &__fade {
+    display: none;
+  }
+
+  &__toggle {
+    @include body-regular;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 16px;
+    padding: 8px 16px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--clr-black-3);
+      text-decoration: underline;
+      outline: none;
+    }
+  }
+
+  &--static &__toggle {
+    display: none;
+  }
+
+  &__chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease;
+  }
+
+  &.is-expanded &__chevron {
+    transform: rotate(180deg);
+  }
+}

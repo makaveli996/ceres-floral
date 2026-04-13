@@ -1,0 +1,225 @@
+/**
+ * Designers slider section (displayHome). Same layout as inspirations: title, CTA, Splide with
+ * editorial cards (image + overlay + title, optional attachment link). Used by tc_designersslider.
+ * JS: TcDesignersSlider.js. No inline styles.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-designers-slider {
+  $r: &;
+  width: 100%;
+  padding: 72px 0 120px;
+  background: var(--clr-gray-3);
+
+  @include md(lg) {
+    padding: 50px 0;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 45px;
+    text-align: center;
+
+    @include md(lg) {
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-black);
+    margin: 0;
+  }
+
+  &__slider-wrapper {
+    @include md(sm) {
+      padding: 0 20px;
+    }
+  }
+
+  &__slider {
+    position: relative;
+    margin: 0 auto;
+  }
+
+  &__card {
+    display: block;
+    position: relative;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    aspect-ratio: 692 / 437;
+
+    &:hover {
+      #{$r}__card-title {
+        transform: translateY(0);
+      }
+
+      #{$r}__card-button {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    &--no-link {
+      cursor: default;
+      pointer-events: auto;
+    }
+  }
+
+  &__card-media {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  &__card-img {
+    @include img-cover;
+  }
+
+  &__card-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 55%;
+    background: linear-gradient(180deg, rgba(39, 26, 20, 0) 0%, #271a14 100%);
+    pointer-events: none;
+  }
+
+  &__card-content {
+    position: absolute;
+    left: 38px;
+    bottom: 29px;
+  }
+
+  &__card-title {
+    @include heading-3-bold;
+    color: var(--clr-white);
+    z-index: 1;
+    display: block;
+    transform: translateY(61px);
+    transition: transform 0.4s ease-in-out;
+
+    @include md(lg) {
+      left: 15px;
+      bottom: 15px;
+      transform: none;
+      font-size: 30px;
+    }
+  }
+
+  &__card-button {
+    margin-top: 20px;
+    transform: translateY(81px);
+    opacity: 0;
+    transition:
+      transform 0.4s ease-in-out,
+      opacity 0.4s ease-in-out,
+      background-color 0.3s ease-in-out,
+      color 0.3s ease-in-out,
+      border-color 0.3s ease-in-out;
+
+    @include md(lg) {
+      transform: none;
+      opacity: 1;
+    }
+  }
+
+  .splide__slide {
+    height: auto;
+    width: 692px;
+    flex-shrink: 0;
+
+    @include md(xl) {
+      width: 520px;
+    }
+
+    @include md(lg) {
+      width: calc(60% - 12px);
+    }
+
+    @include md(sm) {
+      width: 100%;
+    }
+  }
+
+  &__pagination {
+    bottom: -47px !important;
+    gap: 11px !important;
+    position: relative !important;
+    margin-top: 24px;
+
+    .splide__pagination__page {
+      opacity: 1 !important;
+      margin: 0 !important;
+      width: 10px !important;
+      height: 10px !important;
+      background: var(--clr-gray-4);
+      transform: none !important;
+      border-radius: 50%;
+
+      &.is-active {
+        background-color: var(--clr-yellow);
+      }
+    }
+
+    @include md(lg) {
+      bottom: -24px !important;
+    }
+  }
+
+  .tc-slider-arrows {
+    width: 692px;
+    left: 50%;
+    top: calc(50% - 9px);
+    transform: translate(-50%, -50%);
+
+    @include md(xl) {
+      width: 520px;
+    }
+
+    @include md(lg) {
+      width: calc(60% - 12px);
+    }
+
+    @include md(sm) {
+      width: 100%;
+    }
+
+    &__btn {
+      border: none !important;
+
+      &::before {
+        background: var(--clr-white);
+      }
+
+      &--prev {
+        left: -12px !important;
+        transform: translate(-50%, -50%) !important;
+
+        @include md(sm) {
+          left: 0 !important;
+          transform: translate(-50%, -50%) !important;
+        }
+      }
+
+      &--next {
+        right: -12px !important;
+        transform: translate(50%, -50%) !important;
+
+        @include md(sm) {
+          right: 0 !important;
+          transform: translate(50%, -50%) !important;
+        }
+      }
+    }
+  }
+}

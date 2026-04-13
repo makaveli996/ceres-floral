@@ -1,0 +1,1011 @@
+@use "../base" as *;
+@use "../utils" as *;
+
+// ─── Category PLP: nawigacja podkategorii (ID 18) — markup .tcp-category-plp-nav w module tc_collectionpages ─
+
+.tcp-collection-filter {
+  margin-bottom: 2rem;
+
+  &__title {
+    @include body-regular;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--clr-black-3);
+    margin-bottom: 0.75rem;
+  }
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--clr-gray-4);
+    border-radius: 4px;
+    background: var(--clr-white);
+    user-select: none;
+
+    &-label {
+      @include sign-regular;
+      font-size: 0.9375rem;
+      color: var(--clr-black-3);
+    }
+
+    &-icon {
+      transition: transform 0.2s ease;
+      color: var(--clr-black-3);
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+
+    &--open {
+      max-height: 400px;
+    }
+  }
+
+  &__item {
+    border-bottom: 1px solid var(--clr-gray-4);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.25rem;
+    cursor: pointer;
+    @include sign-regular;
+    font-size: 0.9375rem;
+    color: var(--clr-black-3);
+
+    &:hover {
+      color: var(--clr-yellow);
+    }
+
+    &--active {
+      font-weight: 600;
+      color: var(--clr-black);
+    }
+  }
+
+  &__checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .tcp-collection-filter__checkbox-icon {
+      background: var(--clr-yellow);
+      border-color: var(--clr-yellow);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__checkbox-icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--clr-gray-3);
+    border-radius: 3px;
+    background: var(--clr-white);
+    transition:
+      background 0.15s,
+      border-color 0.15s;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 5px;
+      height: 9px;
+      border: 2px solid var(--clr-white);
+      border-top: 0;
+      border-left: 0;
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+  }
+
+  &__name {
+    flex: 1;
+  }
+}
+
+// ─── Collection list page /kolekcje ──────────────────────────────────────────
+
+// Tile styles (tcp-collection-list__item, __link, __image etc.) live in parts/_collection-tile.scss
+.tcp-collection-list {
+  padding: 0 0 89px;
+
+  &__wrapper {
+    padding: 25px 0 111px;
+  }
+
+  &__header {
+    margin-bottom: 40px;
+  }
+
+  &__title {
+    color: var(--clr-black);
+    @include heading-2-bold;
+  }
+
+  &__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+
+    @include mu(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__empty {
+    color: var(--clr-gray);
+    padding: 2rem 0;
+  }
+}
+
+// ─── Collection long description (WYSIWYG) — above "other collections" ────────
+.tcp-collection-description {
+  padding: 63px 0 0;
+  margin-bottom: 72px;
+  background: var(--clr-white);
+
+  &__body {
+    color: var(--clr-black-3);
+    @include body-regular;
+
+    p {
+      margin: 0 0 1em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    ul,
+    ol {
+      margin: 0 0 1em 1.25em;
+      padding: 0;
+    }
+
+    h2,
+    h3,
+    h4 {
+      @include heading-4-bold;
+      margin-bottom: 1em;
+    }
+  }
+
+  // Moduły podpięte pod hook displayListingDescriptionBottom (tylko strona kategorii PLP)
+  &__body + &__hook {
+    margin-top: 1.5rem;
+  }
+}
+
+// ─── "Zobacz pozostałe kolekcje" — bottom section on detail page ──────────────
+.tcp-other-collections {
+  padding: 0 0 100px;
+  margin-top: 72px;
+  background: var(--clr-white);
+
+  &__heading {
+    @include heading-2-bold;
+    text-align: center;
+    color: var(--clr-black);
+    margin-bottom: 40px;
+  }
+
+  &__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+
+    @include mu(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mu(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+// ─── Collection detail page /kolekcje/{slug} ─────────────────────────────────
+
+.tcp-collection-detail {
+  &__hero {
+    position: relative;
+    min-height: 400px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0;
+
+    @include mu(md) {
+      min-height: 700px;
+    }
+  }
+
+  &__hero-media {
+    position: absolute;
+    inset: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(39, 26, 20, 0) 35.655%,
+        #271a14 119.73%
+      );
+    }
+  }
+
+  &__hero-content {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 90px;
+    color: var(--clr-white);
+  }
+
+  &__hero-label {
+    @include heading-4-regular;
+    color: var(--clr-white);
+    margin-bottom: 0.25rem;
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-white);
+    margin-bottom: 0;
+  }
+
+  // Tabs
+  &__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    padding: 1rem 1.5rem;
+    background: var(--clr-white);
+    border-bottom: 1px solid var(--clr-gray-4);
+    overflow-x: auto;
+  }
+
+  &__tab {
+    @include sign-regular;
+    font-size: 0.9375rem;
+    padding: 0.4rem 1rem;
+    color: var(--clr-black-3);
+    text-decoration: none;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition:
+      background 0.15s,
+      color 0.15s;
+
+    &:hover {
+      background: var(--clr-gray-4);
+    }
+
+    &--active {
+      background: var(--clr-yellow);
+      color: var(--clr-black);
+      font-weight: 600;
+    }
+  }
+
+  // Layout — sidebar + main (scroll target po AJAX paginacji)
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    scroll-margin-top: calc(var(--sticky-bar-height, 0px) + 90px);
+
+    @include md(lg) {
+      scroll-margin-top: calc(var(--sticky-bar-height, 0px) + 70px);
+    }
+
+    @include mu(lg) {
+      grid-template-columns: 334px 1fr;
+      gap: 2rem;
+    }
+  }
+
+  // Sidebar wrapper
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  // Main area
+  &__main {
+    min-width: 0;
+  }
+}
+
+// ─── Category PLP — same shell as collection; native ps_facetedsearch in sidebar ─
+// (Brak tcp-collection-detail__hero — tytuł strony tylko jako zwykły H1, zgodnie z Figmą.)
+.tcp-collection-detail--category {
+  .tcp-category-plp__page-heading {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tcp-category-plp__page-title {
+    @include heading-2-bold;
+    color: var(--clr-black);
+    margin: 0;
+  }
+
+  .tcp-collection-detail__sidebar {
+    gap: 0;
+
+    .tcp-sidebar-filters {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .tcp-category-plp-nav {
+      margin-bottom: 21px;
+    }
+
+    #search_filters_wrapper {
+      margin: 0;
+    }
+  }
+
+  // Native facets (ps_facetedsearch) — checkbox / layout aligned with .tcp-sidebar-check
+  .tcp-faceted-search {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tcp-faceted-search__clear-wrap {
+    margin-bottom: 12px;
+  }
+
+  .tcp-faceted-search__clear {
+    @include body-regular;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--clr-black-3);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--clr-black);
+    }
+  }
+
+  .tcp-faceted-search__facet-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 15px;
+  }
+
+  .tcp-faceted-search__facet-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    cursor: pointer;
+
+    .custom-checkbox {
+      flex-shrink: 0;
+      margin-top: 2px;
+      top: -2px !important;
+      width: 25px;
+      height: 25px;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .color,
+      .color.texture {
+        width: 25px;
+        height: 25px;
+        border-radius: 6px;
+        border: 1px solid var(--clr-gray-4);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      }
+
+      .checkbox-checked {
+        display: none !important;
+      }
+
+      span:not(.color) {
+        flex-shrink: 0;
+        width: 25px;
+        height: 25px;
+        border: 1px solid var(--clr-gray-4);
+        border-radius: 6px;
+        background: var(--clr-white);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &.active .custom-checkbox span:not(.color) {
+      background: var(--clr-yellow);
+      border-color: var(--clr-yellow);
+
+      .checkbox-checked {
+        display: inline-block !important;
+        font-size: 16px !important;
+        color: var(--clr-white) !important;
+      }
+    }
+
+    .tcp-faceted-search__facet-link {
+      @include body-regular;
+      color: var(--clr-black);
+      text-decoration: none;
+      padding: 2px 0;
+
+      &:hover {
+        color: var(--clr-yellow);
+      }
+    }
+  }
+
+  .tcp-faceted-search__radio .search-link {
+    @include body-regular;
+  }
+
+  .facet-dropdown .select-title.tcp-sidebar-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    text-decoration: none;
+  }
+
+  .tcp-faceted-search__slider-label {
+    @include body-regular;
+    margin-bottom: 8px;
+  }
+
+  .tcp-faceted-search__facet-dropdown {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tcp-category-plp__active-filters {
+    margin-bottom: 0.75rem;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  // tcp-sort-bar: select (bez przycisku „Filtr” na mobile — fasety w sidebarze nad siatką).
+
+  #products {
+    padding-top: 0;
+  }
+}
+
+// ─── Product grid ─────────────────────────────────────────────────────────────
+
+.tcp-product-grid {
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+
+  &__empty {
+    color: var(--clr-gray);
+    padding: 2rem 0;
+  }
+
+  // Widok "Wszystkie": ten sam produkt może wystąpić wielokrotnie — etykieta kolekcji nad kaflem
+  &__collection-pill {
+    margin: 0 0 0.5rem;
+    @include sign-regular;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--clr-gray);
+  }
+
+  &__collection-pill-link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: var(--clr-black-3);
+    }
+  }
+}
+
+// Paginacja kolekcji — wspólna z blogiem (._blog-pagination.scss); tylko odstęp nad siatką
+#tcp-pagination .blog-pagination {
+  margin-top: 70px;
+}
+
+// ─── Sidebar filter blocks ─────────────────────────────────────────────────────
+// Based on Figma nodes 808-6114, 808-6146, 808-6180 (bg #F2F2F2, padding 30px, radius 7.5px)
+
+.tcp-sidebar-filters {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: calc(var(--sticky-bar-height, 0px) + 90px);
+
+  @include md(lg) {
+    position: static;
+  }
+}
+
+.tcp-sidebar-block {
+  background: var(--clr-gray-3); // #f2f2f2 — matches Figma sidebar bg
+  border-radius: 8px;
+  padding: 30px;
+  margin-bottom: 21px;
+
+  &--no-bg {
+    background: none;
+    padding: 0;
+    margin-bottom: 18px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__title {
+    @include heading-5-bold;
+    color: var(--clr-black);
+    margin-bottom: 18px;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__item {
+    line-height: 1;
+  }
+
+  &__link {
+    display: block;
+    @include body-regular;
+    color: var(--clr-black);
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 4px 0;
+    transition: color 0.15s;
+
+    &:hover {
+      color: var(--clr-yellow);
+    }
+
+    &--active {
+      @include body-bold;
+      background: var(--clr-yellow);
+      color: var(--clr-white);
+      padding: 8px 10px;
+
+      &:hover {
+        color: var(--clr-white);
+      }
+    }
+  }
+
+  // Checkbox list variant
+  &__list--checks {
+    gap: 15px;
+  }
+
+  &__check-item {
+    list-style: none;
+  }
+}
+
+// Custom checkbox
+.tcp-sidebar-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__box {
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+    border: 1px solid var(--clr-gray-4);
+    border-radius: 6px;
+    background: var(--clr-white);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background 0.15s,
+      border-color 0.15s;
+
+    &::after {
+      content: "";
+      display: none;
+      width: 5px;
+      height: 9px;
+      border: 2px solid var(--clr-white);
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg) translateY(-1px);
+    }
+  }
+
+  &__input:checked + &__box {
+    background: var(--clr-yellow);
+    border-color: var(--clr-yellow);
+
+    &::after {
+      display: block;
+    }
+  }
+
+  &__label {
+    @include body-regular;
+    color: var(--clr-black);
+  }
+}
+
+// Select dropdown wrapper
+.tcp-sidebar-select-wrap {
+  position: relative;
+  display: block;
+}
+
+.tcp-sidebar-select {
+  @include body-regular;
+  appearance: none;
+  width: 100%;
+  padding: 8px 40px 8px 12px;
+  color: var(--clr-black);
+  background: var(--clr-white);
+  border: 1px solid #c5c5c5;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+
+  &:focus-visible {
+    border-color: var(--clr-yellow);
+  }
+}
+
+.tcp-sidebar-select__arrow {
+  pointer-events: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--clr-black);
+  border-bottom: 2px solid var(--clr-black);
+  transform: translateY(-70%) rotate(45deg);
+}
+
+// Price range
+.tcp-sidebar-price {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  &__input {
+    @include body-regular;
+    appearance: none;
+    width: 100%;
+    padding: 8px 12px;
+    color: var(--clr-black);
+    background: var(--clr-white);
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
+    outline: none;
+
+    &:focus-visible {
+      border-color: var(--clr-yellow);
+    }
+
+    // Remove spin arrows
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      appearance: none;
+    }
+
+    &::placeholder {
+      color: var(--clr-black-3);
+      opacity: 1;
+    }
+  }
+}
+
+// Grid loading state
+#tcp-product-grid {
+  transition: opacity 0.2s ease;
+  margin-bottom: 70px;
+}
+
+// ─── Sort bar (Figma node 808-6441) ───────────────────────────────────────────
+
+.tcp-sort-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 23px;
+  margin-bottom: 23px;
+  border-bottom: 1px solid var(--clr-gray-3);
+
+  &__label {
+    @include body-regular;
+    color: var(--clr-black);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__select-wrap {
+    position: relative;
+  }
+
+  &__select {
+    @include body-regular;
+    appearance: none;
+    padding: 10px 40px 10px 12px;
+    color: var(--clr-black);
+    background: var(--clr-white);
+    border: 1px solid var(--clr-gray-4, #dde1e6);
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    outline: none;
+    min-width: 190px;
+
+    &:focus-visible {
+      border-color: var(--clr-yellow);
+    }
+  }
+
+  /* Dwie strzałki 12×7 (góra + dół), maska SVG, kolor #8D8D8D — jak screen / Figma */
+  &__arrow {
+    pointer-events: none;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 12px;
+    height: auto;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      width: 12px;
+      height: 7px;
+      flex-shrink: 0;
+      background-color: var(--clr-gray, #8d8d8d);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: 12px 7px;
+      mask-size: 12px 7px;
+    }
+
+    &::before {
+      -webkit-mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7' fill='none'%3E%3Cpath d='M0.833496 5.83337L5.8335 0.833374L10.8335 5.83337' stroke='black' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7' fill='none'%3E%3Cpath d='M0.833496 5.83337L5.8335 0.833374L10.8335 5.83337' stroke='black' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+
+    &::after {
+      -webkit-mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7' fill='none'%3E%3Cpath d='M0.833496 0.833374L5.8335 5.83337L10.8335 0.833374' stroke='black' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7' fill='none'%3E%3Cpath d='M0.833496 0.833374L5.8335 5.83337L10.8335 0.833374' stroke='black' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+  }
+
+  &__count {
+    margin-left: auto;
+    @include sign-regular;
+    font-size: 0.9375rem;
+    color: var(--clr-gray);
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+
+}
+
+// ─── Video card at position 5 in product grid ─────────────────────────────────
+
+.tcp-product-grid__item--video {
+  // Occupy exactly the same cell dimensions as a normal product card
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.tcp-video-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px; // fallback if grid auto-height
+  background: var(--clr-black);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+
+  &__player {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    z-index: 1;
+  }
+
+  // Central play: widoczny gdy film zatrzymany LUB (podczas odtwarzania) hover/focus na karcie
+  &__play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: clamp(48px, 11%, 72px);
+    aspect-ratio: 1;
+    height: auto;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    // Skaluje trójkąt i pause (em)
+    font-size: clamp(15px, 4.2vmin, 22px);
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.2s ease;
+
+    &:focus-visible {
+      outline: 2px solid var(--clr-white, #fff);
+      outline-offset: 3px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+  }
+
+  // Odtwarzanie: ukryj przycisk; pokaż na hover karty lub focus (klawiatura)
+  &--playing &__play {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &--playing:hover &__play,
+  &--playing:focus-within &__play {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &--playing &__play:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__play-icon {
+    display: block;
+    flex-shrink: 0;
+    width: 0;
+    height: 0;
+    margin-left: 0.22em;
+    border-style: solid;
+    border-width: 0.5em 0 0.5em 0.82em;
+    border-color: transparent transparent transparent var(--clr-white, #fff);
+  }
+
+  &__pause-icon {
+    display: none;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 0.34em;
+    height: 1em;
+  }
+
+  &__pause-bar {
+    display: block;
+    width: 0.24em;
+    height: 100%;
+    background: var(--clr-white, #fff);
+    border-radius: 1px;
+  }
+
+  &--playing &__play-icon {
+    display: none;
+  }
+
+  &--playing &__pause-icon {
+    display: flex;
+  }
+}
