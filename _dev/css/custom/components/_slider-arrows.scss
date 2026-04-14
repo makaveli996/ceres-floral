@@ -1,93 +1,60 @@
 /**
- * Slider arrows component. Reusable for any Splide (or other) slider.
- * Used by: theme partial _partials/slider-arrows.tpl. Rendered inside .splide (e.g. product-slider).
+ * Slider arrow buttons component — circle prev/next pair.
+ * Used by: _partials/slider-arrows.tpl. Placed in section header (tc_bestsellersslider, etc.).
+ * JS connects [data-slider-prev] / [data-slider-next] to Splide API.
+ * Figma: 50 px circles, border #bac2b7, chevron currentColor (inherits from parent).
  */
 @use "../base" as *;
 @use "../utils" as *;
 
 .tc-slider-arrows {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-  padding: 0 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 
   &__btn {
-    position: relative;
-    pointer-events: auto !important;
-    width: 48px !important;
-    height: 48px !important;
-    border-radius: 50% !important;
-    background: transparent !important;
-    border: 1px solid var(--clr-gray-3) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
-    opacity: 1 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--clr-gray);
+    background: transparent;
+    color: var(--clr-green);
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
 
     @include md(md) {
-      width: 40px !important;
-      height: 40px !important;
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-      background: var(--clr-gray-3);
-      border-radius: 50%;
-      transition: transform 0.3s ease-in-out;
+      width: 42px;
+      height: 42px;
     }
 
     &:hover {
-      &::before {
-        transform: translate(-50%, -50%) scale(1.25);
-
-        @include md(lg) {
-          transform: translate(-50%, -50%);
-        }
-      }
+      background: var(--clr-green);
+      border-color: var(--clr-green);
+      color: var(--clr-white);
     }
 
-    &--prev {
-      left: -24px !important;
-      transform: translate(-100%, -50%) !important;
-
-      @include md(sm) {
-        left: -4px !important;
-      }
-    }
-
-    &--next {
-      right: -24px !important;
-      transform: translate(100%, -50%) !important;
-
-      @include md(sm) {
-        right: -4px !important;
-      }
+    &:focus-visible {
+      outline: 2px solid var(--clr-green);
+      outline-offset: 2px;
     }
   }
 
   &__icon {
-    position: relative;
-    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    &--prev svg {
-      width: auto !important;
-      height: auto !important;
-      transform: none !important;
+    svg {
+      display: block;
+      width: 9px;
+      height: 15px;
     }
   }
 }

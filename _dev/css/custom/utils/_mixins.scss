@@ -57,7 +57,7 @@ $grid-breakpoints: (
 
 @mixin sign-bold {
   font-family: "Wix Madefor Display", sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 13px;
   line-height: 1.2;
   letter-spacing: 0;
@@ -67,46 +67,30 @@ $grid-breakpoints: (
   font-family: "Wix Madefor Display", sans-serif;
   font-weight: 400;
   font-size: 13px;
-  line-height: 1.2;
+  line-height: 1.4;
   letter-spacing: 0;
 }
 
 @mixin body-bold {
   font-family: "Wix Madefor Display", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1.4;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
   letter-spacing: 0;
 }
 
 @mixin body-regular {
   font-family: "Wix Madefor Display", sans-serif;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.4;
-  letter-spacing: 0;
-}
-
-@mixin heading-5-bold {
-  font-family: "Wix Madefor Display", sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 1.2;
-  letter-spacing: 0;
-}
-
-@mixin heading-5-regular {
-  font-family: "Wix Madefor Display", sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.2;
   letter-spacing: 0;
 }
 
 @mixin heading-4-bold {
   font-family: "Wix Madefor Display", sans-serif;
-  font-weight: 700;
-  font-size: 25px;
+  font-weight: 600;
+  font-size: 19px;
   line-height: 1.2;
   letter-spacing: 0;
 }
@@ -114,15 +98,15 @@ $grid-breakpoints: (
 @mixin heading-4-regular {
   font-family: "Wix Madefor Display", sans-serif;
   font-weight: 400;
-  font-size: 25px;
+  font-size: 19px;
   line-height: 1.2;
   letter-spacing: 0;
 }
 
 @mixin heading-3-bold {
   font-family: "Wix Madefor Display", sans-serif;
-  font-weight: 700;
-  font-size: 39px;
+  font-weight: 600;
+  font-size: 23px;
   line-height: 1.2;
   letter-spacing: 0;
 }
@@ -130,55 +114,55 @@ $grid-breakpoints: (
 @mixin heading-3-regular {
   font-family: "Wix Madefor Display", sans-serif;
   font-weight: 400;
-  font-size: 39px;
+  font-size: 23px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin heading-32-bold {
+  font-family: "Inria Serif", serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@mixin heading-32-regular {
+  font-family: "Inria Serif", serif;
+  font-weight: 400;
+  font-size: 36px;
   line-height: 1.2;
   letter-spacing: 0;
 }
 
 @mixin heading-2-bold {
-  font-family: "Wix Madefor Display", sans-serif;
+  font-family: "Inria Serif", serif;
   font-weight: 700;
-  font-size: 49px;
+  font-size: 48px;
   line-height: 1.2;
   letter-spacing: 0;
-
-  @include md(xxl) {
-    font-size: 42px;
-  }
-
-  @include md(lg) {
-    font-size: 32px;
-  }
 }
 
 @mixin heading-2-regular {
-  font-family: "Wix Madefor Display", sans-serif;
+  font-family: "Inria Serif", serif;
   font-weight: 400;
-  font-size: 49px;
+  font-size: 48px;
   line-height: 1.2;
   letter-spacing: 0;
-
-  @include md(xxl) {
-    font-size: 42px;
-  }
-
-  @include md(lg) {
-    font-size: 32px;
-  }
 }
 
 @mixin heading-1-bold {
-  font-family: "Wix Madefor Display", sans-serif;
+  font-family: "Inria Serif", serif;
   font-weight: 700;
-  font-size: 61px;
-  line-height: 1.2;
+  font-size: 68px;
+  line-height: 1.1;
   letter-spacing: 0;
 }
 
 @mixin heading-1-regular {
-  font-family: "Wix Madefor Display", sans-serif;
+  font-family: "Inria Serif", serif;
   font-weight: 400;
-  font-size: 61px;
-  line-height: 1.2;
+  font-size: 68px;
+  line-height: 1.1;
   letter-spacing: 0;
 }

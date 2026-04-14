@@ -1,0 +1,56 @@
+---
+description: Hard gate checklist before delivering any new/changed PrestaShop module
+alwaysApply: true
+---
+
+# PrestaShop module delivery checklist (hard gate)
+
+Before finalising any task that creates or edits a module in `prestashop/modules/**`, all points below are REQUIRED.
+If any point fails, do not deliver yet.
+
+## 1) Frontend assets boundary
+
+- Frontend SCSS/JS MUST live in `_dev/**` only.
+- Never create module FO assets in:
+  - `prestashop/modules/<module>/views/css/*` (except security `index.php`)
+  - `prestashop/modules/<module>/views/js/*` (except security `index.php`)
+- Module templates may render markup only; behaviour/styles come from `_dev` bundles.
+- Do not call `registerStylesheet()` / `registerJavascript()` in module PHP for FO assets.
+
+## 2) New module required files
+
+Every new module MUST include:
+
+- `<module>.php` (main class)
+- `config.xml`
+- `config_pl.xml`
+- `logo.png`
+- `index.php` in every directory (root + subdirectories)
+
+Minimum expected tree:
+
+- `prestashop/modules/<module>/index.php`
+- `prestashop/modules/<module>/views/index.php`
+- `prestashop/modules/<module>/views/css/index.php`
+- `prestashop/modules/<module>/views/js/index.php`
+- `prestashop/modules/<module>/views/templates/index.php`
+- and `index.php` in each templates child folder (e.g. `admin/`, `hook/`)
+
+## 3) Module metadata and conventions
+
+- Author MUST be `Rafal Majdan` in both PHP and XML.
+- Back-office texts: Polish by default with domain `Modules.<TechnicalName>.Admin`.
+- If module renders display hook content, implement `WidgetInterface`.
+
+## 4) Theme integration conventions
+
+- Reusable CTA links/buttons must use `{include file='_partials/button.tpl' ...}`.
+- For sliders/carousels, use `Splide.js`.
+- Add SCSS section partial in `_dev/css/custom/sections/` and forward it from `_dev/css/custom/sections/_index.scss`.
+- Add JS initialiser in `_dev/js/custom/Sections/` and run it from `_dev/js/custom/theme.js`.
+
+## 5) Final verification before response
+
+- Run `php -l` on module main class file.
+- Run lints for edited files.
+- Ensure no FO asset file remains in module `views/css` or `views/js` besides `index.php`.

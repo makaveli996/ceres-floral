@@ -1,14 +1,97 @@
+/**
+ * Bestsellers slider section — "Najczęściej kupowane". Figma node 240:2772.
+ * Used by: tc_bestsellersslider/views/templates/hook/tc_bestsellersslider.tpl.
+ * JS: data-tc-bestsellers-slider → BestsellersSlider.js.
+ * Layout: container-md → header row (title+sub | arrows) → Splide (4 tiles, gap 20px) → pagination.
+ */
 @use "../base" as *;
 @use "../utils" as *;
 
-.tc-product-slider {
-  $r: &;
-  width: 100%;
-  margin-top: 100px;
-  margin-bottom: 100px;
+.tc-bestsellers-slider {
+  padding: 80px 0;
 
   @include md(lg) {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    padding: 56px 0;
+  }
+
+  /* ── Section header: title+subtitle left, arrows right ── */
+  &__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 40px;
+
+    @include md(md) {
+      align-items: flex-start;
+    }
+  }
+
+  &__head-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    @include heading-2-regular;
+    color: var(--clr-green);
+    margin: 0 0 8px;
+
+    @include md(lg) {
+      font-size: 36px;
+    }
+  }
+
+  &__subtitle {
+    @include body-regular;
+    color: var(--clr-green-2);
+    margin: 0;
+    max-width: 843px;
+  }
+
+  /* Arrow buttons group — component .tc-slider-arrows is styled separately */
+  &__arrows {
+    flex-shrink: 0;
+    padding-bottom: 4px; // align to baseline of title
+
+    @include md(md) {
+      display: none;
+    }
+  }
+
+  /* ── Splide wrapper ── */
+  &__splide {
+    // Override Splide defaults
+    .splide__track {
+      overflow: visible; // let cards have box-shadow visible
+      overflow: hidden; // but clip slides
+    }
+
+    .splide__list {
+      align-items: stretch;
+    }
+
+    .splide__slide {
+      height: auto;
+    }
+
+    // Gap between slides handled by Splide JS `gap` option (20px)
+  }
+
+  /* ── Pagination — position below slider ── */
+  &__pagination {
+    margin-top: 32px;
+    position: static !important; // override Splide absolute positioning for custom placement
+    transform: none !important;
+    justify-content: center;
+    width: 100%;
+
+    // Color tokens for this section (green/gray palette)
+    --clr-pagination: var(--clr-green-2);
+    --clr-pagination-dot: var(--clr-gray);
+
+    @include md(md) {
+      margin-top: 24px;
+    }
   }
 }

@@ -1,0 +1,214 @@
+name: meblowosk
+display_name: Meblowosk
+version: 1.0.1
+author:
+  name: "Two Colours"
+  email: "twocolours.rmajdan@gmail.com"
+  url: "https://two-colours.com"
+
+meta:
+  compatibility:
+    from: 8.2.1
+    to: ~
+
+  available_layouts:
+    layout-full-width:
+      name: Full Width
+      description: No side columns, ideal for distraction-free pages such as product pages.
+    layout-content-only:
+      name: Content only
+      description: Tylko treść główna, bez kolumn bocznych (minimalny layout).
+    layout-both-columns:
+      name: Three Columns
+      description: One large central column and 2 side columns.
+    layout-left-column:
+      name: Two Columns, small left column
+      description: Two columns with a small left column
+    layout-right-column:
+      name: Two Columns, small right column
+      description: Two columns with a small right column
+
+assets:
+# If you're using this theme as child and you want to load
+# the parent theme assets, uncomment this line.
+#  use_parent_assets: true
+
+# The following lines are showing how to load assets in your page
+# Uncomment and change value to start loading css or js files
+#  css:
+#  all:
+#    - id: custom-lib-style
+#    path: assets/css/custom-lib.css
+#  product:
+#    - id: product-style
+#    path: assets/css/product.css
+#    media: all
+#    priority: 200
+#  js:
+#  cart:
+#    - id: cat-extra-lib
+#    path: assets/js/cart-lib.js
+
+global_settings:
+  configuration:
+    PS_IMAGE_QUALITY: png
+  modules:
+    to_enable:
+      - ps_linklist
+      - tc_logosvg
+      - tc_productbreadcrumb
+      - tc_themehooks
+      - tc_nestedmenu
+    hooks:
+      custom_hooks:
+        - name: displayAboutUs
+          title: displayAboutUs
+          description: Content strony "O nas" (CMS)
+        - name: displayCatalogue
+          title: displayCatalogue
+          description: Content strony "Katalog" (CMS)
+        - name: displayDesignerZone
+          title: displayDesignerZone
+          description: Content strony "Strefa projektanta" (CMS)
+        - name: displayListingDescriptionBottom
+          title: displayListingDescriptionBottom
+          description: Pod długim opisem (tcp-collection-description) na stronie kategorii PLP
+      modules_to_hook:
+      displayAfterBodyOpeningTag:
+        - blockreassurance
+      displayNavFullWidth:
+        - blockreassurance
+      displayAdminCustomers:
+        - blockwishlist
+        - tc_designerregister
+      displayCustomerAccount:
+        - blockwishlist
+        - psgdpr
+      displayMyAccountBlock:
+        - blockwishlist
+      displayNav1:
+        - ps_contactinfo
+      displayNav2:
+        - ps_languageselector
+        - ps_currencyselector
+        - ps_customersignin
+        - ps_shoppingcart
+      displayTop:
+        - tc_nestedmenu
+        - ps_searchbar
+      displayHome:
+        - ps_imageslider
+        - ps_featuredproducts
+        - ps_banner
+        - ps_customtext
+        - ps_specials
+        - ps_newproducts
+        - ps_bestsellers
+        - tc_contact
+      displayFooterBefore:
+        - ps_emailsubscription
+        - ps_socialfollow
+        - blockreassurance
+      displayFooter:
+        - ps_contactinfo
+        - ps_linklist
+        - ps_customeraccountlinks
+        - blockwishlist
+      displayFooterAfter:
+        - blockreassurance
+      displayFooterProduct:
+        - productcomments
+      displayLeftColumn:
+        - ps_categorytree
+        - ps_facetedsearch
+      displayContactContent:
+        - contactform
+        - tc_showroom
+        - tc_contact
+      displayAboutUs:
+        - tc_herocms
+      displayDesignerZone:
+        - tc_herocms
+      displaySearch:
+        - ps_searchbar
+      displayProductAdditionalInfo:
+        - ps_sharebuttons
+        - productcomments
+      displayProductListReviews:
+        - productcomments
+      displayReassurance:
+        - blockreassurance
+      displayOrderConfirmation2:
+        - ps_featuredproducts
+      displayProductActions:
+        - blockwishlist
+
+  image_types:
+    cart_default:
+      width: 125
+      height: 125
+      scope: [products]
+    small_default:
+      width: 98
+      height: 98
+      scope: [products, categories, manufacturers, suppliers]
+    medium_default:
+      width: 452
+      height: 452
+      scope: [products, manufacturers, suppliers]
+    home_default:
+      width: 250
+      height: 250
+      scope: [products]
+    large_default:
+      width: 800
+      height: 800
+      scope: [products, manufacturers, suppliers]
+    category_default:
+      width: 141
+      height: 180
+      scope: [categories]
+    stores_default:
+      width: 170
+      height: 115
+      scope: [stores]
+  new_password_policy_feature: true
+
+# Układy stron: domyślne wartości przy włączeniu motywu / resecie układów.
+# Zapis z BO „Szablony → Dostosuj układy” ląduje w prestashop/config/themes/meblowosk/shop<id>.json — ten plik też commituj przy migracji domeny.
+theme_settings:
+  default_layout: layout-full-width
+  layouts:
+    # PLP / listingi z kolumną (filtry)
+    category: layout-full-width
+    best-sales: layout-left-column
+    new-products: layout-left-column
+    prices-drop: layout-left-column
+    manufacturer: layout-left-column
+    supplier: layout-left-column
+    search: layout-full-width
+    # CMS i proste strony informacyjne
+    contact: layout-content-only
+    cms: layout-content-only
+    stores: layout-content-only
+    sitemap: layout-content-only
+    # Produkt i strona główna
+    product: layout-full-width
+    index: layout-full-width
+    # Konto, koszyk, zamówienia (spójnie z default_layout)
+    cart: layout-full-width
+    order: layout-full-width
+    order-confirmation: layout-full-width
+    authentication: layout-full-width
+    registration: layout-full-width
+    password: layout-full-width
+    identity: layout-full-width
+    my-account: layout-full-width
+    history: layout-full-width
+    addresses: layout-full-width
+    address: layout-full-width
+    order-follow: layout-full-width
+    order-slip: layout-full-width
+    discount: layout-full-width
+    guest-tracking: layout-full-width
+    pagenotfound: layout-full-width

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="modules/tc_bestsellersslider/views/templates/hook/tc_bestsellersslider.tpl" source-language="pl" target-language="pl" datatype="plaintext">
+    <body>
+      <trans-unit id="bestsellery_title" approved="yes">
+        <source>Bestsellery</source>
+        <target state="final">Bestsellery</target>
+      </trans-unit>
+      <trans-unit id="zobacz_wszystkie" approved="yes">
+        <source>Zobacz wszystkie</source>
+        <target state="final">Zobacz wszystkie</target>
+      </trans-unit>
+      <trans-unit id="ostatnie_sztuki" approved="yes">
+        <source>Ostatnie sztuki!</source>
+        <target state="final">Ostatnie sztuki!</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

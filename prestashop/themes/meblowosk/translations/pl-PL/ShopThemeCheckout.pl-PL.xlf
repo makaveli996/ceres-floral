@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/meblowosk/templates/_partials/breadcrumb.tpl" source-language="en" target-language="pl" datatype="plaintext">
+    <body>
+      <trans-unit id="6ff063fbc860a79759a7369ac32cee22" approved="yes">
+        <source>Checkout</source>
+        <target state="final">Kasa</target>
+        <note>Breadcrumb on checkout / order page</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

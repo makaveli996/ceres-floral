@@ -1,0 +1,37 @@
+.tc-home-promo-admin__item {
+  border: 1px solid #dbe6e9;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: #fff;
+}
+
+.tc-home-promo-admin__item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tc-home-promo-admin__preview {
+  border: 1px solid #ccd2d8;
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.tc-home-promo-admin__preview img {
+  max-width: 100%;
+  display: block;
+}
+
+.tc-home-promo-admin__list-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.tc-home-promo-admin__list-item .form-control {
+  flex: 1;
+}

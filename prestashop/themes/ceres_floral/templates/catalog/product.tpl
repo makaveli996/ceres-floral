@@ -51,197 +51,148 @@
   <section id="main">
     <meta content="{$product.url}">
 
-    <div class="row product-container js-product-container">
-      <div class="col-md-6">
-        {block name='page_content_container'}
-          <section class="page-content" id="content">
-            {block name='page_content'}
-              {include file='catalog/_partials/product-flags.tpl'}
+    <div class="container-lg">
+      <div class="pdp">
+        <div class="pdp__layout product-container js-product-container">
+          <div class="pdp__media">
+            {block name='page_content_container'}
+              <section class="pdp__media-content page-content">
+                {block name='page_content'}
+                  {block name='product_cover_thumbnails'}
+                    {include file='catalog/_partials/product-gallery-splide.tpl'}
+                  {/block}
+                  {block name='hook_display_product_pdp_highlights'}
+                    <div class="pdp__highlights-wrap">
+                      {hook h='displayProductPdpHighlights' product=$product}
+                    </div>
+                  {/block}
+                  {block name='hook_display_product_pdp_tabs'}
+                    <div class="pdp__tabs-wrap">
+                      {hook h='displayProductPdpTabs' product=$product}
+                    </div>
+                  {/block}
 
-              {block name='product_cover_thumbnails'}
-                {include file='catalog/_partials/product-cover-thumbnails.tpl'}
+                {/block}
+              </section>
+            {/block}
+          </div>
+          <div class="pdp__aside">
+            <div class="pdp__price-card">
+              {block name='product_availability'}
+                {include file='catalog/_partials/product-availability-pdp.tpl'}
               {/block}
-              <div class="scroll-box-arrows">
-                <i class="material-icons left">&#xE314;</i>
-                <i class="material-icons right">&#xE315;</i>
+
+              {block name='page_header_container'}
+                {block name='page_header'}
+                  <h1 class="pdp__title">{block name='page_title'}{$product.name}{/block}</h1>
+                {/block}
+              {/block}
+
+              {* Mobile: CSS reorder (display:contents + order) puts .pdp__price-card-body below gallery; desktop: normal flow inside .pdp__price-card. *}
+              <div class="pdp__price-card-body">
+              {block name='product_prices'}
+                {include file='catalog/_partials/product-prices.tpl'}
+              {/block}
+
+              <hr class="pdp__divider" role="presentation">
+
+              <div class="pdp__information product-information">
+                {if $product.is_customizable && count($product.customizations.fields)}
+                  {block name='product_customization'}
+                    {include file="catalog/_partials/product-customization.tpl" customizations=$product.customizations}
+                  {/block}
+                {/if}
+
+                <div class="pdp__actions product-actions js-product-actions">
+                  {block name='product_buy'}
+                    <form action="{$urls.pages.cart}" method="post" id="add-to-cart-or-refresh">
+                      <input type="hidden" name="token" value="{$static_token}">
+                      <input type="hidden" name="id_product" value="{$product.id}" id="product_page_product_id">
+                      <input type="hidden" name="id_customization" value="{$product.id_customization}" id="product_customization_id" class="js-product-customization-id">
+
+                      {block name='product_variants'}
+                        {include file='catalog/_partials/product-variants.tpl'}
+                      {/block}
+
+                      {block name='product_pack'}
+                        {if $packItems}
+                          <section class="product-pack">
+                            <p class="h4">{l s='This pack contains' d='Shop.Theme.Catalog'}</p>
+                            {foreach from=$packItems item="product_pack"}
+                              {block name='product_miniature'}
+                                {include file='catalog/_partials/miniatures/pack-product.tpl' product=$product_pack showPackProductsPrice=$product.show_price}
+                              {/block}
+                            {/foreach}
+                          </section>
+                        {/if}
+                      {/block}
+
+                      <hr class="pdp__divider" role="presentation">
+
+                      {block name='product_discounts'}
+                        {include file='catalog/_partials/product-discounts.tpl'}
+                      {/block}
+
+                      {block name='product_add_to_cart'}
+                        {include file='catalog/_partials/product-add-to-cart.tpl'}
+                      {/block}
+
+                      {block name='product_additional_info'}
+                        {include file='catalog/_partials/product-additional-info.tpl'}
+                      {/block}
+
+                      {* Input to refresh product HTML removed, block kept for compatibility with themes *}
+                      {block name='product_refresh'}{/block}
+                    </form>
+                  {/block}
+                </div>
               </div>
 
-            {/block}
-          </section>
-        {/block}
-        </div>
-        <div class="col-md-6">
-          {block name='page_header_container'}
-            {block name='page_header'}
-              <h1 class="h1">{block name='page_title'}{$product.name}{/block}</h1>
-            {/block}
-          {/block}
-          {block name='product_prices'}
-            {include file='catalog/_partials/product-prices.tpl'}
-          {/block}
-
-          <div class="product-information">
-            {block name='product_description_short'}
-              <div id="product-description-short-{$product.id}" class="product-description">{$product.description_short nofilter}</div>
-            {/block}
-
-            {if $product.is_customizable && count($product.customizations.fields)}
-              {block name='product_customization'}
-                {include file="catalog/_partials/product-customization.tpl" customizations=$product.customizations}
+              {block name='pdp_custom_size'}
+                <div class="pdp__custom-size">
+                  <p>
+                    {l s='Potrzebujesz innego wymiaru?' d='Shop.Theme.Catalog'}
+                    <a href="{$urls.pages.contact}">{l s='Zapytaj o swój wymiar' d='Shop.Theme.Catalog'}</a>
+                  </p>
+                </div>
               {/block}
-            {/if}
-
-            <div class="product-actions js-product-actions">
-              {block name='product_buy'}
-                <form action="{$urls.pages.cart}" method="post" id="add-to-cart-or-refresh">
-                  <input type="hidden" name="token" value="{$static_token}">
-                  <input type="hidden" name="id_product" value="{$product.id}" id="product_page_product_id">
-                  <input type="hidden" name="id_customization" value="{$product.id_customization}" id="product_customization_id" class="js-product-customization-id">
-
-                  {block name='product_variants'}
-                    {include file='catalog/_partials/product-variants.tpl'}
-                  {/block}
-
-                  {block name='product_pack'}
-                    {if $packItems}
-                      <section class="product-pack">
-                        <p class="h4">{l s='This pack contains' d='Shop.Theme.Catalog'}</p>
-                        {foreach from=$packItems item="product_pack"}
-                          {block name='product_miniature'}
-                            {include file='catalog/_partials/miniatures/pack-product.tpl' product=$product_pack showPackProductsPrice=$product.show_price}
-                          {/block}
-                        {/foreach}
-                    </section>
-                    {/if}
-                  {/block}
-
-                  {block name='product_discounts'}
-                    {include file='catalog/_partials/product-discounts.tpl'}
-                  {/block}
-
-                  {block name='product_add_to_cart'}
-                    {include file='catalog/_partials/product-add-to-cart.tpl'}
-                  {/block}
-
-                  {block name='product_additional_info'}
-                    {include file='catalog/_partials/product-additional-info.tpl'}
-                  {/block}
-
-                  {* Input to refresh product HTML removed, block kept for compatibility with themes *}
-                  {block name='product_refresh'}{/block}
-                </form>
-              {/block}
-
-            </div>
-
-            {block name='hook_display_reassurance'}
-              {hook h='displayReassurance'}
-            {/block}
-
-            {block name='product_tabs'}
-              <div class="tabs">
-                <ul class="nav nav-tabs" role="tablist">
-                  {if $product.description}
-                    <li class="nav-item">
-                       <a
-                         class="nav-link{if $product.description} active js-product-nav-active{/if}"
-                         data-toggle="tab"
-                         href="#description"
-                         role="tab"
-                         aria-controls="description"
-                         {if $product.description} aria-selected="true"{/if}>{l s='Description' d='Shop.Theme.Catalog'}</a>
-                    </li>
-                  {/if}
-                  <li class="nav-item">
-                    <a
-                      class="nav-link{if !$product.description} active js-product-nav-active{/if}"
-                      data-toggle="tab"
-                      href="#product-details"
-                      role="tab"
-                      aria-controls="product-details"
-                      {if !$product.description} aria-selected="true"{/if}>{l s='Product Details' d='Shop.Theme.Catalog'}</a>
-                  </li>
-                  {if $product.attachments}
-                    <li class="nav-item">
-                      <a
-                        class="nav-link"
-                        data-toggle="tab"
-                        href="#attachments"
-                        role="tab"
-                        aria-controls="attachments">{l s='Attachments' d='Shop.Theme.Catalog'}</a>
-                    </li>
-                  {/if}
-                  {foreach from=$product.extraContent item=extra key=extraKey}
-                    <li class="nav-item">
-                      <a
-                        class="nav-link"
-                        data-toggle="tab"
-                        href="#extra-{$extraKey}"
-                        role="tab"
-                        aria-controls="extra-{$extraKey}">{$extra.title}</a>
-                    </li>
-                  {/foreach}
-                </ul>
-
-                <div class="tab-content" id="tab-content">
-                 <div class="tab-pane fade in{if $product.description} active js-product-tab-active{/if}" id="description" role="tabpanel">
-                   {block name='product_description'}
-                     <div class="product-description">{$product.description nofilter}</div>
-                   {/block}
-                 </div>
-
-                 {block name='product_details'}
-                   {include file='catalog/_partials/product-details.tpl'}
-                 {/block}
-
-                 {block name='product_attachments'}
-                   {if $product.attachments}
-                    <div class="tab-pane fade in" id="attachments" role="tabpanel">
-                       <section class="product-attachments">
-                         <p class="h5 text-uppercase">{l s='Download' d='Shop.Theme.Actions'}</p>
-                         {foreach from=$product.attachments item=attachment}
-                           <div class="attachment">
-                             <h4><a href="{url entity='attachment' params=['id_attachment' => $attachment.id_attachment]}">{$attachment.name}</a></h4>
-                             <p>{$attachment.description}</p>
-                             <a href="{url entity='attachment' params=['id_attachment' => $attachment.id_attachment]}">
-                               {l s='Download' d='Shop.Theme.Actions'} ({$attachment.file_size_formatted})
-                             </a>
-                           </div>
-                         {/foreach}
-                       </section>
-                     </div>
-                   {/if}
-                 {/block}
-
-                 {foreach from=$product.extraContent item=extra key=extraKey}
-                 <div class="tab-pane fade in {$extra.attr.class}" id="extra-{$extraKey}" role="tabpanel" {foreach $extra.attr as $key => $val} {$key}="{$val}"{/foreach}>
-                   {$extra.content nofilter}
-                 </div>
-                 {/foreach}
               </div>
             </div>
-          {/block}
+
+            {block name='hook_display_product_pdp_before_reassurance'}
+              <div class="pdp__before-reassurance">
+                {hook h='displayProductPdpBeforeReassurance' product=$product}
+              </div>
+            {/block}
+            {block name='hook_display_product_pdp_support'}
+              {* Hook displayProductPdpSupport — np. tc_pdpsupport (tresc globalna: ustawienia modulu / sklep). *}
+              <div class="pdp__support-wrap">
+                {hook h='displayProductPdpSupport' product=$product}
+              </div>
+            {/block}
+
+          </div>
         </div>
       </div>
     </div>
 
-    {block name='product_accessories'}
-      {if $accessories}
-        <section class="product-accessories clearfix">
-          <p class="h5 text-uppercase">{l s='You might also like' d='Shop.Theme.Catalog'}</p>
-          <div class="products row">
-            {foreach from=$accessories item="product_accessory" key="position"}
-              {block name='product_miniature'}
-                {include file='catalog/_partials/miniatures/product.tpl' product=$product_accessory position=$position productClasses="col-xs-12 col-sm-6 col-lg-4 col-xl-3"}
-              {/block}
-            {/foreach}
-          </div>
-        </section>
-      {/if}
+    {**
+     * Full-width zone below the main PDP grid (outside container-lg). Hook: displayProductPdpFullWidth.
+     * Przyklady: tc_pdpdelivery, tc_pdppayments, tc_pdptiles, tc_furniture_comparison, tc_pdprelatedslider, tc_pdpcollectionslider — PDP.
+     *}
+    {block name='hook_display_product_pdp_full_width'}
+      <div class="pdp__full-width">
+        {hook h='displayProductPdpFullWidth' product=$product}
+      </div>
     {/block}
 
     {block name='product_footer'}
-      {hook h='displayFooterProduct' product=$product category=$category}
+      {* $category is omitted from Smarty when default category is invalid; modules fall back to id_category_default *}
+      {if isset($category)}
+        {hook h='displayFooterProduct' product=$product category=$category}
+      {else}
+        {hook h='displayFooterProduct' product=$product}
+      {/if}
     {/block}
 
     {block name='product_images_modal'}

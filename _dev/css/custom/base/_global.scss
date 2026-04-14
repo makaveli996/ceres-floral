@@ -74,18 +74,19 @@ html {
 
 body {
   @include body-regular;
-  padding: var(--sticky-bar-height) 0 0;
   color: var(--clr-black);
-  background: var(--clr-white);
+  background: var(--clr-gray-2);
   max-width: 2560px;
   margin: 0 auto;
+  /* Mobile: sticky bar + header-nav (no header-bar) */
+  padding: calc(
+      var(--sticky-bar-height) + var(--header-nav-height-mobile, 60px)
+    )
+    0 0;
 
-  &:not(.page-index) {
-    padding: calc(var(--sticky-bar-height) + 62px) 0 0;
-
-    @include mu(lg) {
-      padding: calc(var(--sticky-bar-height) + 162px) 0 0;
-    }
+  /* Desktop: sticky bar + header-bar + header-nav */
+  @include mu(lg) {
+    padding: var(--header-height, 234px) 0 0;
   }
 }
 
@@ -245,39 +246,4 @@ section[id] {
     margin-top: 0;
     margin-bottom: 1rem;
   }
-}
-
-#guestOrderTrackingForm {
-  header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-}
-
-.register-form {
-  p:first-child {
-    text-align: center;
-    margin-bottom: 20px;
-
-    a {
-      color: var(--clr-yellow);
-    }
-  }
-}
-
-.input-group-btn {
-  margin-left: 10px;
-
-  button {
-    background: transparent !important;
-    color: var(--clr-black-3) !important;
-
-    &:hover {
-      border-color: var(--clr-black-3) !important;
-    }
-  }
-}
-
-#payment-confirmation {
-  margin-top: 20px;
 }

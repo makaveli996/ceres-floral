@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="modules/tc_bestsellersslider/tc_bestsellersslider.php" source-language="pl" target-language="pl" datatype="plaintext">
+    <body>
+      <trans-unit id="displayName" approved="yes">
+        <source>Bestsellery slider</source>
+        <target state="final">Bestsellery slider</target>
+      </trans-unit>
+      <trans-unit id="description" approved="yes">
+        <source>Wyświetla sekcję „Bestsellery” na stronie głównej jako slider Splide z bestsellerami.</source>
+        <target state="final">Wyświetla sekcję „Bestsellery” na stronie głównej jako slider Splide z bestsellerami.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

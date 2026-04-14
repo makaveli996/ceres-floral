@@ -1,0 +1,31 @@
+@use "../base" as *;
+@use "../utils" as *;
+
+.hero-slider__pagination {
+  --slider-pagination-dot-size: 8px;
+  --slider-pagination-active-width: 20px;
+  --slider-pagination-gap: 6px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--slider-pagination-gap) !important;
+  padding: 0 !important;
+
+  .splide__pagination__page {
+    width: var(--slider-pagination-dot-size) !important;
+    height: var(--slider-pagination-dot-size) !important;
+    margin: 0 !important;
+    border-radius: 100px;
+    background: var(--clr-pagination-dot, var(--clr-green)) !important;
+    transform: none !important;
+    transition:
+      width 0.2s ease,
+      background-color 0.2s ease;
+    opacity: 1 !important;
+  }
+
+  .splide__pagination__page.is-active {
+    width: var(--slider-pagination-active-width) !important;
+    background: var(--clr-pagination, var(--clr-yellow)) !important;
+  }
+}
