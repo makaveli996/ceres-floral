@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>tc_quickadd</name>
+    <displayName><![CDATA[TC Quick Add to Cart]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[Provides AJAX endpoint for the quick-add modal on product tiles.]]></description>
+    <author><![CDATA[Rafal Majdan]]></author>
+    <tab><![CDATA[front_office_features]]></tab>
+    <is_configurable>0</is_configurable>
+    <need_instance>0</need_instance>
+    <limited_countries></limited_countries>
+</module>

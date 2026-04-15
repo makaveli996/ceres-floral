@@ -15,18 +15,26 @@
   height: 100%;
   position: relative;
 
-  // ── Image area ──
-  &__image-link {
-    display: block;
-    text-decoration: none;
-  }
-
-  &__image-wrap {
+  // ── Image area — overflow:hidden tu odpowiada za obcinanie ikon przed hover ──
+  &__image-area {
     position: relative;
     overflow: hidden;
     aspect-ratio: 1 / 1;
     background: var(--clr-gray-2);
     flex-shrink: 0;
+  }
+
+  &__image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  &__image-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
 
   &__picture {
@@ -90,6 +98,55 @@
       background: var(--clr-green-2);
       color: var(--clr-white);
     }
+  }
+
+  // ── Hover action icons — cały blok wyjeżdża znad górnej krawędzi jako jeden element ──
+  // __image-area ma overflow:hidden — ikony są przycinane gdy translateY jest ujemne.
+  &__actions {
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    pointer-events: none;
+    transform: translateY(-120px);
+    transition: transform 0.6s ease;
+  }
+
+  &__action-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--clr-green);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0;
+    transition: background 0.18s ease;
+
+    svg path {
+      fill: var(--clr-gray-2);
+    }
+
+    &:hover {
+      background: var(--clr-green-2);
+    }
+
+    &--wishlist {
+      &.is-active {
+        background: var(--clr-green-2);
+      }
+    }
+  }
+
+  &:hover &__actions {
+    transform: translateY(0);
+    pointer-events: auto;
   }
 
   // ── Content area ──

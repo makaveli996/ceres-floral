@@ -4042,6 +4042,532 @@ function initProductSlider() {
 
 /***/ },
 
+/***/ "./_dev/js/custom/Sections/QuickAddModal.js"
+/*!**************************************************!*\
+  !*** ./_dev/js/custom/Sections/QuickAddModal.js ***!
+  \**************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+/**
+ * Quick-add-to-cart modal for product tiles.
+ * Purpose: on cart icon click fetches combination data from tc_quickadd module,
+ *   renders a variant picker + qty selector in a modal overlay, then POSTs to PS cart.
+ * Called from: _dev/js/custom/theme.js via runWhenReady(initQuickAddModal).
+ * Inputs: data-product-id / data-product-url on .js-tile-quick-add buttons.
+ * Side effects: updates PS cart (fires prestashop.emit updateCart), localStorage wishlist.
+ */
+
+var SEL_OPEN = ".js-tile-quick-add";
+var SEL_WISH = ".js-tile-wishlist";
+var WL_KEY = "tc_wishlist";
+var MODULE_CTL = "tc_quickadd";
+
+// ── Wishlist (localStorage) ──────────────────────────────────────────────────
+
+function getWishlist() {
+  try {
+    return JSON.parse(localStorage.getItem(WL_KEY) || "[]");
+  } catch (_unused) {
+    return [];
+  }
+}
+function saveWishlist(list) {
+  localStorage.setItem(WL_KEY, JSON.stringify(list));
+}
+function syncWishlistButtons() {
+  var list = getWishlist();
+  document.querySelectorAll(SEL_WISH).forEach(function (btn) {
+    var id = parseInt(btn.dataset.productId, 10);
+    btn.classList.toggle("is-active", list.includes(id));
+    btn.setAttribute("aria-pressed", list.includes(id) ? "true" : "false");
+  });
+}
+function toggleWishlist(btn) {
+  var id = parseInt(btn.dataset.productId, 10);
+  if (!id) return;
+  var list = getWishlist();
+  if (list.includes(id)) {
+    list = list.filter(function (i) {
+      return i !== id;
+    });
+    btn.classList.remove("is-active");
+    btn.setAttribute("aria-pressed", "false");
+  } else {
+    list.push(id);
+    btn.classList.add("is-active");
+    btn.setAttribute("aria-pressed", "true");
+  }
+  saveWishlist(list);
+}
+
+// ── Modal DOM builder ────────────────────────────────────────────────────────
+
+function buildModal() {
+  var overlay = document.createElement("div");
+  overlay.id = "tc-qam";
+  overlay.className = "tc-qam__overlay";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Dodaj do koszyka");
+  overlay.innerHTML = "\n    <div class=\"tc-qam__panel\" tabindex=\"-1\">\n      <div class=\"tc-qam__header\">\n        <p class=\"tc-qam__title\"></p>\n        <button type=\"button\" class=\"tc-qam__close js-qam-close\" aria-label=\"Zamknij\">\n          <svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M1 1L17 17M17 1L1 17\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\"/>\n          </svg>\n        </button>\n      </div>\n      <div class=\"tc-qam__inner\"></div>\n    </div>";
+  document.body.appendChild(overlay);
+  return overlay;
+}
+
+// ── Combination resolver ─────────────────────────────────────────────────────
+
+/**
+ * Given current selections {groupId: attrId} and the combinations list,
+ * returns the matching id_product_attribute (or 0 if not found / incomplete).
+ */
+function findCombination(selections, combinations) {
+  var _combinations$0$id_pr, _combinations$;
+  var groupIds = Object.keys(selections).map(Number);
+  if (!groupIds.length) return (_combinations$0$id_pr = (_combinations$ = combinations[0]) === null || _combinations$ === void 0 ? void 0 : _combinations$.id_product_attribute) !== null && _combinations$0$id_pr !== void 0 ? _combinations$0$id_pr : 0;
+  var _iterator = _createForOfIteratorHelper(combinations),
+    _step;
+  try {
+    var _loop = function _loop() {
+        var combo = _step.value;
+        var attrs = combo.attributes;
+        var match = groupIds.every(function (gid) {
+          return attrs[gid] !== undefined && attrs[gid] === selections[gid];
+        });
+        if (match) return {
+          v: combo.id_product_attribute
+        };
+      },
+      _ret;
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      _ret = _loop();
+      if (_ret) return _ret.v;
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+  return 0;
+}
+
+// ── Available attributes resolver ────────────────────────────────────────────
+
+/**
+ * Returns a Set of attr IDs that are still reachable given current partial selections
+ * (excluding the group being evaluated).
+ */
+function getAvailableAttrs(groupId, combinations, currentSelections) {
+  var available = new Set();
+  var otherSelections = Object.entries(currentSelections).filter(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 1),
+      gid = _ref2[0];
+    return Number(gid) !== Number(groupId);
+  });
+  var _iterator2 = _createForOfIteratorHelper(combinations),
+    _step2;
+  try {
+    var _loop2 = function _loop2() {
+      var combo = _step2.value;
+      if (!combo.available) return 1; // continue
+      var matchesOthers = otherSelections.every(function (_ref3) {
+        var _ref4 = _slicedToArray(_ref3, 2),
+          gid = _ref4[0],
+          aid = _ref4[1];
+        return combo.attributes[Number(gid)] === Number(aid);
+      });
+      if (matchesOthers && combo.attributes[Number(groupId)] !== undefined) {
+        available.add(combo.attributes[Number(groupId)]);
+      }
+    };
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      if (_loop2()) continue;
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
+  }
+  return available;
+}
+
+// ── Variant groups renderer ───────────────────────────────────────────────────
+
+function renderGroups(groups, combinations, selections, onSelect) {
+  if (!groups.length) return "";
+  return groups.map(function (group) {
+    var available = getAvailableAttrs(group.id, combinations, selections);
+    var isColor = group.type === "color";
+    var items = group.attributes.map(function (attr) {
+      var isSelected = selections[group.id] === attr.id;
+      var isDisabled = available.size > 0 && !available.has(attr.id);
+      var colorStyle = isColor && attr.html_color_code ? "style=\"background-color:".concat(attr.html_color_code, "\"") : "";
+      var colorTitle = isColor ? "title=\"".concat(attr.name, "\"") : "";
+      var btnLabel = isColor ? "" : attr.name;
+      return "<li class=\"tc-qam__attr-item".concat(isColor ? " tc-qam__attr-item--color" : "", "\">\n            <button\n              type=\"button\"\n              class=\"tc-qam__attr-btn").concat(isSelected ? " is-selected" : "", "\"\n              data-group=\"").concat(group.id, "\"\n              data-attr=\"").concat(attr.id, "\"\n              ").concat(colorStyle, "\n              ").concat(colorTitle, "\n              ").concat(isDisabled ? "disabled" : "", "\n              aria-pressed=\"").concat(isSelected, "\"\n            >").concat(btnLabel, "</button>\n          </li>");
+    }).join("");
+    return "<div class=\"tc-qam__group\">\n        <span class=\"tc-qam__group-label\">".concat(group.name, "</span>\n        <ul class=\"tc-qam__attrs\">").concat(items, "</ul>\n      </div>");
+  }).join("");
+}
+
+// ── Inner HTML builder ───────────────────────────────────────────────────────
+
+function buildInner(data, selections) {
+  var hasGroups = data.groups && data.groups.length > 0;
+  var combinationId = hasGroups ? findCombination(selections, data.combinations) : data.default_combination;
+  var isComplete = !hasGroups || data.groups.every(function (g) {
+    return selections[g.id] !== undefined;
+  });
+  var addDisabled = !isComplete || combinationId === 0 ? "disabled" : "";
+  var summary = "\n    <div class=\"tc-qam__summary\">\n      ".concat(data.cover_url ? "<img class=\"tc-qam__cover\" src=\"".concat(data.cover_url, "\" alt=\"\" width=\"72\" height=\"72\" loading=\"eager\">") : "", "\n      <div class=\"tc-qam__price-wrap\">\n        <span class=\"tc-qam__price\">").concat(data.price, "</span>\n      </div>\n    </div>");
+  var groupsHtml = hasGroups ? "<div class=\"tc-qam__body\">".concat(renderGroups(data.groups, data.combinations, selections, null), "</div>") : "";
+  var feedbackHtml = "<div class=\"tc-qam__feedback js-qam-feedback\"></div>";
+  var footer = "\n    <div class=\"tc-qam__footer\">\n      <div class=\"tc-qam__qty-wrap\">\n        <button type=\"button\" class=\"tc-qam__qty-btn js-qam-qty-down\" aria-label=\"Zmniejsz ilo\u015B\u0107\">\u2212</button>\n        <input type=\"number\" class=\"tc-qam__qty-input js-qam-qty\" value=\"1\" min=\"1\" max=\"99\" aria-label=\"Ilo\u015B\u0107\">\n        <button type=\"button\" class=\"tc-qam__qty-btn js-qam-qty-up\" aria-label=\"Zwi\u0119ksz ilo\u015B\u0107\">+</button>\n      </div>\n      <button\n        type=\"button\"\n        class=\"tc-qam__add-btn js-qam-add\"\n        data-id-product=\"".concat(data.id_product, "\"\n        data-id-product-attribute=\"").concat(combinationId, "\"\n        data-cart-url=\"").concat(data.cart_url, "\"\n        data-token=\"").concat(data.static_token, "\"\n        ").concat(addDisabled, "\n      >Dodaj do koszyka</button>\n    </div>");
+  return summary + groupsHtml + feedbackHtml + footer;
+}
+
+// ── AJAX helpers ─────────────────────────────────────────────────────────────
+
+function getAjaxBaseUrl() {
+  return window.prestashop && window.prestashop.urls && window.prestashop.urls.base_url || "/";
+}
+function fetchProductData(_x) {
+  return _fetchProductData.apply(this, arguments);
+}
+function _fetchProductData() {
+  _fetchProductData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(productId) {
+    var base, url, resp;
+    return _regenerator().w(function (_context3) {
+      while (1) switch (_context3.n) {
+        case 0:
+          base = getAjaxBaseUrl();
+          url = "".concat(base, "index.php?fc=module&module=").concat(MODULE_CTL, "&controller=product&id_product=").concat(productId);
+          _context3.n = 1;
+          return fetch(url, {
+            headers: {
+              Accept: "application/json"
+            }
+          });
+        case 1:
+          resp = _context3.v;
+          if (resp.ok) {
+            _context3.n = 2;
+            break;
+          }
+          throw new Error("HTTP ".concat(resp.status));
+        case 2:
+          return _context3.a(2, resp.json());
+      }
+    }, _callee3);
+  }));
+  return _fetchProductData.apply(this, arguments);
+}
+function addToCart(_x2) {
+  return _addToCart.apply(this, arguments);
+} // ── Modal controller ─────────────────────────────────────────────────────────
+function _addToCart() {
+  _addToCart = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(_ref5) {
+    var idProduct, idProductAttribute, qty, cartUrl, token, body, resp;
+    return _regenerator().w(function (_context4) {
+      while (1) switch (_context4.n) {
+        case 0:
+          idProduct = _ref5.idProduct, idProductAttribute = _ref5.idProductAttribute, qty = _ref5.qty, cartUrl = _ref5.cartUrl, token = _ref5.token;
+          body = new URLSearchParams({
+            ajax: "1",
+            action: "update",
+            add: "1",
+            id_product: idProduct,
+            id_product_attribute: idProductAttribute || 0,
+            qty: qty,
+            token: token
+          });
+          _context4.n = 1;
+          return fetch(cartUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: body.toString()
+          });
+        case 1:
+          resp = _context4.v;
+          if (resp.ok) {
+            _context4.n = 2;
+            break;
+          }
+          throw new Error("HTTP ".concat(resp.status));
+        case 2:
+          return _context4.a(2, resp.json());
+      }
+    }, _callee4);
+  }));
+  return _addToCart.apply(this, arguments);
+}
+var overlay = null;
+var currentData = null;
+var currentSelections = {};
+function openModal() {
+  if (!overlay) overlay = buildModal();
+  overlay.classList.add("is-open");
+  document.body.classList.add("tc-qam-open");
+  overlay.querySelector(".tc-qam__panel").focus();
+  trapFocusInit(overlay);
+}
+function closeModal() {
+  if (!overlay) return;
+  overlay.classList.remove("is-open");
+  document.body.classList.remove("tc-qam-open");
+  trapFocusDestroy();
+  currentData = null;
+  currentSelections = {};
+}
+function setTitle(text) {
+  if (!overlay) return;
+  overlay.querySelector(".tc-qam__title").textContent = text;
+}
+function setLoading() {
+  if (!overlay) return;
+  overlay.querySelector(".tc-qam__inner").innerHTML = "\n    <div class=\"tc-qam__loader\">\n      <span>\u0141adowanie\u2026</span>\n    </div>";
+}
+function renderModal() {
+  if (!overlay || !currentData) return;
+  overlay.querySelector(".tc-qam__inner").innerHTML = buildInner(currentData, currentSelections);
+  bindInnerEvents();
+}
+function showFeedback(msg) {
+  var isError = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var fb = overlay && overlay.querySelector(".js-qam-feedback");
+  if (!fb) return;
+  fb.textContent = msg;
+  fb.classList.add("is-visible");
+  if (isError) fb.style.background = "#b44";else fb.style.background = "";
+  setTimeout(function () {
+    return fb.classList.remove("is-visible");
+  }, 2800);
+}
+
+// ── Inner event binding (re-run after each re-render) ────────────────────────
+
+function bindInnerEvents() {
+  var _inner$querySelector, _inner$querySelector2;
+  if (!overlay) return;
+  var inner = overlay.querySelector(".tc-qam__inner");
+
+  // Attribute selection
+  inner.querySelectorAll(".tc-qam__attr-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var gid = Number(btn.dataset.group);
+      var aid = Number(btn.dataset.attr);
+      if (currentSelections[gid] === aid) {
+        delete currentSelections[gid];
+      } else {
+        currentSelections[gid] = aid;
+      }
+      renderModal();
+    });
+  });
+
+  // Quantity
+  var qtyInput = inner.querySelector(".js-qam-qty");
+  (_inner$querySelector = inner.querySelector(".js-qam-qty-up")) === null || _inner$querySelector === void 0 || _inner$querySelector.addEventListener("click", function () {
+    qtyInput.value = Math.min(99, parseInt(qtyInput.value || "1", 10) + 1);
+  });
+  (_inner$querySelector2 = inner.querySelector(".js-qam-qty-down")) === null || _inner$querySelector2 === void 0 || _inner$querySelector2.addEventListener("click", function () {
+    qtyInput.value = Math.max(1, parseInt(qtyInput.value || "1", 10) - 1);
+  });
+
+  // Add to cart
+  var addBtn = inner.querySelector(".js-qam-add");
+  addBtn === null || addBtn === void 0 || addBtn.addEventListener("click", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+    var idProduct, idProductAttribute, qty, cartUrl, token, _t;
+    return _regenerator().w(function (_context) {
+      while (1) switch (_context.p = _context.n) {
+        case 0:
+          idProduct = parseInt(addBtn.dataset.idProduct, 10);
+          idProductAttribute = parseInt(addBtn.dataset.idProductAttribute, 10) || 0;
+          qty = parseInt((qtyInput === null || qtyInput === void 0 ? void 0 : qtyInput.value) || "1", 10);
+          cartUrl = addBtn.dataset.cartUrl;
+          token = addBtn.dataset.token;
+          addBtn.disabled = true;
+          addBtn.textContent = "…";
+          _context.p = 1;
+          _context.n = 2;
+          return addToCart({
+            idProduct: idProduct,
+            idProductAttribute: idProductAttribute,
+            qty: qty,
+            cartUrl: cartUrl,
+            token: token
+          });
+        case 2:
+          showFeedback("Dodano do koszyka!");
+          if (window.prestashop) {
+            window.prestashop.emit("updateCart", {
+              reason: {
+                idProduct: idProduct,
+                idProductAttribute: idProductAttribute,
+                linkAction: "add-to-cart"
+              }
+            });
+          }
+          setTimeout(function () {
+            return closeModal();
+          }, 1400);
+          _context.n = 4;
+          break;
+        case 3:
+          _context.p = 3;
+          _t = _context.v;
+          showFeedback("Wystąpił błąd. Spróbuj ponownie.", true);
+          addBtn.disabled = false;
+          addBtn.textContent = "Dodaj do koszyka";
+        case 4:
+          return _context.a(2);
+      }
+    }, _callee, null, [[1, 3]]);
+  })));
+}
+
+// ── Focus trap ───────────────────────────────────────────────────────────────
+
+var _trapHandler = null;
+function trapFocusInit(el) {
+  var focusable = 'button:not([disabled]),input,select,[tabindex]:not([tabindex="-1"])';
+  _trapHandler = function _trapHandler(e) {
+    if (e.key !== "Tab" && e.key !== "Escape") return;
+    if (e.key === "Escape") {
+      closeModal();
+      return;
+    }
+    var nodes = _toConsumableArray(el.querySelectorAll(focusable));
+    if (!nodes.length) return;
+    var first = nodes[0],
+      last = nodes[nodes.length - 1];
+    if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+      e.preventDefault();
+      (e.shiftKey ? last : first).focus();
+    }
+  };
+  el.addEventListener("keydown", _trapHandler);
+}
+function trapFocusDestroy() {
+  if (overlay && _trapHandler) overlay.removeEventListener("keydown", _trapHandler);
+  _trapHandler = null;
+}
+
+// ── Main init ────────────────────────────────────────────────────────────────
+
+function initQuickAddModal() {
+  // Lazy-build modal once
+  overlay = buildModal();
+
+  // Close on overlay click (outside panel)
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) closeModal();
+  });
+
+  // Close button
+  overlay.addEventListener("click", function (e) {
+    if (e.target.closest(".js-qam-close")) closeModal();
+  });
+
+  // Delegate cart icon clicks
+  document.addEventListener("click", /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(e) {
+      var btn, productId, defCombo, _t2;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.p = _context2.n) {
+          case 0:
+            btn = e.target.closest(SEL_OPEN);
+            if (btn) {
+              _context2.n = 1;
+              break;
+            }
+            return _context2.a(2);
+          case 1:
+            e.preventDefault();
+            productId = parseInt(btn.dataset.productId, 10);
+            if (productId) {
+              _context2.n = 2;
+              break;
+            }
+            return _context2.a(2);
+          case 2:
+            openModal();
+            setLoading();
+            setTitle("Dodaj do koszyka");
+            _context2.p = 3;
+            _context2.n = 4;
+            return fetchProductData(productId);
+          case 4:
+            currentData = _context2.v;
+            currentSelections = {};
+
+            // Pre-select the default combination attributes
+            if (currentData.default_combination) {
+              defCombo = currentData.combinations.find(function (c) {
+                return c.id_product_attribute === currentData.default_combination;
+              });
+              if (defCombo) currentSelections = _objectSpread({}, defCombo.attributes);
+            }
+            setTitle(currentData.name);
+            renderModal();
+            _context2.n = 6;
+            break;
+          case 5:
+            _context2.p = 5;
+            _t2 = _context2.v;
+            overlay.querySelector(".tc-qam__inner").innerHTML = "\n        <div class=\"tc-qam__message\">Nie mo\u017Cna za\u0142adowa\u0107 produktu. Spr\xF3buj ponownie.</div>";
+          case 6:
+            return _context2.a(2);
+        }
+      }, _callee2, null, [[3, 5]]);
+    }));
+    return function (_x3) {
+      return _ref7.apply(this, arguments);
+    };
+  }());
+
+  // Delegate wishlist icon clicks
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest(SEL_WISH);
+    if (!btn) return;
+    e.preventDefault();
+    toggleWishlist(btn);
+  });
+
+  // Sync wishlist state on load
+  syncWishlistButtons();
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initQuickAddModal);
+
+/***/ },
+
 /***/ "./_dev/js/custom/theme.js"
 /*!*********************************!*\
   !*** ./_dev/js/custom/theme.js ***!
@@ -4055,6 +4581,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Sections_HomePromoSlider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Sections/HomePromoSlider */ "./_dev/js/custom/Sections/HomePromoSlider.js");
 /* harmony import */ var _Sections_ProductSlider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Sections/ProductSlider */ "./_dev/js/custom/Sections/ProductSlider.js");
 /* harmony import */ var _Sections_CategorySlider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Sections/CategorySlider */ "./_dev/js/custom/Sections/CategorySlider.js");
+/* harmony import */ var _Sections_QuickAddModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Sections/QuickAddModal */ "./_dev/js/custom/Sections/QuickAddModal.js");
+
 
 
 
@@ -4072,6 +4600,7 @@ runWhenReady(_Sections_MobileHeader__WEBPACK_IMPORTED_MODULE_1__["default"]);
 runWhenReady(_Sections_HomePromoSlider__WEBPACK_IMPORTED_MODULE_2__["default"]);
 runWhenReady(_Sections_ProductSlider__WEBPACK_IMPORTED_MODULE_3__["default"]);
 runWhenReady(_Sections_CategorySlider__WEBPACK_IMPORTED_MODULE_4__["default"]);
+runWhenReady(_Sections_QuickAddModal__WEBPACK_IMPORTED_MODULE_5__["default"]);
 
 /***/ },
 
