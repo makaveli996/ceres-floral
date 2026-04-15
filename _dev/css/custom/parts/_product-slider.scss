@@ -1,62 +1,75 @@
 /**
- * Global product slider component (Splide). Reusable for bestsellers, new products, custom queries.
- * Used by: theme partial _partials/product-slider.tpl. JS: _dev/js/custom/Sections/ProductSlider.js.
+ * Global product slider component — default styles for tc-product-slider BEM block.
+ * Used by: _partials/product-slider.tpl (when no $section_class is passed).
+ * Section-specific overrides live in their own SCSS file (e.g. _bestsellers-slider.scss).
+ * JS: _dev/js/custom/Sections/ProductSlider.js.
  */
 @use "../base" as *;
 @use "../utils" as *;
 
 .tc-product-slider {
-  $r: &;
-  width: 100%;
+  padding: 80px 0;
 
-  @media (max-width: 1579.98px) {
-    padding-left: 75px;
-    padding-right: 75px;
+  @include md(lg) {
+    padding: 56px 0;
   }
 
-  @include md(sm) {
-    padding-left: 40px;
-    padding-right: 40px;
+  /* Head: title + optional subtitle left, arrows right */
+  &__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 30px;
+
+    @include md(md) {
+      align-items: flex-start;
+    }
+  }
+
+  &__head-text {
+    flex: 1;
+    min-width: 0;
   }
 
   &__title {
-    @include heading-2-bold;
-    color: var(--clr-black);
-    text-align: center;
-    margin: 0 0 34px;
-
-    @include md(md) {
-      margin: 0 0 30px;
-    }
-  }
-
-  &__splide {
-    position: relative;
-    margin-bottom: 56px;
-
-    @include md(md) {
-      margin-bottom: 30px;
-    }
-  }
-
-  .splide__track {
-    overflow: hidden;
-  }
-
-  .splide__list {
-    display: flex;
+    @include heading-2-regular;
+    color: var(--clr-green);
     margin: 0;
-    padding: 0;
-    gap: 0;
   }
 
-  .splide__slide {
-    box-sizing: border-box;
-    list-style: none;
-    display: flex;
+  &__subtitle {
+    @include body-regular;
+    color: var(--clr-green-2);
+    margin: 8px 0 0;
   }
 
+  &__arrows {
+    flex-shrink: 0;
+
+    @include md(md) {
+      display: none;
+    }
+  }
+
+  /* Splide wrapper */
+  &__splide {
+    .splide__track {
+      overflow: hidden;
+    }
+
+    .splide__list {
+      align-items: stretch;
+    }
+
+    .splide__slide {
+      height: auto;
+    }
+  }
+
+  /* CTA block */
   &__cta {
+    margin-top: 40px;
     text-align: center;
   }
 }

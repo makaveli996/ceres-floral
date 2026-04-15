@@ -1,133 +1,173 @@
 /**
- * Product tile component. Card: image, flags, name, price, link.
- * Used by: _partials/product-tile.tpl (product-slider, listings, etc.). No JS. Standalone.
+ * Product tile (card) component — single source of truth.
+ * Figma: "Karta_produktu" — bg #fffdf6, border 1px #f8f3dd, sharp corners, 1:1 image.
+ * Body: 30px padding, gap 15px — name / price row / discount badge / omnibus (omnibuseufree).
+ * Used by: _partials/product-tile.tpl in product-slider, bestsellers-slider, listings.
  */
 @use "../base" as *;
 @use "../utils" as *;
 
 .product-tile {
-  $r: &;
+  background: var(--clr-gray-2);
+  border: 1px solid var(--clr-yellow);
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  width: 100%;
-  border-radius: 7.5px;
+  position: relative;
 
-  &__link {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  /* ── Image area ── */
+  &__image-link {
+    display: block;
     text-decoration: none;
-    color: inherit;
   }
 
   &__image-wrap {
     position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    background: var(--clr-white);
     overflow: hidden;
-    border-radius: 7.5px;
-    border: 1px solid var(--clr-gray-3);
+    aspect-ratio: 1 / 1;
+    background: var(--clr-gray-2);
+    flex-shrink: 0;
   }
 
   &__picture {
-    position: absolute;
-    inset: 0;
     display: block;
-
-    &--main {
-      position: relative;
-    }
+    width: 100%;
+    height: 100%;
 
     &--hover {
+      position: absolute;
+      inset: 0;
       opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
-
-      #{$r}:hover & {
-        opacity: 1;
-      }
+      transition: opacity 0.3s ease;
     }
   }
 
   &__image {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    padding: 18px;
-    box-sizing: border-box;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
   }
 
-  &__flags {
+  &:hover &__picture--hover {
+    opacity: 1;
+  }
+
+  /* Gentle slow shrink on hover — no box-shadow */
+  &:hover &__image {
+    transform: scale(0.92);
+  }
+
+  /* Badge — top-left overlay (Figma: #414f42 bg, #f8f3dd text, pill) */
+  &__badge {
     position: absolute;
-    left: 19px;
-    top: 19px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 13px;
-  }
-
-  &__flag {
-    @include sign-bold;
-    color: var(--clr-white);
-    padding: 4px 10px;
+    top: 17px;
+    left: 17px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
     border-radius: 100px;
+    @include sign-bold;
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0;
     white-space: nowrap;
 
-    &--on-sale,
-    &--discount {
-      background: var(--clr-yellow);
+    &--sale {
+      background: var(--clr-green);
+      color: var(--clr-yellow);
     }
 
     &--new {
-      background: var(--clr-green);
+      background: var(--clr-green-2);
+      color: var(--clr-white);
     }
 
-    &--last_units {
-      background: var(--clr-gray);
+    &--last {
+      background: var(--clr-green-2);
+      color: var(--clr-white);
     }
   }
 
+  /* ── Content area ── */
   &__body {
+    padding: 30px 30px 26px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 15px;
     flex: 1;
   }
 
-  &__name {
-    font-family: "Wix Madefor Display", sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 1.2;
-    color: var(--clr-black);
-    margin: 0;
+  &__name-link {
+    display: block;
+    text-decoration: none;
   }
 
+  /* Figma: 16px Bold #1a1a1a */
+  &__name {
+    @include body-bold;
+    color: var(--clr-black-2);
+    margin: 0;
+    word-break: break-word;
+
+    .product-tile__name-link:hover & {
+      color: var(--clr-green);
+    }
+  }
+
+  /* Price row: price + optional discount badge */
   &__price-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
+  /* Figma: 24px Inria Serif Regular #414f42 */
   &__price {
-    font-family: "Wix Madefor Display", sans-serif;
-    font-weight: 700;
-    font-size: 20px;
+    font-family: "Inria Serif", serif;
+    font-weight: 400;
+    font-size: 24px;
     line-height: 1.2;
-    color: var(--clr-black);
+    color: var(--clr-green);
+    white-space: nowrap;
   }
 
-  &__arrow {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    flex-shrink: 0;
+  /* Figma: "-260,00 zł" — rgba(186,194,183,0.2) bg, #79897e text, r=10px */
+  &__discount-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    border-radius: 10px;
+    background: rgba(186, 194, 183, 0.2);
+    @include body-bold;
+    color: var(--clr-green-2);
+    white-space: nowrap;
   }
 
-  &:hover {
-    #{$r}__arrow {
-      opacity: 1;
+  /* Omnibus directive output (omnibuseufree module) — override module CSS */
+  &__omnibus-wrap {
+    .presta-studio-price-history {
+      margin: 0;
+      padding: 0;
+    }
+
+    .presta-studio-price-history-text {
+      @include sign-regular;
+      color: var(--clr-green-2) !important;
+      font-size: 13px !important;
+      margin: 0;
+      padding: 0;
+    }
+
+    .presta-studio-price-history-price {
+      @include sign-regular;
+      color: var(--clr-green-2) !important;
+      font-size: 13px !important;
     }
   }
 }

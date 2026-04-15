@@ -5,8 +5,11 @@
 # ran and the web installer appeared. Host: sudo usermod -aG www-data $USER (once).
 
 set -e
+umask 0002
 chown -R 33:33 /var/www/html
 chmod -R g+rwX /var/www/html
+mkdir -p /var/www/html/var/logs
+chmod 2775 /var/www/html/var/logs
 
 # Official image CMD is /tmp/docker_run.sh (wait for DB, CLI install, exec apache).
 if [ -x /tmp/docker_run.sh ]; then

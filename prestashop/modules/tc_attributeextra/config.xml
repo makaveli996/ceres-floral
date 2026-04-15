@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+    <name>tc_attributeextra</name>
+    <displayName><![CDATA[Atrybut — dodatkowy tekst]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[Adds a free-text subtitle field to each attribute value in BO. Displayed below the attribute name on the product detail page.]]></description>
+    <author><![CDATA[Rafal Majdan]]></author>
+    <tab><![CDATA[administration]]></tab>
+    <is_configurable>0</is_configurable>
+    <need_instance>0</need_instance>
+    <limited_countries></limited_countries>
+</module>

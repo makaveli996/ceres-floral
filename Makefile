@@ -161,36 +161,36 @@ fix-theme-config:
 # After cache:clear we chown var/cache to www-data (33) so Apache can create profiler/ and other subdirs.
 fix-cache: perms-cache
 	@echo "Regenerating Symfony cache in container..."
-	@docker compose exec web sh -c 'mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod && chmod -R 777 /var/www/html/var/cache && cd /var/www/html && php bin/console cache:clear --env=dev && php bin/console cache:clear --env=prod && chown -R 33:33 /var/www/html/var/cache' || \
-	 docker compose run --rm web sh -c 'mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod && chmod -R 777 /var/www/html/var/cache && cd /var/www/html && php bin/console cache:clear --env=dev && php bin/console cache:clear --env=prod && chown -R 33:33 /var/www/html/var/cache' || \
+	@docker compose exec -u 33:33 web sh -c 'mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod /var/www/html/var/logs && chmod -R 777 /var/www/html/var/cache /var/www/html/var/logs && cd /var/www/html && php bin/console cache:clear --env=dev && php bin/console cache:clear --env=prod' || \
+	 docker compose run --rm -u 33:33 web sh -c 'mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod /var/www/html/var/logs && chmod -R 777 /var/www/html/var/cache /var/www/html/var/logs && cd /var/www/html && php bin/console cache:clear --env=dev && php bin/console cache:clear --env=prod' || \
 	 (echo "Failed. Ensure containers are up (make up) and run: make fix-cache" && exit 1)
-	@echo "OK: cache regenerated (appParameters.php should exist now)"
+	@echo "OK: cache regenerated as www-data (appParameters.php should exist now)"
 
 # Fast cache clear: only delete cache dirs + theme JSON in container (no PHP/Symfony). Use from webpack watch.
 # Does not regenerate container; run "make cache-clear" if you need full rebuild (e.g. after services.yml change).
 cache-clear-fast:
-	@docker compose exec web sh -c 'rm -rf /var/www/html/var/cache/dev/* /var/www/html/var/cache/prod/* 2>/dev/null; find /var/www/html/config/themes -name "*.json" -type f -delete 2>/dev/null; mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod; chown -R 33:33 /var/www/html/var/cache' || \
-	 docker compose run --rm web sh -c 'rm -rf /var/www/html/var/cache/dev/* /var/www/html/var/cache/prod/* 2>/dev/null; find /var/www/html/config/themes -name "*.json" -type f -delete 2>/dev/null; mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod; chown -R 33:33 /var/www/html/var/cache' || \
+	@docker compose exec -u 33:33 web sh -c 'rm -rf /var/www/html/var/cache/dev/* /var/www/html/var/cache/prod/* 2>/dev/null; find /var/www/html/config/themes -name "*.json" -type f -delete 2>/dev/null; mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod /var/www/html/var/logs' || \
+	 docker compose run --rm -u 33:33 web sh -c 'rm -rf /var/www/html/var/cache/dev/* /var/www/html/var/cache/prod/* 2>/dev/null; find /var/www/html/config/themes -name "*.json" -type f -delete 2>/dev/null; mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod /var/www/html/var/logs' || \
 	 (echo "Could not run cache-clear-fast (start containers: make up)" && exit 1)
-	@echo "OK: cache cleared (fast, no PHP). For full rebuild use: make cache-clear"
+	@echo "OK: cache cleared as www-data (fast, no PHP). For full rebuild use: make cache-clear"
 
 # Symfony cache:clear (rebuilds cache; safe, never breaks the site). Use after config/template/service changes.
 # chown to www-data (33) so Apache can write profiler/ and other runtime subdirs.
 cache-clear:
-	@docker compose exec web sh -c 'cd /var/www/html && php bin/console cache:clear --env=prod && php bin/console cache:clear --env=dev && chown -R 33:33 /var/www/html/var/cache' || \
-	 docker compose run --rm web sh -c 'cd /var/www/html && php bin/console cache:clear --env=prod && php bin/console cache:clear --env=dev && chown -R 33:33 /var/www/html/var/cache' || \
+	@docker compose exec -u 33:33 web sh -c 'mkdir -p /var/www/html/var/logs && cd /var/www/html && php bin/console cache:clear --env=prod && php bin/console cache:clear --env=dev' || \
+	 docker compose run --rm -u 33:33 web sh -c 'mkdir -p /var/www/html/var/logs && cd /var/www/html && php bin/console cache:clear --env=prod && php bin/console cache:clear --env=dev' || \
 	 (echo "Could not clear cache (start containers with: make up). If you see appParameters.php missing, run: make fix-cache" && exit 1)
-	@echo "OK: cache cleared (Symfony prod + dev). If BO shows 'uprawnienia do zapisu', run: make perms-cache"
+	@echo "OK: cache cleared as www-data (Symfony prod + dev). If BO shows 'uprawnienia do zapisu', run: make perms-cache"
 
 # Alias; same as cache-clear.
 cache-clear-symfony: cache-clear
 
 # Wipe var/cache and legacy cache/, then rebuild. Use only if cache-clear is not enough.
 cache-clear-hard:
-	@docker compose exec web sh -c 'rm -rf /var/www/html/var/cache/* /var/www/html/cache/* 2>/dev/null; cd /var/www/html && php bin/console cache:clear --env=prod && php bin/console cache:clear --env=dev && chown -R 33:33 /var/www/html/var/cache' || \
-	 docker compose run --rm web sh -c 'rm -rf /var/www/html/var/cache/* /var/www/html/cache/* 2>/dev/null; cd /var/www/html && php bin/console cache:clear --env=prod && php bin/console cache:clear --env=dev && chown -R 33:33 /var/www/html/var/cache' || \
+	@docker compose exec -u 33:33 web sh -c 'rm -rf /var/www/html/var/cache/* /var/www/html/cache/* 2>/dev/null; mkdir -p /var/www/html/var/logs; cd /var/www/html && php bin/console cache:clear --env=prod && php bin/console cache:clear --env=dev' || \
+	 docker compose run --rm -u 33:33 web sh -c 'rm -rf /var/www/html/var/cache/* /var/www/html/cache/* 2>/dev/null; mkdir -p /var/www/html/var/logs; cd /var/www/html && php bin/console cache:clear --env=prod && php bin/console cache:clear --env=dev' || \
 	 (echo "Could not clear cache (start containers with: make up). Run: make fix-cache" && exit 1)
-	@echo "OK: cache wiped and rebuilt (var/cache + legacy cache)"
+	@echo "OK: cache wiped and rebuilt as www-data (var/cache + legacy cache)"
 
 # ---------- Theme assets (run from repo root) ----------
 theme-build:

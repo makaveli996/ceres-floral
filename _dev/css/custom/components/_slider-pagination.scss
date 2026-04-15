@@ -1,7 +1,15 @@
+/**
+ * Universal Splide pagination dots component.
+ * Used by any slider section — apply on the <ul class="splide__pagination tc-slider-pagination">.
+ * Colors are customizable via CSS vars on the parent/section:
+ *   --clr-pagination       — active dot (default: --clr-yellow)
+ *   --clr-pagination-dot   — inactive dot (default: --clr-green)
+ * Positioning is handled by the section (e.g. tc-home-promo-slider, tc-bestsellers-slider).
+ */
 @use "../base" as *;
 @use "../utils" as *;
 
-.hero-slider__pagination {
+.tc-slider-pagination {
   --slider-pagination-dot-size: 8px;
   --slider-pagination-active-width: 20px;
   --slider-pagination-gap: 6px;

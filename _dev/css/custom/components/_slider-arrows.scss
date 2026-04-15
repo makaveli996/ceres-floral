@@ -14,20 +14,28 @@
   flex-shrink: 0;
 
   &__btn {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 1px solid var(--clr-gray);
+    border: 0;
     background: transparent;
     color: var(--clr-green);
     cursor: pointer;
-    transition:
-      background 0.2s ease,
-      border-color 0.2s ease,
-      color 0.2s ease;
+    transition: color 0.2s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid var(--clr-gray);
+      transform: scale(1);
+      transition: transform 0.6s ease;
+    }
 
     @include md(md) {
       width: 42px;
@@ -35,9 +43,9 @@
     }
 
     &:hover {
-      background: var(--clr-green);
-      border-color: var(--clr-green);
-      color: var(--clr-white);
+      &::before {
+        transform: scale(1.08);
+      }
     }
 
     &:focus-visible {

@@ -2,6 +2,7 @@
  * Global product tile — card: image, flags badge, name, price, omnibus, link.
  * Figma: "Karta_produktu" — bg #fffdf6, border #f8f3dd, 1:1 image, 30 px padding.
  * Used by: product-slider, tc_bestsellersslider, listings. Pass $product.
+ * Omnibus: rendered via displayProductPriceBlock hook (omnibuseufree module).
  * CSS: _dev/css/custom/components/_product-tile.scss
  *}
 {assign var='product_name_safe' value=''}
@@ -98,7 +99,7 @@
         {if !empty($product.has_discount) && $product.has_discount}
           <span class="product-tile__discount-badge">
             {if !empty($product.discount_amount_to_display)}
-              -{$product.discount_amount_to_display|escape:'html':'UTF-8'}
+              {$product.discount_amount_to_display|escape:'html':'UTF-8'}
             {elseif !empty($product.discount_percentage)}
               {$product.discount_percentage|escape:'html':'UTF-8'}
             {/if}
@@ -107,13 +108,10 @@
       </div>
     {/if}
 
-    {* Omnibus — lowest price in 30 days (EU directive) *}
-    {if !empty($product.lowest_price_in_30_days)}
-      <p class="product-tile__omnibus">
-        {l s='Najniższa cena w ciągu 30 dni:' d='Shop.Theme.Catalog'}
-        {if is_array($product.lowest_price_in_30_days)}{$product.lowest_price_in_30_days.price|escape:'html':'UTF-8'}{else}{$product.lowest_price_in_30_days|escape:'html':'UTF-8'}{/if}
-      </p>
-    {/if}
+    {* Omnibus — lowest price in 30 days via omnibuseufree module hook (EU directive) *}
+    <div class="product-tile__omnibus-wrap">
+      {hook h='displayProductPriceBlock' product=$product type='after_price'}
+    </div>
 
   </div>
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+    <name>tc_attributeextra</name>
+    <displayName><![CDATA[Atrybut — dodatkowy tekst]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[Dodaje pole z dodatkowym tekstem do każdej wartości atrybutu. Wyświetlany pod nazwą atrybutu na karcie produktu.]]></description>
+    <author><![CDATA[Rafal Majdan]]></author>
+    <tab><![CDATA[administration]]></tab>
+    <is_configurable>0</is_configurable>
+    <need_instance>0</need_instance>
+    <limited_countries></limited_countries>
+</module>

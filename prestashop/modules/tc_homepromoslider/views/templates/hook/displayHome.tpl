@@ -23,7 +23,7 @@
           </div>
 
           <ul
-            class="splide__pagination hero-slider__pagination"
+            class="splide__pagination tc-slider-pagination"
             aria-label="{l s='Slider navigation' d='Shop.Theme.Catalog'}"
           ></ul>
         </div>
