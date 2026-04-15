@@ -3804,18 +3804,16 @@ function initCategorySlider() {
       gap: "20px",
       arrows: false,
       pagination: true,
-      autoplay: false,
+      autoplay: true,
       drag: true,
       breakpoints: {
         992: {
-          fixedWidth: 0,
           perPage: 2,
           gap: "16px"
         },
         640: {
-          fixedWidth: 0,
-          perPage: 1,
-          gap: "0"
+          focus: "center",
+          trimSpace: false
         }
       }
     });
@@ -4014,18 +4012,16 @@ function initProductSlider() {
       gap: "20px",
       arrows: false,
       pagination: true,
-      autoplay: false,
+      autoplay: true,
       drag: true,
       breakpoints: {
         992: {
-          fixedWidth: 0,
           perPage: 2,
           gap: "16px"
         },
         640: {
-          fixedWidth: 0,
-          perPage: 1,
-          gap: "0"
+          focus: "center",
+          trimSpace: false
         }
       }
     });

@@ -112,6 +112,10 @@
     @include heading-32-bold;
     margin: 0 0 22px;
     color: var(--clr-green);
+
+    @include md(lg) {
+      margin: 0 0 8px;
+    }
   }
 
   &__list-items {
@@ -129,6 +133,11 @@
       padding: 23px 0 33px;
       color: var(--clr-black-2);
       margin-bottom: 10px;
+
+      @include md(lg) {
+        min-height: 50px;
+        padding: 16px 0 20px;
+      }
 
       &:last-child {
         border-bottom: none;

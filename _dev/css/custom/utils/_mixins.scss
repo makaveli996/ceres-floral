@@ -109,6 +109,10 @@ $grid-breakpoints: (
   font-size: 23px;
   line-height: 1.2;
   letter-spacing: 0;
+
+  @include md(lg) {
+    font-size: 28px;
+  }
 }
 
 @mixin heading-3-regular {
@@ -117,6 +121,10 @@ $grid-breakpoints: (
   font-size: 23px;
   line-height: 1.2;
   letter-spacing: 0;
+
+  @include md(lg) {
+    font-size: 28px;
+  }
 }
 
 @mixin heading-32-bold {
@@ -125,6 +133,10 @@ $grid-breakpoints: (
   font-size: 36px;
   line-height: 1.2;
   letter-spacing: 0;
+
+  @include md(lg) {
+    font-size: 28px;
+  }
 }
 
 @mixin heading-32-regular {
@@ -133,6 +145,10 @@ $grid-breakpoints: (
   font-size: 36px;
   line-height: 1.2;
   letter-spacing: 0;
+
+  @include md(lg) {
+    font-size: 28px;
+  }
 }
 
 @mixin heading-2-bold {
@@ -141,6 +157,10 @@ $grid-breakpoints: (
   font-size: 48px;
   line-height: 1.2;
   letter-spacing: 0;
+
+  @include md(lg) {
+    font-size: 32px;
+  }
 }
 
 @mixin heading-2-regular {
@@ -149,6 +169,10 @@ $grid-breakpoints: (
   font-size: 48px;
   line-height: 1.2;
   letter-spacing: 0;
+
+  @include md(lg) {
+    font-size: 32px;
+  }
 }
 
 @mixin heading-1-bold {
