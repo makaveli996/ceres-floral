@@ -1,0 +1,87 @@
+/**
+ * New Products slider section — "Nowości".
+ * Used by: tc_newproductsslider/views/templates/hook/tc_newproductsslider.tpl.
+ * JS: data-tc-product-slider → ProductSlider.js (shared).
+ * Layout: container-md → header row (title+sub | arrows) → Splide (4 tiles, gap 20px) → pagination.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-newproducts-slider {
+  margin: 49px 0 57px;
+
+  @include md(lg) {
+    margin: 32px 0;
+  }
+
+  /* ── Section header: title+subtitle left, arrows right ── */
+  &__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 30px;
+
+    @include md(md) {
+      align-items: flex-start;
+    }
+  }
+
+  &__head-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    @include heading-2-regular;
+    color: var(--clr-green);
+    margin: 0 0 14px;
+  }
+
+  &__subtitle {
+    color: var(--clr-green-2);
+    margin: 0;
+    max-width: 843px;
+  }
+
+  /* Arrow buttons group — component .tc-slider-arrows is styled separately */
+  &__arrows {
+    flex-shrink: 0;
+    padding-bottom: 4px;
+
+    @include md(md) {
+      display: none;
+    }
+  }
+
+  /* ── Splide wrapper ── */
+  &__splide {
+    .splide__track {
+      overflow: hidden;
+    }
+
+    .splide__list {
+      align-items: stretch;
+    }
+
+    .splide__slide {
+      height: auto;
+    }
+  }
+
+  /* ── Pagination — position below slider ── */
+  &__pagination {
+    margin-top: 32px !important;
+    position: static !important;
+    transform: none !important;
+    justify-content: center;
+    width: 100%;
+
+    --clr-pagination: var(--clr-green-2);
+    --clr-pagination-dot: var(--clr-gray);
+
+    @include md(md) {
+      margin-top: 24px;
+    }
+  }
+}

@@ -22,7 +22,7 @@
     height: 50px;
     border-radius: 50%;
     border: 0;
-    background: transparent;
+    background: var(--clr-gray-2);
     color: var(--clr-green);
     cursor: pointer;
     transition: color 0.2s ease;

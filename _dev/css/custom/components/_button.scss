@@ -10,7 +10,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--clr-black-3);
+  color: var(--clr-green);
   height: 51px;
   cursor: pointer;
   background: var(--clr-yellow);
@@ -20,7 +20,7 @@
     border-color 0.3s ease-in-out;
   border: 1px solid var(--clr-yellow);
   gap: 10px;
-  padding: 13px 30px;
+  padding: 13px 32px;
   border-radius: 100px;
 
   &__icon {
@@ -37,65 +37,25 @@
   }
 
   &:hover {
-    background-color: var(--clr-black-3);
+    background-color: var(--clr-black-2);
     color: var(--clr-white);
-    border-color: var(--clr-black-3);
-
-    svg {
-      path {
-        fill: var(--clr-yellow);
-      }
-    }
+    border-color: var(--clr-black-2);
   }
 
-  &--empty {
-    background: transparent;
-
-    &:hover {
-      background-color: transparent;
-      color: var(--clr-black-3);
-
-      svg {
-        path {
-          fill: var(--clr-black-3);
-        }
-      }
-    }
-  }
-
-  &--white {
+  &--green {
     color: var(--clr-white);
+    background-color: var(--clr-green);
+    border: 1px solid var(--clr-green);
 
     &:hover {
+      background-color: var(--clr-black-2);
       color: var(--clr-white);
-
-      svg {
-        path {
-          fill: var(--clr-white);
-        }
-      }
+      border-color: var(--clr-black-2);
     }
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-  }
-
-  /* Optional: pass label_mobile + label from Smarty (_partials/button.tpl). */
-  &__responsive-label--mobile {
-    display: inline;
-
-    @include mu(lg) {
-      display: none;
-    }
-  }
-
-  &__responsive-label--desktop {
-    display: none;
-
-    @include mu(lg) {
-      display: inline;
-    }
   }
 }

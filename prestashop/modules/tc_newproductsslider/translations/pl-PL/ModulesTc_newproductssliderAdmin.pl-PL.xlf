@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="modules/tc_newproductsslider/tc_newproductsslider.php" source-language="pl" target-language="pl" datatype="plaintext">
+    <body>
+      <trans-unit id="displayName" approved="yes">
+        <source>Nowości slider</source>
+        <target state="final">Nowości slider</target>
+      </trans-unit>
+      <trans-unit id="description" approved="yes">
+        <source>Wyświetla sekcję „Nowości" na stronie głównej jako slider Splide z najnowszymi produktami.</source>
+        <target state="final">Wyświetla sekcję „Nowości" na stronie głównej jako slider Splide z najnowszymi produktami.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

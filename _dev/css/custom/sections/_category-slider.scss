@@ -1,0 +1,145 @@
+/**
+ * Category Slider section — repeatable category segments. Figma nodes 240:2789 / 240:2809 / 240:2828.
+ * Used by: tc_categoryslider/views/templates/hook/displayHome.tpl.
+ * JS: data-tc-category-slider → CategorySlider.js (Splide, 3 per page).
+ * Layout: full-width split — left panel (~30%) image+gradient+CTA | right (~70%) product slider.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-category-slider {
+  margin: 57px 0 48px;
+
+  @include md(lg) {
+    margin: 32px 0 24px;
+  }
+
+  /* Each segment is a standalone full-width split row */
+  &__segment {
+    position: relative;
+    display: flex;
+    min-height: 600px;
+    margin-bottom: 80px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  /* ── Left panel ── */
+  &__panel {
+    position: relative;
+    width: 100%;
+    max-width: 570px;
+    background-color: var(--clr-green);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+
+    @include md(lg) {
+      flex: 0 0 35%;
+      max-width: 35%;
+    }
+
+    @include md(md) {
+      display: none;
+    }
+  }
+
+  &__panel-overlay {
+    position: absolute;
+    inset: 0;
+    // Figma gradient: 201°, transparent top-right → #79897E bottom-left
+    background: linear-gradient(
+      201deg,
+      rgba(121, 137, 126, 0) 6%,
+      rgb(121, 137, 126) 80%
+    );
+    opacity: 0.9;
+  }
+
+  &__panel-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 233px 102px 82px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: flex-start;
+  }
+
+  &__panel-title {
+    @include heading-2-bold;
+    color: var(--clr-white);
+    margin: 0;
+    word-break: break-word;
+  }
+
+  &__panel-desc {
+    @include body-regular;
+    color: var(--clr-white);
+    margin: 0;
+  }
+
+  &__panel-btn {
+  }
+
+  /* ── Right slider wrap ── */
+  &__slider-wrap {
+    flex: 1;
+    min-width: 0;
+    width: calc(285px * 3 + 20px * 2);
+    position: absolute;
+    right: calc((1464px - 1300px) / 2);
+    top: calc(50% + 20px);
+    transform: translateY(-50%);
+  }
+
+  /* ── Splide overrides ── */
+  &__splide {
+    .splide__track {
+      overflow: hidden;
+    }
+
+    .splide__list {
+      align-items: stretch;
+    }
+
+    .splide__slide {
+      height: auto;
+    }
+  }
+
+  /* ── Pagination below slider ── */
+  &__pagination {
+    margin-top: 32px !important;
+    padding-right: calc(285px + 20px) !important;
+    position: static !important;
+    transform: none !important;
+    justify-content: center;
+    width: 100%;
+
+    --clr-pagination: var(--clr-green-2);
+    --clr-pagination-dot: var(--clr-gray);
+
+    @include md(md) {
+      margin-top: 24px !important;
+    }
+  }
+
+  /* ── Next arrow — uses tc-slider-arrows__btn component, positioned absolutely ── */
+  &__arrow {
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    @include md(md) {
+      right: 10px;
+    }
+  }
+}

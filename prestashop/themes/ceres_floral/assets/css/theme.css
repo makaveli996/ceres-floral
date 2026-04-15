@@ -12472,14 +12472,14 @@ section[id] {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--clr-black-3);
+  color: var(--clr-green);
   height: 51px;
   cursor: pointer;
   background: var(--clr-yellow);
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
   border: 1px solid var(--clr-yellow);
   gap: 10px;
-  padding: 13px 30px;
+  padding: 13px 32px;
   border-radius: 100px;
 }
 
@@ -12495,38 +12495,21 @@ section[id] {
 }
 
 .button:hover {
-  background-color: var(--clr-black-3);
+  background-color: var(--clr-black-2);
   color: var(--clr-white);
-  border-color: var(--clr-black-3);
+  border-color: var(--clr-black-2);
 }
 
-.button:hover svg path {
-  fill: var(--clr-yellow);
-}
-
-.button--empty {
-  background: transparent;
-}
-
-.button--empty:hover {
-  background-color: transparent;
-  color: var(--clr-black-3);
-}
-
-.button--empty:hover svg path {
-  fill: var(--clr-black-3);
-}
-
-.button--white {
+.button--green {
   color: var(--clr-white);
+  background-color: var(--clr-green);
+  border: 1px solid var(--clr-green);
 }
 
-.button--white:hover {
+.button--green:hover {
+  background-color: var(--clr-black-2);
   color: var(--clr-white);
-}
-
-.button--white:hover svg path {
-  fill: var(--clr-white);
+  border-color: var(--clr-black-2);
 }
 
 .button:disabled {
@@ -12534,28 +12517,6 @@ section[id] {
   cursor: not-allowed;
 }
 
-.button {
-  /* Optional: pass label_mobile + label from Smarty (_partials/button.tpl). */
-}
-
-.button__responsive-label--mobile {
-  display: inline;
-}
-
-@media (min-width: 991.98px) {
-  .button__responsive-label--mobile {
-    display: none;
-  }
-}
-.button__responsive-label--desktop {
-  display: none;
-}
-
-@media (min-width: 991.98px) {
-  .button__responsive-label--desktop {
-    display: inline;
-  }
-}
 /**
  * Slider arrow buttons component — circle prev/next pair.
  * Used by: _partials/slider-arrows.tpl. Placed in section header (tc_bestsellersslider, etc.).
@@ -12578,7 +12539,7 @@ section[id] {
   height: 50px;
   border-radius: 50%;
   border: 0;
-  background: transparent;
+  background: var(--clr-gray-2);
   color: var(--clr-green);
   cursor: pointer;
   transition: color 0.2s ease;
@@ -14602,6 +14563,271 @@ body:not(.page-index) .sticky-bar__text {
     margin-top: 24px;
   }
 }
+/**
+ * Category Slider section — repeatable category segments. Figma nodes 240:2789 / 240:2809 / 240:2828.
+ * Used by: tc_categoryslider/views/templates/hook/displayHome.tpl.
+ * JS: data-tc-category-slider → CategorySlider.js (Splide, 3 per page).
+ * Layout: full-width split — left panel (~30%) image+gradient+CTA | right (~70%) product slider.
+ */
+.tc-category-slider {
+  margin: 57px 0 48px;
+}
+
+@media (max-width: 991.98px) {
+  .tc-category-slider {
+    margin: 32px 0 24px;
+  }
+}
+.tc-category-slider {
+  /* Each segment is a standalone full-width split row */
+}
+
+.tc-category-slider__segment {
+  position: relative;
+  display: flex;
+  min-height: 600px;
+  margin-bottom: 80px;
+}
+
+.tc-category-slider__segment:last-child {
+  margin-bottom: 0;
+}
+
+.tc-category-slider {
+  /* ── Left panel ── */
+}
+
+.tc-category-slider__panel {
+  position: relative;
+  width: 100%;
+  max-width: 570px;
+  background-color: var(--clr-green);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+@media (max-width: 991.98px) {
+  .tc-category-slider__panel {
+    flex: 0 0 35%;
+    max-width: 35%;
+  }
+}
+@media (max-width: 749.98px) {
+  .tc-category-slider__panel {
+    display: none;
+  }
+}
+.tc-category-slider__panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(201deg, rgba(121, 137, 126, 0) 6%, rgb(121, 137, 126) 80%);
+  opacity: 0.9;
+}
+
+.tc-category-slider__panel-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 233px 102px 82px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.tc-category-slider__panel-title {
+  font-family: "Inria Serif", serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--clr-white);
+  margin: 0;
+  word-break: break-word;
+}
+
+.tc-category-slider__panel-desc {
+  font-family: "Wix Madefor Display", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--clr-white);
+  margin: 0;
+}
+
+.tc-category-slider {
+  /* ── Right slider wrap ── */
+}
+
+.tc-category-slider__slider-wrap {
+  flex: 1;
+  min-width: 0;
+  width: 895px;
+  position: absolute;
+  right: 82px;
+  top: calc(50% + 20px);
+  transform: translateY(-50%);
+}
+
+.tc-category-slider {
+  /* ── Splide overrides ── */
+}
+
+.tc-category-slider__splide .splide__track {
+  overflow: hidden;
+}
+
+.tc-category-slider__splide .splide__list {
+  align-items: stretch;
+}
+
+.tc-category-slider__splide .splide__slide {
+  height: auto;
+}
+
+.tc-category-slider {
+  /* ── Pagination below slider ── */
+}
+
+.tc-category-slider__pagination {
+  margin-top: 32px !important;
+  padding-right: 305px !important;
+  position: static !important;
+  transform: none !important;
+  justify-content: center;
+  width: 100%;
+  --clr-pagination: var(--clr-green-2);
+  --clr-pagination-dot: var(--clr-gray);
+}
+
+@media (max-width: 749.98px) {
+  .tc-category-slider__pagination {
+    margin-top: 24px !important;
+  }
+}
+.tc-category-slider {
+  /* ── Next arrow — uses tc-slider-arrows__btn component, positioned absolutely ── */
+}
+
+.tc-category-slider__arrow {
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+@media (max-width: 749.98px) {
+  .tc-category-slider__arrow {
+    right: 10px;
+  }
+}
+/**
+ * New Products slider section — "Nowości".
+ * Used by: tc_newproductsslider/views/templates/hook/tc_newproductsslider.tpl.
+ * JS: data-tc-product-slider → ProductSlider.js (shared).
+ * Layout: container-md → header row (title+sub | arrows) → Splide (4 tiles, gap 20px) → pagination.
+ */
+.tc-newproducts-slider {
+  margin: 49px 0 57px;
+}
+
+@media (max-width: 991.98px) {
+  .tc-newproducts-slider {
+    margin: 32px 0;
+  }
+}
+.tc-newproducts-slider {
+  /* ── Section header: title+subtitle left, arrows right ── */
+}
+
+.tc-newproducts-slider__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 749.98px) {
+  .tc-newproducts-slider__head {
+    align-items: flex-start;
+  }
+}
+.tc-newproducts-slider__head-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.tc-newproducts-slider__title {
+  font-family: "Inria Serif", serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--clr-green);
+  margin: 0 0 14px;
+}
+
+.tc-newproducts-slider__subtitle {
+  color: var(--clr-green-2);
+  margin: 0;
+  max-width: 843px;
+}
+
+.tc-newproducts-slider {
+  /* Arrow buttons group — component .tc-slider-arrows is styled separately */
+}
+
+.tc-newproducts-slider__arrows {
+  flex-shrink: 0;
+  padding-bottom: 4px;
+}
+
+@media (max-width: 749.98px) {
+  .tc-newproducts-slider__arrows {
+    display: none;
+  }
+}
+.tc-newproducts-slider {
+  /* ── Splide wrapper ── */
+}
+
+.tc-newproducts-slider__splide .splide__track {
+  overflow: hidden;
+}
+
+.tc-newproducts-slider__splide .splide__list {
+  align-items: stretch;
+}
+
+.tc-newproducts-slider__splide .splide__slide {
+  height: auto;
+}
+
+.tc-newproducts-slider {
+  /* ── Pagination — position below slider ── */
+}
+
+.tc-newproducts-slider__pagination {
+  margin-top: 32px !important;
+  position: static !important;
+  transform: none !important;
+  justify-content: center;
+  width: 100%;
+  --clr-pagination: var(--clr-green-2);
+  --clr-pagination-dot: var(--clr-gray);
+}
+
+@media (max-width: 749.98px) {
+  .tc-newproducts-slider__pagination {
+    margin-top: 24px;
+  }
+}
 .breadcrumbs-wrapper {
   position: relative;
 }
@@ -14782,7 +15008,6 @@ body:not(.page-index) .sticky-bar__text {
   flex-direction: column;
   height: 100%;
   position: relative;
-  /* ── Image area ── */
 }
 
 .product-tile__image-link {
@@ -14824,16 +15049,8 @@ body:not(.page-index) .sticky-bar__text {
   opacity: 1;
 }
 
-.product-tile {
-  /* Gentle slow shrink on hover — no box-shadow */
-}
-
 .product-tile:hover .product-tile__image {
   transform: scale(0.92);
-}
-
-.product-tile {
-  /* Badge — top-left overlay (Figma: #414f42 bg, #f8f3dd text, pill) */
 }
 
 .product-tile__badge {
@@ -14872,10 +15089,6 @@ body:not(.page-index) .sticky-bar__text {
   color: var(--clr-white);
 }
 
-.product-tile {
-  /* ── Content area ── */
-}
-
 .product-tile__body {
   padding: 30px 30px 26px;
   display: flex;
@@ -14887,10 +15100,6 @@ body:not(.page-index) .sticky-bar__text {
 .product-tile__name-link {
   display: block;
   text-decoration: none;
-}
-
-.product-tile {
-  /* Figma: 16px Bold #1a1a1a */
 }
 
 .product-tile__name {
@@ -14908,19 +15117,11 @@ body:not(.page-index) .sticky-bar__text {
   color: var(--clr-green);
 }
 
-.product-tile {
-  /* Price row: price + optional discount badge */
-}
-
 .product-tile__price-row {
   display: flex;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-}
-
-.product-tile {
-  /* Figma: 24px Inria Serif Regular #414f42 */
 }
 
 .product-tile__price {
@@ -14930,10 +15131,6 @@ body:not(.page-index) .sticky-bar__text {
   line-height: 1.2;
   color: var(--clr-green);
   white-space: nowrap;
-}
-
-.product-tile {
-  /* Figma: "-260,00 zł" — rgba(186,194,183,0.2) bg, #79897e text, r=10px */
 }
 
 .product-tile__discount-badge {
@@ -14950,10 +15147,6 @@ body:not(.page-index) .sticky-bar__text {
   letter-spacing: 0;
   color: var(--clr-green-2);
   white-space: nowrap;
-}
-
-.product-tile {
-  /* Omnibus directive output (omnibuseufree module) — override module CSS */
 }
 
 .product-tile__omnibus-wrap .presta-studio-price-history {

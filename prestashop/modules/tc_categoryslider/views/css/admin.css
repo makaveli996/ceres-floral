@@ -1,0 +1,37 @@
+/**
+ * Admin styles for tc_categoryslider BO configuration form.
+ * Loaded by tc_categoryslider::getContent().
+ */
+.tc-cs-admin__item {
+  margin-bottom: 16px;
+}
+
+.tc-cs-admin__item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tc-cs-admin__item-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.tc-cs-admin__preview {
+  margin-bottom: 10px;
+}
+
+.tc-cs-admin__preview img {
+  max-width: 200px;
+  max-height: 120px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: block;
+}
+
+[data-tc-cs-add] {
+  margin-top: 12px;
+}

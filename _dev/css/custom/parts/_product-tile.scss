@@ -15,7 +15,7 @@
   height: 100%;
   position: relative;
 
-  /* ── Image area ── */
+  // ── Image area ──
   &__image-link {
     display: block;
     text-decoration: none;
@@ -54,12 +54,12 @@
     opacity: 1;
   }
 
-  /* Gentle slow shrink on hover — no box-shadow */
+  // Gentle slow shrink on hover — no box-shadow
   &:hover &__image {
     transform: scale(0.92);
   }
 
-  /* Badge — top-left overlay (Figma: #414f42 bg, #f8f3dd text, pill) */
+  // Badge — top-left overlay (Figma: #414f42 bg, #f8f3dd text, pill)
   &__badge {
     position: absolute;
     top: 17px;
@@ -92,7 +92,7 @@
     }
   }
 
-  /* ── Content area ── */
+  // ── Content area ──
   &__body {
     padding: 30px 30px 26px;
     display: flex;
@@ -106,7 +106,7 @@
     text-decoration: none;
   }
 
-  /* Figma: 16px Bold #1a1a1a */
+  // Figma: 16px Bold #1a1a1a
   &__name {
     @include body-bold;
     color: var(--clr-black-2);
@@ -118,7 +118,7 @@
     }
   }
 
-  /* Price row: price + optional discount badge */
+  // Price row: price + optional discount badge
   &__price-row {
     display: flex;
     align-items: center;
@@ -126,7 +126,7 @@
     flex-wrap: wrap;
   }
 
-  /* Figma: 24px Inria Serif Regular #414f42 */
+  // Figma: 24px Inria Serif Regular #414f42
   &__price {
     font-family: "Inria Serif", serif;
     font-weight: 400;
@@ -136,7 +136,7 @@
     white-space: nowrap;
   }
 
-  /* Figma: "-260,00 zł" — rgba(186,194,183,0.2) bg, #79897e text, r=10px */
+  // Figma: "-260,00 zł" — rgba(186,194,183,0.2) bg, #79897e text, r=10px
   &__discount-badge {
     display: inline-flex;
     align-items: center;
@@ -149,7 +149,7 @@
     white-space: nowrap;
   }
 
-  /* Omnibus directive output (omnibuseufree module) — override module CSS */
+  // Omnibus directive output (omnibuseufree module) — override module CSS
   &__omnibus-wrap {
     .presta-studio-price-history {
       margin: 0;
