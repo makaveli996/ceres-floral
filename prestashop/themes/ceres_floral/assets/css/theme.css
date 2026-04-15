@@ -14943,6 +14943,149 @@ body:not(.page-index) .sticky-bar__text {
     margin-top: 24px;
   }
 }
+/**
+ * Content Rows section — alternating text+image repeater. Figma nodes 240:2490 / 240:2502.
+ * Used by: tc_contentrows/views/templates/hook/displayHome.tpl.
+ * Layout: two-column grid (1fr 1fr), alternates text-left/image-right and image-left/text-right.
+ * Background: --clr-gray; content wrapped in container-md.
+ */
+.tc-content-rows {
+  background: var(--clr-gray);
+  padding: 80px 0 126px;
+}
+
+@media (max-width: 991.98px) {
+  .tc-content-rows {
+    padding: 50px 0;
+  }
+}
+.tc-content-rows__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 92px;
+}
+
+@media (max-width: 991.98px) {
+  .tc-content-rows__rows {
+    gap: 50px;
+  }
+}
+.tc-content-rows__row {
+  display: grid;
+  grid-template-columns: minmax(0, 488px) 1fr;
+  gap: 122px;
+  align-items: center;
+}
+
+@media (max-width: 991.98px) {
+  .tc-content-rows__row {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+.tc-content-rows__row--reversed {
+  grid-template-columns: 1fr minmax(0, 488px);
+}
+
+.tc-content-rows__row--reversed .tc-content-rows__content {
+  order: 2;
+}
+
+.tc-content-rows__row--reversed .tc-content-rows__media {
+  order: 1;
+}
+
+.tc-content-rows__row--reversed .tc-content-rows__media::before {
+  content: "";
+  position: absolute;
+  right: auto;
+  top: -7px;
+  left: -139px;
+}
+
+@media (max-width: 991.98px) {
+  .tc-content-rows__row--reversed {
+    grid-template-columns: 1fr;
+  }
+  .tc-content-rows__row--reversed .tc-content-rows__content {
+    order: 1;
+  }
+  .tc-content-rows__row--reversed .tc-content-rows__media {
+    order: 2;
+  }
+}
+.tc-content-rows__content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.tc-content-rows__title {
+  font-family: "Inria Serif", serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@media (max-width: 991.98px) {
+  .tc-content-rows__title {
+    font-size: 32px;
+  }
+}
+.tc-content-rows__title {
+  color: var(--clr-green);
+  margin: 0;
+}
+
+.tc-content-rows__description {
+  font-family: "Wix Madefor Display", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--clr-black-2);
+}
+
+.tc-content-rows__description p, .tc-content-rows__description .page-content.page-cms ul, .page-content.page-cms .tc-content-rows__description ul {
+  margin: 0;
+}
+
+.tc-content-rows__description p + p, .tc-content-rows__description .page-content.page-cms ul + p, .page-content.page-cms .tc-content-rows__description ul + p, .tc-content-rows__description .page-content.page-cms p + ul, .page-content.page-cms .tc-content-rows__description p + ul, .tc-content-rows__description .page-content.page-cms ul + ul, .page-content.page-cms .tc-content-rows__description ul + ul {
+  margin-top: 1em;
+}
+
+.tc-content-rows__cta {
+  display: flex;
+}
+
+.tc-content-rows__media {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.tc-content-rows__media::before {
+  content: "";
+  position: absolute;
+  width: 540px;
+  height: 460px;
+  background-image: url("../img/leaves.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  pointer-events: none;
+  z-index: -1;
+  right: -99px;
+  top: 114px;
+}
+
+.tc-content-rows__image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .breadcrumbs-wrapper {
   position: relative;
 }

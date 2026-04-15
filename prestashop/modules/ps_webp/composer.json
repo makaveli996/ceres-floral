@@ -1,0 +1,17 @@
+{
+    "name": "meblowosk/ps_webp",
+    "description": "Serves images as WebP when the browser supports it (product images, module uploads). Requires Apache rewrite configuration.",
+    "type": "prestashop-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Meblowosk"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "config": {
+        "prepend-autoloader": false
+    }
+}

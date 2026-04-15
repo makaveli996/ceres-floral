@@ -1,0 +1,126 @@
+/**
+ * Content Rows section — alternating text+image repeater. Figma nodes 240:2490 / 240:2502.
+ * Used by: tc_contentrows/views/templates/hook/displayHome.tpl.
+ * Layout: two-column grid (1fr 1fr), alternates text-left/image-right and image-left/text-right.
+ * Background: --clr-gray; content wrapped in container-md.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-content-rows {
+  background: var(--clr-gray);
+  padding: 80px 0 126px;
+
+  @include md(lg) {
+    padding: 50px 0;
+  }
+
+  &__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 92px;
+
+    @include md(lg) {
+      gap: 50px;
+    }
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: minmax(0, 488px) 1fr;
+    gap: 122px;
+    align-items: center;
+
+    @include md(lg) {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    // Even-indexed rows: image left, text right
+    &--reversed {
+      grid-template-columns: 1fr minmax(0, 488px);
+
+      .tc-content-rows__content {
+        order: 2;
+      }
+
+      .tc-content-rows__media {
+        order: 1;
+
+        &::before {
+          content: "";
+          position: absolute;
+          right: auto;
+          top: -7px;
+          left: -139px;
+        }
+      }
+
+      @include md(lg) {
+        grid-template-columns: 1fr;
+
+        .tc-content-rows__content {
+          order: 1;
+        }
+
+        .tc-content-rows__media {
+          order: 2;
+        }
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__title {
+    @include heading-2-regular;
+    color: var(--clr-green);
+    margin: 0;
+  }
+
+  &__description {
+    @include body-regular;
+    color: var(--clr-black-2);
+
+    p {
+      margin: 0;
+
+      & + p {
+        margin-top: 1em;
+      }
+    }
+  }
+
+  &__cta {
+    display: flex;
+  }
+
+  &__media {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 540px;
+      height: 460px;
+      background-image: url("../img/leaves.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      pointer-events: none;
+      z-index: -1;
+      right: -99px;
+      top: 114px;
+    }
+  }
+
+  &__image {
+    @include img-fluid;
+  }
+}

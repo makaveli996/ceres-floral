@@ -1,0 +1,37 @@
+/**
+ * Admin styles for tc_contentrows BO configuration form.
+ * Loaded by tc_contentrows::getContent().
+ */
+.tc-cr-admin__item {
+  margin-bottom: 16px;
+}
+
+.tc-cr-admin__item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tc-cr-admin__item-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.tc-cr-admin__preview {
+  margin-bottom: 10px;
+}
+
+.tc-cr-admin__preview img {
+  max-width: 200px;
+  max-height: 160px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: block;
+}
+
+[data-tc-cr-add] {
+  margin-top: 12px;
+}

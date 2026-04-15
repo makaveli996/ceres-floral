@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>ps_webp</name>
+    <displayName><![CDATA[Global WebP delivery]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[Serves images as WebP when the browser supports it (product images, module uploads). Requires Apache rewrite configuration.]]></description>
+    <author><![CDATA[Meblowosk]]></author>
+    <tab><![CDATA[administration]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+</module>
