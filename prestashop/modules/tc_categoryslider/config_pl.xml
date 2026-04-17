@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>tc_categoryslider</name>
     <displayName><![CDATA[Slider kategorii]]></displayName>
     <version><![CDATA[1.0.0]]></version>
-    <description><![CDATA[Wyświetla repeatera segmentów kategorii na stronie głównej — każdy segment to panel z obrazkiem i slider produktów z wybranej kategorii.]]></description>
+    <description><![CDATA[Wyświetla repeatera segment&oacute;w kategorii na stronie gł&oacute;wnej &mdash; każdy segment to panel z obrazkiem i slider produkt&oacute;w.]]></description>
     <author><![CDATA[Rafal Majdan]]></author>
     <tab><![CDATA[front_office_features]]></tab>
     <is_configurable>1</is_configurable>
     <need_instance>0</need_instance>
-    <limited_countries></limited_countries>
 </module>

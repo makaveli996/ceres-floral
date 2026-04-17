@@ -8,10 +8,6 @@
 @use "../base" as *;
 @use "../utils" as *;
 
-$is-img-big: 285px;
-$is-img-medium: 183px;
-$is-img-small: 81px;
-
 // ── Section ─────────────────────────────────────────────────────────────────
 .tc-imagecta {
   margin: 88px 0 83px;
@@ -33,7 +29,7 @@ $is-img-small: 81px;
 
     @include md(lg) {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 60px;
     }
   }
 
@@ -46,6 +42,10 @@ $is-img-small: 81px;
     }
     &--right {
       justify-content: flex-start;
+
+      @include md(lg) {
+        display: none;
+      }
     }
 
     @include md(lg) {
@@ -56,36 +56,35 @@ $is-img-small: 81px;
   // ── Big image — positioning anchor for the two small images ────────────────
   &__img-big {
     position: relative;
-    width: $is-img-big;
-    height: $is-img-big;
+    width: 285px;
+    height: 285px;
     flex-shrink: 0;
     box-shadow: 0px 20px 32px 0px rgba(186, 194, 183, 0.3);
 
     &__photo {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      @include img-cover;
+    }
+
+    @include md(xxl) {
+      width: 180px;
+      height: 180px;
     }
 
     @include md(lg) {
-      width: min($is-img-big, 100%);
+      width: 200px;
     }
   }
 
   // ── Small image (top corner) — absolute relative to big ────────────────────
   &__img-small {
     position: absolute;
-    width: $is-img-small;
-    height: $is-img-small;
+    width: 81px;
+    height: 81px;
     overflow: hidden;
     box-shadow: 0px 8px 9px 1px rgba(186, 194, 183, 0.3);
 
     img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      @include img-cover;
     }
 
     &--top {
@@ -106,16 +105,18 @@ $is-img-small: 81px;
   // ── Medium image (bottom) — absolute relative to big ──────────────────────
   &__img-medium {
     position: absolute;
-    width: $is-img-medium;
-    height: $is-img-medium;
+    width: 183px;
+    height: 183px;
     overflow: hidden;
     box-shadow: 0px 14px 20px 0px rgba(186, 194, 183, 0.3);
 
     img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      @include img-cover;
+    }
+
+    @include md(xxl) {
+      width: 120px;
+      height: 120px;
     }
 
     // Left column: bottom-right of big (sticks out right and below)
@@ -150,6 +151,10 @@ $is-img-small: 81px;
     @include heading-2-regular;
     color: var(--clr-green);
     margin: 0 0 44px;
+
+    @include md(lg) {
+      margin: 0 0 20px;
+    }
   }
 
   &__description {
@@ -157,6 +162,10 @@ $is-img-small: 81px;
     color: var(--clr-black-2);
     max-width: 386px;
     margin: 0 0 31px;
+
+    @include md(lg) {
+      margin: 0 0 20px;
+    }
   }
 
   &__cta {

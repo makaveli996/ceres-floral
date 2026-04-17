@@ -4,6 +4,7 @@ import initHomePromoSlider from "./Sections/HomePromoSlider";
 import initProductSlider from "./Sections/ProductSlider";
 import initCategorySlider from "./Sections/CategorySlider";
 import initQuickAddModal from "./Sections/QuickAddModal";
+import initLocationSlider from "./Sections/LocationSlider";
 
 function runWhenReady(fn) {
   if (document.readyState === "loading") {
@@ -19,3 +20,4 @@ runWhenReady(initHomePromoSlider);
 runWhenReady(initProductSlider);
 runWhenReady(initCategorySlider);
 runWhenReady(initQuickAddModal);
+runWhenReady(initLocationSlider);

@@ -3871,6 +3871,61 @@ function initHomePromoSlider() {
 
 /***/ },
 
+/***/ "./_dev/js/custom/Sections/LocationSlider.js"
+/*!***************************************************!*\
+  !*** ./_dev/js/custom/Sections/LocationSlider.js ***!
+  \***************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @splidejs/splide */ "./node_modules/@splidejs/splide/dist/js/splide.esm.js");
+/**
+ * Location Slider — Splide init for the showroom image slider.
+ * Target: section with [data-tc-location-slider] → finds first .splide inside.
+ * Custom arrow: binds [data-slider-next] to splide.go('>') — next only, per design.
+ * Called from _dev/js/custom/theme.js via runWhenReady(initLocationSlider).
+ */
+
+var DATA_INITED = "data-tc-location-slider-inited";
+function initLocationSlider() {
+  var roots = document.querySelectorAll("[data-tc-location-slider]");
+  roots.forEach(function (root) {
+    if (root.getAttribute(DATA_INITED) === "true") return;
+    root.setAttribute(DATA_INITED, "true");
+    var splideEl = root.querySelector(".splide");
+    if (!splideEl || splideEl.querySelectorAll(".splide__slide").length === 0) {
+      return;
+    }
+    var splide = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__["default"](splideEl, {
+      type: "loop",
+      perPage: 2,
+      perMove: 1,
+      gap: "16px",
+      arrows: false,
+      pagination: false,
+      autoplay: false,
+      drag: true,
+      breakpoints: {
+        768: {
+          perPage: 1
+        }
+      }
+    });
+    splide.mount();
+    var nextBtn = root.querySelector("[data-slider-next]");
+    if (nextBtn) nextBtn.addEventListener("click", function () {
+      return splide.go(">");
+    });
+  });
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initLocationSlider);
+
+/***/ },
+
 /***/ "./_dev/js/custom/Sections/MenuSticky.js"
 /*!***********************************************!*\
   !*** ./_dev/js/custom/Sections/MenuSticky.js ***!
@@ -4582,6 +4637,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Sections_ProductSlider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Sections/ProductSlider */ "./_dev/js/custom/Sections/ProductSlider.js");
 /* harmony import */ var _Sections_CategorySlider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Sections/CategorySlider */ "./_dev/js/custom/Sections/CategorySlider.js");
 /* harmony import */ var _Sections_QuickAddModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Sections/QuickAddModal */ "./_dev/js/custom/Sections/QuickAddModal.js");
+/* harmony import */ var _Sections_LocationSlider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Sections/LocationSlider */ "./_dev/js/custom/Sections/LocationSlider.js");
+
 
 
 
@@ -4601,6 +4658,7 @@ runWhenReady(_Sections_HomePromoSlider__WEBPACK_IMPORTED_MODULE_2__["default"]);
 runWhenReady(_Sections_ProductSlider__WEBPACK_IMPORTED_MODULE_3__["default"]);
 runWhenReady(_Sections_CategorySlider__WEBPACK_IMPORTED_MODULE_4__["default"]);
 runWhenReady(_Sections_QuickAddModal__WEBPACK_IMPORTED_MODULE_5__["default"]);
+runWhenReady(_Sections_LocationSlider__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
 /***/ },
 

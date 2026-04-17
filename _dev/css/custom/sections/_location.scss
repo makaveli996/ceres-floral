@@ -1,0 +1,156 @@
+/**
+ * Location section — showroom with Google Maps iframe (left) and image slider + address (right).
+ * Used by: tc_location/views/templates/hook/displayHome.tpl.
+ * JS: data-tc-location-slider → _dev/js/custom/Sections/LocationSlider.js
+ * Layout: two-column flex on desktop, stacked on mobile (map on top).
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.tc-location {
+  margin: 80px 0;
+
+  @include md(lg) {
+    margin: 60px 0;
+  }
+
+  // ── Inner two-column layout ───────────────────────────────────────────────
+  &__inner {
+    display: flex;
+    align-items: stretch;
+
+    @include md(lg) {
+      flex-direction: column;
+    }
+  }
+
+  // ── Left column: map iframe ───────────────────────────────────────────────
+  &__map {
+    flex: 0 0 50%;
+    min-height: 540px;
+    overflow: hidden;
+
+    @include md(xl) {
+      flex: 0 0 45%;
+    }
+
+    @include md(lg) {
+      flex: none;
+      min-height: 340px;
+    }
+
+    @include md(sm) {
+      min-height: 260px;
+    }
+  }
+
+  &__map-frame {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    min-height: inherit;
+  }
+
+  // ── Right column: title + slider + address ────────────────────────────────
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 82px 64px 122px;
+    background-color: var(--clr-gray-2);
+
+    @include md(xl) {
+      padding: 48px 40px;
+    }
+
+    @include md(lg) {
+      padding: 48px 24px;
+    }
+
+    @include md(sm) {
+      padding: 40px 16px;
+    }
+  }
+
+  &__title {
+    @include heading-2-regular;
+    color: var(--clr-green);
+    margin: 0 0 32px;
+
+    @include md(lg) {
+      margin-bottom: 24px;
+    }
+  }
+
+  // ── Slider ────────────────────────────────────────────────────────────────
+  &__slider-wrap {
+    position: relative;
+    margin-bottom: 32px;
+
+    @include md(lg) {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__splide {
+    overflow: hidden;
+  }
+
+  &__slide-img {
+    display: block;
+    width: 100%;
+    height: 265px;
+    object-fit: cover;
+
+    @include md(sm) {
+      height: 220px;
+    }
+  }
+
+  // ── Arrow button — positioned at right edge of slider ─────────────────────
+  &__arrow {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+
+    @include md(sm) {
+      right: 8px;
+    }
+  }
+
+  // ── Address block ─────────────────────────────────────────────────────────
+  &__address-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__address {
+    @include sign-bold;
+    color: var(--clr-black);
+    margin: 0;
+  }
+
+  // ── Google Maps navigation link ───────────────────────────────────────────
+  &__maps-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--clr-black);
+    text-decoration: none;
+
+    @include body-regular;
+
+    &:hover {
+      color: var(--clr-green);
+    }
+  }
+
+  &__maps-link-icon {
+    flex-shrink: 0;
+  }
+}

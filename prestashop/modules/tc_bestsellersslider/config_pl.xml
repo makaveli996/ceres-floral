@@ -3,9 +3,9 @@
     <name>tc_bestsellersslider</name>
     <displayName><![CDATA[Bestsellery slider]]></displayName>
     <version><![CDATA[1.0.0]]></version>
-    <description><![CDATA[Wyświetla sekcję &bdquo;Bestsellery&rdquo; na stronie gł&oacute;wnej jako slider Splide z bestsellerami.]]></description>
+    <description><![CDATA[Wyświetla sekcję &bdquo;Najczęściej kupowane&quot; na stronie gł&oacute;wnej jako slider Splide z bestsellerami.]]></description>
     <author><![CDATA[Rafal Majdan]]></author>
     <tab><![CDATA[front_office_features]]></tab>
-    <is_configurable>0</is_configurable>
+    <is_configurable>1</is_configurable>
     <need_instance>0</need_instance>
 </module>

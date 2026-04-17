@@ -1,0 +1,204 @@
+/**
+ * Newsletter banner section — full-width sage-green block with email subscription form.
+ * Used by: ps_emailsubscription theme override (ceres_floral/modules/ps_emailsubscription/.../hook/).
+ * Layout: container-md; left column = headline + form, right column = decorative image.
+ * Colors: background --clr-green-2 (#79897e), text --clr-gray-2 (#fffdf6), btn --clr-green (#414f42).
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+.newsletter-banner {
+  padding-top: 58px;
+  margin-bottom: 68px;
+
+  // ── Inner layout ──────────────────────────────────────────────────────────
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 100px 68px;
+    position: relative;
+    background-color: var(--clr-green-2);
+
+    @include md(lg) {
+      padding: 56px 0 48px;
+      gap: 32px;
+    }
+
+    @include md(md) {
+      flex-direction: column;
+      padding: 48px 0 40px;
+      gap: 32px;
+    }
+  }
+
+  // ── Left: content ─────────────────────────────────────────────────────────
+  &__content {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @include md(md) {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    @include heading-2-bold;
+    color: var(--clr-gray-2);
+    margin: 0;
+
+    @include md(lg) {
+      font-size: 36px;
+    }
+
+    @include md(md) {
+      font-size: 28px;
+    }
+  }
+
+  // ── Form ──────────────────────────────────────────────────────────────────
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    @include md(sm) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  &__input-wrap {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  &__input {
+    @include body-regular;
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    background: var(--clr-gray-2);
+    border: 1px solid var(--clr-gray-2);
+    border-radius: 5px;
+    color: var(--clr-black-2);
+    outline: none;
+    appearance: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+      color: var(--clr-black-2);
+      opacity: 0.55;
+    }
+
+    &:focus {
+      border-color: var(--clr-green);
+    }
+  }
+
+  // ── Submit button overrides ────────────────────────────────────────────────
+  // button--green already sets bg + text color; override arrow SVG fill to white
+  &__btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+
+    svg path {
+      fill: var(--clr-white);
+    }
+
+    &:hover svg path {
+      fill: var(--clr-white);
+    }
+
+    @include md(sm) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  // ── Alerts (success / error) ──────────────────────────────────────────────
+  &__alert {
+    @include sign-regular;
+    padding: 10px 14px;
+    border-radius: 5px;
+    margin: 0;
+
+    &--error {
+      background: rgba(#c0392b, 0.15);
+      color: #ffcdd2;
+      border: 1px solid rgba(#c0392b, 0.3);
+    }
+
+    &--success {
+      background: rgba(var(--clr-gray-2), 0.15);
+      color: var(--clr-gray-2);
+      border: 1px solid rgba(var(--clr-gray-2), 0.3);
+    }
+  }
+
+  // ── GDPR / conditions ─────────────────────────────────────────────────────
+  &__gdpr {
+    @include sign-regular;
+    color: var(--clr-gray-2);
+    opacity: 0.85;
+
+    // psgdpr checkbox + label
+    label {
+      color: var(--clr-gray-2);
+      cursor: pointer;
+    }
+
+    a {
+      color: var(--clr-gray-2);
+      text-decoration: underline;
+
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+  }
+
+  &__conditions {
+    @include sign-regular;
+    color: var(--clr-gray-2);
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  // ── Right: decorative image ───────────────────────────────────────────────
+  &__image {
+    flex-shrink: 0;
+    width: 430px;
+    align-self: flex-end;
+    margin-bottom: -72px;
+
+    @include md(xl) {
+      width: 340px;
+    }
+
+    @include md(lg) {
+      width: 260px;
+      margin-bottom: -56px;
+    }
+
+    @include md(md) {
+      display: none;
+    }
+
+    img {
+      @include img-fluid;
+      // The bouquet in Figma is flipped vertically — appears to grow upward from the bottom
+      transform: rotate(180deg) scaleY(-1);
+      transform-origin: bottom center;
+    }
+  }
+}
