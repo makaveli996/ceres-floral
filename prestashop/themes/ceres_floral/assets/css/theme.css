@@ -15427,6 +15427,182 @@ body:not(.page-index) .sticky-bar__text {
   display: block;
 }
 
+/**
+ * Image CTA section — heading, description, CTA button, mosaic image groups on both sides.
+ * Used by: tc_imagecta/views/templates/hook/displayHome.tpl.
+ * Layout: 3-column grid (left images | center text+CTA | right images).
+ * Left/right: 1 big image (285 × 285 px) with 2 small images absolutely positioned relative to it.
+ * Background: --clr-gray-2; content wrapped in container-md.
+ */
+.tc-imagecta {
+  margin: 88px 0 83px;
+}
+
+@media (max-width: 991.98px) {
+  .tc-imagecta {
+    margin: 60px 0;
+  }
+}
+.tc-imagecta__layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 560px) 1fr;
+  align-items: center;
+  gap: 40px;
+}
+
+@media (max-width: 1199.98px) {
+  .tc-imagecta__layout {
+    grid-template-columns: 1fr minmax(0, 460px) 1fr;
+    gap: 24px;
+  }
+}
+@media (max-width: 991.98px) {
+  .tc-imagecta__layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+.tc-imagecta__col {
+  display: flex;
+}
+
+.tc-imagecta__col--left {
+  justify-content: flex-end;
+}
+
+.tc-imagecta__col--right {
+  justify-content: flex-start;
+}
+
+@media (max-width: 991.98px) {
+  .tc-imagecta__col {
+    justify-content: center;
+  }
+}
+.tc-imagecta__img-big {
+  position: relative;
+  width: 285px;
+  height: 285px;
+  flex-shrink: 0;
+  box-shadow: 0px 20px 32px 0px rgba(186, 194, 183, 0.3);
+}
+
+.tc-imagecta__img-big__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (max-width: 991.98px) {
+  .tc-imagecta__img-big {
+    width: min(285px, 100%);
+  }
+}
+.tc-imagecta__img-small {
+  position: absolute;
+  width: 81px;
+  height: 81px;
+  overflow: hidden;
+  box-shadow: 0px 8px 9px 1px rgba(186, 194, 183, 0.3);
+}
+
+.tc-imagecta__img-small img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.tc-imagecta__col--left .tc-imagecta__img-small--top {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.tc-imagecta__col--right .tc-imagecta__img-small--top {
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.tc-imagecta__img-medium {
+  position: absolute;
+  width: 183px;
+  height: 183px;
+  overflow: hidden;
+  box-shadow: 0px 14px 20px 0px rgba(186, 194, 183, 0.3);
+}
+
+.tc-imagecta__img-medium img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.tc-imagecta__img-medium--right {
+  bottom: 0;
+  right: 0;
+  transform: translate(50%, 35%);
+}
+
+.tc-imagecta__img-medium--left {
+  bottom: 0;
+  left: 0;
+  transform: translate(-50%, 35%);
+}
+
+.tc-imagecta__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+@media (max-width: 991.98px) {
+  .tc-imagecta__center {
+    order: -1;
+    padding: 0;
+  }
+}
+.tc-imagecta__title {
+  font-family: "Inria Serif", serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@media (max-width: 991.98px) {
+  .tc-imagecta__title {
+    font-size: 32px;
+  }
+}
+.tc-imagecta__title {
+  color: var(--clr-green);
+  margin: 0 0 44px;
+}
+
+.tc-imagecta__description {
+  font-family: "Wix Madefor Display", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--clr-black-2);
+  max-width: 386px;
+  margin: 0 0 31px;
+}
+
+.tc-imagecta__cta {
+  display: flex;
+  justify-content: center;
+}
+
 .breadcrumbs-wrapper {
   position: relative;
 }

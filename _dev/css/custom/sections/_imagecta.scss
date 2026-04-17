@@ -1,0 +1,166 @@
+/**
+ * Image CTA section — heading, description, CTA button, mosaic image groups on both sides.
+ * Used by: tc_imagecta/views/templates/hook/displayHome.tpl.
+ * Layout: 3-column grid (left images | center text+CTA | right images).
+ * Left/right: 1 big image (285 × 285 px) with 2 small images absolutely positioned relative to it.
+ * Background: --clr-gray-2; content wrapped in container-md.
+ */
+@use "../base" as *;
+@use "../utils" as *;
+
+$is-img-big: 285px;
+$is-img-medium: 183px;
+$is-img-small: 81px;
+
+// ── Section ─────────────────────────────────────────────────────────────────
+.tc-imagecta {
+  margin: 88px 0 83px;
+
+  @include md(lg) {
+    margin: 60px 0;
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 560px) 1fr;
+    align-items: center;
+    gap: 40px;
+
+    @include md(xl) {
+      grid-template-columns: 1fr minmax(0, 460px) 1fr;
+      gap: 24px;
+    }
+
+    @include md(lg) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  // ── Image columns ──────────────────────────────────────────────────────────
+  &__col {
+    display: flex;
+
+    &--left {
+      justify-content: flex-end;
+    }
+    &--right {
+      justify-content: flex-start;
+    }
+
+    @include md(lg) {
+      justify-content: center;
+    }
+  }
+
+  // ── Big image — positioning anchor for the two small images ────────────────
+  &__img-big {
+    position: relative;
+    width: $is-img-big;
+    height: $is-img-big;
+    flex-shrink: 0;
+    box-shadow: 0px 20px 32px 0px rgba(186, 194, 183, 0.3);
+
+    &__photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @include md(lg) {
+      width: min($is-img-big, 100%);
+    }
+  }
+
+  // ── Small image (top corner) — absolute relative to big ────────────────────
+  &__img-small {
+    position: absolute;
+    width: $is-img-small;
+    height: $is-img-small;
+    overflow: hidden;
+    box-shadow: 0px 8px 9px 1px rgba(186, 194, 183, 0.3);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &--top {
+      .tc-imagecta__col--left & {
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+      }
+
+      .tc-imagecta__col--right & {
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+      }
+    }
+  }
+
+  // ── Medium image (bottom) — absolute relative to big ──────────────────────
+  &__img-medium {
+    position: absolute;
+    width: $is-img-medium;
+    height: $is-img-medium;
+    overflow: hidden;
+    box-shadow: 0px 14px 20px 0px rgba(186, 194, 183, 0.3);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    // Left column: bottom-right of big (sticks out right and below)
+    &--right {
+      bottom: 0;
+      right: 0;
+      transform: translate(50%, 35%);
+    }
+
+    // Right column: bottom-left of big (sticks out left and below)
+    &--left {
+      bottom: 0;
+      left: 0;
+      transform: translate(-50%, 35%);
+    }
+  }
+
+  // ── Center content ─────────────────────────────────────────────────────────
+  &__center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    @include md(lg) {
+      order: -1;
+      padding: 0;
+    }
+  }
+
+  &__title {
+    @include heading-2-regular;
+    color: var(--clr-green);
+    margin: 0 0 44px;
+  }
+
+  &__description {
+    @include body-regular;
+    color: var(--clr-black-2);
+    max-width: 386px;
+    margin: 0 0 31px;
+  }
+
+  &__cta {
+    display: flex;
+    justify-content: center;
+  }
+}
