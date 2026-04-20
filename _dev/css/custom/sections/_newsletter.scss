@@ -11,6 +11,10 @@
   padding-top: 58px;
   margin-bottom: 68px;
 
+  @include md(lg) {
+    margin: 40px 0;
+  }
+
   // ── Inner layout ──────────────────────────────────────────────────────────
   &__inner {
     display: flex;

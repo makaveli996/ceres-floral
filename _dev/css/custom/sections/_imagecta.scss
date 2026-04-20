@@ -71,7 +71,13 @@
     }
 
     @include md(lg) {
+      width: 350px;
+      height: 350px;
+    }
+
+    @include md(md) {
       width: 200px;
+      height: 200px;
     }
   }
 
@@ -100,6 +106,16 @@
         transform: translate(50%, -50%);
       }
     }
+
+    @include md(lg) {
+      width: 120px;
+      height: 120px;
+    }
+
+    @include md(md) {
+      width: 80px;
+      height: 80px;
+    }
   }
 
   // ── Medium image (bottom) — absolute relative to big ──────────────────────
@@ -115,6 +131,16 @@
     }
 
     @include md(xxl) {
+      width: 120px;
+      height: 120px;
+    }
+
+    @include md(lg) {
+      width: 180px;
+      height: 180px;
+    }
+
+    @include md(md) {
       width: 120px;
       height: 120px;
     }

@@ -54,7 +54,19 @@
               </div>
             </div>
 
-            {* Single "next" arrow — only right navigation per design *}
+            {* Mobile-only "prev" arrow *}
+            <button
+              class="tc-slider-arrows__btn tc-location__arrow tc-location__arrow--mobile-prev"
+              type="button"
+              data-slider-prev
+              aria-label="{l s='Poprzednie zdjęcie' d='Shop.Theme.Catalog'}"
+            >
+              <span class="tc-slider-arrows__icon" aria-hidden="true">
+                {include file='_partials/icon-chevron.tpl' direction='left'}
+              </span>
+            </button>
+
+            {* "next" arrow — desktop + mobile *}
             <button
               class="tc-slider-arrows__btn tc-location__arrow"
               type="button"

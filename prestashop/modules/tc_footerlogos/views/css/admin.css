@@ -1,0 +1,22 @@
+/**
+ * Admin styles for tc_footerlogos repeater panels.
+ */
+.tc-footerlogos-admin__item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tc-footerlogos-admin__preview {
+  margin-bottom: 8px;
+}
+
+.tc-footerlogos-admin__preview img {
+  max-height: 80px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tc-footerlogos-admin__repeater {
+  margin-bottom: 16px;
+}

@@ -498,3 +498,351 @@
     }
   }
 }
+
+#footer {
+  padding-top: 30px;
+  background: var(--clr-green);
+
+  @include md(lg) {
+    padding-top: 0;
+  }
+}
+
+/* Ceres Floral footer from Figma (node 240:2566), without background leaf element. */
+.footer-container.tc-footer {
+  color: var(--clr-gray);
+  padding: 11px 0 50px;
+  position: relative;
+  overflow: hidden;
+  background-image: url(../img/leaf-bg-footer.png);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: contain;
+
+  @include md(lg) {
+    padding: 30px 0 24px;
+  }
+}
+
+.tc-footer {
+  &__before,
+  &__after,
+  #blockEmailSubscription_displayFooterBefore,
+  #block-reassurance,
+  .block-contact,
+  #block_contact_infos,
+  .block-social {
+    display: none !important;
+  }
+
+  &__logo-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 38px;
+  }
+
+  &__line {
+    display: block;
+    height: 1px;
+    background: var(--clr-green-2);
+    opacity: 0.7;
+  }
+
+  &__logo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__logo {
+    @include img-fluid;
+    max-width: 205px;
+
+    @include md(lg) {
+      max-width: 172px;
+    }
+  }
+
+  &__logo-text {
+    @include sign-regular;
+    color: var(--clr-gray-2);
+  }
+
+  &__main {
+    display: grid;
+    grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+    gap: 40px 70px;
+  }
+
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  &__heading {
+    @include heading-4-bold;
+    color: var(--clr-gray-2);
+    margin-bottom: 11px;
+  }
+
+  &__text {
+    @include body-regular;
+    color: var(--clr-gray);
+    margin: 0 0 8px;
+  }
+
+  &__link {
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+
+  &__contact-main-item {
+    margin-bottom: 9px;
+  }
+
+  &__contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  &__label {
+    @include heading-4-bold;
+    color: var(--clr-gray-2);
+  }
+
+  &__mail {
+    @include heading-3-regular;
+    color: var(--clr-gray);
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+
+    &:hover {
+      text-decoration: underline !important;
+    }
+
+    &:before {
+      content: "";
+      width: 21px;
+      height: 19px;
+      flex-shrink: 0;
+      display: block;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2721%27%20height%3D%2719%27%20viewBox%3D%270%200%2021%2019%27%20fill%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20d%3D%27M16.1215%200H4.2425C3.11773%200%200.0013473%200.448756%201.24409%201.24409C0.448756%202.03942%200.0013473%203.11773%200%204.2425L0%2014.4245C0.0013473%2015.5493%200.448756%2016.6276%201.24409%2017.4229C2.03942%2018.2182%203.11773%2018.6656%204.2425%2018.667H16.1215C17.2463%2018.6656%2018.3246%2018.2182%2019.1199%2017.4229C19.9152%2016.6276%2020.3626%2015.5493%2020.364%2014.4245V4.2425C20.3626%203.11773%2019.9152%202.03942%2019.1199%201.24409C18.3246%200.448756%2017.2463%200.0013473%2016.1215%200ZM4.2425%201.697H16.1215C16.6296%201.698%2017.1257%201.85101%2017.5461%202.13636C17.9665%202.4217%2018.2918%202.82631%2018.4803%203.29812L11.9825%209.79678C11.5043%2010.2731%2010.8569%2010.5405%2010.182%2010.5405C9.50708%2010.5405%208.85967%2010.2731%208.38148%209.79678L1.88367%203.29812C2.07216%202.82631%202.39753%202.4217%202.81791%202.13636C3.23828%201.85101%203.73443%201.698%204.2425%201.697ZM16.1215%2016.97H4.2425C3.56739%2016.97%202.91993%2016.7018%202.44256%2016.2244C1.96518%2015.7471%201.697%2015.0996%201.697%2014.4245V5.51525L7.1817%2010.9966C7.97813%2011.791%209.0571%2012.2371%2010.182%2012.2371C11.3069%2012.2371%2012.3859%2011.791%2013.1823%2010.9966L18.667%205.51525V14.4245C18.667%2015.0996%2018.3988%2015.7471%2017.9214%2016.2244C17.4441%2016.7018%2016.7966%2016.97%2016.1215%2016.97Z%27%20fill%3D%27%23F8F3DD%27/%3E%3C/svg%3E");
+    }
+  }
+
+  &__links {
+    align-self: start;
+  }
+
+  &__divider {
+    height: 1px;
+    background: var(--clr-green-2);
+    margin: 40px 0 36px;
+
+    &--top {
+      margin-top: 50px;
+    }
+
+    @include md(lg) {
+      margin: 25px 0;
+    }
+  }
+
+  &__brands {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  &__brand-title {
+    @include sign-bold;
+    color: var(--clr-yellow);
+    margin-bottom: 21px;
+  }
+
+  &__brand-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  &__brand-group--delivery &__brand-list {
+    justify-content: flex-end;
+  }
+
+  &__brand-group--delivery {
+    .tc-footer__brand-title {
+      margin-bottom: 12px;
+    }
+
+    .tc-footer__brand-list {
+      gap: 22px;
+    }
+
+    .tc-footer__brand-item--logo img {
+      max-height: 36px;
+    }
+  }
+
+  &__brand-item {
+    @include sign-bold;
+    color: var(--clr-gray-2);
+    text-transform: none;
+  }
+
+  &__brand-item--logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0 !important;
+
+    img {
+      max-height: 26px;
+      width: auto;
+      display: block;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__copyright {
+    @include sign-regular;
+    color: var(--clr-gray);
+    margin: 0;
+  }
+
+  &__made-by {
+    @include sign-regular;
+    color: var(--clr-gray-2);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.tc-footer .footer-linklist {
+  display: block;
+  width: 100%;
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+  }
+}
+
+.tc-footer .footer-linkblock,
+.tc-footer #block_myaccount_infos {
+  grid-area: auto !important;
+
+  .h3,
+  h4,
+  .h4 {
+    @include heading-4-bold;
+    color: var(--clr-gray-2);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin: 0 0 10px;
+  }
+
+  a {
+    @include body-regular;
+    color: var(--clr-gray);
+    transition: color 0.2s ease;
+
+    &:hover {
+      text-decoration: underline !important;
+      color: var(--clr-gray) !important;
+    }
+  }
+
+  .title,
+  .collapse-icons {
+    display: none;
+  }
+
+  ul.collapse {
+    display: block;
+  }
+}
+
+.tc-footer__links {
+  // Undo legacy footer grid rules for module output inside displayFooter hook.
+  .row {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  [class*="col-"] {
+    max-width: none;
+    width: auto;
+    flex: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@include md(lg) {
+  .tc-footer {
+    &__logo-row {
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    &__main {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    &__mail {
+      font-size: 20px;
+    }
+
+    &__brands {
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    &__brand-group--delivery {
+      text-align: left;
+    }
+
+    &__brand-group--delivery &__brand-list {
+      justify-content: flex-start;
+    }
+
+    &__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .tc-footer .footer-linklist__row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

@@ -3886,7 +3886,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Location Slider — Splide init for the showroom image slider.
  * Target: section with [data-tc-location-slider] → finds first .splide inside.
- * Custom arrow: binds [data-slider-next] to splide.go('>') — next only, per design.
+ * Custom arrows: next on all viewports, prev only rendered on mobile in template.
  * Called from _dev/js/custom/theme.js via runWhenReady(initLocationSlider).
  */
 
@@ -3907,7 +3907,7 @@ function initLocationSlider() {
       gap: "16px",
       arrows: false,
       pagination: false,
-      autoplay: false,
+      autoplay: true,
       drag: true,
       breakpoints: {
         768: {
@@ -3916,6 +3916,10 @@ function initLocationSlider() {
       }
     });
     splide.mount();
+    var prevBtn = root.querySelector("[data-slider-prev]");
+    if (prevBtn) prevBtn.addEventListener("click", function () {
+      return splide.go("<");
+    });
     var nextBtn = root.querySelector("[data-slider-next]");
     if (nextBtn) nextBtn.addEventListener("click", function () {
       return splide.go(">");
