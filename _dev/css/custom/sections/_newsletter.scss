@@ -16,19 +16,27 @@
     display: flex;
     align-items: center;
     gap: 40px;
-    padding: 100px 68px;
+    padding: 90px 586px 90px 82px;
     position: relative;
     background-color: var(--clr-green-2);
 
+    @include md(xxl) {
+      padding: 90px 536px 90px 82px;
+    }
+
+    @include md(xl) {
+      padding: 70px 490px 70px 60px;
+    }
+
     @include md(lg) {
-      padding: 56px 0 48px;
+      padding: 50px;
       gap: 32px;
     }
 
     @include md(md) {
       flex-direction: column;
-      padding: 48px 0 40px;
-      gap: 32px;
+      padding: 35px 25px 0;
+      gap: 0;
     }
   }
 
@@ -38,10 +46,11 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 22px;
 
-    @include md(md) {
-      width: 100%;
+    @include md(lg) {
+      position: relative;
+      z-index: 2;
     }
   }
 
@@ -49,6 +58,7 @@
     @include heading-2-bold;
     color: var(--clr-gray-2);
     margin: 0;
+    max-width: 578px;
 
     @include md(lg) {
       font-size: 36px;
@@ -63,15 +73,15 @@
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
   }
 
   &__row {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 20px;
 
-    @include md(sm) {
+    @include md(xl) {
       flex-direction: column;
       align-items: stretch;
     }
@@ -178,27 +188,27 @@
   &__image {
     flex-shrink: 0;
     width: 430px;
-    align-self: flex-end;
-    margin-bottom: -72px;
+    position: absolute;
+    right: 71px;
+    bottom: 0;
 
-    @include md(xl) {
-      width: 340px;
+    @include md(xxl) {
+      right: 40px;
     }
 
     @include md(lg) {
-      width: 260px;
-      margin-bottom: -56px;
+      width: 360px;
+      right: 0;
+      z-index: 1;
     }
 
     @include md(md) {
-      display: none;
+      position: static;
+      max-width: 90%;
     }
 
     img {
       @include img-fluid;
-      // The bouquet in Figma is flipped vertically — appears to grow upward from the bottom
-      transform: rotate(180deg) scaleY(-1);
-      transform-origin: bottom center;
     }
   }
 }

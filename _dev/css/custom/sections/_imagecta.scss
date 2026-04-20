@@ -164,6 +164,7 @@
     margin: 0 0 31px;
 
     @include md(lg) {
+      max-width: 90%;
       margin: 0 0 20px;
     }
   }

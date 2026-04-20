@@ -51,13 +51,15 @@
           {/if}
 
           <div class="newsletter-banner__gdpr">
-            {if isset($id_module)}
-              {hook h='displayGDPRConsent' id_module=$id_module}
+            {capture name='tc_gdpr_consent_html'}{hook h='displayGDPRConsent' id_module=$id_module}{/capture}
+            {if $smarty.capture.tc_gdpr_consent_html|trim}
+              {$smarty.capture.tc_gdpr_consent_html nofilter}
+            {else}
+              {if $conditions}
+                <p class="newsletter-banner__conditions">{$conditions}</p>
+              {/if}
+              {hook h='displayNewsletterRegistration'}
             {/if}
-            {if $conditions}
-              <p class="newsletter-banner__conditions">{$conditions}</p>
-            {/if}
-            {hook h='displayNewsletterRegistration'}
           </div>
 
         </form>
