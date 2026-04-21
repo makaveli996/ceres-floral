@@ -40,6 +40,12 @@
 
         {* ── Right: action icons ── *}
         <div class="header-bar__actions" id="_desktop_actions">
+          <div class="header-bar__search" id="_desktop_search_widget">
+            {hook h='displaySearch'}
+          </div>
+          <div class="header-bar__wishlist" id="_desktop_wishlist">
+            {hook h='displayCustomerAccount' mod='blockwishlist'}
+          </div>
           {**
            * Configure: displayNav2
            * Recommended: ps_customersignin, blockwishlist, ps_shoppingcart.
@@ -63,12 +69,10 @@
         <nav class="header-nav__menu"
              aria-label="{l s='Main navigation' d='Shop.Theme.Global'}">
           {**
-           * Configure: displayTop
-           * Recommended: ps_mainmenu
-           * Figma items: Kategorie (dropdown), Nowości, Promocje,
-           *   Dla firm, O nas, FAQ, Kontakt.
+           * Render nested menu module in this exact spot (as in meblowosk).
+           * This avoids rendering other displayTop modules inside header-nav__menu.
            *}
-          {hook h='displayTop'}
+          {hook h='displayTop' mod='tc_nestedmenu'}
         </nav>
       </div>
 

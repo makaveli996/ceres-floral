@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>tc_nestedmenu</name>
+    <displayName><![CDATA[Menu wielopoziomowe (własne drzewo)]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[Buduj dowolną hierarchię pozycji menu z własnymi etykietami i linkami &mdash; bez ograniczeń do kategorii PrestaShop.]]></description>
+    <author><![CDATA[Rafal Majdan]]></author>
+    <tab><![CDATA[front_office_features]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+</module>

@@ -2,7 +2,7 @@
   position: relative;
   z-index: 999;
   color: $gray;
-  background: $white;
+  pointer-events: none;
 
   .logo {
     max-width: 100%;

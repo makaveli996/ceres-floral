@@ -141,7 +141,8 @@
 
   // ── Alerts (success / error) ──────────────────────────────────────────────
   &__alert {
-    @include sign-regular;
+    @include sign-bold;
+    color: var(--clr-white);
     padding: 10px 14px;
     border-radius: 5px;
     margin: 0;
@@ -153,9 +154,9 @@
     }
 
     &--success {
-      background: rgba(var(--clr-gray-2), 0.15);
+      background: var(--clr-green);
       color: var(--clr-gray-2);
-      border: 1px solid rgba(var(--clr-gray-2), 0.3);
+      border: 1px solid rgba(var(--clr-gray-2), 0.35);
     }
   }
 

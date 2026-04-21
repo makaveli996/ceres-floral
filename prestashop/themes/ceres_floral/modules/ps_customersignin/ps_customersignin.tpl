@@ -44,12 +44,12 @@
       </a>
     {else}
       <a
+      class="account"
         href="{$urls.pages.authentication}?back={$urls.current_url|urlencode}"
         title="{l s='Log in to your customer account' d='Shop.Theme.Customeraccount'}"
         rel="nofollow"
       >
         <i class="material-icons">&#xE7FF;</i>
-        <span class="hidden-sm-down">{l s='Sign in' d='Shop.Theme.Actions'}</span>
       </a>
     {/if}
   </div>
