@@ -9,6 +9,10 @@
 {if $page.page_name == 'cart'
   || $page.page_name == 'checkout'
   || $page.page_name == 'order'
+  || strpos($page.page_name, 'module-blockwishlist-') === 0
+  || strpos($smarty.server.REQUEST_URI|default:'', '/module/blockwishlist/') !== false
+  || strpos($page.page_name, 'module-psgdpr-') === 0
+  || strpos($smarty.server.REQUEST_URI|default:'', '/module/psgdpr/') !== false
   || $page.page_name == 'authentication'
   || $page.page_name == 'registration'
   || $page.page_name == 'password'
@@ -24,6 +28,7 @@
   || $page.page_name == 'order-return'
   || $page.page_name == 'order-confirmation'
   || $page.page_name == 'discount'
+  || $page.page_name == 'search'
   || $page.page_name == 'sitemap'
 } container-lg tc-system-page{/if}
 {/strip}

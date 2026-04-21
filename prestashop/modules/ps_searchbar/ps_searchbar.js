@@ -6,6 +6,10 @@ $(document).ready(function () {
     var $clearButton  = $searchWidget.find('i.clear');
 
     $.widget('prestashop.psBlockSearchAutocomplete', $.ui.autocomplete, {
+        _resizeMenu: function () {
+            var ul = this.menu.element;
+            ul.outerWidth(this.element.outerWidth());
+        },
         _renderItem: function (ul, product) {
             var image = (product.cover) ? product.cover : prestashop.urls.no_picture_image;
             var $img = $('<img class="autocomplete-thumbnail" src="'+image.bySize.small_default.url+'">');
@@ -23,9 +27,9 @@ $(document).ready(function () {
     };
     var autocompletePosition = function() {
       return {
-        my: 'right top',
-        at: 'right bottom',
-        of: isMobile() ? '.header-top' : '#search_widget',
+        my: isMobile() ? 'right top' : 'left top',
+        at: isMobile() ? 'right bottom' : 'left bottom',
+        of: isMobile() ? '.header-top' : $searchBox,
       };
     };
 

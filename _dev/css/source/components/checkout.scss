@@ -4,11 +4,6 @@ body#checkout {
   color: $gray-darker;
 
   #header .header-nav {
-    max-height: none;
-    padding: 0.9375rem 0;
-    margin-bottom: 0;
-    border: none;
-
     .logo {
       width: auto;
       max-height: 4.375rem;
@@ -758,11 +753,6 @@ body#checkout {
   }
 
   body#checkout {
-    #header .header-nav {
-      max-height: none;
-      padding: 0;
-    }
-
     section.checkout-step {
       .content {
         padding: 0.9375rem;

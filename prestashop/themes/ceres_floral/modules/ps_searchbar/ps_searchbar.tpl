@@ -6,7 +6,7 @@
 <div id="search_widget" class="search-widgets" data-search-controller-url="{$search_controller_url}">
   <form method="get" action="{$search_controller_url}">
     <input type="hidden" name="controller" value="search">
-    <button type="button" class="search-widgets__trigger" aria-label="{l s='Search' d='Shop.Theme.Catalog'}" onclick="this.nextElementSibling.focus();">
+    <button type="button" class="search-widgets__trigger" aria-label="{l s='Search' d='Shop.Theme.Catalog'}" onclick="this.parentElement.querySelector('.search-widgets__input').focus();">
       <span class="search-widgets__icon" aria-hidden="true"></span>
     </button>
     <input

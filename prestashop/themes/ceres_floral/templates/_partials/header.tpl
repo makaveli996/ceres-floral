@@ -38,20 +38,19 @@
           {/if}
         </div>
 
-        {* ── Right: action icons ── *}
+        {* ── Right: action icons — order matches Figma: search | user | wishlist | cart ── *}
         <div class="header-bar__actions" id="_desktop_actions">
           <div class="header-bar__search" id="_desktop_search_widget">
             {hook h='displaySearch'}
           </div>
+          {* User sign-in (ps_customersignin) — Figma: second icon *}
+          {hook h='displayNav2' mod='ps_customersignin'}
+          {* Wishlist (blockwishlist) — Figma: third icon *}
           <div class="header-bar__wishlist" id="_desktop_wishlist">
             {hook h='displayCustomerAccount' mod='blockwishlist'}
           </div>
-          {**
-           * Configure: displayNav2
-           * Recommended: ps_customersignin, blockwishlist, ps_shoppingcart.
-           * Each styled as a 46 px circle icon (see _header.scss).
-           *}
-          {hook h='displayNav2'}
+          {* Cart (ps_shoppingcart) — Figma: fourth icon *}
+          {hook h='displayNav2' mod='ps_shoppingcart'}
         </div>
 
       </div>
