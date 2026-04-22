@@ -1149,7 +1149,7 @@ CREATE TABLE `ps_admin_filter` (
   `filter_id` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admin_filter_search_id_idx` (`employee`,`shop`,`controller`,`action`,`filter_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1170,7 +1170,8 @@ INSERT INTO `ps_admin_filter` VALUES
 (9,1,1,'','','{\"orderBy\":\"position\",\"sortOrder\":\"asc\",\"limit\":50,\"filters\":{\"id_cms_category_parent\":1}}','cms_page_category'),
 (10,1,1,'','','{\"orderBy\":\"position\",\"sortOrder\":\"asc\",\"limit\":50,\"filters\":{\"id_cms_category_parent\":1}}','cms_page'),
 (11,1,1,'','','{\"limit\":50,\"orderBy\":\"id_tax\",\"sortOrder\":\"asc\",\"filters\":[]}','tax'),
-(12,1,1,'','','{\"limit\":50,\"orderBy\":\"id_search_engine\",\"sortOrder\":\"asc\",\"filters\":[]}','search_engine');
+(12,1,1,'','','{\"limit\":50,\"orderBy\":\"id_search_engine\",\"sortOrder\":\"asc\",\"filters\":[]}','search_engine'),
+(13,1,1,'','','{\"limit\":50,\"orderBy\":\"date_add\",\"sortOrder\":\"DESC\",\"filters\":[]}','customer');
 /*!40000 ALTER TABLE `ps_admin_filter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1482,7 +1483,7 @@ CREATE TABLE `ps_authorization_role` (
   `slug` varchar(191) NOT NULL,
   PRIMARY KEY (`id_authorization_role`),
   UNIQUE KEY `slug` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=849 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=853 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1796,6 +1797,10 @@ INSERT INTO `ps_authorization_role` VALUES
 (840,'ROLE_MOD_MODULE_TC_LOCATION_DELETE'),
 (838,'ROLE_MOD_MODULE_TC_LOCATION_READ'),
 (839,'ROLE_MOD_MODULE_TC_LOCATION_UPDATE'),
+(849,'ROLE_MOD_MODULE_TC_NESTEDMENU_CREATE'),
+(852,'ROLE_MOD_MODULE_TC_NESTEDMENU_DELETE'),
+(850,'ROLE_MOD_MODULE_TC_NESTEDMENU_READ'),
+(851,'ROLE_MOD_MODULE_TC_NESTEDMENU_UPDATE'),
 (817,'ROLE_MOD_MODULE_TC_NEWPRODUCTSSLIDER_CREATE'),
 (820,'ROLE_MOD_MODULE_TC_NEWPRODUCTSSLIDER_DELETE'),
 (818,'ROLE_MOD_MODULE_TC_NEWPRODUCTSSLIDER_READ'),
@@ -2379,7 +2384,7 @@ CREATE TABLE `ps_blockwishlist_statistics` (
   `date_add` datetime NOT NULL,
   `id_shop` int(10) unsigned DEFAULT 1,
   PRIMARY KEY (`id_statistics`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2388,6 +2393,27 @@ CREATE TABLE `ps_blockwishlist_statistics` (
 
 LOCK TABLES `ps_blockwishlist_statistics` WRITE;
 /*!40000 ALTER TABLE `ps_blockwishlist_statistics` DISABLE KEYS */;
+INSERT INTO `ps_blockwishlist_statistics` VALUES
+(1,0,25,0,'2026-04-22 14:10:49',1),
+(2,0,24,0,'2026-04-22 14:11:08',1),
+(3,0,23,0,'2026-04-22 14:11:10',1),
+(4,0,25,0,'2026-04-22 14:16:11',1),
+(5,0,20,0,'2026-04-22 14:16:42',1),
+(6,0,23,0,'2026-04-22 14:39:26',1),
+(7,0,24,0,'2026-04-22 14:40:32',1),
+(8,0,23,0,'2026-04-22 14:43:09',1),
+(9,0,20,0,'2026-04-22 14:57:31',1),
+(10,0,25,0,'2026-04-22 14:59:35',1),
+(11,0,20,0,'2026-04-22 15:52:56',1),
+(12,0,20,0,'2026-04-22 16:44:50',1),
+(13,0,23,0,'2026-04-22 16:55:53',1),
+(14,0,20,0,'2026-04-22 17:01:14',1),
+(15,0,20,0,'2026-04-22 17:10:31',1),
+(16,0,20,0,'2026-04-22 17:19:33',1),
+(17,0,23,0,'2026-04-22 17:19:34',1),
+(18,0,25,0,'2026-04-22 17:19:46',1),
+(19,0,24,0,'2026-04-22 17:19:54',1),
+(20,0,23,0,'2026-04-22 17:56:55',1);
 /*!40000 ALTER TABLE `ps_blockwishlist_statistics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2637,7 +2663,7 @@ CREATE TABLE `ps_cart` (
   KEY `id_shop_group` (`id_shop_group`),
   KEY `id_shop_2` (`id_shop`,`date_upd`),
   KEY `id_shop` (`id_shop`,`date_add`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2654,7 +2680,12 @@ INSERT INTO `ps_cart` VALUES
 (5,1,1,2,'{\"3\":\"2,\"}',1,5,5,1,2,1,'b44a6d9efd7a0076a0fbce6b15eaf3b1',0,0,'',0,0,'2026-04-13 17:52:50','2026-04-13 17:52:50',NULL),
 (6,1,1,1,'{\"8\":\"1,\"}',1,8,8,3,4,4,'f0b5aa9c10e0b74426e5b5a1686f135a',0,0,'',0,0,'2026-04-14 21:05:16','2026-04-15 12:04:08','{\"checkout-personal-information-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-addresses-step\":{\"step_is_reachable\":true,\"step_is_complete\":true,\"use_same_address\":true},\"checkout-delivery-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-payment-step\":{\"step_is_reachable\":true,\"step_is_complete\":false},\"checksum\":\"64038a516adc8755f9f76999c7a01e721a18fa3d\"}'),
 (7,1,1,1,'{\"7\":\"1,\"}',1,7,7,3,3,7,'a717e0d04aec41407f7ab6b75a545485',0,0,'',0,0,'2026-04-14 21:05:57','2026-04-14 21:07:00','{\"checkout-personal-information-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-addresses-step\":{\"step_is_reachable\":true,\"step_is_complete\":true,\"use_same_address\":true},\"checkout-delivery-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-payment-step\":{\"step_is_reachable\":true,\"step_is_complete\":false},\"checksum\":\"36cca33a0e8f497d199ae72d16820af31bd8acc4\"}'),
-(8,1,1,1,'{\"8\":\"1,\"}',1,8,8,3,4,4,'f0b5aa9c10e0b74426e5b5a1686f135a',0,0,'',0,0,'2026-04-15 13:27:12','2026-04-15 13:27:20','{\"checkout-personal-information-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-addresses-step\":{\"step_is_reachable\":true,\"step_is_complete\":true,\"use_same_address\":true},\"checkout-delivery-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-payment-step\":{\"step_is_reachable\":true,\"step_is_complete\":false},\"checksum\":\"35b8953facd72e37f10f593d8f8b88dd7975e15d\"}');
+(8,1,1,1,'{\"8\":\"1,\"}',1,8,8,3,4,4,'f0b5aa9c10e0b74426e5b5a1686f135a',0,0,'',0,0,'2026-04-15 13:27:12','2026-04-15 13:27:20','{\"checkout-personal-information-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-addresses-step\":{\"step_is_reachable\":true,\"step_is_complete\":true,\"use_same_address\":true},\"checkout-delivery-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-payment-step\":{\"step_is_reachable\":true,\"step_is_complete\":false},\"checksum\":\"35b8953facd72e37f10f593d8f8b88dd7975e15d\"}'),
+(9,1,1,0,'',1,8,8,3,4,4,'f0b5aa9c10e0b74426e5b5a1686f135a',0,0,'',0,0,'2026-04-21 12:41:18','2026-04-21 12:54:59',NULL),
+(10,1,1,0,'',1,7,7,3,3,7,'a717e0d04aec41407f7ab6b75a545485',0,0,'',0,0,'2026-04-21 16:11:33','2026-04-22 14:13:11','{\"checkout-personal-information-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-addresses-step\":{\"step_is_reachable\":true,\"step_is_complete\":true,\"use_same_address\":true},\"checkout-delivery-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-payment-step\":{\"step_is_reachable\":true,\"step_is_complete\":false},\"checksum\":\"00e89e3d00c12b55a066c590910beab83509192b\"}'),
+(11,1,1,1,'{\"7\":\"1,\"}',1,7,7,3,3,7,'a717e0d04aec41407f7ab6b75a545485',0,0,'',0,0,'2026-04-14 21:05:57','2026-04-22 17:57:14','{\"checkout-personal-information-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-addresses-step\":{\"step_is_reachable\":true,\"step_is_complete\":true,\"use_same_address\":true},\"checkout-delivery-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-payment-step\":{\"step_is_reachable\":true,\"step_is_complete\":false},\"checksum\":\"b0a986dc6b2ab3fc935f47453307a8e8ca581066\"}'),
+(12,1,1,1,'{\"7\":\"1,\"}',1,7,7,3,3,7,'a717e0d04aec41407f7ab6b75a545485',0,0,'',0,0,'2026-04-14 21:05:57','2026-04-22 22:46:39','{\"checkout-personal-information-step\":{\"step_is_reachable\":true,\"step_is_complete\":true},\"checkout-addresses-step\":{\"step_is_reachable\":true,\"step_is_complete\":false,\"use_same_address\":true},\"checkout-delivery-step\":{\"step_is_reachable\":false,\"step_is_complete\":false},\"checkout-payment-step\":{\"step_is_reachable\":false,\"step_is_complete\":false},\"checksum\":\"095427661a6fa2aaf1de4f0a2236c93b67e34ae7\"}'),
+(13,1,1,0,'',1,7,7,3,3,7,'a717e0d04aec41407f7ab6b75a545485',0,0,'',0,0,'2026-04-22 22:38:49','2026-04-22 22:38:49',NULL);
 /*!40000 ALTER TABLE `ps_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2715,7 +2746,12 @@ INSERT INTO `ps_cart_product` VALUES
 (6,23,8,1,57,0,1,'2026-04-15 12:01:27'),
 (6,24,8,1,61,0,1,'2026-04-15 12:01:33'),
 (6,25,8,1,66,0,1,'2026-04-15 12:01:36'),
-(8,26,8,1,74,0,1,'2026-04-15 13:27:12');
+(8,26,8,1,74,0,1,'2026-04-15 13:27:12'),
+(11,23,7,1,52,0,1,'2026-04-22 17:56:27'),
+(11,23,7,1,54,0,1,'2026-04-22 17:57:01'),
+(11,24,7,1,58,0,1,'2026-04-22 17:56:33'),
+(12,24,7,1,58,0,1,'2026-04-22 17:57:37'),
+(13,23,7,1,52,0,1,'2026-04-22 22:38:49');
 /*!40000 ALTER TABLE `ps_cart_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3202,7 +3238,7 @@ CREATE TABLE `ps_cms` (
   `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `indexation` tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_cms`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3216,7 +3252,9 @@ INSERT INTO `ps_cms` VALUES
 (2,1,1,1,0),
 (3,1,2,1,0),
 (4,1,3,1,0),
-(5,1,4,1,0);
+(5,1,4,1,0),
+(6,1,5,0,0),
+(7,1,6,0,0);
 /*!40000 ALTER TABLE `ps_cms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3345,10 +3383,14 @@ INSERT INTO `ps_cms_lang` VALUES
 (2,2,1,'Legal Notice','','Legal notice','notice, legal, credits','<h2>Legal</h2><h3>Credits</h3><p>Concept and production:</p><p>This Online store was created using <a href=\"http://www.prestashop.com\">Prestashop Shopping Cart Software</a>,check out PrestaShop\'s <a href=\"http://www.prestashop.com/blog/en/\">ecommerce blog</a> for news and advices about selling online and running your ecommerce website.</p>','legal-notice'),
 (3,1,1,'Terms and conditions of use','','Our terms and conditions of use','conditions, terms, use, sell','<h2>Your terms and conditions of use</h2><h3>Rule 1</h3><p>Here is the rule 1 content</p>\r\n<h3>Rule 2</h3><p>Here is the rule 2 content</p>\r\n<h3>Rule 3</h3><p>Here is the rule 3 content</p>','terms-and-conditions-of-use'),
 (3,2,1,'Terms and conditions of use','','Our terms and conditions of use','conditions, terms, use, sell','<h1 class=\"page-heading\">Terms and conditions of use</h1>\n<h3 class=\"page-subheading\">Rule 1</h3>\n<p class=\"bottom-indent\">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n<h3 class=\"page-subheading\">Rule 2</h3>\n<p class=\"bottom-indent\">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam&#1102;</p>\n<h3 class=\"page-subheading\">Rule 3</h3>\n<p class=\"bottom-indent\">Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam&#1102;</p>','terms-and-conditions-of-use'),
-(4,1,1,'About us','','Learn more about us','about us, informations','<h2>About us</h2>\r\n<h3>Our company</h3><p>Our company</p>\r\n<h3>Our team</h3><p>Our team</p>\r\n<h3>Informations</h3><p>Informations</p>','about-us'),
+(4,1,1,'O nas','','Learn more about us','about us, informations','','o-nas'),
 (4,2,1,'About us','','Learn more about us','about us, informations','<h1 class=\"page-heading bottom-indent\">About us</h1>\n<div class=\"row\">\n<div class=\"col-xs-12 col-sm-4\">\n<div class=\"cms-block\">\n<h3 class=\"page-subheading\">Our company</h3>\n<p><strong class=\"dark\">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididun.</strong></p>\n<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet conse ctetur adipisicing elit.</p>\n<ul class=\"list-1\">\n<li><em class=\"icon-ok\"></em>Top quality products</li>\n<li><em class=\"icon-ok\"></em>Best customer service</li>\n<li><em class=\"icon-ok\"></em>30-days money back guarantee</li>\n</ul>\n</div>\n</div>\n<div class=\"col-xs-12 col-sm-4\">\n<div class=\"cms-box\">\n<h3 class=\"page-subheading\">Our team</h3>\n<p><strong class=\"dark\">Lorem set sint occaecat cupidatat non </strong></p>\n<p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>\n</div>\n</div>\n<div class=\"col-xs-12 col-sm-4\">\n<div class=\"cms-box\">\n<h3 class=\"page-subheading\">Testimonials</h3>\n<div class=\"testimonials\">\n<div class=\"inner\"><span class=\"before\">“</span>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.<span class=\"after\">”</span></div>\n</div>\n<p><strong class=\"dark\">Lorem ipsum dolor sit</strong></p>\n<div class=\"testimonials\">\n<div class=\"inner\"><span class=\"before\">“</span>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod.<span class=\"after\">”</span></div>\n</div>\n<p><strong class=\"dark\">Ipsum dolor sit</strong></p>\n</div>\n</div>\n</div>','about-us'),
 (5,1,1,'Secure payment','','Our secure payment mean','secure payment, ssl, visa, mastercard, paypal','<h2>Secure payment</h2>\r\n<h3>Our secure payment</h3><p>With SSL</p>\r\n<h3>Using Visa/Mastercard/Paypal</h3><p>About this services</p>','secure-payment'),
-(5,2,1,'Secure payment','','Our secure payment method','secure payment, ssl, visa, mastercard, paypal','<h2>Secure payment</h2>\r\n<h3>Our secure payment</h3><p>With SSL</p>\r\n<h3>Using Visa/Mastercard/Paypal</h3><p>About this service</p>','secure-payment');
+(5,2,1,'Secure payment','','Our secure payment method','secure payment, ssl, visa, mastercard, paypal','<h2>Secure payment</h2>\r\n<h3>Our secure payment</h3><p>With SSL</p>\r\n<h3>Using Visa/Mastercard/Paypal</h3><p>About this service</p>','secure-payment'),
+(6,1,1,'Dla firm','','','','','dla-firm'),
+(6,2,1,'Dla firm','','','','','dla-firm'),
+(7,1,1,'FAQ','','','','','faq'),
+(7,2,1,'FAQ','','','','','faq');
 /*!40000 ALTER TABLE `ps_cms_lang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3431,7 +3473,9 @@ INSERT INTO `ps_cms_shop` VALUES
 (2,1),
 (3,1),
 (4,1),
-(5,1);
+(5,1),
+(6,1),
+(7,1);
 /*!40000 ALTER TABLE `ps_cms_shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3879,8 +3923,8 @@ INSERT INTO `ps_configuration` VALUES
 (422,NULL,NULL,'PS_LAYERED_FILTER_SHOW_OUT_OF_STOCK_LAST','0','2026-04-13 17:52:53','2026-04-13 17:52:53'),
 (423,NULL,NULL,'PS_LAYERED_FILTER_BY_DEFAULT_CATEGORY','0','2026-04-13 17:52:53','2026-04-13 17:52:53'),
 (424,NULL,NULL,'PS_LAYERED_INDEXED','1','2026-04-13 17:52:53','2026-04-13 17:52:53'),
-(425,NULL,NULL,'PS_CCCJS_VERSION','2','2026-04-14 10:08:22','2026-04-14 10:11:41'),
-(426,NULL,NULL,'PS_CCCCSS_VERSION','2','2026-04-14 10:08:22','2026-04-14 10:11:41'),
+(425,NULL,NULL,'PS_CCCJS_VERSION','3','2026-04-14 10:08:22','2026-04-22 17:41:31'),
+(426,NULL,NULL,'PS_CCCCSS_VERSION','3','2026-04-14 10:08:22','2026-04-22 17:41:31'),
 (427,NULL,NULL,'PS_LOGO_MAIL','logo_mail-1776157831.jpg','2026-04-14 11:09:44','2026-04-14 11:10:31'),
 (428,NULL,NULL,'PS_LOGO_INVOICE','logo_invoice-1776157784.png','2026-04-14 11:09:44','2026-04-14 11:09:44'),
 (429,NULL,NULL,'TC_HPS_SLIDES','[{\"title\":\"Wakacyjna promocja\",\"description\":\"Ograniczona promocja na zestawy kwiat\\u00f3w bukietowych\",\"button_label\":\"Zobacz pe\\u0142n\\u0105 ofert\\u0119\",\"button_url\":\"https:\\/\\/www.google.pl\\/\",\"badge_text\":\"-60%\",\"image\":\"\\/modules\\/tc_homepromoslider\\/views\\/img\\/uploads\\/slide-4dbc87ca63d65c307492bec4d4bfe9e82fbeb163.jpg\"},{\"title\":\"Wakacyjna promocja\",\"description\":\"Ograniczona promocja na zestawy kwiat\\u00f3w bukietowych\",\"button_label\":\"Zobacz pe\\u0142n\\u0105 ofert\\u0119\",\"button_url\":\"https:\\/\\/www.google.pl\\/\",\"badge_text\":\"-60%\",\"image\":\"\\/modules\\/tc_homepromoslider\\/views\\/img\\/uploads\\/slide-4c444c86dea2e51929355b56350a077e629b1a76.jpg\"}]','2026-04-14 12:45:33','2026-04-14 14:54:26'),
@@ -3947,7 +3991,7 @@ CREATE TABLE `ps_configuration_kpi` (
   KEY `name` (`name`),
   KEY `id_shop` (`id_shop`),
   KEY `id_shop_group` (`id_shop_group`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3994,11 +4038,11 @@ INSERT INTO `ps_configuration_kpi` VALUES
 (35,NULL,NULL,'DASHGOALS_CONVERSION_12_2026','2','2026-04-13 17:52:47','2026-04-13 17:52:47'),
 (36,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_12_2026','80','2026-04-13 17:52:47','2026-04-13 17:52:47'),
 (37,NULL,NULL,'FRONTOFFICE_TRANSLATIONS','0%','2026-04-13 17:55:41','2026-04-13 17:55:41'),
-(38,NULL,NULL,'FRONTOFFICE_TRANSLATIONS_EXPIRE','1776686986','2026-04-13 17:55:41','2026-04-20 14:07:46'),
+(38,NULL,NULL,'FRONTOFFICE_TRANSLATIONS_EXPIRE','1776756578','2026-04-13 17:55:41','2026-04-21 09:27:38'),
 (39,NULL,NULL,'MAIN_COUNTRY',NULL,'2026-04-13 17:55:41','2026-04-13 17:55:41'),
 (40,NULL,NULL,'MAIN_COUNTRY_EXPIRE',NULL,'2026-04-13 17:55:41','2026-04-13 17:55:41'),
 (41,NULL,NULL,'ENABLED_LANGUAGES','1','2026-04-13 17:55:41','2026-04-20 14:07:46'),
-(42,NULL,NULL,'ENABLED_LANGUAGES_EXPIRE','1776686926','2026-04-13 17:55:41','2026-04-20 14:07:46'),
+(42,NULL,NULL,'ENABLED_LANGUAGES_EXPIRE','1776756518','2026-04-13 17:55:41','2026-04-21 09:27:38'),
 (43,NULL,NULL,'CONVERSION_RATE','16.67%','2026-04-14 20:55:02','2026-04-15 12:04:43'),
 (44,NULL,NULL,'CONVERSION_RATE_EXPIRE','1776290400','2026-04-14 20:55:02','2026-04-15 12:04:43'),
 (45,NULL,NULL,'ABANDONED_CARTS','0','2026-04-14 20:55:02','2026-04-14 20:55:02'),
@@ -4008,13 +4052,21 @@ INSERT INTO `ps_configuration_kpi` VALUES
 (49,NULL,NULL,'NETPROFIT_VISIT','4,85 zł','2026-04-14 20:55:02','2026-04-15 12:04:43'),
 (50,NULL,NULL,'NETPROFIT_VISIT_EXPIRE','1776290400','2026-04-14 20:55:02','2026-04-15 12:04:43'),
 (51,NULL,NULL,'EMPTY_CATEGORIES','0','2026-04-15 10:28:43','2026-04-15 11:59:05'),
-(52,NULL,NULL,'EMPTY_CATEGORIES_EXPIRE','1776262340','2026-04-15 10:28:43','2026-04-15 14:12:20'),
+(52,NULL,NULL,'EMPTY_CATEGORIES_EXPIRE','1776778929','2026-04-15 10:28:43','2026-04-21 13:42:09'),
 (53,NULL,NULL,'DISABLED_CATEGORIES','0','2026-04-15 10:28:43','2026-04-15 10:28:43'),
-(54,NULL,NULL,'DISABLED_CATEGORIES_EXPIRE','1776262340','2026-04-15 10:28:43','2026-04-15 14:12:20'),
+(54,NULL,NULL,'DISABLED_CATEGORIES_EXPIRE','1776778929','2026-04-15 10:28:43','2026-04-21 13:42:09'),
 (55,NULL,NULL,'TOP_CATEGORY',NULL,'2026-04-15 10:28:43','2026-04-15 10:28:43'),
 (56,NULL,NULL,'TOP_CATEGORY_EXPIRE',NULL,'2026-04-15 10:28:43','2026-04-15 10:28:43'),
 (57,NULL,NULL,'PRODUCTS_PER_CATEGORY','2','2026-04-15 10:28:43','2026-04-15 13:45:55'),
-(58,NULL,NULL,'PRODUCTS_PER_CATEGORY_EXPIRE','1776258740','2026-04-15 10:28:43','2026-04-15 14:12:20');
+(58,NULL,NULL,'PRODUCTS_PER_CATEGORY_EXPIRE','1776775329','2026-04-15 10:28:43','2026-04-21 13:42:09'),
+(59,NULL,NULL,'CUSTOMER_MAIN_GENDER',NULL,'2026-04-21 13:28:13','2026-04-21 13:28:13'),
+(60,NULL,NULL,'CUSTOMER_MAIN_GENDER_EXPIRE',NULL,'2026-04-21 13:28:13','2026-04-21 13:28:13'),
+(61,NULL,NULL,'ORDERS_PER_CUSTOMER','1','2026-04-21 13:28:13','2026-04-21 13:28:13'),
+(62,NULL,NULL,'ORDERS_PER_CUSTOMER_EXPIRE','1776857293','2026-04-21 13:28:13','2026-04-21 13:28:13'),
+(63,NULL,NULL,'AVG_CUSTOMER_AGE',NULL,'2026-04-21 13:28:13','2026-04-21 13:28:13'),
+(64,NULL,NULL,'AVG_CUSTOMER_AGE_EXPIRE',NULL,'2026-04-21 13:28:13','2026-04-21 13:28:13'),
+(65,NULL,NULL,'NEWSLETTER_REGISTRATIONS','6','2026-04-21 13:28:13','2026-04-21 13:28:13'),
+(66,NULL,NULL,'NEWSLETTER_REGISTRATIONS_EXPIRE','1776792493','2026-04-21 13:28:13','2026-04-21 13:28:13');
 /*!40000 ALTER TABLE `ps_configuration_kpi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4042,9 +4094,13 @@ LOCK TABLES `ps_configuration_kpi_lang` WRITE;
 /*!40000 ALTER TABLE `ps_configuration_kpi_lang` DISABLE KEYS */;
 INSERT INTO `ps_configuration_kpi_lang` VALUES
 (39,1,'100 Polska','2026-04-20 12:07:46'),
-(40,1,'1776773266','2026-04-20 12:07:46'),
-(55,1,'Kwiaty wyrobowe','2026-04-15 12:09:30'),
-(56,1,'1776341540','2026-04-15 12:12:20');
+(40,1,'1776842858','2026-04-21 07:27:38'),
+(55,1,'Kwiaty wyrobowe','2026-04-21 11:42:09'),
+(56,1,'1776858129','2026-04-21 11:42:09'),
+(59,1,'100% Klientów Mężczyzn','2026-04-21 13:28:13'),
+(60,1,'1776857293','2026-04-21 13:28:13'),
+(63,1,'49 lat','2026-04-21 13:28:13'),
+(64,1,'1776857293','2026-04-21 13:28:13');
 /*!40000 ALTER TABLE `ps_configuration_kpi_lang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4132,7 +4188,7 @@ CREATE TABLE `ps_connections` (
   KEY `id_guest` (`id_guest`),
   KEY `date_add` (`date_add`),
   KEY `id_page` (`id_page`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4187,17 +4243,52 @@ INSERT INTO `ps_connections` VALUES
 (43,1,1,4,1,2886926337,'2026-04-17 17:33:09',''),
 (44,1,1,4,1,2886926337,'2026-04-20 10:15:20',''),
 (45,1,1,4,2,2886926337,'2026-04-20 10:46:11',''),
-(46,1,1,8,1,2886926337,'2026-04-20 10:51:32',''),
+(46,1,1,7,1,2886926337,'2026-04-20 10:51:32',''),
 (47,1,1,4,1,2886926337,'2026-04-20 11:17:18',''),
 (48,1,1,4,1,2886926337,'2026-04-20 11:48:40',''),
 (49,1,1,4,1,2886926337,'2026-04-20 12:19:03',''),
 (50,1,1,4,1,2886926337,'2026-04-20 13:37:18',''),
-(51,1,1,8,1,2886926337,'2026-04-20 13:53:03',''),
+(51,1,1,7,1,2886926337,'2026-04-20 13:53:03',''),
 (52,1,1,4,1,2886926337,'2026-04-20 14:15:14',''),
 (53,1,1,4,1,2886926337,'2026-04-20 14:59:54',''),
 (54,1,1,4,2,2886926337,'2026-04-20 15:33:11',''),
 (55,1,1,4,2,2886926337,'2026-04-20 16:38:40',''),
-(56,1,1,4,2,2886926337,'2026-04-20 17:09:17','');
+(56,1,1,4,2,2886926337,'2026-04-20 17:09:17',''),
+(57,1,1,4,1,2886926337,'2026-04-21 09:16:25',''),
+(58,1,1,4,1,2886926337,'2026-04-21 09:49:48',''),
+(59,1,1,7,1,2886926337,'2026-04-21 10:13:44',''),
+(60,1,1,4,2,2886926337,'2026-04-21 10:27:08',''),
+(61,1,1,4,2,2886926337,'2026-04-21 11:02:40',''),
+(62,1,1,4,2,2886926337,'2026-04-21 11:52:10',''),
+(63,1,1,7,1,2886926337,'2026-04-21 12:09:51',''),
+(64,1,1,4,2,2886926337,'2026-04-21 12:25:09',''),
+(65,1,1,7,3,2886926337,'2026-04-21 12:58:40','http://ceres-floral.test:8090/moje-konto'),
+(66,1,1,7,2,2886926337,'2026-04-21 13:29:16',''),
+(67,1,1,7,2,2886926337,'2026-04-21 14:00:37',''),
+(68,1,1,7,2,2886926337,'2026-04-21 14:35:04',''),
+(69,1,1,7,1,2886926337,'2026-04-21 14:39:18',''),
+(70,1,1,7,2,2886926337,'2026-04-21 15:06:42',''),
+(71,1,1,7,2,2886926337,'2026-04-21 15:44:36',''),
+(72,1,1,7,1,2886926337,'2026-04-21 15:44:58',''),
+(73,1,1,10,1,2886926337,'2026-04-21 16:13:01',''),
+(74,1,1,11,1,2886926337,'2026-04-21 16:13:14',''),
+(75,1,1,12,1,2886926337,'2026-04-21 16:20:33',''),
+(76,1,1,13,1,2886926337,'2026-04-21 16:20:39',''),
+(77,1,1,7,1,2886926337,'2026-04-21 16:25:03',''),
+(78,1,1,7,4,2886926337,'2026-04-21 17:32:44',''),
+(79,1,1,7,5,2886926337,'2026-04-21 19:33:16',''),
+(80,1,1,7,1,2886926337,'2026-04-22 09:08:24',''),
+(81,1,1,7,1,2886926337,'2026-04-22 11:18:17',''),
+(82,1,1,7,1,2886926337,'2026-04-22 12:04:44',''),
+(83,1,1,7,2,2886926337,'2026-04-22 12:36:46',''),
+(84,1,1,7,1,2886926337,'2026-04-22 13:08:51',''),
+(85,1,1,7,1,2886926337,'2026-04-22 14:11:06',''),
+(86,1,1,7,6,2886926337,'2026-04-22 14:42:13',''),
+(87,1,1,7,7,2886926337,'2026-04-22 15:26:08',''),
+(88,1,1,7,6,2886926337,'2026-04-22 16:46:18',''),
+(89,1,1,14,1,2886926337,'2026-04-22 17:00:47',''),
+(90,1,1,15,1,2886926337,'2026-04-22 17:01:10',''),
+(91,1,1,7,8,2886926337,'2026-04-22 22:38:39','');
 /*!40000 ALTER TABLE `ps_connections` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4245,7 +4336,7 @@ CREATE TABLE `ps_connections_source` (
   KEY `orderby` (`date_add`),
   KEY `http_referer` (`http_referer`),
   KEY `request_uri` (`request_uri`)
-) ENGINE=InnoDB AUTO_INCREMENT=1514 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2964 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5767,7 +5858,1457 @@ INSERT INTO `ps_connections_source` VALUES
 (1510,53,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-20 17:12:09'),
 (1511,53,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-20 17:12:09'),
 (1512,53,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-20 17:12:23'),
-(1513,53,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-20 17:12:51');
+(1513,53,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-20 17:12:51'),
+(1514,57,'','ceres-floral.test:8090/','','2026-04-21 09:16:25'),
+(1515,57,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 09:17:02'),
+(1516,57,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 09:17:15'),
+(1517,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:17:33'),
+(1518,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:17:33'),
+(1519,57,'','ceres-floral.test:8090/','','2026-04-21 09:17:54'),
+(1520,57,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 09:18:09'),
+(1521,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:18:16'),
+(1522,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:18:16'),
+(1523,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:22:34'),
+(1524,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:23:17'),
+(1525,57,'','ceres-floral.test:8090/','','2026-04-21 09:24:12'),
+(1526,57,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 09:24:20'),
+(1527,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:24:32'),
+(1528,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:24:32'),
+(1529,57,'','ceres-floral.test:8090/','','2026-04-21 09:24:48'),
+(1530,57,'','ceres-floral.test:8090/','','2026-04-21 09:24:49'),
+(1531,57,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 09:24:56'),
+(1532,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:29:08'),
+(1533,57,'','ceres-floral.test:8090/','','2026-04-21 09:33:08'),
+(1534,57,'','ceres-floral.test:8090/','','2026-04-21 09:33:09'),
+(1535,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:34:10'),
+(1536,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:34:10'),
+(1537,57,'','ceres-floral.test:8090/','','2026-04-21 09:35:40'),
+(1538,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:35:40'),
+(1539,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:35:40'),
+(1540,57,'','ceres-floral.test:8090/','','2026-04-21 09:36:31'),
+(1541,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:36:31'),
+(1542,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:36:31'),
+(1543,57,'','ceres-floral.test:8090/','','2026-04-21 09:37:35'),
+(1544,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:37:35'),
+(1545,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:37:35'),
+(1546,57,'','ceres-floral.test:8090/','','2026-04-21 09:38:08'),
+(1547,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:38:08'),
+(1548,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:38:08'),
+(1549,57,'','ceres-floral.test:8090/','','2026-04-21 09:38:58'),
+(1550,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:38:58'),
+(1551,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:38:58'),
+(1552,57,'','ceres-floral.test:8090/','','2026-04-21 09:39:51'),
+(1553,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:39:51'),
+(1554,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:39:51'),
+(1555,57,'','ceres-floral.test:8090/','','2026-04-21 09:40:48'),
+(1556,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:40:48'),
+(1557,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:40:48'),
+(1558,57,'','ceres-floral.test:8090/','','2026-04-21 09:42:02'),
+(1559,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:42:02'),
+(1560,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:42:02'),
+(1561,57,'','ceres-floral.test:8090/','','2026-04-21 09:42:06'),
+(1562,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:42:06'),
+(1563,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:42:06'),
+(1564,57,'','ceres-floral.test:8090/','','2026-04-21 09:42:07'),
+(1565,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:42:08'),
+(1566,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:42:08'),
+(1567,57,'','ceres-floral.test:8090/','','2026-04-21 09:42:13'),
+(1568,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:42:13'),
+(1569,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:42:13'),
+(1570,57,'','ceres-floral.test:8090/','','2026-04-21 09:44:08'),
+(1571,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:44:08'),
+(1572,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:44:08'),
+(1573,57,'','ceres-floral.test:8090/','','2026-04-21 09:44:15'),
+(1574,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:44:15'),
+(1575,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:44:15'),
+(1576,57,'','ceres-floral.test:8090/','','2026-04-21 09:45:11'),
+(1577,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:45:11'),
+(1578,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:45:11'),
+(1579,57,'','ceres-floral.test:8090/','','2026-04-21 09:45:19'),
+(1580,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:45:21'),
+(1581,57,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:45:21'),
+(1582,58,'','ceres-floral.test:8090/','','2026-04-21 09:49:48'),
+(1583,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:49:48'),
+(1584,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 09:49:49'),
+(1585,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/szukaj','','2026-04-21 09:50:01'),
+(1586,58,'','ceres-floral.test:8090/','','2026-04-21 09:50:03'),
+(1587,58,'','ceres-floral.test:8090/','','2026-04-21 09:50:04'),
+(1588,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 09:50:05'),
+(1589,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/szukaj','','2026-04-21 09:50:06'),
+(1590,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 09:50:08'),
+(1591,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 09:53:36'),
+(1592,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 10:00:50'),
+(1593,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 10:03:18'),
+(1594,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 10:12:28'),
+(1595,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 10:12:37'),
+(1596,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 10:12:37'),
+(1597,59,'','ceres-floral.test:8090/','','2026-04-21 10:13:44'),
+(1598,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 10:14:12'),
+(1599,59,'','ceres-floral.test:8090/','','2026-04-21 10:14:38'),
+(1600,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 10:14:43'),
+(1601,59,'','ceres-floral.test:8090/','','2026-04-21 10:14:47'),
+(1602,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 10:17:47'),
+(1603,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 10:17:54'),
+(1604,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 10:17:54'),
+(1605,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 10:18:16'),
+(1606,60,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 10:27:08'),
+(1607,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 10:27:29'),
+(1608,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 10:32:40'),
+(1609,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 10:32:47'),
+(1610,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 10:32:47'),
+(1611,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 10:34:24'),
+(1612,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 10:34:24'),
+(1613,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 10:34:24'),
+(1614,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 10:34:26'),
+(1615,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 10:34:26'),
+(1616,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 10:34:26'),
+(1617,61,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 11:02:40'),
+(1618,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 11:51:09'),
+(1619,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 11:51:13'),
+(1620,62,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 11:52:10'),
+(1621,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 11:52:57'),
+(1622,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 11:52:57'),
+(1623,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 11:52:57'),
+(1624,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 11:53:08'),
+(1625,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 11:53:09'),
+(1626,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 11:53:09'),
+(1627,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:04:05'),
+(1628,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:04:05'),
+(1629,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:04:05'),
+(1630,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:04:19'),
+(1631,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:04:32'),
+(1632,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:04:32'),
+(1633,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:05:02'),
+(1634,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:05:59'),
+(1635,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:07:19'),
+(1636,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:07:23'),
+(1637,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:07:23'),
+(1638,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:08:41'),
+(1639,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:09:28'),
+(1640,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:09:28'),
+(1641,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:09:28'),
+(1642,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:09:29'),
+(1643,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:09:30'),
+(1644,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:09:30'),
+(1645,63,'','ceres-floral.test:8090/','','2026-04-21 12:09:51'),
+(1646,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:13:00'),
+(1647,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:13:00'),
+(1648,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:13:00'),
+(1649,63,'','ceres-floral.test:8090/','','2026-04-21 12:13:04'),
+(1650,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:13:15'),
+(1651,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:13:15'),
+(1652,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:13:15'),
+(1653,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:14:24'),
+(1654,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:14:24'),
+(1655,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:14:24'),
+(1656,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:14:27'),
+(1657,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:14:27'),
+(1658,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:14:27'),
+(1659,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:15:29'),
+(1660,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:15:35'),
+(1661,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:15:35'),
+(1662,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:16:11'),
+(1663,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:16:11'),
+(1664,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:16:11'),
+(1665,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:16:56'),
+(1666,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:17:02'),
+(1667,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:17:02'),
+(1668,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:20:02'),
+(1669,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:20:04'),
+(1670,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:20:05'),
+(1671,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:20:20'),
+(1672,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:20:27'),
+(1673,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:20:27'),
+(1674,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:20:48'),
+(1675,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:20:48'),
+(1676,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:20:48'),
+(1677,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:21:17'),
+(1678,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:21:17'),
+(1679,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:21:17'),
+(1680,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:21:25'),
+(1681,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:21:25'),
+(1682,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:21:25'),
+(1683,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:21:58'),
+(1684,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:22:49'),
+(1685,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:22:49'),
+(1686,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:22:49'),
+(1687,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:25:09'),
+(1688,64,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:25:09'),
+(1689,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:25:09'),
+(1690,63,'','ceres-floral.test:8090/','','2026-04-21 12:25:56'),
+(1691,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:26:20'),
+(1692,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:28:30'),
+(1693,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:31:09'),
+(1694,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:31:24'),
+(1695,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:32:44'),
+(1696,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:33:12'),
+(1697,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:33:37'),
+(1698,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:33:37'),
+(1699,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:33:48'),
+(1700,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:33:54'),
+(1701,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:33:54'),
+(1702,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:34:41'),
+(1703,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:35:00'),
+(1704,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:35:13'),
+(1705,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:35:15'),
+(1706,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:35:22'),
+(1707,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:35:24'),
+(1708,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:36:01'),
+(1709,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:36:14'),
+(1710,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:36:52'),
+(1711,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:36:52'),
+(1712,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:37:35'),
+(1713,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:37:35'),
+(1714,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:37:36'),
+(1715,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:37:41'),
+(1716,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:37:41'),
+(1717,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:37:41'),
+(1718,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:38:30'),
+(1719,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:39:52'),
+(1720,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:39:57'),
+(1721,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:39:57'),
+(1722,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:40:26'),
+(1723,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:40:26'),
+(1724,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:40:26'),
+(1725,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:40:51'),
+(1726,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:40:51'),
+(1727,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:40:51'),
+(1728,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/26-70-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-21 12:41:16'),
+(1729,58,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 12:41:16'),
+(1730,58,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 12:41:16'),
+(1731,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:41:21'),
+(1732,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:41:21'),
+(1733,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:41:21'),
+(1734,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:49:12'),
+(1735,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:49:25'),
+(1736,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:49:42'),
+(1737,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:49:42'),
+(1738,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:50:10'),
+(1739,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:50:17'),
+(1740,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:50:17'),
+(1741,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:50:23'),
+(1742,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:50:59'),
+(1743,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:50:59'),
+(1744,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:50:59'),
+(1745,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:51:43'),
+(1746,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:51:43'),
+(1747,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:51:43'),
+(1748,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:53:28'),
+(1749,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:53:29'),
+(1750,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:53:29'),
+(1751,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:53:55'),
+(1752,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:53:55'),
+(1753,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:53:55'),
+(1754,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:54:04'),
+(1755,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:54:04'),
+(1756,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:54:04'),
+(1757,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:54:09'),
+(1758,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:54:09'),
+(1759,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:54:09'),
+(1760,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:54:15'),
+(1761,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:54:15'),
+(1762,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:54:15'),
+(1763,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:54:27'),
+(1764,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 12:54:27'),
+(1765,58,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 12:54:27'),
+(1766,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 12:54:57'),
+(1767,58,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 12:54:57'),
+(1768,58,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 12:54:57'),
+(1769,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:55:00'),
+(1770,58,'http://ceres-floral.test:8090/','ceres-floral.test:8090/moje-konto','','2026-04-21 12:58:35'),
+(1771,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/logowanie?back=my-account','','2026-04-21 12:58:40'),
+(1772,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 12:58:42'),
+(1773,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:22:42'),
+(1774,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 13:25:36'),
+(1775,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:25:36'),
+(1776,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:25:36'),
+(1777,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 13:27:38'),
+(1778,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:27:38'),
+(1779,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:27:38'),
+(1780,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','','2026-04-21 13:27:39'),
+(1781,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:27:40'),
+(1782,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:27:40'),
+(1783,65,'http://ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','ceres-floral.test:8090/','','2026-04-21 13:27:43'),
+(1784,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:27:43'),
+(1785,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:27:43'),
+(1786,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','','2026-04-21 13:27:48'),
+(1787,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:27:48'),
+(1788,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:27:48'),
+(1789,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','','2026-04-21 13:27:49'),
+(1790,65,'http://ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','ceres-floral.test:8090/','','2026-04-21 13:27:49'),
+(1791,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:27:49'),
+(1792,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:27:49'),
+(1793,65,'http://ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','ceres-floral.test:8090/','','2026-04-21 13:27:52'),
+(1794,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:27:52'),
+(1795,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:27:52'),
+(1796,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','','2026-04-21 13:27:54'),
+(1797,65,'http://ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','','2026-04-21 13:28:00'),
+(1798,65,'http://ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','','2026-04-21 13:28:06'),
+(1799,65,'http://ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','ceres-floral.test:8090/','','2026-04-21 13:28:23'),
+(1800,65,'http://ceres-floral.test:8090/logowanie?back=http%3A%2F%2Fceres-floral.test%3A8090%2F','ceres-floral.test:8090/','','2026-04-21 13:28:27'),
+(1801,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/moje-konto','','2026-04-21 13:28:28'),
+(1802,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 13:28:29'),
+(1803,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 13:28:31'),
+(1804,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-21 13:28:37'),
+(1805,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/moje-konto','','2026-04-21 13:28:38'),
+(1806,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 13:28:40'),
+(1807,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-21 13:28:41'),
+(1808,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/moje-konto','','2026-04-21 13:28:43'),
+(1809,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 13:28:44'),
+(1810,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:28:51'),
+(1811,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 13:28:52'),
+(1812,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:28:54'),
+(1813,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 13:28:55'),
+(1814,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:28:56'),
+(1815,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 13:28:57'),
+(1816,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:28:58'),
+(1817,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 13:28:59'),
+(1818,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:29:01'),
+(1819,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 13:29:01'),
+(1820,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:29:02'),
+(1821,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/potwierdzenia-zwrotu','','2026-04-21 13:29:02'),
+(1822,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:29:03'),
+(1823,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 13:29:04'),
+(1824,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:29:05'),
+(1825,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 13:29:05'),
+(1826,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:29:06'),
+(1827,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 13:29:07'),
+(1828,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:29:08'),
+(1829,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 13:29:09'),
+(1830,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 13:29:09'),
+(1831,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 13:29:11'),
+(1832,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 13:29:13'),
+(1833,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 13:29:14'),
+(1834,66,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:29:16'),
+(1835,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:29:16'),
+(1836,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 13:29:29'),
+(1837,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:29:38'),
+(1838,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 13:29:45'),
+(1839,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:29:46'),
+(1840,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:29:46'),
+(1841,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:31:26'),
+(1842,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php/sell/catalog/categories/10/edit?_token=sh0rKRPBe2UHA92rMJBO_x16VLX0BNh7ELtwSssNZEY','ceres-floral.test:8090/','','2026-04-21 13:40:10'),
+(1843,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 13:42:22'),
+(1844,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:57:30'),
+(1845,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 13:58:36'),
+(1846,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:58:36'),
+(1847,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:58:36'),
+(1848,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 13:58:42'),
+(1849,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:58:42'),
+(1850,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:58:43'),
+(1851,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 13:59:19'),
+(1852,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 13:59:19'),
+(1853,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 13:59:19'),
+(1854,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:00:37'),
+(1855,67,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:00:37'),
+(1856,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 14:00:37'),
+(1857,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:01:02'),
+(1858,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:01:02'),
+(1859,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 14:01:02'),
+(1860,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:01:19'),
+(1861,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:01:19'),
+(1862,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 14:01:19'),
+(1863,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:03:22'),
+(1864,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 14:03:43'),
+(1865,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:03:43'),
+(1866,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:04:44'),
+(1867,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:05:33'),
+(1868,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:07:53'),
+(1869,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-21 14:11:26'),
+(1870,68,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:35:04'),
+(1871,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:36:42'),
+(1872,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:36:46'),
+(1873,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:37:38'),
+(1874,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:38:58'),
+(1875,69,'','ceres-floral.test:8090/','','2026-04-21 14:39:18'),
+(1876,69,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 14:39:24'),
+(1877,69,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:39:24'),
+(1878,69,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:39:33'),
+(1879,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:40:17'),
+(1880,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:41:10'),
+(1881,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 14:41:27'),
+(1882,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:41:27'),
+(1883,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:42:34'),
+(1884,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:42:57'),
+(1885,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:43:32'),
+(1886,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:43:51'),
+(1887,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:45:39'),
+(1888,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:45:39'),
+(1889,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 14:45:39'),
+(1890,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:46:24'),
+(1891,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:46:45'),
+(1892,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:48:06'),
+(1893,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 14:57:39'),
+(1894,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 14:57:39'),
+(1895,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 14:57:39'),
+(1896,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:01:23'),
+(1897,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:01:23'),
+(1898,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:01:23'),
+(1899,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:03:33'),
+(1900,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:03:33'),
+(1901,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:03:33'),
+(1902,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:04:43'),
+(1903,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:04:43'),
+(1904,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:04:43'),
+(1905,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:05:24'),
+(1906,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:05:24'),
+(1907,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:05:24'),
+(1908,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:06:42'),
+(1909,70,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:06:42'),
+(1910,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:06:42'),
+(1911,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:13:43'),
+(1912,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:13:43'),
+(1913,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:13:44'),
+(1914,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:13:52'),
+(1915,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:13:52'),
+(1916,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:13:53'),
+(1917,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:14:31'),
+(1918,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:14:31'),
+(1919,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:14:31'),
+(1920,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:15:22'),
+(1921,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:15:23'),
+(1922,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:15:23'),
+(1923,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:15:29'),
+(1924,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:15:30'),
+(1925,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:15:30'),
+(1926,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:16:02'),
+(1927,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:16:02'),
+(1928,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:16:02'),
+(1929,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:16:55'),
+(1930,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:16:55'),
+(1931,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:16:55'),
+(1932,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:17:28'),
+(1933,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:17:28'),
+(1934,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:17:28'),
+(1935,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:17:38'),
+(1936,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:17:38'),
+(1937,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:17:39'),
+(1938,65,'http://ceres-floral.test:8090/admin365e2yxcs2cemstkzfy/index.php?controller=AdminModules&token=719ff69a3f0d26fd27638b7d27aa1ee9&conf=4&configure=tc_nestedmenu&tab_module=front_office_features&module_name=tc_nestedmenu','ceres-floral.test:8090/','','2026-04-21 15:18:52'),
+(1939,71,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:44:36'),
+(1940,72,'','ceres-floral.test:8090/','','2026-04-21 15:44:58'),
+(1941,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:44:58'),
+(1942,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:44:58'),
+(1943,72,'','ceres-floral.test:8090/','','2026-04-21 15:48:07'),
+(1944,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:48:07'),
+(1945,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:48:07'),
+(1946,72,'','ceres-floral.test:8090/','','2026-04-21 15:57:13'),
+(1947,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:57:13'),
+(1948,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:57:13'),
+(1949,72,'','ceres-floral.test:8090/','','2026-04-21 15:57:37'),
+(1950,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 15:57:37'),
+(1951,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 15:57:37'),
+(1952,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 15:59:42'),
+(1953,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 15:59:45'),
+(1954,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 15:59:47'),
+(1955,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 15:59:48'),
+(1956,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 15:59:49'),
+(1957,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 15:59:53'),
+(1958,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 15:59:56'),
+(1959,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:00:06'),
+(1960,72,'','ceres-floral.test:8090/logowanie?back=my-account','','2026-04-21 16:00:20'),
+(1961,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:00:24'),
+(1962,72,'','ceres-floral.test:8090/logowanie?back=my-account','','2026-04-21 16:00:27'),
+(1963,72,'','ceres-floral.test:8090/logowanie','','2026-04-21 16:00:30'),
+(1964,72,'http://ceres-floral.test:8090/logowanie?back=my-account','ceres-floral.test:8090/moje-konto','','2026-04-21 16:00:39'),
+(1965,72,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:00:42'),
+(1966,72,'http://ceres-floral.test:8090/logowanie','ceres-floral.test:8090/moje-konto','','2026-04-21 16:00:55'),
+(1967,72,'','ceres-floral.test:8090/','','2026-04-21 16:02:18'),
+(1968,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:02:19'),
+(1969,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:02:19'),
+(1970,72,'','ceres-floral.test:8090/','','2026-04-21 16:02:57'),
+(1971,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:02:57'),
+(1972,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:02:57'),
+(1973,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:03:33'),
+(1974,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:03:43'),
+(1975,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:03:44'),
+(1976,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:03:44'),
+(1977,65,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:03:46'),
+(1978,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:03:51'),
+(1979,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:04:10'),
+(1980,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:04:31'),
+(1981,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:04:32'),
+(1982,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:04:45'),
+(1983,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:04:48'),
+(1984,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:04:55'),
+(1985,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:04:55'),
+(1986,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:05:06'),
+(1987,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-21 16:05:21'),
+(1988,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:05:21'),
+(1989,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:05:21'),
+(1990,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:05:22'),
+(1991,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:05:22'),
+(1992,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:05:22'),
+(1993,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-21 16:05:23'),
+(1994,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:05:23'),
+(1995,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:05:23'),
+(1996,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:05:24'),
+(1997,72,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:05:39'),
+(1998,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:06:04'),
+(1999,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:06:04'),
+(2000,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:06:12'),
+(2001,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:06:12'),
+(2002,72,'','ceres-floral.test:8090/','','2026-04-21 16:06:18'),
+(2003,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:06:18'),
+(2004,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:06:18'),
+(2005,72,'','ceres-floral.test:8090/','','2026-04-21 16:06:37'),
+(2006,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:06:37'),
+(2007,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:06:37'),
+(2008,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:07:21'),
+(2009,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:07:25'),
+(2010,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:07:30'),
+(2011,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:07:33'),
+(2012,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:07:33'),
+(2013,72,'','ceres-floral.test:8090/','','2026-04-21 16:07:35'),
+(2014,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:07:36'),
+(2015,72,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:07:36'),
+(2016,72,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:07:42'),
+(2017,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:08:41'),
+(2018,65,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:08:44'),
+(2019,72,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:08:50'),
+(2020,65,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:09:02'),
+(2021,65,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:09:08'),
+(2022,65,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:09:47'),
+(2023,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:09:53'),
+(2024,65,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:09:56'),
+(2025,72,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:10:01'),
+(2026,65,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 16:11:03'),
+(2027,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:11:14'),
+(2028,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 16:11:15'),
+(2029,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:11:16'),
+(2030,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 16:11:17'),
+(2031,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:11:17'),
+(2032,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 16:11:18'),
+(2033,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:11:18'),
+(2034,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:11:19'),
+(2035,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:11:19'),
+(2036,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/potwierdzenia-zwrotu','','2026-04-21 16:11:20'),
+(2037,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:11:21'),
+(2038,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 16:11:21'),
+(2039,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 16:11:24'),
+(2040,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:11:24'),
+(2041,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-21 16:11:28'),
+(2042,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-21 16:11:29'),
+(2043,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 16:11:30'),
+(2044,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 16:11:30'),
+(2045,65,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:11:34'),
+(2046,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 16:11:41'),
+(2047,65,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:11:46'),
+(2048,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-21 16:11:46'),
+(2049,65,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:11:51'),
+(2050,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 16:11:53'),
+(2051,65,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:12:03'),
+(2052,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 16:12:03'),
+(2053,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 16:12:03'),
+(2054,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 16:12:06'),
+(2055,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 16:12:08'),
+(2056,65,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:12:11'),
+(2057,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 16:12:11'),
+(2058,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 16:12:11'),
+(2059,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 16:12:12'),
+(2060,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:12:20'),
+(2061,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:12:20'),
+(2062,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.js.map','','2026-04-21 16:12:39'),
+(2063,65,'','ceres-floral.test:8090/modules/blockreassurance/views/dist/front.css.map','','2026-04-21 16:12:39'),
+(2064,73,'','ceres-floral.test:8090/','','2026-04-21 16:13:01'),
+(2065,65,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:13:08'),
+(2066,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 16:13:08'),
+(2067,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 16:13:08'),
+(2068,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 16:13:09'),
+(2069,65,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:13:09'),
+(2070,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 16:13:10'),
+(2071,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 16:13:10'),
+(2072,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 16:13:10'),
+(2073,74,'','ceres-floral.test:8090/','','2026-04-21 16:13:14'),
+(2074,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 16:13:17'),
+(2075,65,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:14:47'),
+(2076,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 16:14:47'),
+(2077,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 16:14:47'),
+(2078,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 16:14:50'),
+(2079,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-21 16:15:28'),
+(2080,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:15:31'),
+(2081,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 16:15:31'),
+(2082,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 16:15:31'),
+(2083,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:15:32'),
+(2084,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:15:33'),
+(2085,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 16:15:33'),
+(2086,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 16:15:33'),
+(2087,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:15:34'),
+(2088,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:15:36'),
+(2089,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 16:15:37'),
+(2090,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 16:15:37'),
+(2091,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:15:49'),
+(2092,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 16:16:04'),
+(2093,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:16:08'),
+(2094,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 16:16:08'),
+(2095,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 16:16:08'),
+(2096,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 16:16:08'),
+(2097,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:16:09'),
+(2098,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:16:55'),
+(2099,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:18:08'),
+(2100,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:18:19'),
+(2101,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:18:54'),
+(2102,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 16:19:32'),
+(2103,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:19:32'),
+(2104,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:19:40'),
+(2105,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:19:51'),
+(2106,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:20:03'),
+(2107,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:20:09'),
+(2108,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:20:24'),
+(2109,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/moje-konto','','2026-04-21 16:20:27'),
+(2110,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 16:20:31'),
+(2111,75,'','ceres-floral.test:8090/','','2026-04-21 16:20:33'),
+(2112,76,'','ceres-floral.test:8090/','','2026-04-21 16:20:39'),
+(2113,77,'','ceres-floral.test:8090/','','2026-04-21 16:25:03'),
+(2114,77,'','ceres-floral.test:8090/','','2026-04-21 16:29:52'),
+(2115,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:13:47'),
+(2116,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:13:57'),
+(2117,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:13:59'),
+(2118,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:14:00'),
+(2119,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:14:01'),
+(2120,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/adres?id_address=7','','2026-04-21 17:14:14'),
+(2121,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:14:16'),
+(2122,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/adres','','2026-04-21 17:14:18'),
+(2123,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:14:19'),
+(2124,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:14:19'),
+(2125,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:14:21'),
+(2126,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:14:23'),
+(2127,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/potwierdzenia-zwrotu','','2026-04-21 17:14:23'),
+(2128,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:14:25'),
+(2129,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:14:25'),
+(2130,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:14:26'),
+(2131,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:14:26'),
+(2132,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:14:27'),
+(2133,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:14:28'),
+(2134,65,'http://ceres-floral.test:8090/module/psgdpr/gdpr','ceres-floral.test:8090/moje-konto','','2026-04-21 17:18:23'),
+(2135,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:18:24'),
+(2136,65,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/index.php?controller=order-detail&id_order=6','','2026-04-21 17:18:28'),
+(2137,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:18:32'),
+(2138,65,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/moje-konto','','2026-04-21 17:18:37'),
+(2139,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:18:38'),
+(2140,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:18:57'),
+(2141,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:19:48'),
+(2142,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:19:50'),
+(2143,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:19:59'),
+(2144,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:20:53'),
+(2145,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:20:58'),
+(2146,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:20:59'),
+(2147,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:21:00'),
+(2148,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:21:16'),
+(2149,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:21:22'),
+(2150,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:21:24'),
+(2151,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:21:24'),
+(2152,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:21:26'),
+(2153,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:21:27'),
+(2154,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:21:51'),
+(2155,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:21:52'),
+(2156,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:21:53'),
+(2157,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:21:57'),
+(2158,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:22:22'),
+(2159,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:22:36'),
+(2160,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:23:56'),
+(2161,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:24:02'),
+(2162,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:24:05'),
+(2163,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:24:06'),
+(2164,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:24:07'),
+(2165,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:24:08'),
+(2166,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:24:10'),
+(2167,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:24:10'),
+(2168,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:24:32'),
+(2169,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:24:36'),
+(2170,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:24:42'),
+(2171,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:24:53'),
+(2172,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:24:56'),
+(2173,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:25:08'),
+(2174,65,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/moje-konto','','2026-04-21 17:25:13'),
+(2175,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:25:15'),
+(2176,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:25:22'),
+(2177,65,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/moje-konto','','2026-04-21 17:25:25'),
+(2178,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:25:26'),
+(2179,65,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/','','2026-04-21 17:25:33'),
+(2180,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:25:53'),
+(2181,65,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/moje-konto','','2026-04-21 17:25:57'),
+(2182,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:25:58'),
+(2183,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:26:18'),
+(2184,65,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/moje-konto','','2026-04-21 17:26:21'),
+(2185,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:26:22'),
+(2186,65,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/moje-konto','','2026-04-21 17:26:24'),
+(2187,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:26:24'),
+(2188,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:26:46'),
+(2189,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:26:49'),
+(2190,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:26:50'),
+(2191,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:26:51'),
+(2192,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:26:52'),
+(2193,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:26:53'),
+(2194,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:26:53'),
+(2195,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:26:55'),
+(2196,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/potwierdzenia-zwrotu','','2026-04-21 17:26:55'),
+(2197,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:26:57'),
+(2198,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:26:57'),
+(2199,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:27:01'),
+(2200,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:27:01'),
+(2201,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:27:03'),
+(2202,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:27:04'),
+(2203,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:30:49'),
+(2204,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:31:08'),
+(2205,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:31:26'),
+(2206,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:31:27'),
+(2207,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:31:45'),
+(2208,65,'http://ceres-floral.test:8090/module/psgdpr/gdpr','ceres-floral.test:8090/moje-konto','','2026-04-21 17:31:51'),
+(2209,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:31:53'),
+(2210,65,'http://ceres-floral.test:8090/module/psgdpr/gdpr','ceres-floral.test:8090/moje-konto','','2026-04-21 17:31:54'),
+(2211,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:31:55'),
+(2212,65,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-21 17:32:22'),
+(2213,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:32:23'),
+(2214,78,'','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:32:44'),
+(2215,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:33:47'),
+(2216,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:33:59'),
+(2217,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:34:35'),
+(2218,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:34:59'),
+(2219,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:35:01'),
+(2220,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:35:05'),
+(2221,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:35:13'),
+(2222,65,'http://ceres-floral.test:8090/module/psgdpr/gdpr','ceres-floral.test:8090/moje-konto','','2026-04-21 17:35:41'),
+(2223,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:35:42'),
+(2224,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:35:49'),
+(2225,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:35:51'),
+(2226,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:35:51'),
+(2227,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:35:52'),
+(2228,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:36:06'),
+(2229,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-21 17:36:08'),
+(2230,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:36:10'),
+(2231,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 17:36:11'),
+(2232,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:36:13'),
+(2233,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:36:13'),
+(2234,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:36:18'),
+(2235,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 17:36:19'),
+(2236,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:36:21'),
+(2237,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/potwierdzenia-zwrotu','','2026-04-21 17:36:22'),
+(2238,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:36:24'),
+(2239,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:36:24'),
+(2240,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:36:26'),
+(2241,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:36:27'),
+(2242,65,'http://ceres-floral.test:8090/dane-osobiste','ceres-floral.test:8090/moje-konto','','2026-04-21 17:36:28'),
+(2243,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:36:29'),
+(2244,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:36:52'),
+(2245,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:36:55'),
+(2246,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-21 17:37:11'),
+(2247,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:37:12'),
+(2248,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:38:40'),
+(2249,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:39:12'),
+(2250,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:39:18'),
+(2251,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 17:39:20'),
+(2252,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-21 17:39:26'),
+(2253,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 17:39:32'),
+(2254,65,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-21 17:40:03'),
+(2255,65,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/moje-konto','','2026-04-21 17:40:06'),
+(2256,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 17:40:11'),
+(2257,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 17:40:11'),
+(2258,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 17:40:11'),
+(2259,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:40:14'),
+(2260,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 17:41:31'),
+(2261,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 17:41:32'),
+(2262,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 17:41:32'),
+(2263,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 17:41:47'),
+(2264,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 17:41:48'),
+(2265,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 17:41:48'),
+(2266,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 17:43:03'),
+(2267,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 17:43:03'),
+(2268,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 17:43:03'),
+(2269,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/koszyk?action=show','','2026-04-21 17:43:21'),
+(2270,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 17:43:21'),
+(2271,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 17:43:21'),
+(2272,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 17:43:22'),
+(2273,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 17:44:01'),
+(2274,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:45:13'),
+(2275,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:45:21'),
+(2276,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:45:56'),
+(2277,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:46:12'),
+(2278,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:46:18'),
+(2279,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:46:52'),
+(2280,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:46:59'),
+(2281,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:47:21'),
+(2282,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:47:38'),
+(2283,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:47:39'),
+(2284,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-21 17:47:42'),
+(2285,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 19:05:47'),
+(2286,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 19:06:06'),
+(2287,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 19:06:18'),
+(2288,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 19:11:33'),
+(2289,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 19:11:35'),
+(2290,65,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-21 19:11:42'),
+(2291,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-21 19:11:46'),
+(2292,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-21 19:11:49'),
+(2293,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-21 19:11:52'),
+(2294,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-21 19:11:53'),
+(2295,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie?controller=order','','2026-04-21 19:11:55'),
+(2296,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie?controller=order','','2026-04-21 19:13:15'),
+(2297,65,'http://ceres-floral.test:8090/zamowienie?controller=order','ceres-floral.test:8090/zamowienie?controller=order','','2026-04-21 19:13:18'),
+(2298,65,'http://ceres-floral.test:8090/zamowienie?controller=order','ceres-floral.test:8090/zamowienie','','2026-04-21 19:13:27'),
+(2299,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-21 19:13:30'),
+(2300,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-21 19:13:53'),
+(2301,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-21 19:14:35'),
+(2302,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/moje-konto','','2026-04-21 19:14:39'),
+(2303,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-21 19:14:41'),
+(2304,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/moje-konto','','2026-04-21 19:14:42'),
+(2305,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-21 19:14:43'),
+(2306,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-21 19:14:48'),
+(2307,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-21 19:15:27'),
+(2308,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-21 19:15:32'),
+(2309,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/','','2026-04-21 19:15:41'),
+(2310,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/','','2026-04-21 19:24:27'),
+(2311,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/','','2026-04-21 19:25:58'),
+(2312,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/','','2026-04-21 19:26:03'),
+(2313,65,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/','','2026-04-21 19:26:08'),
+(2314,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/moje-konto','','2026-04-21 19:26:11'),
+(2315,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 19:26:13'),
+(2316,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 19:26:57'),
+(2317,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 19:28:10'),
+(2318,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 19:30:08'),
+(2319,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 19:31:29'),
+(2320,65,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-21 19:31:40'),
+(2321,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/szukaj?controller=search&s=kopia','','2026-04-21 19:32:16'),
+(2322,79,'','ceres-floral.test:8090/szukaj?controller=search&s=kopia','','2026-04-21 19:33:16'),
+(2323,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/szukaj?controller=search&s=kopia','','2026-04-21 19:34:19'),
+(2324,65,'http://ceres-floral.test:8090/szukaj?controller=search&s=kopia','ceres-floral.test:8090/','','2026-04-21 19:34:26'),
+(2325,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/szukaj?controller=search&s=kopia','','2026-04-21 19:36:27'),
+(2326,65,'http://ceres-floral.test:8090/szukaj?controller=search&s=kopia','ceres-floral.test:8090/','','2026-04-21 19:37:10'),
+(2327,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/szukaj?controller=search&s=kopia','','2026-04-21 19:39:57'),
+(2328,65,'http://ceres-floral.test:8090/szukaj?controller=search&s=kopia','ceres-floral.test:8090/','','2026-04-21 19:40:08'),
+(2329,65,'http://ceres-floral.test:8090/szukaj?controller=search&s=kopia','ceres-floral.test:8090/','','2026-04-21 19:45:13'),
+(2330,65,'http://ceres-floral.test:8090/szukaj?controller=search&s=kopia','ceres-floral.test:8090/','','2026-04-21 19:45:23'),
+(2331,65,'http://ceres-floral.test:8090/szukaj?controller=search&s=kopia','ceres-floral.test:8090/','','2026-04-21 19:45:32'),
+(2332,65,'http://ceres-floral.test:8090/szukaj?controller=search&s=kopia','ceres-floral.test:8090/','','2026-04-21 19:47:12'),
+(2333,65,'http://ceres-floral.test:8090/szukaj?controller=search&s=kopia','ceres-floral.test:8090/','','2026-04-21 19:47:54'),
+(2334,65,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-21 19:48:18'),
+(2335,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-21 19:48:18'),
+(2336,65,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-21 19:48:18'),
+(2337,65,'http://ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/','','2026-04-21 19:48:20'),
+(2338,80,'','ceres-floral.test:8090/','','2026-04-22 09:08:24'),
+(2339,80,'','ceres-floral.test:8090/','','2026-04-22 09:11:02'),
+(2340,80,'','ceres-floral.test:8090/','','2026-04-22 09:11:31'),
+(2341,80,'','ceres-floral.test:8090/','','2026-04-22 09:12:25'),
+(2342,80,'','ceres-floral.test:8090/','','2026-04-22 09:12:28'),
+(2343,79,'','ceres-floral.test:8090/','','2026-04-22 09:20:37'),
+(2344,79,'','ceres-floral.test:8090/','','2026-04-22 09:22:34'),
+(2345,79,'','ceres-floral.test:8090/','','2026-04-22 09:22:43'),
+(2346,80,'','ceres-floral.test:8090/','','2026-04-22 09:31:13'),
+(2347,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 09:31:56'),
+(2348,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 09:31:58'),
+(2349,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 09:33:57'),
+(2350,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 09:38:25'),
+(2351,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 09:39:23'),
+(2352,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 09:39:51'),
+(2353,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 09:40:01'),
+(2354,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 09:40:10'),
+(2355,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 09:57:48'),
+(2356,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:24:00'),
+(2357,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:24:03'),
+(2358,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:25:42'),
+(2359,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:26:16'),
+(2360,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:26:22'),
+(2361,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:27:45'),
+(2362,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:28:33'),
+(2363,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:30:31'),
+(2364,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:30:48'),
+(2365,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:31:11'),
+(2366,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:32:30'),
+(2367,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:32:49'),
+(2368,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:33:38'),
+(2369,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:35:13'),
+(2370,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:36:10'),
+(2371,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:36:18'),
+(2372,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:36:32'),
+(2373,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:37:48'),
+(2374,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:38:11'),
+(2375,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:38:25'),
+(2376,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:38:31'),
+(2377,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:39:14'),
+(2378,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:39:20'),
+(2379,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:39:29'),
+(2380,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:39:56'),
+(2381,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:39:58'),
+(2382,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:40:19'),
+(2383,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:40:25'),
+(2384,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 10:41:04'),
+(2385,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/moje-konto','','2026-04-22 11:16:07'),
+(2386,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 11:16:07'),
+(2387,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:16:44'),
+(2388,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:17:08'),
+(2389,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:17:51'),
+(2390,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:17:56'),
+(2391,81,'','ceres-floral.test:8090/','','2026-04-22 11:18:17'),
+(2392,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:20:13'),
+(2393,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:21:53'),
+(2394,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:39:26'),
+(2395,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:39:33'),
+(2396,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:50:11'),
+(2397,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:50:14'),
+(2398,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:51:44'),
+(2399,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:53:12'),
+(2400,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:53:34'),
+(2401,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:53:56'),
+(2402,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:54:54'),
+(2403,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:55:33'),
+(2404,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:56:19'),
+(2405,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:57:17'),
+(2406,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:57:27'),
+(2407,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:57:38'),
+(2408,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 11:58:23'),
+(2409,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:00:03'),
+(2410,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:01:21'),
+(2411,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:01:40'),
+(2412,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:02:17'),
+(2413,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:02:34'),
+(2414,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:03:00'),
+(2415,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:03:06'),
+(2416,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:03:43'),
+(2417,82,'','ceres-floral.test:8090/','','2026-04-22 12:04:44'),
+(2418,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:08:01'),
+(2419,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:08:12'),
+(2420,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:08:28'),
+(2421,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:08:32'),
+(2422,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:08:53'),
+(2423,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:09:13'),
+(2424,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:09:28'),
+(2425,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:09:40'),
+(2426,82,'','ceres-floral.test:8090/','','2026-04-22 12:23:05'),
+(2427,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:24:36'),
+(2428,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:26:20'),
+(2429,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:26:24'),
+(2430,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:26:29'),
+(2431,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:28:25'),
+(2432,80,'','ceres-floral.test:8090/','','2026-04-22 12:28:39'),
+(2433,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:29:27'),
+(2434,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:31:41'),
+(2435,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:31:47'),
+(2436,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:33:30'),
+(2437,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:33:36'),
+(2438,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:33:43'),
+(2439,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:35:06'),
+(2440,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/dla-firm','','2026-04-22 12:35:09'),
+(2441,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 12:35:11'),
+(2442,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 12:36:22'),
+(2443,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 12:36:33'),
+(2444,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/promocje','','2026-04-22 12:36:46'),
+(2445,83,'','ceres-floral.test:8090/modules/ps_facetedsearch/views/dist/front.css.map','','2026-04-22 12:36:46'),
+(2446,80,'','ceres-floral.test:8090/modules/ps_facetedsearch/views/dist/front.js.map','','2026-04-22 12:36:46'),
+(2447,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 12:36:50'),
+(2448,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/moje-konto','','2026-04-22 12:42:39'),
+(2449,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-22 12:42:40'),
+(2450,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:42:41'),
+(2451,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:43:22'),
+(2452,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:45:21'),
+(2453,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:46:44'),
+(2454,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:46:51'),
+(2455,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/promocje','','2026-04-22 12:47:14'),
+(2456,80,'','ceres-floral.test:8090/modules/ps_facetedsearch/views/dist/front.css.map','','2026-04-22 12:47:15'),
+(2457,80,'','ceres-floral.test:8090/modules/ps_facetedsearch/views/dist/front.js.map','','2026-04-22 12:47:15'),
+(2458,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:47:17'),
+(2459,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:47:43'),
+(2460,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 12:52:07'),
+(2461,84,'','ceres-floral.test:8090/','','2026-04-22 13:08:51'),
+(2462,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 13:11:07'),
+(2463,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 13:12:44'),
+(2464,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 13:13:38'),
+(2465,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 13:14:23'),
+(2466,84,'','ceres-floral.test:8090/','','2026-04-22 13:16:22'),
+(2467,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 13:17:38'),
+(2468,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 13:19:31'),
+(2469,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 13:19:40'),
+(2470,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 13:19:45'),
+(2471,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 13:19:49'),
+(2472,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 13:19:49'),
+(2473,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/moje-konto','','2026-04-22 13:19:49'),
+(2474,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 13:19:53'),
+(2475,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 13:19:53'),
+(2476,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 13:19:53'),
+(2477,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-22 13:19:56'),
+(2478,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 13:27:07'),
+(2479,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/','','2026-04-22 13:28:14'),
+(2480,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/dla-firm','','2026-04-22 13:28:43'),
+(2481,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 13:28:45'),
+(2482,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 13:28:55'),
+(2483,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 13:29:17'),
+(2484,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 13:29:51'),
+(2485,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 13:29:51'),
+(2486,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 13:29:51'),
+(2487,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-22 13:29:52'),
+(2488,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 13:30:00'),
+(2489,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 13:30:00'),
+(2490,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 13:30:00'),
+(2491,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 13:30:05'),
+(2492,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 14:09:30'),
+(2493,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 14:10:47'),
+(2494,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 14:10:51'),
+(2495,85,'','ceres-floral.test:8090/','','2026-04-22 14:11:06'),
+(2496,85,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:11:11'),
+(2497,85,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:11:13'),
+(2498,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:11:16'),
+(2499,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:11:17'),
+(2500,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:11:23'),
+(2501,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:11:27'),
+(2502,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:11:40'),
+(2503,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:11:47'),
+(2504,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:11:49'),
+(2505,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:11:54'),
+(2506,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:11:55'),
+(2507,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:11:57'),
+(2508,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:11:58'),
+(2509,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:11:59'),
+(2510,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:12:02'),
+(2511,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:12:03'),
+(2512,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:12:04'),
+(2513,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:12:05'),
+(2514,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:12:07'),
+(2515,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:12:07'),
+(2516,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:12:08'),
+(2517,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:12:09'),
+(2518,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 14:13:09'),
+(2519,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 14:13:09'),
+(2520,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 14:13:09'),
+(2521,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:13:12'),
+(2522,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:13:13'),
+(2523,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:13:21'),
+(2524,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:13:22'),
+(2525,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:13:23'),
+(2526,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:13:24'),
+(2527,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:13:31'),
+(2528,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:13:38'),
+(2529,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:13:41'),
+(2530,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 14:13:43'),
+(2531,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 14:14:43'),
+(2532,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 14:14:50'),
+(2533,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:14:51'),
+(2534,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 14:15:36'),
+(2535,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 14:15:53'),
+(2536,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 14:16:04'),
+(2537,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:16:14'),
+(2538,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:16:15'),
+(2539,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:16:20'),
+(2540,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:16:22'),
+(2541,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:16:37'),
+(2542,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:16:38'),
+(2543,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:16:43'),
+(2544,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:16:44'),
+(2545,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:16:47'),
+(2546,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:16:49'),
+(2547,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:16:56'),
+(2548,85,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:17:02'),
+(2549,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/strona-glowna/25-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 14:19:15'),
+(2550,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 14:19:15'),
+(2551,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 14:19:15'),
+(2552,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:19:17'),
+(2553,85,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:20:51'),
+(2554,85,'','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:21:58'),
+(2555,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:25:58'),
+(2556,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:26:01'),
+(2557,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:26:02'),
+(2558,85,'','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:26:23'),
+(2559,85,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:26:25'),
+(2560,85,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:27:13'),
+(2561,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/moje-konto','','2026-04-22 14:27:39'),
+(2562,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 14:27:44'),
+(2563,85,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:27:47'),
+(2564,80,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 14:27:50'),
+(2565,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 14:27:52'),
+(2566,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/moje-konto','','2026-04-22 14:27:55'),
+(2567,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 14:27:56'),
+(2568,80,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/','','2026-04-22 14:28:01'),
+(2569,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 14:28:04'),
+(2570,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 14:28:05'),
+(2571,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 14:28:05'),
+(2572,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 14:28:05'),
+(2573,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 14:28:05'),
+(2574,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 14:28:05'),
+(2575,80,'http://ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 14:28:13'),
+(2576,85,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:28:59'),
+(2577,85,'','ceres-floral.test:8090/','','2026-04-22 14:29:07'),
+(2578,85,'http://ceres-floral.test:8090/','ceres-floral.test:8090/promocje','','2026-04-22 14:29:26'),
+(2579,85,'','ceres-floral.test:8090/promocje','','2026-04-22 14:29:30'),
+(2580,85,'http://ceres-floral.test:8090/promocje','ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 14:30:49'),
+(2581,85,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 14:30:49'),
+(2582,85,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 14:30:49'),
+(2583,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 14:33:38'),
+(2584,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 14:33:38'),
+(2585,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 14:33:38'),
+(2586,80,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 14:33:49'),
+(2587,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:34:01'),
+(2588,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:34:04'),
+(2589,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:34:06'),
+(2590,85,'http://ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:34:10'),
+(2591,85,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:34:11'),
+(2592,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:34:13'),
+(2593,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:34:15'),
+(2594,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:34:16'),
+(2595,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:34:17'),
+(2596,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:34:18'),
+(2597,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:34:19'),
+(2598,85,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:34:38'),
+(2599,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:34:43'),
+(2600,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:34:49'),
+(2601,85,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:35:45'),
+(2602,85,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:35:49'),
+(2603,85,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:36:49'),
+(2604,80,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 14:38:14'),
+(2605,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 14:38:14'),
+(2606,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 14:38:14'),
+(2607,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:38:15'),
+(2608,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:38:17'),
+(2609,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:18'),
+(2610,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:20'),
+(2611,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:20'),
+(2612,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:22'),
+(2613,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:25'),
+(2614,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:30'),
+(2615,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:31'),
+(2616,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:33'),
+(2617,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:33'),
+(2618,85,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:38'),
+(2619,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 14:38:43'),
+(2620,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 14:38:43'),
+(2621,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 14:38:43'),
+(2622,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 14:38:47'),
+(2623,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:38:48'),
+(2624,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:49'),
+(2625,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:51'),
+(2626,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:58'),
+(2627,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:38:59'),
+(2628,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:39:00'),
+(2629,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:39:02'),
+(2630,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:39:02'),
+(2631,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:39:05'),
+(2632,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:39:07'),
+(2633,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:39:13'),
+(2634,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:39:14'),
+(2635,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:39:15'),
+(2636,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:39:16'),
+(2637,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/','','2026-04-22 14:39:17'),
+(2638,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:39:42'),
+(2639,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:39:45'),
+(2640,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/strona-glowna/23-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 14:39:46'),
+(2641,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 14:39:46'),
+(2642,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 14:39:46'),
+(2643,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:39:47'),
+(2644,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:39:47'),
+(2645,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:39:49'),
+(2646,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:39:50'),
+(2647,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:39:51'),
+(2648,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:39:52'),
+(2649,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:39:53'),
+(2650,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:39:53'),
+(2651,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:40:09'),
+(2652,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:40:10'),
+(2653,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:40:13'),
+(2654,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 14:40:23'),
+(2655,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:40:24'),
+(2656,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 14:40:29'),
+(2657,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:40:33'),
+(2658,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:40:34'),
+(2659,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:40:36'),
+(2660,85,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:40:42'),
+(2661,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:41:30'),
+(2662,85,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:41:59'),
+(2663,86,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:42:13'),
+(2664,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:42:57'),
+(2665,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:42:59'),
+(2666,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:43:02'),
+(2667,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/','','2026-04-22 14:43:05'),
+(2668,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:43:11'),
+(2669,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:43:12'),
+(2670,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:43:14'),
+(2671,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:43:18'),
+(2672,86,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:43:23'),
+(2673,86,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:43:25'),
+(2674,86,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:43:26'),
+(2675,86,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:43:29'),
+(2676,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:46:01'),
+(2677,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:46:05'),
+(2678,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:46:07'),
+(2679,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:48:19'),
+(2680,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/','','2026-04-22 14:48:21'),
+(2681,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:48:25'),
+(2682,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:48:29'),
+(2683,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:48:30'),
+(2684,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:48:32'),
+(2685,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:48:32'),
+(2686,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:48:44'),
+(2687,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:49:59'),
+(2688,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:52:05'),
+(2689,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:52:08'),
+(2690,86,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:53:12'),
+(2691,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/','','2026-04-22 14:55:21'),
+(2692,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','ceres-floral.test:8090/','','2026-04-22 14:57:28'),
+(2693,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:57:34'),
+(2694,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 14:57:35'),
+(2695,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:57:43'),
+(2696,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=3','','2026-04-22 14:57:45'),
+(2697,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:57:48'),
+(2698,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 14:57:49'),
+(2699,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 14:59:11'),
+(2700,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 14:59:39'),
+(2701,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:00:27'),
+(2702,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:00:32'),
+(2703,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:00:35'),
+(2704,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:00:37'),
+(2705,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:05:58'),
+(2706,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:06:03'),
+(2707,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:06:04'),
+(2708,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','ceres-floral.test:8090/','','2026-04-22 15:06:52'),
+(2709,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:23:20'),
+(2710,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:23:26'),
+(2711,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:23:34'),
+(2712,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:23:44'),
+(2713,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','ceres-floral.test:8090/','','2026-04-22 15:24:19'),
+(2714,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:25:16'),
+(2715,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','ceres-floral.test:8090/','','2026-04-22 15:25:16'),
+(2716,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:25:39'),
+(2717,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:25:42'),
+(2718,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-22 15:25:44'),
+(2719,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:25:46'),
+(2720,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:25:50'),
+(2721,87,'','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:26:08'),
+(2722,87,'','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:26:11'),
+(2723,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:26:13'),
+(2724,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-22 15:26:17'),
+(2725,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:26:19'),
+(2726,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:26:21'),
+(2727,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:32:30'),
+(2728,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:32:38'),
+(2729,87,'','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:32:46'),
+(2730,87,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:32:48'),
+(2731,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:32:52'),
+(2732,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:32:53'),
+(2733,87,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:32:57'),
+(2734,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:33:00'),
+(2735,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:33:04'),
+(2736,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:33:04'),
+(2737,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','','2026-04-22 15:33:06'),
+(2738,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=4','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:33:07'),
+(2739,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:33:08'),
+(2740,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:35:20'),
+(2741,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:35:26'),
+(2742,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:35:49'),
+(2743,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 15:35:49'),
+(2744,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 15:35:49'),
+(2745,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:35:52'),
+(2746,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:35:59'),
+(2747,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:36:19'),
+(2748,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 15:40:15'),
+(2749,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/24-58-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 15:40:18'),
+(2750,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 15:40:18'),
+(2751,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 15:40:18'),
+(2752,80,'http://ceres-floral.test:8090/strona-glowna/24-58-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:40:22'),
+(2753,80,'http://ceres-floral.test:8090/strona-glowna/24-58-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:40:25'),
+(2754,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:40:52'),
+(2755,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 15:40:52'),
+(2756,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 15:40:52'),
+(2757,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:40:55'),
+(2758,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 15:41:02'),
+(2759,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 15:41:02'),
+(2760,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 15:41:02'),
+(2761,80,'http://ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:41:07'),
+(2762,80,'http://ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:41:10'),
+(2763,80,'http://ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:41:28'),
+(2764,80,'http://ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:41:31'),
+(2765,80,'http://ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:41:33'),
+(2766,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 15:41:44'),
+(2767,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 15:41:44'),
+(2768,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 15:41:44'),
+(2769,80,'http://ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:41:47'),
+(2770,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 15:41:47'),
+(2771,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 15:41:47'),
+(2772,80,'http://ceres-floral.test:8090/strona-glowna/20-40-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 15:42:42'),
+(2773,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 15:42:45'),
+(2774,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:45:03'),
+(2775,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 15:45:10'),
+(2776,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/24-58-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 15:45:14'),
+(2777,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 15:45:14'),
+(2778,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 15:45:14'),
+(2779,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:45:19'),
+(2780,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:45:24'),
+(2781,87,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:45:46'),
+(2782,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:47:04'),
+(2783,87,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:51:37'),
+(2784,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:52:21'),
+(2785,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 15:52:26'),
+(2786,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 15:52:38'),
+(2787,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:52:44'),
+(2788,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 15:52:46'),
+(2789,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:52:52'),
+(2790,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:52:57'),
+(2791,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:53:01'),
+(2792,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:53:06'),
+(2793,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 15:53:08'),
+(2794,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 16:40:22'),
+(2795,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 16:44:39'),
+(2796,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 16:44:39'),
+(2797,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 16:44:45'),
+(2798,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 16:44:46'),
+(2799,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 16:44:48'),
+(2800,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 16:44:52'),
+(2801,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 16:44:53'),
+(2802,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 16:44:57'),
+(2803,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 16:44:58'),
+(2804,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 16:45:06'),
+(2805,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 16:45:09'),
+(2806,88,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 16:46:18'),
+(2807,88,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&nocache=1','','2026-04-22 16:47:14'),
+(2808,88,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 16:48:32'),
+(2809,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/','','2026-04-22 16:50:58'),
+(2810,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 16:53:29'),
+(2811,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/dla-firm','','2026-04-22 16:53:36'),
+(2812,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 16:53:38'),
+(2813,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 16:54:23'),
+(2814,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 16:54:39'),
+(2815,88,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&bust=1','','2026-04-22 16:54:42'),
+(2816,80,'http://ceres-floral.test:8090/dla-firm','ceres-floral.test:8090/','','2026-04-22 16:55:49'),
+(2817,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 16:55:55'),
+(2818,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 16:55:56'),
+(2819,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776869759943','','2026-04-22 16:56:01'),
+(2820,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776869761490','','2026-04-22 16:56:11'),
+(2821,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776869771746','','2026-04-22 16:56:19'),
+(2822,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776869781253','','2026-04-22 16:56:22'),
+(2823,88,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&bust=1&from-xhr=1&_=1776869682580','','2026-04-22 16:56:41'),
+(2824,88,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&hard=1','','2026-04-22 16:59:04'),
+(2825,88,'','ceres-floral.test:8090/','','2026-04-22 17:00:06'),
+(2826,88,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&test=afterbuild','','2026-04-22 17:00:19'),
+(2827,88,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&test=reloadcheck','','2026-04-22 17:00:38'),
+(2828,89,'','ceres-floral.test:8090/','','2026-04-22 17:00:47'),
+(2829,90,'','ceres-floral.test:8090/','','2026-04-22 17:01:10'),
+(2830,88,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&test=hasitem','','2026-04-22 17:01:18'),
+(2831,88,'','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 17:01:22'),
+(2832,88,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 17:01:28'),
+(2833,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776869874420&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:01:42'),
+(2834,88,'','ceres-floral.test:8090/','','2026-04-22 17:02:08'),
+(2835,88,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 17:02:44'),
+(2836,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776869874420&order=product.position.asc','','2026-04-22 17:09:34'),
+(2837,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870575061&order=product.position.asc','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870575061&order=product.position.asc','','2026-04-22 17:09:36'),
+(2838,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870576300&order=product.position.asc','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870576300&order=product.position.asc','','2026-04-22 17:09:37'),
+(2839,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870577179&order=product.position.asc','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870577179&order=product.position.asc','','2026-04-22 17:09:37'),
+(2840,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870577179&order=product.position.asc','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870577827&order=product.position.asc','','2026-04-22 17:09:39'),
+(2841,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870577179&order=product.position.asc','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870579694&order=product.position.asc','','2026-04-22 17:09:40'),
+(2842,80,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870580409&order=product.position.asc','','2026-04-22 17:09:42'),
+(2843,88,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 17:09:47'),
+(2844,88,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 17:09:48'),
+(2845,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:10:25'),
+(2846,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:10:28'),
+(2847,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:10:33'),
+(2848,88,'','ceres-floral.test:8090/','','2026-04-22 17:10:42'),
+(2849,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:10:51'),
+(2850,80,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','','2026-04-22 17:14:53'),
+(2851,80,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870893792&order=product.position.asc','','2026-04-22 17:14:58'),
+(2852,80,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870898826&order=product.position.asc','','2026-04-22 17:14:59'),
+(2853,80,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870899899&order=product.position.asc','','2026-04-22 17:15:11'),
+(2854,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:15:13'),
+(2855,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:15:16'),
+(2856,80,'','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870911197&order=product.position.asc','','2026-04-22 17:15:17'),
+(2857,88,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870588504','','2026-04-22 17:15:27'),
+(2858,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870918017&order=product.position.asc','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 17:17:50'),
+(2859,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 17:17:59'),
+(2860,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776871079756','','2026-04-22 17:19:00'),
+(2861,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776871142665','ceres-floral.test:8090/','','2026-04-22 17:19:30'),
+(2862,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 17:19:35'),
+(2863,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 17:19:37'),
+(2864,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776871180117','ceres-floral.test:8090/','','2026-04-22 17:19:41'),
+(2865,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 17:19:55'),
+(2866,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=5','','2026-04-22 17:19:56'),
+(2867,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=5&_=1776871197966','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 17:19:59'),
+(2868,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 17:19:59'),
+(2869,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776871199995','','2026-04-22 17:26:18'),
+(2870,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776871578370','ceres-floral.test:8090/','','2026-04-22 17:26:19'),
+(2871,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776871578370','ceres-floral.test:8090/','','2026-04-22 17:27:18'),
+(2872,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776871578370','ceres-floral.test:8090/','','2026-04-22 17:27:41'),
+(2873,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:30:41'),
+(2874,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:41:56'),
+(2875,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:42:06'),
+(2876,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:42:12'),
+(2877,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:45:46'),
+(2878,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:50:52'),
+(2879,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:51:17'),
+(2880,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 17:51:18'),
+(2881,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 17:51:18'),
+(2882,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 17:51:18'),
+(2883,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:51:24'),
+(2884,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:51:29'),
+(2885,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/24-58-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 17:51:43'),
+(2886,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 17:51:43'),
+(2887,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 17:51:43'),
+(2888,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:51:44'),
+(2889,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1&_=1776870582743&order=product.position.asc','ceres-floral.test:8090/','','2026-04-22 17:52:12'),
+(2890,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','','2026-04-22 17:52:14'),
+(2891,80,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/','','2026-04-22 17:52:49'),
+(2892,80,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/','','2026-04-22 17:56:20'),
+(2893,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 17:56:21'),
+(2894,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 17:56:21'),
+(2895,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 17:56:21'),
+(2896,80,'http://ceres-floral.test:8090/strona-glowna/23-52-sztuczne-tulipany-wiazanka-5-kwiatow.html','ceres-floral.test:8090/','','2026-04-22 17:56:24'),
+(2897,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 17:56:39'),
+(2898,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 17:56:39'),
+(2899,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 17:56:39'),
+(2900,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 17:56:40'),
+(2901,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 17:56:48'),
+(2902,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','','2026-04-22 17:56:49'),
+(2903,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=1','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 17:56:52'),
+(2904,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/','','2026-04-22 17:56:53'),
+(2905,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 17:56:57'),
+(2906,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=5','','2026-04-22 17:56:58'),
+(2907,80,'http://ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=5&_=1776873418336','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 17:57:06'),
+(2908,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 17:57:07'),
+(2909,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 17:57:09'),
+(2910,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/zamowienie','','2026-04-22 17:57:10'),
+(2911,80,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-22 17:57:12'),
+(2912,80,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/zamowienie','','2026-04-22 17:57:15'),
+(2913,80,'http://ceres-floral.test:8090/zamowienie','ceres-floral.test:8090/potwierdzenie-zamowienia?id_cart=11&id_module=31&id_order=9&key=a717e0d04aec41407f7ab6b75a545485','','2026-04-22 17:57:17'),
+(2914,80,'http://ceres-floral.test:8090/potwierdzenie-zamowienia?id_cart=11&id_module=31&id_order=9&key=a717e0d04aec41407f7ab6b75a545485','ceres-floral.test:8090/moje-konto','','2026-04-22 17:57:31'),
+(2915,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 17:57:34'),
+(2916,80,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/zamowienie','','2026-04-22 17:57:37'),
+(2917,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 17:57:38'),
+(2918,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 22:32:37'),
+(2919,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 22:33:26'),
+(2920,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 22:34:06'),
+(2921,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 22:34:08'),
+(2922,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 22:34:25'),
+(2923,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 22:34:39'),
+(2924,80,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/moje-konto','','2026-04-22 22:35:21'),
+(2925,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/','','2026-04-22 22:35:30'),
+(2926,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:35:33'),
+(2927,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 22:35:33'),
+(2928,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 22:35:33'),
+(2929,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 22:36:00'),
+(2930,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/moje-konto','','2026-04-22 22:36:21'),
+(2931,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 22:36:22'),
+(2932,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/module/blockwishlist/view?id_wishlist=5','','2026-04-22 22:36:24'),
+(2933,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 22:36:28'),
+(2934,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-22 22:36:34'),
+(2935,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-22 22:36:37'),
+(2936,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-22 22:36:37'),
+(2937,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 22:36:37'),
+(2938,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-22 22:36:39'),
+(2939,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/dane-osobiste','','2026-04-22 22:36:40'),
+(2940,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-22 22:36:41'),
+(2941,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/psgdpr/gdpr','','2026-04-22 22:36:42'),
+(2942,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-22 22:36:43'),
+(2943,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 22:36:43'),
+(2944,80,'http://ceres-floral.test:8090/module/blockwishlist/lists','ceres-floral.test:8090/moje-konto','','2026-04-22 22:36:45'),
+(2945,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/adresy','','2026-04-22 22:36:45'),
+(2946,80,'http://ceres-floral.test:8090/adresy','ceres-floral.test:8090/moje-konto','','2026-04-22 22:36:48'),
+(2947,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/historia-zamowien','','2026-04-22 22:36:48'),
+(2948,80,'http://ceres-floral.test:8090/historia-zamowien','ceres-floral.test:8090/moje-konto','','2026-04-22 22:36:50'),
+(2949,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 22:36:51'),
+(2950,80,'http://ceres-floral.test:8090/moje-konto','ceres-floral.test:8090/module/blockwishlist/lists','','2026-04-22 22:38:00'),
+(2951,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:38:12'),
+(2952,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 22:38:12'),
+(2953,80,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 22:38:13'),
+(2954,91,'','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:38:39'),
+(2955,91,'','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:38:42'),
+(2956,91,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 22:38:44'),
+(2957,91,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:38:50'),
+(2958,91,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-up.svg','','2026-04-22 22:38:50'),
+(2959,91,'http://ceres-floral.test:8090/themes/ceres_floral/assets/css/theme.css','ceres-floral.test:8090/themes/ceres_floral/assets/img/touchspin-down.svg','','2026-04-22 22:38:50'),
+(2960,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:40:51'),
+(2961,91,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:40:55'),
+(2962,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:46:35'),
+(2963,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 22:46:40');
 /*!40000 ALTER TABLE `ps_connections_source` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -7180,7 +8721,7 @@ CREATE TABLE `ps_customer_session` (
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_customer_session`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7191,7 +8732,8 @@ LOCK TABLES `ps_customer_session` WRITE;
 /*!40000 ALTER TABLE `ps_customer_session` DISABLE KEYS */;
 INSERT INTO `ps_customer_session` VALUES
 (1,3,'c0c776beb0a4e8cc66fe7a1ac01236a26d8fae2f','2026-04-14 21:06:41','2026-04-14 21:07:04'),
-(2,4,'27a80998fd3eeff2bb654d7bd63233e87f8c233e','2026-04-15 12:02:50','2026-04-20 17:12:51');
+(3,3,'cdca7b900ad28eab2cba51bce4a851b067e42066','2026-04-21 13:28:23','2026-04-22 22:46:40'),
+(4,3,'fe0a2922f607d52d0d8f3f9b9664a170b20b5744','2026-04-21 16:00:39','2026-04-22 22:40:55');
 /*!40000 ALTER TABLE `ps_customer_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -7439,7 +8981,7 @@ CREATE TABLE `ps_emailsubscription` (
   `active` tinyint(1) NOT NULL DEFAULT 0,
   `id_lang` int(10) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7448,6 +8990,10 @@ CREATE TABLE `ps_emailsubscription` (
 
 LOCK TABLES `ps_emailsubscription` WRITE;
 /*!40000 ALTER TABLE `ps_emailsubscription` DISABLE KEYS */;
+INSERT INTO `ps_emailsubscription` VALUES
+(1,1,1,'makaveli9996@gmail.com','2026-04-21 07:17:15','172.19.0.1','',1,1),
+(2,1,1,'kuaka2222@wp.pl','2026-04-21 07:24:20','172.19.0.1','',1,1),
+(3,1,1,'kuaka22232323@wp.pl','2026-04-21 07:24:56','172.19.0.1','',1,1);
 /*!40000 ALTER TABLE `ps_emailsubscription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -7502,7 +9048,7 @@ CREATE TABLE `ps_employee` (
 LOCK TABLES `ps_employee` WRITE;
 /*!40000 ALTER TABLE `ps_employee` DISABLE KEYS */;
 INSERT INTO `ps_employee` VALUES
-(1,1,1,'Doe','John','admin@local.test','$2y$10$7pSdL5V.2dvfRC6B25Eghu3oa1DNxeIdm2dSyrVNmAePLTeU5l6tm','2026-04-13 11:52:41','2026-03-13','2026-04-13','0000-00-00','0000-00-00',1,NULL,NULL,'default','theme.css',1,0,1,1,NULL,0,0,0,'2026-04-20',NULL,'0000-00-00 00:00:00',0);
+(1,1,1,'Doe','John','admin@local.test','$2y$10$7pSdL5V.2dvfRC6B25Eghu3oa1DNxeIdm2dSyrVNmAePLTeU5l6tm','2026-04-13 11:52:41','2026-03-13','2026-04-13','0000-00-00','0000-00-00',1,NULL,NULL,'default','theme.css',1,0,1,1,NULL,0,0,0,'2026-04-22',NULL,'0000-00-00 00:00:00',0);
 /*!40000 ALTER TABLE `ps_employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -7530,7 +9076,7 @@ CREATE TABLE `ps_employee_session` (
 LOCK TABLES `ps_employee_session` WRITE;
 /*!40000 ALTER TABLE `ps_employee_session` DISABLE KEYS */;
 INSERT INTO `ps_employee_session` VALUES
-(1,1,'6621caf2b6e8d2020faba217038e1dc43770d1b6','2026-04-13 17:54:16','2026-04-20 17:15:03'),
+(1,1,'6621caf2b6e8d2020faba217038e1dc43770d1b6','2026-04-13 17:54:16','2026-04-22 17:42:17'),
 (2,1,'41b2fabca241d858b915fbc39ce2d0e8792a2f98','2026-04-15 10:20:16','2026-04-15 20:07:37'),
 (3,1,'d9635af4b1fb0aefe349338a5985778ae623a9aa','2026-04-17 14:24:12','2026-04-20 17:08:56');
 /*!40000 ALTER TABLE `ps_employee_session` ENABLE KEYS */;
@@ -7772,7 +9318,7 @@ CREATE TABLE `ps_ganalytics` (
   PRIMARY KEY (`id_google_analytics`),
   KEY `id_order` (`id_order`),
   KEY `sent` (`sent`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7784,7 +9330,8 @@ LOCK TABLES `ps_ganalytics` WRITE;
 INSERT INTO `ps_ganalytics` VALUES
 (1,6,0,1,0,NULL,'2026-04-14 19:07:04'),
 (2,7,0,1,0,NULL,'2026-04-15 10:04:13'),
-(3,8,0,1,0,NULL,'2026-04-15 11:27:23');
+(3,8,0,1,0,NULL,'2026-04-15 11:27:23'),
+(4,9,0,1,0,NULL,'2026-04-22 15:57:17');
 /*!40000 ALTER TABLE `ps_ganalytics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -7812,7 +9359,8 @@ LOCK TABLES `ps_ganalytics_data` WRITE;
 INSERT INTO `ps_ganalytics_data` VALUES
 (6,1,'[\"gtag(\\\"event\\\", \\\"add_shipping_info\\\", {\\\"send_to\\\": false, \\\"currency\\\": \\\"PLN\\\", \\\"value\\\": 1280, \\\"shipping_tier\\\": \\\"Click and collect\\\"});\"]'),
 (7,1,'[\"gtag(\\\"event\\\", \\\"add_shipping_info\\\", {\\\"send_to\\\": false, \\\"currency\\\": \\\"PLN\\\", \\\"value\\\": 89.519999999999996, \\\"shipping_tier\\\": \\\"Click and collect\\\"});\"]'),
-(8,1,'[\"gtag(\\\"event\\\", \\\"add_shipping_info\\\", {\\\"send_to\\\": false, \\\"currency\\\": \\\"PLN\\\", \\\"value\\\": 250, \\\"shipping_tier\\\": \\\"Click and collect\\\"});\"]');
+(8,1,'[\"gtag(\\\"event\\\", \\\"add_shipping_info\\\", {\\\"send_to\\\": false, \\\"currency\\\": \\\"PLN\\\", \\\"value\\\": 250, \\\"shipping_tier\\\": \\\"Click and collect\\\"});\"]'),
+(11,1,'[\"gtag(\\\"event\\\", \\\"add_shipping_info\\\", {\\\"send_to\\\": false, \\\"currency\\\": \\\"PLN\\\", \\\"value\\\": 1030, \\\"shipping_tier\\\": \\\"Click and collect\\\"});\"]');
 /*!40000 ALTER TABLE `ps_ganalytics_data` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -8038,7 +9586,7 @@ CREATE TABLE `ps_guest` (
   KEY `id_customer` (`id_customer`),
   KEY `id_operating_system` (`id_operating_system`),
   KEY `id_web_browser` (`id_web_browser`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8054,8 +9602,13 @@ INSERT INTO `ps_guest` VALUES
 (4,6,11,4,0,0,0,0,0,0,0,0,0,0,'pl',0),
 (5,6,11,0,0,0,0,0,0,0,0,0,0,0,'en',0),
 (6,0,0,0,0,0,0,0,0,0,0,0,0,0,'',0),
-(7,6,11,3,0,0,0,0,0,0,0,0,0,0,'pl',0),
-(8,6,11,0,0,0,0,0,0,0,0,0,0,0,'en',0);
+(7,6,11,3,0,0,0,0,0,0,0,0,0,0,'en',0),
+(10,0,0,0,0,0,0,0,0,0,0,0,0,0,'',0),
+(11,0,0,0,0,0,0,0,0,0,0,0,0,0,'',0),
+(12,0,0,0,0,0,0,0,0,0,0,0,0,0,'',0),
+(13,0,0,0,0,0,0,0,0,0,0,0,0,0,'',0),
+(14,0,0,0,0,0,0,0,0,0,0,0,0,0,'',0),
+(15,0,0,0,0,0,0,0,0,0,0,0,0,0,'',0);
 /*!40000 ALTER TABLE `ps_guest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -9480,6 +11033,7 @@ INSERT INTO `ps_hook_module` VALUES
 (67,1,91,3),
 (70,1,80,3),
 (72,1,20,3),
+(81,1,31,3),
 (9,1,917,4),
 (17,1,34,4),
 (18,1,25,4),
@@ -10655,7 +12209,7 @@ CREATE TABLE `ps_log` (
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_log`)
-) ENGINE=InnoDB AUTO_INCREMENT=414 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=421 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -11077,7 +12631,14 @@ INSERT INTO `ps_log` VALUES
 (410,1,0,'Protect vendor folder in module tc_newsletter','',0,1,NULL,1,0,1,'2026-04-20 10:16:26','2026-04-20 10:16:26'),
 (411,1,0,'Module tc_newsletter has no vendor folder','',0,1,NULL,1,0,1,'2026-04-20 10:16:26','2026-04-20 10:16:26'),
 (412,1,0,'Protect vendor folder in module tc_footerlogos','',0,1,NULL,1,0,1,'2026-04-20 14:53:59','2026-04-20 14:53:59'),
-(413,1,0,'Module tc_footerlogos has no vendor folder','',0,1,NULL,1,0,1,'2026-04-20 14:53:59','2026-04-20 14:53:59');
+(413,1,0,'Module tc_footerlogos has no vendor folder','',0,1,NULL,1,0,1,'2026-04-20 14:53:59','2026-04-20 14:53:59'),
+(414,3,0,'No result was found for query although at least one row was expected.','Translation',0,1,NULL,1,0,1,'2026-04-21 09:28:38','2026-04-21 09:28:38'),
+(415,1,0,'Protect vendor folder in module tc_nestedmenu','',0,1,NULL,1,0,1,'2026-04-21 13:33:03','2026-04-21 13:33:03'),
+(416,1,0,'Module tc_nestedmenu has no vendor folder','',0,1,NULL,1,0,1,'2026-04-21 13:33:03','2026-04-21 13:33:03'),
+(417,1,0,'Protect vendor folder in module tc_quickadd','',0,1,NULL,1,0,1,'2026-04-22 17:41:50','2026-04-22 17:41:50'),
+(418,1,0,'Module tc_quickadd has no vendor folder','',0,1,NULL,1,0,1,'2026-04-22 17:41:50','2026-04-22 17:41:50'),
+(419,3,0,'Swift Error: Expected response code 220 but got an empty response','SwiftMessage',0,1,NULL,1,0,0,'2026-04-22 17:57:17','2026-04-22 17:57:17'),
+(420,3,0,'Swift Error: Expected response code 220 but got an empty response','SwiftMessage',0,1,NULL,1,0,0,'2026-04-22 17:57:17','2026-04-22 17:57:17');
 /*!40000 ALTER TABLE `ps_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -11408,13 +12969,13 @@ INSERT INTO `ps_meta_lang` VALUES
 (1,1,2,'404 error','This page cannot be found','','page-not-found'),
 (2,1,1,'Najczęściej kupowane','Nasze najlepiej sprzedające się produkty','','bestsellery'),
 (2,1,2,'Best sellers','Our best sales','','best-sellers'),
-(3,1,1,'Kontakt z nami','Skorzystaj z formularza kontaktowego','','kontakt'),
+(3,1,1,'Kontakt','Skorzystaj z formularza kontaktowego','','kontakt'),
 (3,1,2,'Contact us','Use our form to contact us','','contact-us'),
 (4,1,1,'','','',''),
 (4,1,2,'','','',''),
 (5,1,1,'Marki','Lista marek','','producenci'),
 (5,1,2,'Brands','Brands list','','brands'),
-(6,1,1,'Nowe produkty','Nasze nowe produkty','','nowe-produkty'),
+(6,1,1,'Nowości','Nasze nowe produkty','','nowe-produkty'),
 (6,1,2,'New products','Our new products','','new-products'),
 (7,1,1,'Zapomniałeś hasła','Wpisz swój adres e-mail w celu uzyskania nowego hasła','','odzyskiwanie-hasla'),
 (7,1,2,'Forgot your password','Enter the e-mail address you use to sign in to receive an e-mail with a new password','','password-recovery'),
@@ -11492,7 +13053,7 @@ CREATE TABLE `ps_module` (
   PRIMARY KEY (`id_module`),
   UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -11503,7 +13064,7 @@ LOCK TABLES `ps_module` WRITE;
 /*!40000 ALTER TABLE `ps_module` DISABLE KEYS */;
 INSERT INTO `ps_module` VALUES
 (1,'ps_linklist',1,'6.0.7'),
-(2,'blockreassurance',1,'5.1.4'),
+(2,'blockreassurance',0,'5.1.4'),
 (3,'blockwishlist',1,'3.0.2'),
 (4,'psgdpr',1,'1.4.3'),
 (5,'ps_contactinfo',1,'3.3.3'),
@@ -11580,7 +13141,8 @@ INSERT INTO `ps_module` VALUES
 (77,'tc_imagecta',1,'1.0.0'),
 (78,'tc_location',1,'1.0.0'),
 (79,'tc_newsletter',1,'1.0.0'),
-(80,'tc_footerlogos',1,'1.0.0');
+(80,'tc_footerlogos',1,'1.0.0'),
+(81,'tc_nestedmenu',1,'1.0.0');
 /*!40000 ALTER TABLE `ps_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -11920,7 +13482,11 @@ INSERT INTO `ps_module_access` VALUES
 (1,845),
 (1,846),
 (1,847),
-(1,848);
+(1,848),
+(1,849),
+(1,850),
+(1,851),
+(1,852);
 /*!40000 ALTER TABLE `ps_module_access` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -12276,7 +13842,10 @@ INSERT INTO `ps_module_group` VALUES
 (79,1,3),
 (80,1,1),
 (80,1,2),
-(80,1,3);
+(80,1,3),
+(81,1,1),
+(81,1,2),
+(81,1,3);
 /*!40000 ALTER TABLE `ps_module_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -12294,7 +13863,7 @@ CREATE TABLE `ps_module_history` (
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -12314,7 +13883,9 @@ INSERT INTO `ps_module_history` VALUES
 (8,1,4,'2026-04-17 15:06:39','2026-04-20 10:45:02'),
 (9,1,78,'2026-04-17 16:42:40','2026-04-17 16:42:40'),
 (10,1,79,'2026-04-20 10:16:31','2026-04-20 10:16:31'),
-(11,1,80,'2026-04-20 14:54:01','2026-04-20 14:54:01');
+(11,1,80,'2026-04-20 14:54:01','2026-04-20 14:54:01'),
+(12,1,3,'2026-04-21 09:53:01','2026-04-21 10:03:44'),
+(13,1,81,'2026-04-21 13:33:05','2026-04-21 13:33:05');
 /*!40000 ALTER TABLE `ps_module_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -12369,7 +13940,6 @@ LOCK TABLES `ps_module_shop` WRITE;
 /*!40000 ALTER TABLE `ps_module_shop` DISABLE KEYS */;
 INSERT INTO `ps_module_shop` VALUES
 (1,1,7),
-(2,1,7),
 (3,1,7),
 (4,1,7),
 (5,1,7),
@@ -12446,7 +14016,8 @@ INSERT INTO `ps_module_shop` VALUES
 (77,1,7),
 (78,1,7),
 (79,1,7),
-(80,1,7);
+(80,1,7),
+(81,1,7);
 /*!40000 ALTER TABLE `ps_module_shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -12662,7 +14233,7 @@ CREATE TABLE `ps_order_carrier` (
   KEY `id_order` (`id_order`),
   KEY `id_carrier` (`id_carrier`),
   KEY `id_order_invoice` (`id_order_invoice`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -12679,7 +14250,8 @@ INSERT INTO `ps_order_carrier` VALUES
 (5,5,2,0,0.000000,7.000000,8.400000,'','2026-04-13 17:52:52'),
 (6,6,1,1,1.200000,0.000000,0.000000,'','2026-04-14 21:07:04'),
 (7,7,1,2,0.000000,0.000000,0.000000,'','2026-04-15 12:04:13'),
-(8,8,1,3,0.000000,0.000000,0.000000,'','2026-04-15 13:27:23');
+(8,8,1,3,0.000000,0.000000,0.000000,'','2026-04-15 13:27:23'),
+(9,9,1,0,0.000000,0.000000,0.000000,'','2026-04-22 17:57:17');
 /*!40000 ALTER TABLE `ps_order_carrier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -12778,7 +14350,7 @@ CREATE TABLE `ps_order_detail` (
   KEY `product_attribute_id` (`product_attribute_id`),
   KEY `id_tax_rules_group` (`id_tax_rules_group`),
   KEY `id_order_id_order_detail` (`id_order`,`id_order_detail`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -12803,7 +14375,10 @@ INSERT INTO `ps_order_detail` VALUES
 (13,7,2,0,1,23,57,0,'Sztuczne Tulipany Wiązanka 5 Kwiatów 3 (Dostępne rodzaje: Żółte - Pakowanie: Paczka)',1,1,0,0,0,390.000000,22.00,0.000000,0.000000,0.000000,0.00,391.000000,'','','','','','',0.000000,0,0,'',0.000,0.000000,0.000,0,'',0,'0000-00-00 00:00:00',390.000000,390.000000,390.000000,390.000000,0.000000,0.000000,0.000000,500.000000,0.000000,0.000000,0.000000),
 (14,7,2,0,1,24,61,0,'Sztuczne Tulipany Wiązanka 5 Kwiatów 4 (Dostępne rodzaje: Zielone - Pakowanie: Paczka)',1,1,0,0,0,250.000000,0.00,0.000000,0.000000,0.000000,0.00,0.000000,'','','','','','',0.000000,0,0,'',0.000,0.000000,0.000,0,'',0,'0000-00-00 00:00:00',250.000000,250.000000,250.000000,250.000000,0.000000,0.000000,0.000000,250.000000,0.000000,0.000000,0.000000),
 (15,7,2,0,1,25,66,0,'kopia Sztuczne Tulipany Wiązanka 5 Kwiatów 5 (Dostępne rodzaje: Zielone - Pakowanie: Karton)',1,1,0,0,0,250.000000,0.00,0.000000,0.000000,0.000000,0.00,0.000000,'','','','','','',0.000000,0,0,'',0.000,0.000000,0.000,0,'',0,'0000-00-00 00:00:00',250.000000,250.000000,250.000000,250.000000,0.000000,0.000000,0.000000,250.000000,0.000000,0.000000,0.000000),
-(16,8,3,0,1,26,74,0,'kopia kopia Sztuczne Tulipany Wiązanka 5 Kwiatów 6 (Dostępne rodzaje: Żółte - Pakowanie: Karton)',1,1,0,0,0,250.000000,0.00,0.000000,0.000000,0.000000,0.00,0.000000,'','','','','','',0.000000,0,0,'',0.000,0.000000,0.000,0,'',0,'0000-00-00 00:00:00',250.000000,250.000000,250.000000,250.000000,0.000000,0.000000,0.000000,250.000000,0.000000,0.000000,0.000000);
+(16,8,3,0,1,26,74,0,'kopia kopia Sztuczne Tulipany Wiązanka 5 Kwiatów 6 (Dostępne rodzaje: Żółte - Pakowanie: Karton)',1,1,0,0,0,250.000000,0.00,0.000000,0.000000,0.000000,0.00,0.000000,'','','','','','',0.000000,0,0,'',0.000,0.000000,0.000,0,'',0,'0000-00-00 00:00:00',250.000000,250.000000,250.000000,250.000000,0.000000,0.000000,0.000000,250.000000,0.000000,0.000000,0.000000),
+(17,9,0,0,1,23,52,0,'Sztuczne Tulipany Wiązanka 5 Kwiatów 3 (Dostępne rodzaje: Czerwone - Pakowanie: Karton)',1,1,0,0,0,390.000000,22.00,0.000000,0.000000,0.000000,0.00,391.000000,'','','','','','',0.000000,0,0,'',0.000,0.000000,0.000,0,'',0,'0000-00-00 00:00:00',390.000000,390.000000,390.000000,390.000000,0.000000,0.000000,0.000000,500.000000,0.000000,0.000000,0.000000),
+(18,9,0,0,1,24,58,0,'Sztuczne Tulipany Wiązanka 5 Kwiatów 4 (Dostępne rodzaje: Czerwone - Pakowanie: Karton)',1,1,0,0,0,250.000000,0.00,0.000000,0.000000,0.000000,0.00,0.000000,'','','','','','',0.000000,0,0,'',0.000,0.000000,0.000,0,'',0,'0000-00-00 00:00:00',250.000000,250.000000,250.000000,250.000000,0.000000,0.000000,0.000000,250.000000,0.000000,0.000000,0.000000),
+(19,9,0,0,1,23,54,0,'Sztuczne Tulipany Wiązanka 5 Kwiatów 3 (Dostępne rodzaje: Zielone - Pakowanie: Karton)',1,1,0,0,0,390.000000,22.00,0.000000,0.000000,0.000000,0.00,391.000000,'','','','','','',0.000000,0,0,'',0.000,0.000000,0.000,0,'',0,'0000-00-00 00:00:00',390.000000,390.000000,390.000000,390.000000,0.000000,0.000000,0.000000,500.000000,0.000000,0.000000,0.000000);
 /*!40000 ALTER TABLE `ps_order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -12850,7 +14425,7 @@ CREATE TABLE `ps_order_history` (
   KEY `order_history_order` (`id_order`),
   KEY `id_employee` (`id_employee`),
   KEY `id_order_state` (`id_order_state`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -12872,7 +14447,8 @@ INSERT INTO `ps_order_history` VALUES
 (10,0,7,10,'2026-04-15 12:04:13'),
 (11,1,7,4,'2026-04-15 12:04:58'),
 (12,0,8,10,'2026-04-15 13:27:23'),
-(13,1,8,4,'2026-04-15 13:27:34');
+(13,1,8,4,'2026-04-15 13:27:34'),
+(14,0,9,10,'2026-04-22 17:57:17');
 /*!40000 ALTER TABLE `ps_order_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -13425,7 +15001,7 @@ CREATE TABLE `ps_orders` (
   KEY `current_state` (`current_state`),
   KEY `id_shop` (`id_shop`),
   KEY `date_add` (`date_add`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -13442,7 +15018,8 @@ INSERT INTO `ps_orders` VALUES
 (5,'KHWLILZLL',1,1,2,1,2,5,1,5,5,10,'b44a6d9efd7a0076a0fbce6b15eaf3b1','Bank wire',1.000000,'ps_wirepayment',0,0,'',0,0.000000,0.000000,0.000000,20.900000,27.300000,25.900000,0.000000,18.900000,18.900000,7.000000,8.400000,7.000000,0.000,0.000000,0.000000,0.000000,0,0,0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00',0,'2026-04-13 17:52:52','2026-04-13 17:52:52',''),
 (6,'RYGNJBWAO',1,1,1,1,3,7,3,7,7,4,'a717e0d04aec41407f7ab6b75a545485','Płatność przelewem bankowym',1.000000,'ps_wirepayment',0,0,'',0,0.000000,0.000000,0.000000,89.520000,89.520000,89.520000,89.520000,89.520000,89.520000,0.000000,0.000000,0.000000,0.000,0.000000,0.000000,0.000000,2,2,1,1,'2026-04-14 21:07:38','2026-04-14 21:07:38',1,'2026-04-14 21:07:03','2026-04-14 21:07:38',''),
 (7,'LSUPJRTLO',1,1,1,1,4,6,3,8,8,4,'f0b5aa9c10e0b74426e5b5a1686f135a','Płatność przelewem bankowym',1.000000,'ps_wirepayment',0,0,'',0,0.000000,0.000000,0.000000,1280.000000,1280.000000,1280.000000,1280.000000,1280.000000,1280.000000,0.000000,0.000000,0.000000,0.000,0.000000,0.000000,0.000000,2,2,2,2,'2026-04-15 12:04:58','2026-04-15 12:04:58',1,'2026-04-15 12:04:13','2026-04-15 12:04:58',''),
-(8,'WKELDVZRV',1,1,1,1,4,8,3,8,8,4,'f0b5aa9c10e0b74426e5b5a1686f135a','Płatność przelewem bankowym',1.000000,'ps_wirepayment',0,0,'',0,0.000000,0.000000,0.000000,250.000000,250.000000,250.000000,250.000000,250.000000,250.000000,0.000000,0.000000,0.000000,0.000,0.000000,0.000000,0.000000,2,2,3,3,'2026-04-15 13:27:34','2026-04-15 13:27:34',1,'2026-04-15 13:27:23','2026-04-15 13:27:34','');
+(8,'WKELDVZRV',1,1,1,1,4,8,3,8,8,4,'f0b5aa9c10e0b74426e5b5a1686f135a','Płatność przelewem bankowym',1.000000,'ps_wirepayment',0,0,'',0,0.000000,0.000000,0.000000,250.000000,250.000000,250.000000,250.000000,250.000000,250.000000,0.000000,0.000000,0.000000,0.000,0.000000,0.000000,0.000000,2,2,3,3,'2026-04-15 13:27:34','2026-04-15 13:27:34',1,'2026-04-15 13:27:23','2026-04-15 13:27:34',''),
+(9,'NBHLBJKOY',1,1,1,1,3,11,3,7,7,10,'a717e0d04aec41407f7ab6b75a545485','Płatność przelewem bankowym',1.000000,'ps_wirepayment',0,0,'',0,0.000000,0.000000,0.000000,1030.000000,1030.000000,1030.000000,0.000000,1030.000000,1030.000000,0.000000,0.000000,0.000000,0.000,0.000000,0.000000,0.000000,2,2,0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00',0,'2026-04-22 17:57:17','2026-04-22 17:57:17','');
 /*!40000 ALTER TABLE `ps_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -13486,7 +15063,7 @@ CREATE TABLE `ps_page` (
   PRIMARY KEY (`id_page`),
   KEY `id_page_type` (`id_page_type`),
   KEY `id_object` (`id_object`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -13497,7 +15074,13 @@ LOCK TABLES `ps_page` WRITE;
 /*!40000 ALTER TABLE `ps_page` DISABLE KEYS */;
 INSERT INTO `ps_page` VALUES
 (1,1,NULL),
-(2,2,NULL);
+(2,2,NULL),
+(3,3,NULL),
+(4,4,NULL),
+(5,5,NULL),
+(6,6,NULL),
+(7,7,NULL),
+(8,8,NULL);
 /*!40000 ALTER TABLE `ps_page` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -13513,7 +15096,7 @@ CREATE TABLE `ps_page_type` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id_page_type`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -13523,8 +15106,14 @@ CREATE TABLE `ps_page_type` (
 LOCK TABLES `ps_page_type` WRITE;
 /*!40000 ALTER TABLE `ps_page_type` DISABLE KEYS */;
 INSERT INTO `ps_page_type` VALUES
+(3,'authentication'),
+(8,'cart'),
+(4,'gdpr'),
 (1,'index'),
-(2,'pagenotfound');
+(7,'lists'),
+(2,'pagenotfound'),
+(5,'search'),
+(6,'view');
 /*!40000 ALTER TABLE `ps_page_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -16074,7 +17663,7 @@ CREATE TABLE `ps_statssearch` (
   `results` int(6) NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_statssearch`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -16084,7 +17673,94 @@ CREATE TABLE `ps_statssearch` (
 LOCK TABLES `ps_statssearch` WRITE;
 /*!40000 ALTER TABLE `ps_statssearch` DISABLE KEYS */;
 INSERT INTO `ps_statssearch` VALUES
-(1,1,1,'te',0,'2026-04-14 09:34:01');
+(1,1,1,'te',0,'2026-04-14 09:34:01'),
+(2,1,1,'te',0,'2026-04-21 17:31:46'),
+(3,1,1,'test',6,'2026-04-21 17:31:47'),
+(4,1,1,'te',0,'2026-04-21 17:31:48'),
+(5,1,1,'tet',0,'2026-04-21 17:31:49'),
+(6,1,1,'te',0,'2026-04-21 17:31:51'),
+(7,1,1,'kopia',2,'2026-04-21 17:31:55'),
+(8,1,1,'kopi',2,'2026-04-21 17:32:02'),
+(9,1,1,'kop',2,'2026-04-21 17:32:14'),
+(10,1,1,'kopia',2,'2026-04-21 17:32:16'),
+(11,1,1,'kopia',2,'2026-04-21 17:32:16'),
+(12,1,1,'kopia',2,'2026-04-21 17:33:16'),
+(13,1,1,'kopia',2,'2026-04-21 17:34:19'),
+(14,1,1,'kopia',2,'2026-04-21 17:36:27'),
+(15,1,1,'kopia',2,'2026-04-21 17:39:56'),
+(16,1,1,'kopia',2,'2026-04-21 17:40:17'),
+(17,1,1,'kop',2,'2026-04-21 17:40:28'),
+(18,1,1,'kopia',2,'2026-04-21 17:41:06'),
+(19,1,1,'kop',2,'2026-04-21 17:41:17'),
+(20,1,1,'kopia',2,'2026-04-21 17:41:26'),
+(21,1,1,'ko',0,'2026-04-21 17:41:55'),
+(22,1,1,'kopia',2,'2026-04-21 17:41:56'),
+(23,1,1,'kopi',2,'2026-04-21 17:42:28'),
+(24,1,1,'kop',2,'2026-04-21 17:42:28'),
+(25,1,1,'kk',0,'2026-04-21 17:42:44'),
+(26,1,1,'kopia',2,'2026-04-21 17:42:45'),
+(27,1,1,'te',0,'2026-04-21 17:45:15'),
+(28,1,1,'test',6,'2026-04-21 17:45:15'),
+(29,1,1,'test',6,'2026-04-21 17:45:25'),
+(30,1,1,'kopia',2,'2026-04-21 17:45:27'),
+(31,1,1,'kopia',2,'2026-04-21 17:45:35'),
+(32,1,1,'kop',2,'2026-04-21 17:45:52'),
+(33,1,1,'kopia',2,'2026-04-21 17:45:53'),
+(34,1,1,'k',0,'2026-04-21 17:47:16'),
+(35,1,1,'kopia',2,'2026-04-21 17:47:18'),
+(36,1,1,'kopia',2,'2026-04-21 17:47:57'),
+(37,1,1,'ko',0,'2026-04-21 17:48:10'),
+(38,1,1,'kop',2,'2026-04-21 17:48:12'),
+(39,1,1,'tu',0,'2026-04-21 17:48:16'),
+(40,1,1,'tulipa',6,'2026-04-21 17:48:16'),
+(41,1,1,'kopia',2,'2026-04-22 11:11:12'),
+(42,1,1,'kop',2,'2026-04-22 11:11:21'),
+(43,1,1,'kopia',2,'2026-04-22 11:11:22'),
+(44,1,1,'kop',2,'2026-04-22 11:11:35'),
+(45,1,1,'ko',0,'2026-04-22 11:12:47'),
+(46,1,1,'kopi',2,'2026-04-22 11:12:48'),
+(47,1,1,'kopia',2,'2026-04-22 11:13:45'),
+(48,1,1,'kopia',2,'2026-04-22 11:14:26'),
+(49,1,1,'kopia',2,'2026-04-22 11:14:40'),
+(50,1,1,'ko',0,'2026-04-22 11:15:00'),
+(51,1,1,'kopia',2,'2026-04-22 11:15:02'),
+(52,1,1,'ko',0,'2026-04-22 11:15:23'),
+(53,1,1,'kopia',2,'2026-04-22 11:15:24'),
+(54,1,1,'kop',2,'2026-04-22 11:15:36'),
+(55,1,1,'kopia',2,'2026-04-22 11:15:38'),
+(56,1,1,'kopia',2,'2026-04-22 11:16:24'),
+(57,1,1,'kopia',2,'2026-04-22 11:17:42'),
+(58,1,1,'kop',2,'2026-04-22 11:18:02'),
+(59,1,1,'kopia',2,'2026-04-22 11:18:03'),
+(60,1,1,'kopia',2,'2026-04-22 11:19:35'),
+(61,1,1,'kopia',2,'2026-04-22 11:19:42'),
+(62,1,1,'kopia',2,'2026-04-22 11:20:08'),
+(63,1,1,'kop',2,'2026-04-22 11:20:36'),
+(64,1,1,'kopia',2,'2026-04-22 11:20:44'),
+(65,1,1,'kop',2,'2026-04-22 11:21:02'),
+(66,1,1,'kopia',2,'2026-04-22 11:21:04'),
+(67,1,1,'kop',2,'2026-04-22 11:21:28'),
+(68,1,1,'kopia',2,'2026-04-22 11:21:31'),
+(69,1,1,'kopia',2,'2026-04-22 11:21:38'),
+(70,1,1,'ko',0,'2026-04-22 11:22:02'),
+(71,1,1,'kop',2,'2026-04-22 11:22:03'),
+(72,1,1,'kopia',2,'2026-04-22 11:22:03'),
+(73,1,1,'kop',2,'2026-04-22 11:23:38'),
+(74,1,1,'kopi',2,'2026-04-22 11:23:39'),
+(75,1,1,'kopia',2,'2026-04-22 11:23:39'),
+(76,1,1,'kop',2,'2026-04-22 11:24:12'),
+(77,1,1,'kopia',2,'2026-04-22 11:24:12'),
+(78,1,1,'kop',2,'2026-04-22 11:25:04'),
+(79,1,1,'kopia',2,'2026-04-22 11:25:05'),
+(80,1,1,'ko',0,'2026-04-22 11:25:30'),
+(81,1,1,'kopia',2,'2026-04-22 11:25:32'),
+(82,1,1,'kopia',2,'2026-04-22 11:26:24'),
+(83,1,1,'kopia',2,'2026-04-22 11:27:12'),
+(84,1,1,'kopia',2,'2026-04-22 11:28:17'),
+(85,1,1,'ko',0,'2026-04-22 11:28:32'),
+(86,1,1,'kopia',2,'2026-04-22 11:28:32'),
+(87,1,1,'kopia',2,'2026-04-22 11:28:57'),
+(88,1,1,'kopi',2,'2026-04-22 14:54:31');
 /*!40000 ALTER TABLE `ps_statssearch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -16173,15 +17849,15 @@ INSERT INTO `ps_stock_available` VALUES
 (71,22,49,1,0,0,0,0,0,2,''),
 (72,22,50,1,0,0,0,0,0,2,''),
 (73,22,51,1,0,0,0,0,0,2,''),
-(74,23,0,1,0,299,299,0,0,2,''),
-(75,23,52,1,0,50,50,0,0,2,''),
+(74,23,0,1,0,297,297,0,0,2,''),
+(75,23,52,1,0,49,50,1,0,2,''),
 (76,23,53,1,0,50,50,0,0,2,''),
-(77,23,54,1,0,50,50,0,0,2,''),
+(77,23,54,1,0,49,50,1,0,2,''),
 (78,23,55,1,0,50,50,0,0,2,''),
 (79,23,56,1,0,50,50,0,0,2,''),
 (80,23,57,1,0,49,49,0,0,2,''),
-(81,24,0,1,0,299,299,0,0,2,''),
-(82,24,58,1,0,50,50,0,0,2,''),
+(81,24,0,1,0,298,298,0,0,2,''),
+(82,24,58,1,0,49,50,1,0,2,''),
 (83,24,59,1,0,50,50,0,0,2,''),
 (84,24,60,1,0,50,50,0,0,2,''),
 (85,24,61,1,0,49,49,0,0,2,''),
@@ -16945,7 +18621,7 @@ INSERT INTO `ps_tab` VALUES
 (116,0,4,NULL,'DEFAULT','',1,1,'','More','Admin.Navigation.Menu'),
 (117,-1,1,NULL,'AdminPatterns','',1,1,'','',''),
 (118,43,5,'ps_linklist','AdminLinkWidget','admin_link_block_list',1,1,'','Link List','Modules.Linklist.Admin'),
-(119,0,5,'blockreassurance','AdminBlockListing','',0,1,'',NULL,NULL),
+(119,0,5,'blockreassurance','AdminBlockListing','',0,0,'',NULL,NULL),
 (120,38,1,'blockwishlist','WishlistConfigurationAdminParentController','',0,1,'',NULL,NULL),
 (121,120,1,'blockwishlist','WishlistConfigurationAdminController','',1,1,'',NULL,NULL),
 (122,120,2,'blockwishlist','WishlistStatisticsAdminController','',1,1,'',NULL,NULL),
@@ -17489,6 +19165,122 @@ INSERT INTO `ps_tc_attribute_extra` VALUES
 (29,'12 paczek'),
 (30,'12 sztuk');
 /*!40000 ALTER TABLE `ps_tc_attribute_extra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ps_tc_nestedmenu_node`
+--
+
+DROP TABLE IF EXISTS `ps_tc_nestedmenu_node`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ps_tc_nestedmenu_node` (
+  `id_tc_nestedmenu_node` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_parent` int(10) unsigned NOT NULL DEFAULT 0,
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `new_window` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_tc_nestedmenu_node`),
+  KEY `id_parent` (`id_parent`),
+  KEY `position` (`position`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ps_tc_nestedmenu_node`
+--
+
+LOCK TABLES `ps_tc_nestedmenu_node` WRITE;
+/*!40000 ALTER TABLE `ps_tc_nestedmenu_node` DISABLE KEYS */;
+INSERT INTO `ps_tc_nestedmenu_node` VALUES
+(1,0,1,1,0),
+(2,0,2,1,0),
+(3,0,3,1,0),
+(4,0,4,1,0),
+(5,0,5,1,0),
+(6,0,6,1,0),
+(7,0,7,1,0),
+(8,1,1,1,0),
+(9,1,2,1,0);
+/*!40000 ALTER TABLE `ps_tc_nestedmenu_node` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ps_tc_nestedmenu_node_lang`
+--
+
+DROP TABLE IF EXISTS `ps_tc_nestedmenu_node_lang`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ps_tc_nestedmenu_node_lang` (
+  `id_tc_nestedmenu_node` int(10) unsigned NOT NULL,
+  `id_lang` int(10) unsigned NOT NULL,
+  `id_shop` int(10) unsigned NOT NULL,
+  `label` varchar(128) NOT NULL DEFAULT '',
+  `link` varchar(512) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_tc_nestedmenu_node`,`id_lang`,`id_shop`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ps_tc_nestedmenu_node_lang`
+--
+
+LOCK TABLES `ps_tc_nestedmenu_node_lang` WRITE;
+/*!40000 ALTER TABLE `ps_tc_nestedmenu_node_lang` DISABLE KEYS */;
+INSERT INTO `ps_tc_nestedmenu_node_lang` VALUES
+(1,1,1,'Kategorie','#'),
+(1,2,1,'',''),
+(2,1,1,'Nowości','http://ceres-floral.test:8090/nowe-produkty'),
+(2,2,1,'',''),
+(3,1,1,'Promocje','http://ceres-floral.test:8090/promocje'),
+(3,2,1,'',''),
+(4,1,1,'O nas','http://ceres-floral.test:8090/o-nas'),
+(4,2,1,'',''),
+(5,1,1,'Dla firm','dla-firm'),
+(5,2,1,'',''),
+(6,1,1,'FAQ','http://ceres-floral.test:8090/faq'),
+(6,2,1,'',''),
+(7,1,1,'Kontakt','http://ceres-floral.test:8090/kontakt'),
+(7,2,1,'',''),
+(8,1,1,'Kwiaty wyrobowe','http://ceres-floral.test:8090/10-kwiaty-wyrobowe'),
+(8,2,1,'',''),
+(9,1,1,'Kwiaty pojedyczne','http://ceres-floral.test:8090/11-kwiaty-pojedyczne'),
+(9,2,1,'','');
+/*!40000 ALTER TABLE `ps_tc_nestedmenu_node_lang` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ps_tc_nestedmenu_node_shop`
+--
+
+DROP TABLE IF EXISTS `ps_tc_nestedmenu_node_shop`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ps_tc_nestedmenu_node_shop` (
+  `id_tc_nestedmenu_node` int(10) unsigned NOT NULL,
+  `id_shop` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_tc_nestedmenu_node`,`id_shop`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ps_tc_nestedmenu_node_shop`
+--
+
+LOCK TABLES `ps_tc_nestedmenu_node_shop` WRITE;
+/*!40000 ALTER TABLE `ps_tc_nestedmenu_node_shop` DISABLE KEYS */;
+INSERT INTO `ps_tc_nestedmenu_node_shop` VALUES
+(1,1),
+(2,1),
+(3,1),
+(4,1),
+(5,1),
+(6,1),
+(7,1),
+(8,1),
+(9,1);
+/*!40000 ALTER TABLE `ps_tc_nestedmenu_node_shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -18091,7 +19883,7 @@ CREATE TABLE `ps_translation` (
   PRIMARY KEY (`id_translation`),
   KEY `IDX_ADEBEB36BA299860` (`id_lang`),
   KEY `key` (`domain`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -18100,6 +19892,8 @@ CREATE TABLE `ps_translation` (
 
 LOCK TABLES `ps_translation` WRITE;
 /*!40000 ALTER TABLE `ps_translation` DISABLE KEYS */;
+INSERT INTO `ps_translation` VALUES
+(1,1,'You have successfully subscribed to this newsletter.','Zostałeś zapisany do newslettera!','ModulesEmailsubscriptionShop',NULL);
 /*!40000 ALTER TABLE `ps_translation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -18345,7 +20139,7 @@ CREATE TABLE `ps_wishlist` (
   `date_upd` datetime NOT NULL,
   `default` int(10) unsigned DEFAULT 0,
   PRIMARY KEY (`id_wishlist`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -18356,7 +20150,8 @@ LOCK TABLES `ps_wishlist` WRITE;
 /*!40000 ALTER TABLE `ps_wishlist` DISABLE KEYS */;
 INSERT INTO `ps_wishlist` VALUES
 (1,3,1,1,'E9B6E63ED1077101','Moja lista życzeń',NULL,'2026-04-14 21:06:41','2026-04-14 21:06:41',1),
-(2,4,1,1,'39646747C748CA42','Moja lista życzeń',NULL,'2026-04-15 12:02:50','2026-04-15 12:02:50',1);
+(2,4,1,1,'39646747C748CA42','Moja lista życzeń',NULL,'2026-04-15 12:02:50','2026-04-15 12:02:50',1),
+(5,3,1,1,'05986B887FF37AF5','test',NULL,'2026-04-22 17:19:53','2026-04-22 17:19:53',0);
 /*!40000 ALTER TABLE `ps_wishlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -18375,7 +20170,7 @@ CREATE TABLE `ps_wishlist_product` (
   `quantity` int(10) unsigned NOT NULL,
   `priority` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_wishlist_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -18384,6 +20179,11 @@ CREATE TABLE `ps_wishlist_product` (
 
 LOCK TABLES `ps_wishlist_product` WRITE;
 /*!40000 ALTER TABLE `ps_wishlist_product` DISABLE KEYS */;
+INSERT INTO `ps_wishlist_product` VALUES
+(7,3,24,0,1,1),
+(8,3,23,0,1,1),
+(10,4,25,0,1,1),
+(19,5,23,0,1,1);
 /*!40000 ALTER TABLE `ps_wishlist_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -18486,4 +20286,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-20 15:15:09
+-- Dump completed on 2026-04-22 20:47:00

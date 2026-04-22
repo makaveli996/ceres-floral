@@ -408,3 +408,18 @@ body#checkout .additional-information {
     @include heading-2-bold;
   }
 }
+
+.reorder-link {
+  @include body-regular;
+  color: var(--clr-orange);
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+}
+
+.wishlist-modal .modal-cancel:hover {
+  opacity: 1 !important;
+}
+
+.modal-cancel {
+  margin-right: 10px;
+}
