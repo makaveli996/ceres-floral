@@ -5,6 +5,7 @@ import initProductSlider from "./Sections/ProductSlider";
 import initCategorySlider from "./Sections/CategorySlider";
 import initQuickAddModal from "./Sections/QuickAddModal";
 import initLocationSlider from "./Sections/LocationSlider";
+import initMobileDrawerSearch from "./Sections/MobileDrawerSearch";
 
 function runWhenReady(fn) {
   if (document.readyState === "loading") {
@@ -21,3 +22,4 @@ runWhenReady(initProductSlider);
 runWhenReady(initCategorySlider);
 runWhenReady(initQuickAddModal);
 runWhenReady(initLocationSlider);
+runWhenReady(initMobileDrawerSearch);

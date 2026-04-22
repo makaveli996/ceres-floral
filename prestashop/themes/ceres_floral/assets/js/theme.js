@@ -3984,6 +3984,142 @@ function initMenuSticky() {
 
 /***/ },
 
+/***/ "./_dev/js/custom/Sections/MobileDrawerSearch.js"
+/*!*******************************************************!*\
+  !*** ./_dev/js/custom/Sections/MobileDrawerSearch.js ***!
+  \*******************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ initMobileDrawerSearch)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+
+function normalizeProductsPayload(resp) {
+  if (!resp) return [];
+  if (Array.isArray(resp)) return resp;
+  if (Array.isArray(resp.products)) return resp.products;
+  if (Array.isArray(resp.result)) return resp.result;
+  if (resp.products && _typeof(resp.products) === "object") {
+    return Object.values(resp.products);
+  }
+  return [];
+}
+function toAutocompleteItem(product) {
+  if (typeof product === "string") {
+    return {
+      name: product,
+      label: product,
+      value: product
+    };
+  }
+  var name = resolveProductName(product);
+  var label = name || (product === null || product === void 0 ? void 0 : product.label) || (product === null || product === void 0 ? void 0 : product.value) || "Produkt";
+  return _objectSpread(_objectSpread({}, product), {}, {
+    name: name || label,
+    label: label,
+    value: label
+  });
+}
+function resolveProductName(product) {
+  var _ref, _ref2, _ref3, _ref4, _ref5, _product$name;
+  if (typeof product === "string") {
+    return product.trim();
+  }
+  var rawName = (_ref = (_ref2 = (_ref3 = (_ref4 = (_ref5 = (_product$name = product === null || product === void 0 ? void 0 : product.name) !== null && _product$name !== void 0 ? _product$name : product === null || product === void 0 ? void 0 : product.label) !== null && _ref5 !== void 0 ? _ref5 : product === null || product === void 0 ? void 0 : product.value) !== null && _ref4 !== void 0 ? _ref4 : product === null || product === void 0 ? void 0 : product.pname) !== null && _ref3 !== void 0 ? _ref3 : product === null || product === void 0 ? void 0 : product.cname) !== null && _ref2 !== void 0 ? _ref2 : product === null || product === void 0 ? void 0 : product.title) !== null && _ref !== void 0 ? _ref : "";
+  if (typeof rawName === "string") {
+    return rawName.trim();
+  }
+  if (rawName && _typeof(rawName) === "object") {
+    var firstStringValue = Object.values(rawName).find(function (value) {
+      return typeof value === "string" && value.trim() !== "";
+    });
+    return firstStringValue ? firstStringValue.trim() : "";
+  }
+  return "";
+}
+function buildAutocompleteSource(searchURL) {
+  return function source(request, response) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().post(searchURL, {
+      s: request.term,
+      resultsPerPage: 10
+    }, null, "json").then(function (resp) {
+      response(normalizeProductsPayload(resp).map(toAutocompleteItem));
+    }).fail(function () {
+      return response([]);
+    });
+  };
+}
+function renderItem(ul, product) {
+  var _window$prestashop, _image$bySize;
+  var fallbackImage = (_window$prestashop = window.prestashop) === null || _window$prestashop === void 0 || (_window$prestashop = _window$prestashop.urls) === null || _window$prestashop === void 0 ? void 0 : _window$prestashop.no_picture_image;
+  var image = product.cover || fallbackImage;
+  var imageUrl = (image === null || image === void 0 || (_image$bySize = image.bySize) === null || _image$bySize === void 0 || (_image$bySize = _image$bySize.small_default) === null || _image$bySize === void 0 ? void 0 : _image$bySize.url) || "";
+  var productName = resolveProductName(product) || "Produkt";
+  var $image = imageUrl ? jquery__WEBPACK_IMPORTED_MODULE_0___default()("<img class=\"autocomplete-thumbnail\" src=\"".concat(imageUrl, "\">")) : jquery__WEBPACK_IMPORTED_MODULE_0___default()("<span></span>");
+  return jquery__WEBPACK_IMPORTED_MODULE_0___default()("<li>").append(jquery__WEBPACK_IMPORTED_MODULE_0___default()("<a>").append($image).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()("<span>").text(productName).addClass("product"))).appendTo(ul);
+}
+function initMobileDrawerSearch() {
+  var $wrapper = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".mobile-drawer-search");
+  var $input = $wrapper.find(".mobile-drawer-search__input");
+  if (!$wrapper.length || !$input.length) return;
+  var searchURL = $wrapper.attr("data-search-controller-url") || $wrapper.find("form").attr("action");
+  if (!searchURL) return;
+  var tryInit = function tryInit() {
+    if (!(jquery__WEBPACK_IMPORTED_MODULE_0___default().ui) || !(jquery__WEBPACK_IMPORTED_MODULE_0___default().ui).autocomplete || typeof $input.autocomplete !== "function") {
+      return false;
+    }
+    if ($input.data("mobile-autocomplete-init")) {
+      return true;
+    }
+    $input.autocomplete({
+      source: buildAutocompleteSource(searchURL),
+      minLength: 2,
+      appendTo: $wrapper,
+      position: {
+        my: "left top",
+        at: "left bottom",
+        of: $input
+      },
+      select: function select(event, ui) {
+        var _ui$item;
+        if (ui !== null && ui !== void 0 && (_ui$item = ui.item) !== null && _ui$item !== void 0 && _ui$item.url) {
+          window.location.href = ui.item.url;
+        }
+      },
+      open: function open() {
+        var $menu = $input.autocomplete("widget");
+        $menu.addClass("searchbar-autocomplete").css("width", "".concat($input.outerWidth(), "px"));
+      }
+    });
+    var autocompleteInstance = $input.data("ui-autocomplete") || $input.data("autocomplete");
+    if (autocompleteInstance) {
+      autocompleteInstance._renderItem = renderItem;
+    }
+    $input.data("mobile-autocomplete-init", true);
+    return true;
+  };
+  if (tryInit()) return;
+  var attempts = 0;
+  var interval = window.setInterval(function () {
+    attempts += 1;
+    if (tryInit() || attempts >= 20) {
+      window.clearInterval(interval);
+    }
+  }, 200);
+}
+
+/***/ },
+
 /***/ "./_dev/js/custom/Sections/MobileHeader.js"
 /*!*************************************************!*\
   !*** ./_dev/js/custom/Sections/MobileHeader.js ***!
@@ -4652,6 +4788,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Sections_CategorySlider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Sections/CategorySlider */ "./_dev/js/custom/Sections/CategorySlider.js");
 /* harmony import */ var _Sections_QuickAddModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Sections/QuickAddModal */ "./_dev/js/custom/Sections/QuickAddModal.js");
 /* harmony import */ var _Sections_LocationSlider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Sections/LocationSlider */ "./_dev/js/custom/Sections/LocationSlider.js");
+/* harmony import */ var _Sections_MobileDrawerSearch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Sections/MobileDrawerSearch */ "./_dev/js/custom/Sections/MobileDrawerSearch.js");
+
 
 
 
@@ -4673,6 +4811,7 @@ runWhenReady(_Sections_ProductSlider__WEBPACK_IMPORTED_MODULE_3__["default"]);
 runWhenReady(_Sections_CategorySlider__WEBPACK_IMPORTED_MODULE_4__["default"]);
 runWhenReady(_Sections_QuickAddModal__WEBPACK_IMPORTED_MODULE_5__["default"]);
 runWhenReady(_Sections_LocationSlider__WEBPACK_IMPORTED_MODULE_6__["default"]);
+runWhenReady(_Sections_MobileDrawerSearch__WEBPACK_IMPORTED_MODULE_7__["default"]);
 
 /***/ },
 

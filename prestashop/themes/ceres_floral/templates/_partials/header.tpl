@@ -91,6 +91,9 @@
 
         <div class="header-nav__mobile-actions">
           <div id="_mobile_user_info"></div>
+          <div id="_mobile_wishlist">
+            {hook h='displayCustomerAccount' mod='blockwishlist'}
+          </div>
           <div id="_mobile_cart"></div>
         </div>
 
@@ -104,6 +107,7 @@
          aria-hidden="true"
          style="display:none;">
       <div class="mobile-drawer__scroll">
+        {include file='_partials/mobile-drawer-search.tpl'}
         <div class="js-top-menu mobile" id="_mobile_top_menu"></div>
         <div class="js-top-menu-bottom">
           <div id="_mobile_currency_selector"></div>

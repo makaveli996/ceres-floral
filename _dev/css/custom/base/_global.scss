@@ -6,11 +6,6 @@
   @each $name, $color in $palette {
     --clr-#{"" + $name}: #{$color};
   }
-  --sticky-bar-height: 47px;
-
-  @include md(md) {
-    --sticky-bar-height: 37px;
-  }
 }
 
 *,
@@ -43,6 +38,11 @@ button {
     outline: 1px dotted !important;
     outline: 5px auto -webkit-focus-ring-color !important;
   }
+}
+
+a:focus {
+  outline: none !important;
+  outline-offset: none !important;
 }
 
 .splide__arrow:focus-visible {
@@ -79,10 +79,7 @@ body {
   max-width: 2560px;
   margin: 0 auto;
   /* Mobile: sticky bar + header-nav (no header-bar) */
-  padding: calc(
-      var(--sticky-bar-height) + var(--header-nav-height-mobile, 60px)
-    )
-    0 0;
+  padding: calc(var(--header-nav-height-mobile, 60px)) 0 0;
 
   /* Desktop: sticky bar + header-bar + header-nav */
   @include mu(lg) {
@@ -171,10 +168,10 @@ body {
 }
 
 section[id] {
-  scroll-margin-top: calc(var(--sticky-bar-height) + 90px);
+  scroll-margin-top: calc(var(--header-bar-height) + 90px);
 
   @include md(lg) {
-    scroll-margin-top: calc(var(--sticky-bar-height) + 70px);
+    scroll-margin-top: calc(var(--header-bar-height) + 70px);
   }
 }
 
@@ -202,7 +199,7 @@ section[id] {
   &__col-left-inner {
     @include mu(lg) {
       position: sticky;
-      top: calc(var(--sticky-bar-height) + 110px);
+      top: calc(var(--header-bar-height) + 110px);
     }
 
     > * {

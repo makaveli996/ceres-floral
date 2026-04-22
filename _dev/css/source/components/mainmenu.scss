@@ -101,7 +101,7 @@
 
 #mobile_top_menu_wrapper {
   padding: 15px;
-  background: $white;
+  background: var(--clr-yellow);
 
   #top-menu {
     margin-bottom: 0.625rem;
@@ -125,13 +125,16 @@
     }
 
     .navbar-toggler {
-      display: inline-block;
       padding: 0;
     }
 
     a[data-depth="0"] {
       padding: 0.625rem;
       border-bottom: 1px solid $gray-lighter;
+
+      @include media-breakpoint-down(sm) {
+        border-bottom: none;
+      }
     }
 
     .collapse {
@@ -150,7 +153,6 @@
       min-width: 100%;
       margin-left: 0;
       overflow: hidden;
-      background: $white;
       box-shadow: none;
 
       &.collapse {
@@ -186,6 +188,10 @@
         padding: 0.625rem;
         font-weight: 600;
         border-bottom: 1px solid $white;
+
+        @include media-breakpoint-down(sm) {
+          border-bottom: none;
+        }
       }
 
       ul[data-depth="2"] li a {
@@ -203,10 +209,6 @@
   }
 
   .js-top-menu-bottom {
-    a {
-      color: $gray;
-    }
-
     .language-selector-wrapper {
       padding: 0.625rem;
 
@@ -216,10 +218,6 @@
     }
 
     .currency-selector {
-      padding: 0.625rem;
-    }
-
-    #contact-link {
       padding: 0.625rem;
     }
 
