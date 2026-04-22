@@ -12858,11 +12858,17 @@ body#checkout .additional-information {
   gap: 30px;
 }
 
+@media (max-width: 1199.98px) {
+  .header-bar__contact-items {
+    gap: 15px;
+  }
+}
 .header-bar__inner {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   height: 100%;
+  gap: 10px;
 }
 
 .header-bar {
@@ -12984,6 +12990,11 @@ body#checkout .additional-information {
   max-width: 250px;
 }
 
+@media (max-width: 1199.98px) {
+  .header-bar__logo {
+    max-width: 190px;
+  }
+}
 .header-bar__logo .header-bar__logo-title {
   margin: 0;
   line-height: 1;
@@ -12995,8 +13006,7 @@ body#checkout .additional-information {
 
 .header-bar__logo img,
 .header-bar__logo svg {
-  max-height: 108px;
-  width: auto;
+  max-width: 100%;
   height: auto;
   display: block;
 }

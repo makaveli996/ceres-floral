@@ -74,6 +74,10 @@
     display: flex;
     align-items: center;
     gap: 30px;
+
+    @include md(xl) {
+      gap: 15px;
+    }
   }
 
   &__inner {
@@ -81,6 +85,7 @@
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     height: 100%;
+    gap: 10px;
   }
 
   /* ── Left: contact info (displayNav1) ── */
@@ -169,6 +174,10 @@
     transition: max-width 0.3s ease;
     max-width: 250px;
 
+    @include md(xl) {
+      max-width: 190px;
+    }
+
     .header-bar__logo-title {
       margin: 0;
       line-height: 1;
@@ -180,10 +189,7 @@
 
     img,
     svg {
-      max-height: 108px;
-      width: auto;
-      height: auto;
-      display: block;
+      @include img-fluid;
     }
   }
 
