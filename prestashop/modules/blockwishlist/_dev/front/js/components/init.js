@@ -37,9 +37,8 @@ export default function initApp(component, componentSelector, props) {
   const componentElements = document.querySelectorAll(componentSelector);
   const ComponentRoot = Vue.extend(component);
 
-  const propsData = {};
-
   componentElements.forEach((e) => {
+    const propsData = {};
     /* eslint-disable */
     for (const prop of props) {
       if (e.dataset[prop.name]) {

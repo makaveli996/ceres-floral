@@ -206,28 +206,38 @@ class WishList extends ObjectModel
      */
     public static function removeProduct($id_wishlist, $id_customer, $id_product, $id_product_attribute)
     {
-        $result = Db::getInstance()->getRow('
-            SELECT w.`id_wishlist`, wp.`id_wishlist_product`
+        $row = Db::getInstance()->getRow('
+            SELECT wp.`id_wishlist_product`
             FROM `' . _DB_PREFIX_ . 'wishlist` w
-            LEFT JOIN `' . _DB_PREFIX_ . 'wishlist_product` wp ON (wp.`id_wishlist` = w.`id_wishlist`)
-            WHERE `id_customer` = ' . (int) $id_customer . '
-            AND w.`id_wishlist` = ' . (int) $id_wishlist
+            INNER JOIN `' . _DB_PREFIX_ . 'wishlist_product` wp ON (
+                wp.`id_wishlist` = w.`id_wishlist`
+                AND wp.`id_product` = ' . (int) $id_product . '
+                AND wp.`id_product_attribute` = ' . (int) $id_product_attribute . '
+            )
+            WHERE w.`id_customer` = ' . (int) $id_customer . '
+                AND w.`id_wishlist` = ' . (int) $id_wishlist
         );
 
-        if (empty($result)) {
+        if (empty($row['id_wishlist_product'])) {
             return false;
         }
 
-        // Delete product in wishlist_product_cart
         Db::getInstance()->delete(
             'wishlist_product_cart',
-            'id_wishlist_product = ' . (int) $result['id_wishlist_product']
+            'id_wishlist_product = ' . (int) $row['id_wishlist_product']
         );
 
-        return Db::getInstance()->delete(
+        if (!Db::getInstance()->delete(
             'wishlist_product',
-            'id_wishlist = ' . (int) $id_wishlist . ' AND id_product = ' . (int) $id_product . ' AND id_product_attribute = ' . (int) $id_product_attribute
-        );
+            'id_wishlist = ' . (int) $id_wishlist
+                . ' AND id_product = ' . (int) $id_product
+                . ' AND id_product_attribute = ' . (int) $id_product_attribute
+        )) {
+            return false;
+        }
+
+        // Row existence was verified above; do not rely on Affected_Rows() (PDO/MySQL can report 0 incorrectly).
+        return true;
     }
 
     /**

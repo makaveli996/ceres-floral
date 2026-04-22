@@ -284,6 +284,20 @@ body#checkout .additional-information {
   border-radius: 5px;
 }
 
+/* Widok /module/blockwishlist/view — ikony w kafelku z v-html: bez hovera .product-tile__actions miało pointer-events: none. */
+.wishlist-products-container .wishlist-smarty-tile {
+  .product-tile {
+    .product-tile__actions {
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+}
+
+.wishlist-add-to-new i {
+  color: var(--clr-orange) !important;
+}
+
 .cart-grid-body .cart-grid-body-wrapper {
   #checkout-payment-step {
     h1 {
@@ -386,5 +400,11 @@ body#checkout .additional-information {
         float: none !important;
       }
     }
+  }
+}
+
+.wishlist-products-container-header {
+  h1 {
+    @include heading-2-bold;
   }
 }

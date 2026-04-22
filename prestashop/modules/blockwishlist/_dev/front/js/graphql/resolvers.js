@@ -32,9 +32,14 @@ export default {
      * Get product from a list
      */
     products: async (root, {url}) => {
-      const response = await fetch(`${url}&from-xhr`, {
-        headers: headers.products,
-      });
+      const sep = url.includes('?') ? '&' : '?';
+      const response = await fetch(
+        `${url}${sep}from-xhr&_=${Date.now()}`,
+        {
+          headers: headers.products,
+          cache: 'no-store',
+        },
+      );
 
       const datas = await response.json();
 

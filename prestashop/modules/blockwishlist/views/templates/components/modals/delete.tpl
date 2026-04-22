@@ -61,7 +61,7 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="modal-cancel btn btn-secondary"
+            class="modal-cancel button"
             data-dismiss="modal"
             @click="toggleModal"
           >
@@ -70,7 +70,7 @@
 
           <button
             type="button"
-            class="btn btn-primary"
+            class="button button--green"
             @click="deleteWishlist"
           >
             ((modalDeleteText))

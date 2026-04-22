@@ -111,11 +111,17 @@ class BlockWishlistViewModuleFrontController extends ProductListingFrontControll
             return;
         }
 
+        $jsBase = 'modules/' . $this->module->name . '/public/';
+        $plPath = rtrim($this->module->getLocalPath() ?: '', '/\\') . '/public/productslist.bundle.js';
+        $plVer = is_readable($plPath) ? (string) @filemtime($plPath) : null;
+        /** Jedna paczka (splitChunks: false) — brak vendors/graphql jako osobnych plików. */
         $this->context->controller->registerJavascript(
             'blockwishlistController',
-            'modules/blockwishlist/public/productslist.bundle.js',
+            $jsBase . 'productslist.bundle.js',
             [
-              'priority' => 200,
+                'position' => 'bottom',
+                'priority' => 100,
+                'version' => $plVer,
             ]
         );
 
@@ -207,6 +213,7 @@ class BlockWishlistViewModuleFrontController extends ProductListingFrontControll
 
         // prepare the products
         $products = $this->prepareMultipleProductsForTemplate($result->getProducts());
+        $products = $this->enrichWishlistProductsWithProductTileHtml($products);
 
         // render the facets with the core
         $rendered_facets = $this->renderFacets($result);
@@ -294,6 +301,81 @@ class BlockWishlistViewModuleFrontController extends ProductListingFrontControll
         }
 
         return [];
+    }
+
+    /**
+     * Dla odpowiedzi AJAX: dokłada html_tile (render motywu ceres: product-tile) — ten sam kafel co na listingu.
+     *
+     * @param array $products
+     *
+     * @return array
+     */
+    private function enrichWishlistProductsWithProductTileHtml(array $products)
+    {
+        $out = [];
+        foreach ($products as $product) {
+            $row = is_array($product) ? $product : $this->productRowToPlainArray($product);
+            if (!is_array($row)) {
+                $row = [];
+            }
+            if (isset($row['wishlist_line_id_product_attribute'])) {
+                $row['id_product_attribute'] = (int) $row['wishlist_line_id_product_attribute'];
+            }
+            $row['html_tile'] = $this->renderProductTileHtmlForWishlist($row);
+            $out[] = $row;
+        }
+
+        return $out;
+    }
+
+    /**
+     * @param mixed $product
+     *
+     * @return array
+     */
+    private function productRowToPlainArray($product)
+    {
+        if (is_array($product)) {
+            return $product;
+        }
+        if (is_object($product) && $product instanceof \JsonSerializable) {
+            $d = $product->jsonSerialize();
+
+            return is_array($d) ? $d : (array) $d;
+        }
+        if (is_object($product) && $product instanceof \ArrayAccess) {
+            return json_decode(
+                (string) json_encode($product, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                true
+            ) ?: [];
+        }
+        if (is_object($product)) {
+            return (array) $product;
+        }
+
+        return [];
+    }
+
+    /**
+     * @param array $product
+     *
+     * @return string
+     */
+    private function renderProductTileHtmlForWishlist(array $product)
+    {
+        $embed = rtrim((string) _PS_THEME_DIR_, '/\\') . '/templates/_partials/product-tile-wishlist-embed.tpl';
+        $fallback = rtrim((string) _PS_THEME_DIR_, '/\\') . '/templates/_partials/product-tile.tpl';
+        $tpl = is_readable($embed) ? $embed : $fallback;
+        if (!is_readable($tpl)) {
+            return '';
+        }
+        $this->context->smarty->assign([
+            'product' => $product,
+            'id_wishlist' => (int) $this->wishlist->id,
+            'removeFromWishlistUrl' => $this->context->link->getModuleLink('blockwishlist', 'action', ['action' => 'deleteProductFromWishlist']),
+        ]);
+
+        return (string) $this->context->smarty->fetch('file:' . $tpl);
     }
 
     public function getBreadcrumbLinks()

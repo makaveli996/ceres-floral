@@ -4,50 +4,297 @@
  *   renders a variant picker + qty selector in a modal overlay, then POSTs to PS cart.
  * Called from: _dev/js/custom/theme.js via runWhenReady(initQuickAddModal).
  * Inputs: data-product-id / data-product-url on .js-tile-quick-add buttons.
- * Side effects: updates PS cart (fires prestashop.emit updateCart), localStorage wishlist.
+ * Side effects: updates PS cart (fires prestashop.emit updateCart), wishlist UI sync.
  */
 
 const SEL_OPEN   = ".js-tile-quick-add";
 const SEL_WISH   = ".js-tile-wishlist";
-const WL_KEY     = "tc_wishlist";
 const MODULE_CTL = "tc_quickadd";
 
-// ── Wishlist (localStorage) ──────────────────────────────────────────────────
-
-function getWishlist() {
-  try { return JSON.parse(localStorage.getItem(WL_KEY) || "[]"); } catch { return []; }
+/** Native blockwishlist runs its own Vue + EventBus on these URLs; skip theme wishlist hooks there. */
+function isBlockwishlistModulePage() {
+  return window.location.pathname.includes("/module/blockwishlist/");
 }
 
-function saveWishlist(list) {
-  localStorage.setItem(WL_KEY, JSON.stringify(list));
+/** Pojedyncza lista produktów (view), nie ekran list list */
+function isBlockwishlistSingleListViewPage() {
+  return /\/module\/blockwishlist\/view/.test(window.location.pathname);
+}
+const WISH_ADD_LABEL = "Dodaj do ulubionych";
+const WISH_REMOVE_LABEL = "Usuń z ulubionych";
+
+// ── Wishlist (blockwishlist) ─────────────────────────────────────────────────
+
+function isCustomerLoggedIn() {
+  const isLogged = window?.prestashop?.customer?.is_logged;
+  return isLogged === true || isLogged === 1 || isLogged === "1";
 }
 
-function syncWishlistButtons() {
-  const list = getWishlist();
+function getTaggedProducts() {
+  return Array.isArray(window.productsAlreadyTagged) ? window.productsAlreadyTagged : [];
+}
+
+function setTaggedProducts(nextTagged) {
+  window.productsAlreadyTagged = nextTagged;
+}
+
+/**
+ * @param {Element | null} [wrap] optional .wishlist-smarty-tile (has data-remove-from-wishlist-url)
+ */
+function getRemoveFromWishlistUrl(wrap) {
+  if (window.removeFromWishlistUrl) {
+    return window.removeFromWishlistUrl;
+  }
+  if (wrap && wrap.dataset && wrap.dataset.removeFromWishlistUrl) {
+    return wrap.dataset.removeFromWishlistUrl;
+  }
+  const container = document.querySelector(".wishlist-products-container");
+  if (container && container.dataset && container.dataset.deleteProductUrl) {
+    return container.dataset.deleteProductUrl;
+  }
+  return "";
+}
+
+function setWishlistButtonState(btn, isActive, wishlistId = 0) {
+  btn.classList.toggle("is-active", isActive);
+  btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+  btn.setAttribute("aria-label", isActive ? WISH_REMOVE_LABEL : WISH_ADD_LABEL);
+  btn.setAttribute("title", isActive ? WISH_REMOVE_LABEL : WISH_ADD_LABEL);
+
+  if (wishlistId) btn.dataset.wishlistId = String(wishlistId);
+  else delete btn.dataset.wishlistId;
+}
+
+function getServerWishlistState(productId) {
+  const matches = getTaggedProducts().filter(
+    (entry) => Number(entry.id_product) === Number(productId)
+  );
+  if (!matches.length) return { isActive: false, wishlistId: 0 };
+
+  const preferred = matches.find(
+    (entry) => Number(entry.id_product_attribute || 0) === 0
+  ) || matches[0];
+
+  return {
+    isActive: true,
+    wishlistId: Number(preferred.id_wishlist) || 0,
+  };
+}
+
+function updateWishlistButtons(productId, isActive, wishlistId = 0) {
   document.querySelectorAll(SEL_WISH).forEach((btn) => {
-    const id = parseInt(btn.dataset.productId, 10);
-    btn.classList.toggle("is-active", list.includes(id));
-    btn.setAttribute(
-      "aria-pressed",
-      list.includes(id) ? "true" : "false"
-    );
+    if (Number(btn.dataset.productId) !== Number(productId)) return;
+    setWishlistButtonState(btn, isActive, wishlistId);
   });
 }
 
-function toggleWishlist(btn) {
+function syncWishlistButtons() {
+  document.querySelectorAll(SEL_WISH).forEach((btn) => {
+    const id = parseInt(btn.dataset.productId, 10);
+    if (!id) return;
+
+    const { isActive, wishlistId } = isCustomerLoggedIn()
+      ? getServerWishlistState(id)
+      : { isActive: false, wishlistId: 0 };
+    setWishlistButtonState(btn, isActive, wishlistId);
+  });
+}
+
+async function postWishlistAction(url, params) {
+  if (!url) throw new Error("Missing wishlist endpoint URL");
+
+  const query = Object.entries(params)
+    .map(([key, value]) => `params[${encodeURIComponent(key)}]=${encodeURIComponent(value)}`)
+    .join("&");
+  const fullUrl = `${url}${url.includes("?") ? "&" : "?"}${query}`;
+
+  const response = await fetch(fullUrl, {
+    method: "POST",
+    headers: { Accept: "application/json" },
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+function getWishlistEventBus() {
+  return window.WishlistEventBus || null;
+}
+
+function emitWishlistEvent(name, detail = {}) {
+  const bus = getWishlistEventBus();
+  if (!bus || typeof bus.$emit !== "function") return false;
+  bus.$emit(name, { detail });
+  return true;
+}
+
+function openAddToWishlistModal(productId) {
+  return emitWishlistEvent("showAddToWishList", {
+    productId,
+    productAttributeId: 0,
+    quantity: 1,
+    forceOpen: true,
+  });
+}
+
+function notifyWishlistToast(type, message) {
+  emitWishlistEvent("showToast", { type, message });
+}
+
+function bindWishlistBusListeners() {
+  const bus = getWishlistEventBus();
+  if (!bus || typeof bus.$on !== "function") return false;
+
+  bus.$on("addedToWishlist", (event) => {
+    const detail = event?.detail || {};
+    const productId = Number(detail.productId);
+    const listId = Number(detail.listId) || 0;
+    const productAttributeId = Number(detail.productAttributeId || 0);
+    if (!productId || !listId) return;
+
+    const tagged = getTaggedProducts();
+    const alreadyTagged = tagged.some(
+      (entry) => Number(entry.id_product) === productId
+        && Number(entry.id_wishlist) === listId
+        && Number(entry.id_product_attribute || 0) === productAttributeId
+    );
+
+    if (!alreadyTagged) {
+      tagged.push({
+        id_product: String(productId),
+        id_wishlist: String(listId),
+        id_product_attribute: String(productAttributeId),
+        quantity: "1",
+      });
+      setTaggedProducts(tagged);
+    }
+
+    const state = getServerWishlistState(productId);
+    updateWishlistButtons(productId, state.isActive, state.wishlistId);
+  });
+
+  return true;
+}
+
+/**
+ * Na stronie widoku listy: serce w kafelku usuwa produkt z tej listy (to samo co przycisk pod kafelkiem).
+ * @param {Element} triggerEl serce (.js-tile-wishlist) albo przycisk „Usuń z listy”
+ * @param {Element | null} wrapEl opcjonalnie .wishlist-smarty-tile (gdy trigger jest poza embedem HTML)
+ */
+async function removeProductFromCurrentWishlistListView(triggerEl, wrapEl = null) {
+  const wrap = wrapEl || triggerEl.closest(".wishlist-smarty-tile");
+  if (!wrap) {
+    return;
+  }
+  const fromContainer = document.querySelector(".wishlist-products-container");
+  const listId =
+    parseInt(wrap.dataset.wishlistId, 10) ||
+    (fromContainer && fromContainer.dataset
+      ? parseInt(fromContainer.dataset.listId, 10)
+      : 0) ||
+    0;
+  const idProduct =
+    parseInt(wrap.dataset.idProduct, 10) || parseInt(triggerEl.dataset.productId, 10);
+  const idAttr = parseInt(String(wrap.dataset.idProductAttribute ?? "0"), 10) || 0;
+  if (!listId || !idProduct) {
+    return;
+  }
+  const url = getRemoveFromWishlistUrl(wrap);
+  if (!url) {
+    // eslint-disable-next-line no-console
+    console.error("[wishlist] remove from list: brak URL (removeFromWishlistUrl / data-remove-from-wishlist-url)");
+    return;
+  }
+  if (triggerEl.disabled) {
+    return;
+  }
+  triggerEl.disabled = true;
+  try {
+    const removeResp = await postWishlistAction(url, {
+      id_product: idProduct,
+      idWishList: listId,
+      id_product_attribute: idAttr,
+    });
+    if (!removeResp?.success) {
+      throw new Error(removeResp?.message || "remove failed");
+    }
+    const nextTagged = getTaggedProducts().filter(
+      (entry) =>
+        !(
+          Number(entry.id_product) === idProduct
+          && Number(entry.id_wishlist) === listId
+          && Number(entry.id_product_attribute || 0) === idAttr
+        )
+    );
+    setTaggedProducts(nextTagged);
+    const heartInWrap = wrap.querySelector(SEL_WISH);
+    if (heartInWrap) {
+      setWishlistButtonState(heartInWrap, false, 0);
+    }
+    if (!emitWishlistEvent("refetchList", { detail: {} })) {
+      window.location.reload();
+      return;
+    }
+    notifyWishlistToast("success", removeResp?.message || WISH_REMOVE_LABEL);
+  } catch (err) {
+    notifyWishlistToast("error", (err && err.message) || "Błąd usuwania");
+  } finally {
+    triggerEl.disabled = false;
+  }
+}
+
+async function toggleWishlist(btn) {
   const id = parseInt(btn.dataset.productId, 10);
   if (!id) return;
-  let list = getWishlist();
-  if (list.includes(id)) {
-    list = list.filter((i) => i !== id);
-    btn.classList.remove("is-active");
-    btn.setAttribute("aria-pressed", "false");
-  } else {
-    list.push(id);
-    btn.classList.add("is-active");
-    btn.setAttribute("aria-pressed", "true");
+
+  if (!isCustomerLoggedIn()) {
+    emitWishlistEvent("showLogin");
+    return;
   }
-  saveWishlist(list);
+
+  const isActive = btn.classList.contains("is-active");
+  if (!isActive) {
+    const opened = openAddToWishlistModal(id);
+    if (!opened) {
+      // eslint-disable-next-line no-console
+      console.warn("[wishlist] EventBus unavailable, cannot open wishlist modal");
+    }
+    return;
+  }
+
+  btn.disabled = true;
+
+  try {
+    const fallbackState = getServerWishlistState(id);
+    const listId = Number(btn.dataset.wishlistId) || fallbackState.wishlistId;
+    if (!listId) throw new Error("Missing wishlist id for remove");
+
+    const removeResp = await postWishlistAction(getRemoveFromWishlistUrl(), {
+      id_product: id,
+      idWishList: listId,
+      id_product_attribute: 0,
+    });
+
+    if (!removeResp?.success) throw new Error(removeResp?.message || "Remove failed");
+
+    const nextTagged = getTaggedProducts().filter(
+      (entry) => !(
+        Number(entry.id_product) === id
+        && Number(entry.id_wishlist) === listId
+        && Number(entry.id_product_attribute || 0) === 0
+      )
+    );
+    setTaggedProducts(nextTagged);
+
+    const state = getServerWishlistState(id);
+    updateWishlistButtons(id, state.isActive, state.wishlistId);
+    notifyWishlistToast("success", removeResp.message || "Produkt usunięty z ulubionych");
+  } catch (error) {
+    notifyWishlistToast("error", "Nie udało się usunąć produktu z ulubionych.");
+    // eslint-disable-next-line no-console
+    console.error("[wishlist] toggle failed", error);
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 // ── Modal DOM builder ────────────────────────────────────────────────────────
@@ -441,16 +688,75 @@ function initQuickAddModal() {
     }
   });
 
-  // Delegate wishlist icon clicks
-  document.addEventListener("click", (e) => {
-    const btn = e.target.closest(SEL_WISH);
-    if (!btn) return;
-    e.preventDefault();
-    toggleWishlist(btn);
-  });
+  if (isBlockwishlistSingleListViewPage()) {
+    document.addEventListener(
+      "click",
+      async (e) => {
+        const btn = e.target.closest(SEL_WISH);
+        if (!btn) {
+          return;
+        }
+        if (!btn.closest(".wishlist-smarty-tile")) {
+          return;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        await removeProductFromCurrentWishlistListView(btn);
+      },
+      true
+    );
+    /** Przycisk „Usuń z listy”: jest poza v-html embedem — bierzemy .wishlist-smarty-tile z rodzeństwa, bez serca. */
+    document.addEventListener(
+      "click",
+      async (e) => {
+        const subBtn = e.target.closest(".wishlist-tile__remove button");
+        if (!subBtn) {
+          return;
+        }
+        const row = subBtn.closest(".wishlist-tile");
+        if (!row) {
+          return;
+        }
+        const wrap = row.querySelector(".wishlist-smarty-tile");
+        if (!wrap) {
+          return;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        await removeProductFromCurrentWishlistListView(subBtn, wrap);
+      },
+      true
+    );
+  }
 
-  // Sync wishlist state on load
-  syncWishlistButtons();
+  if (!isBlockwishlistModulePage()) {
+    // Delegate wishlist icon clicks (product tiles only — not module wishlist UI)
+    document.addEventListener("click", async (e) => {
+      const btn = e.target.closest(SEL_WISH);
+      if (!btn) return;
+      e.preventDefault();
+      await toggleWishlist(btn);
+    });
+
+    syncWishlistButtons();
+
+    if (!bindWishlistBusListeners() && window.prestashop?.on) {
+      window.prestashop.on("wishlistEventBusInit", () => {
+        bindWishlistBusListeners();
+        syncWishlistButtons();
+      });
+    }
+
+    let syncRaf = 0;
+    const observer = new MutationObserver(() => {
+      if (syncRaf) return;
+      syncRaf = window.requestAnimationFrame(() => {
+        syncRaf = 0;
+        syncWishlistButtons();
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
 }
 
 export default initQuickAddModal;

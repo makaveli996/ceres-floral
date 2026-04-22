@@ -116,6 +116,8 @@ class WishListProductSearchProvider implements ProductSearchProviderInterface
         if ('products' === $type) {
             $querySearch->select('p.*');
             $querySearch->select('wp.quantity AS wishlist_quantity');
+            // Exact combination stored on the wishlist row (do not use product_attribute_shop / getProductProperties id_product_attribute — they can differ).
+            $querySearch->select('wp.`id_product_attribute` AS `wishlist_line_id_product_attribute`');
             $querySearch->select('product_shop.*');
             $querySearch->select('stock.out_of_stock, IFNULL(stock.quantity, 0) AS quantity');
             $querySearch->select('pl.`description`, pl.`description_short`, pl.`link_rewrite`, pl.`meta_description`,

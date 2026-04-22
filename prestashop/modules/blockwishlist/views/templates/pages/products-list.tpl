@@ -25,6 +25,7 @@
   <div
     class="wishlist-products-container"
     data-url="{$url}"
+    data-delete-product-url="{$deleteProductUrl|escape:'html'}"
     data-list-id="{$id}"
     data-default-sort="{l s='Last added' d='Modules.Blockwishlist.Shop'}"
     data-add-to-cart="{l s='Add to cart' d='Shop.Theme.Actions'}"
@@ -34,6 +35,8 @@
     data-title="{$wishlistName}"
     data-no-products-message="{l s='No products found' d='Modules.Blockwishlist.Shop'}"
     data-filter="{l s='Sort by:' d='Shop.Theme.Global'}"
+    data-remove-from-list="{l s='Usuń z listy' d='Modules.Blockwishlist.Shop'}"
+    data-add-all-to-cart="{l s='Dodaj wszystkie do koszyka' d='Modules.Blockwishlist.Shop'}"
   >
   </div>
 

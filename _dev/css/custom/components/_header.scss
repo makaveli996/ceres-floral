@@ -1050,7 +1050,6 @@
   background: var(--clr-gray-2);
   color: var(--clr-black-2);
   overflow: hidden;
-  border-top: 1px solid var(--clr-gray-4);
 
   &__scroll {
     height: 100%;
@@ -1081,6 +1080,7 @@
     background: var(--clr-white);
     color: var(--clr-black-2);
     @include body-regular;
+    border: 1px solid var(--clr-gray);
 
     &::placeholder {
       color: var(--clr-gray);
@@ -1205,7 +1205,7 @@
     }
 
     .sub-menu {
-      background: var(--clr-yellow);
+      background: var(--clr-gray-2);
       padding: 4px 0 6px 16px;
       margin: 0 0 4px;
       border-radius: 0 0 6px 6px;
@@ -1302,4 +1302,8 @@ body {
       }
     }
   }
+}
+
+.wishlist-products-container-header {
+  gap: 15px;
 }

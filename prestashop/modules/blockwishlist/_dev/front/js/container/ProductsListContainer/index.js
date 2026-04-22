@@ -64,6 +64,14 @@ const props = [
     name: 'listId',
     type: Number,
   },
+  {
+    name: 'removeFromList',
+    type: String,
+  },
+  {
+    name: 'addAllToCart',
+    type: String,
+  },
 ];
 
 initApp(ProductsListContainer, '.wishlist-products-container', props);

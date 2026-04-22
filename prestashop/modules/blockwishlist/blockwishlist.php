@@ -123,8 +123,6 @@ class BlockWishList extends Module
     public function hookActionAdminControllerSetMedia(array $params)
     {
         $this->context->controller->addCss($this->getPathUri() . 'public/backoffice.css');
-
-        $this->context->controller->addJs($this->getPathUri() . 'public/vendors.js');
     }
 
     /**
@@ -160,27 +158,13 @@ class BlockWishList extends Module
             ]
         );
 
+        $productBundle = $this->getLocalPath() . 'public/product.bundle.js';
         $this->context->controller->registerJavascript(
             'blockwishlistController',
             'modules/' . $this->name . '/public/product.bundle.js',
             [
               'priority' => 100,
-            ]
-        );
-
-        $this->context->controller->registerJavascript(
-            'blockwishlistGraphql',
-            'modules/' . $this->name . '/public/graphql.js',
-            [
-              'priority' => 190,
-            ]
-        );
-
-        $this->context->controller->registerJavascript(
-            'blockwishlistVendors',
-            'modules/' . $this->name . '/public/vendors.js',
-            [
-              'priority' => 190,
+              'version' => is_readable($productBundle) ? (string) filemtime($productBundle) : null,
             ]
         );
     }
