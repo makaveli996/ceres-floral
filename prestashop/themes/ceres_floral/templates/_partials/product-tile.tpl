@@ -8,7 +8,12 @@
 {assign var='product_name_safe' value=''}
 {if isset($product.name)}
   {if is_array($product.name)}
-    {foreach from=$product.name item='pn' name='pn_loop'}{if $smarty.foreach.pn_loop.first}{assign var='product_name_safe' value=$pn}{/if}{/foreach}
+    {* Current language — do not use foreach.first (random / wrong locale). *}
+    {if isset($product.name[$language.id])}
+      {assign var='product_name_safe' value=$product.name[$language.id]}
+    {else}
+      {foreach from=$product.name item='pn' name='pn_loop'}{if $smarty.foreach.pn_loop.first}{assign var='product_name_safe' value=$pn}{/if}{/foreach}
+    {/if}
   {else}
     {assign var='product_name_safe' value=$product.name}
   {/if}
@@ -88,9 +93,10 @@
       {/foreach}
     {/if}
 
-    {* Hover action icons — opcjonalnie ukryj (np. lista wishlist, akcje pod kafelkiem) *}
+    {* Hover action icons — product_tile_hide_hover_actions: cały blok; product_tile_hide_wishlist: tylko serce (np. widok listy życzeń) *}
     {if empty($product_tile_hide_hover_actions)}
     <div class="product-tile__actions" aria-hidden="true">
+      {if empty($product_tile_hide_wishlist)}
       <button
         type="button"
         class="product-tile__action-btn product-tile__action-btn--wishlist js-tile-wishlist"
@@ -103,12 +109,14 @@
           <path d="M14.2246 0C13.3096 0.0142328 12.4145 0.269667 11.6298 0.740509C10.845 1.21135 10.1984 1.88092 9.75526 2.68162C9.3121 1.88092 8.6655 1.21135 7.88076 0.740509C7.09603 0.269667 6.20094 0.0142328 5.2859 0C3.82722 0.0633761 2.4529 0.70149 1.46321 1.77493C0.473509 2.84837 -0.0511209 4.26988 0.00393393 5.72891C0.00393393 9.42385 3.89309 13.4593 7.15491 16.1953C7.88318 16.8073 8.80398 17.1429 9.75526 17.1429C10.7065 17.1429 11.6273 16.8073 12.3556 16.1953C15.6174 13.4593 19.5066 9.42385 19.5066 5.72891C19.5616 4.26988 19.037 2.84837 18.0473 1.77493C17.0576 0.70149 15.6833 0.0633761 14.2246 0ZM11.3114 14.952C10.8758 15.3188 10.3247 15.52 9.75526 15.52C9.18582 15.52 8.63468 15.3188 8.19911 14.952C4.02392 11.4489 1.62916 8.08792 1.62916 5.72891C1.57361 4.70072 1.92687 3.69228 2.6119 2.92353C3.29693 2.15478 4.25814 1.68808 5.2859 1.62522C6.31367 1.68808 7.27488 2.15478 7.95991 2.92353C8.64494 3.69228 8.9982 4.70072 8.94265 5.72891C8.94265 5.94442 9.02826 6.15111 9.18066 6.30351C9.33305 6.4559 9.53974 6.54152 9.75526 6.54152C9.97078 6.54152 10.1775 6.4559 10.3299 6.30351C10.4823 6.15111 10.5679 5.94442 10.5679 5.72891C10.5123 4.70072 10.8656 3.69228 11.5506 2.92353C12.2356 2.15478 13.1969 1.68808 14.2246 1.62522C15.2524 1.68808 16.2136 2.15478 16.8986 2.92353C17.5837 3.69228 17.9369 4.70072 17.8814 5.72891C17.8814 8.08792 15.4866 11.4489 11.3114 14.9488V14.952Z"/>
         </svg>
       </button>
+      {/if}
 
       <button
         type="button"
         class="product-tile__action-btn product-tile__action-btn--cart js-tile-quick-add"
         data-product-id="{$product.id_product}"
         data-product-url="{$product.url|escape:'html':'UTF-8'}"
+        data-product-name="{$product_name_safe|escape:'html':'UTF-8'}"
         title="{l s='Dodaj do koszyka' d='Shop.Theme.Actions'}"
         aria-label="{l s='Dodaj do koszyka' d='Shop.Theme.Actions'}"
       >

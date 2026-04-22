@@ -68,10 +68,6 @@ const props = [
     name: 'removeFromList',
     type: String,
   },
-  {
-    name: 'addAllToCart',
-    type: String,
-  },
 ];
 
 initApp(ProductsListContainer, '.wishlist-products-container', props);

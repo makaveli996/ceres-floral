@@ -30,15 +30,6 @@
             ({{ products.datas.pagination.total_items }})
           </span>
         </h1>
-        <button
-          v-if="!share && products.datas && products.datas.products.length > 0"
-          type="button"
-          class="button button--green wishlist-add-all-btn"
-          :disabled="addAllInProgress"
-          @click="addAllProductsToCart"
-        >
-          {{ addAllToCartLabel }}
-        </button>
       </div>
 
       <div
@@ -154,9 +145,6 @@
   import getProducts from '@graphqlFiles/queries/getproducts';
   import {ContentLoader} from 'vue-content-loader';
   import EventBus from '@components/EventBus';
-  import headers from '@constants/headers';
-  import prestashop from 'prestashop';
-  import wishlistAddProductToCartUrl from 'wishlistAddProductToCartUrl';
 
   /**
    * This component act as a smart component wich will handle every actions of the list one
@@ -226,11 +214,6 @@
         required: false,
         default: '',
       },
-      addAllToCart: {
-        type: String,
-        required: false,
-        default: '',
-      },
     },
     data() {
       return {
@@ -238,7 +221,6 @@
         currentWishlist: {},
         apiUrl: window.location.href,
         selectedSort: '',
-        addAllInProgress: false,
       };
     },
     methods: {
@@ -250,88 +232,10 @@
         this.selectedSort = value.label;
         this.apiUrl = value.url;
       },
-      /**
-       * Dodaje do koszyka wszystkie pozycje z bieżącej listy (pomija customizowalne / bez add_to_cart).
-       */
-      /**
-       * Nazwa inna niż prop `addAllToCart` (tekst etykiety) — inaczej `this.addAllToCart` w computed to funkcja.
-       */
-      async addAllProductsToCart() {
-        if (
-          this.addAllInProgress
-          || !this.products.datas
-          || !this.products.datas.products
-        ) {
-          return;
-        }
-        const rows = this.products.datas.products;
-        this.addAllInProgress = true;
-        const listId = this.listId
-          ? this.listId
-          : parseInt(this.currentWishlist.id_wishlist, 10);
-        let lastResp = null;
-        let added = 0;
-
-        try {
-          for (let i = 0; i < rows.length; i += 1) {
-            const product = rows[i];
-            if (product.customizable || !product.add_to_cart_url) {
-              /* eslint-disable-next-line no-continue */
-              continue;
-            }
-            const datas = new FormData();
-            datas.append('qty', product.wishlist_quantity);
-            datas.append('id_product', product.id_product);
-            datas.append('id_customization', product.id_customization);
-
-            const response = await fetch(
-              `${product.add_to_cart_url}&action=update`,
-              {
-                method: 'POST',
-                headers: headers.addToCart,
-                body: datas,
-              },
-            );
-            lastResp = await response.json();
-            added += 1;
-
-            /* eslint-disable */
-            await fetch(
-              `${wishlistAddProductToCartUrl}&params[idWishlist]=${listId}&params[id_product]=${product.id_product}&params[id_product_attribute]=${product.id_product_attribute}&params[quantity]=${product.wishlist_quantity}`,
-              {
-                headers: {
-                  'Content-Type':
-                    'application/x-www-form-urlencoded; charset=UTF-8',
-                  Accept: 'application/json, text/javascript, */*; q=0.01',
-                },
-              },
-            );
-            /* eslint-enable */
-          }
-
-          if (added > 0 && lastResp) {
-            prestashop.emit('updateCart', {
-              reason: {
-                linkAction: 'add-to-cart',
-              },
-              resp: lastResp,
-            });
-          }
-          EventBus.$emit('refetchList');
-        } catch (e) {
-          /* eslint-disable no-console */
-          console.error('[wishlist] addAllToCart', e);
-        } finally {
-          this.addAllInProgress = false;
-        }
-      },
     },
     computed: {
       removeFromListLabel() {
         return this.removeFromList || 'Usuń z listy';
-      },
-      addAllToCartLabel() {
-        return this.addAllToCart || 'Dodaj wszystkie do koszyka';
       },
       productList() {
         if (!this.products.datas || !this.products.datas.sort_orders) {

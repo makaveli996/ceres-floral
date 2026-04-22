@@ -307,6 +307,23 @@
     text-align: center;
   }
 
+  &__message-actions {
+    padding: 0 24px 24px;
+    text-align: center;
+  }
+
+  &__fallback-link {
+    @include sign-regular;
+    font-size: 14px;
+    color: var(--clr-green);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: var(--clr-black-2);
+    }
+  }
+
   // Success feedback banner (injected above footer temporarily)
   &__feedback {
     padding: 10px 24px;

@@ -35,7 +35,6 @@ module.exports = {
     prestashop: 'prestashop',
     blockwishlistModule: 'blockwishlistModule',
     removeFromWishlistUrl: 'removeFromWishlistUrl',
-    wishlistAddProductToCartUrl: 'wishlistAddProductToCartUrl',
     wishlistUrl: 'wishlistUrl',
   },
   entry: {

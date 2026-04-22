@@ -9,6 +9,9 @@
  * Outputs: JSON {id_product, name, price, cover_url, groups[], combinations[], ...}.
  * Side effects: none — read-only.
  *
+ * Note: With $ajax = true, PrestaShop Controller::run() invokes displayAjax* instead of display().
+ *   displayAjax() below delegates to display() so JSON is actually sent.
+ *
  * @author Rafal Majdan
  */
 
@@ -21,7 +24,15 @@ class Tc_QuickAddProductModuleFrontController extends ModuleFrontController
 
     public function initContent(): void
     {
-        parent::initContent();
+        // Omit FrontController::initContent (Smarty, displayHeader, etc.) — this controller only emits JSON in display().
+    }
+
+    /**
+     * Required when $ajax is true: core run() calls displayAjax() / displayAjax{Action}, not display().
+     */
+    public function displayAjax(): void
+    {
+        $this->display();
     }
 
     public function display(): void
@@ -39,16 +50,30 @@ class Tc_QuickAddProductModuleFrontController extends ModuleFrontController
             $this->returnJson(['error' => 'Product not found'], 404);
         }
 
-        $currency   = $this->context->currency;
-        $idShop     = (int) $this->context->shop->id;
+        $currency = $this->context->currency;
 
         // Price (with tax, formatted)
-        $priceRaw  = Product::getPriceStatic($idProduct, true, null, 2, null, false, true, 1, false, null, null, null, $nothing);
-        $price     = Tools::displayPrice($priceRaw, $currency);
+        $specificPriceOutput = null;
+        $priceRaw = Product::getPriceStatic(
+            $idProduct,
+            true,
+            null,
+            2,
+            null,
+            false,
+            true,
+            1,
+            false,
+            null,
+            null,
+            null,
+            $specificPriceOutput
+        );
+        $price = Tools::displayPrice($priceRaw, $currency);
 
-        // Cover image URL
+        // Cover image URL (PS 8+: second argument is Context|null, not id_shop)
         $coverUrl = '';
-        $cover    = Product::getCover($idProduct, $idShop);
+        $cover    = Product::getCover($idProduct, $this->context);
         if (!empty($cover['id_image'])) {
             $coverUrl = $this->context->link->getImageLink(
                 $product->link_rewrite[$idLang] ?? $product->link_rewrite,
@@ -72,8 +97,8 @@ class Tc_QuickAddProductModuleFrontController extends ModuleFrontController
             if (!isset($groupsMap[$idAttrGroup])) {
                 $groupsMap[$idAttrGroup] = [
                     'id'         => $idAttrGroup,
-                    'name'       => $row['group_name'],
-                    'type'       => $row['group_type'],
+                    'name'       => (string) ($row['group_name'] ?? ''),
+                    'type'       => (string) ($row['group_type'] ?? ''),
                     'attributes' => [],
                 ];
             }
@@ -92,10 +117,12 @@ class Tc_QuickAddProductModuleFrontController extends ModuleFrontController
 
             // Build combination index
             if (!isset($combinationsMap[$idProductAttr])) {
+                $qty = (int) $row['quantity'];
+                $allowOos = (bool) Product::isAvailableWhenOutOfStock((int) $product->out_of_stock);
                 $combinationsMap[$idProductAttr] = [
                     'id_product_attribute' => $idProductAttr,
                     'attributes'           => [],
-                    'available'            => ((int) $row['quantity']) > 0 || !Product::isAvailableWhenOutOfStock((int) $product->out_of_stock) === false,
+                    'available'            => $qty > 0 || $allowOos,
                 ];
             }
             $combinationsMap[$idProductAttr]['attributes'][$idAttrGroup] = $idAttr;
@@ -103,9 +130,21 @@ class Tc_QuickAddProductModuleFrontController extends ModuleFrontController
 
         $defaultCombo = (int) Product::getDefaultAttribute($idProduct);
 
+        $name = Product::getProductName($idProduct, null, $idLang);
+        if ($name === false || $name === '') {
+            if (is_array($product->name)) {
+                $name = (string) ($product->name[$idLang] ?? '');
+                if ($name === '' && $product->name !== []) {
+                    $name = (string) reset($product->name);
+                }
+            } else {
+                $name = (string) $product->name;
+            }
+        }
+
         $this->returnJson([
             'id_product'          => $idProduct,
-            'name'                => $product->name[$idLang] ?? (is_array($product->name) ? reset($product->name) : (string) $product->name),
+            'name'                => (string) $name,
             'price'               => $price,
             'cover_url'           => $coverUrl,
             'groups'              => array_values($groupsMap),

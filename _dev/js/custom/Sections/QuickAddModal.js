@@ -3,7 +3,7 @@
  * Purpose: on cart icon click fetches combination data from tc_quickadd module,
  *   renders a variant picker + qty selector in a modal overlay, then POSTs to PS cart.
  * Called from: _dev/js/custom/theme.js via runWhenReady(initQuickAddModal).
- * Inputs: data-product-id / data-product-url on .js-tile-quick-add buttons.
+ * Inputs: data-product-id / data-product-url / data-product-name on .js-tile-quick-add buttons.
  * Side effects: updates PS cart (fires prestashop.emit updateCart), wishlist UI sync.
  */
 
@@ -422,7 +422,9 @@ function buildInner(data, selections) {
   const isComplete =
     !hasGroups ||
     data.groups.every((g) => selections[g.id] !== undefined);
-  const addDisabled = !isComplete || combinationId === 0 ? "disabled" : "";
+  // Simple products: id_product_attribute 0 — only disable when attribute groups exist but combo unresolved.
+  const addDisabled =
+    hasGroups && (!isComplete || combinationId === 0) ? "disabled" : "";
 
   const summary = `
     <div class="tc-qam__summary">
@@ -471,9 +473,39 @@ function getAjaxBaseUrl() {
 async function fetchProductData(productId) {
   const base = getAjaxBaseUrl();
   const url = `${base}index.php?fc=module&module=${MODULE_CTL}&controller=product&id_product=${productId}`;
-  const resp = await fetch(url, { headers: { Accept: "application/json" } });
-  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-  return resp.json();
+  const resp = await fetch(url, {
+    headers: { Accept: "application/json" },
+    credentials: "same-origin",
+  });
+  let data;
+  try {
+    data = await resp.json();
+  } catch {
+    throw new Error("INVALID_JSON");
+  }
+  if (!resp.ok || (data && typeof data.error === "string" && data.error.length)) {
+    throw new Error(data?.error || `HTTP ${resp.status}`);
+  }
+  if (!data || data.id_product == null) {
+    throw new Error("INVALID_PAYLOAD");
+  }
+  return data;
+}
+
+/**
+ * Parses cart AJAX body — may be prefixed with PHP/HTML noise; core returns JSON from displayAjaxUpdate.
+ * @returns {object|null}
+ */
+function parseCartJsonResponse(rawText) {
+  const trimmed = (rawText || "").trim();
+  if (!trimmed) return null;
+  const start = trimmed.indexOf("{");
+  if (start === -1) return null;
+  try {
+    return JSON.parse(trimmed.slice(start));
+  } catch {
+    return null;
+  }
 }
 
 async function addToCart({ idProduct, idProductAttribute, qty, cartUrl, token }) {
@@ -481,18 +513,47 @@ async function addToCart({ idProduct, idProductAttribute, qty, cartUrl, token })
     ajax: "1",
     action: "update",
     add: "1",
-    id_product: idProduct,
-    id_product_attribute: idProductAttribute || 0,
-    qty,
+    id_product: String(idProduct),
+    id_product_attribute: String(idProductAttribute || 0),
+    qty: String(qty),
     token,
   });
   const resp = await fetch(cartUrl, {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Accept: "application/json, text/javascript, */*; q=0.01",
+      "X-Requested-With": "XMLHttpRequest",
+    },
     body: body.toString(),
   });
-  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-  return resp.json();
+  const rawText = await resp.text();
+  const data = parseCartJsonResponse(rawText);
+
+  if (!resp.ok) {
+    throw new Error(`HTTP ${resp.status}`);
+  }
+  if (data && data.hasError) {
+    const errs = data.errors;
+    const msg = Array.isArray(errs) ? errs.join(" ") : String(errs || "Błąd koszyka");
+    throw new Error(msg);
+  }
+  if (data && data.success === false) {
+    throw new Error("Cart update failed");
+  }
+  // 200 + parsable success payload, or 200 + noise/HTML after successful postProcess — still refresh header cart
+  if (data && (data.success === true || data.cart)) {
+    return data;
+  }
+  if (data === null && rawText.length > 0) {
+    // Unparseable but HTTP OK — product may still have been added; let updateCart refresh preview
+    return { success: true, cart: null };
+  }
+  if (data === null && rawText.length === 0) {
+    return { success: true, cart: null };
+  }
+  return data || { success: true, cart: null };
 }
 
 // ── Modal controller ─────────────────────────────────────────────────────────
@@ -529,6 +590,27 @@ function setLoading() {
     <div class="tc-qam__loader">
       <span>Ładowanie…</span>
     </div>`;
+}
+
+/** When AJAX fails: message + optional link to full product page (variant picker). */
+function setLoadError(productPageUrl) {
+  if (!overlay) return;
+  const inner = overlay.querySelector(".tc-qam__inner");
+  inner.textContent = "";
+  const msg = document.createElement("div");
+  msg.className = "tc-qam__message";
+  msg.textContent = "Nie można załadować produktu. Spróbuj ponownie.";
+  inner.appendChild(msg);
+  if (productPageUrl && typeof productPageUrl === "string") {
+    const actions = document.createElement("div");
+    actions.className = "tc-qam__message-actions";
+    const link = document.createElement("a");
+    link.className = "tc-qam__fallback-link";
+    link.href = productPageUrl;
+    link.textContent = "Wybierz wariant na stronie produktu";
+    actions.appendChild(link);
+    inner.appendChild(actions);
+  }
 }
 
 function renderModal() {
@@ -592,16 +674,21 @@ function bindInnerEvents() {
     addBtn.textContent = "…";
 
     try {
-      await addToCart({ idProduct, idProductAttribute, qty, cartUrl, token });
+      const cartResp = await addToCart({ idProduct, idProductAttribute, qty, cartUrl, token });
       showFeedback("Dodano do koszyka!");
 
       if (window.prestashop) {
+        if (cartResp && cartResp.cart) {
+          window.prestashop.cart = cartResp.cart;
+        }
         window.prestashop.emit("updateCart", {
           reason: {
             idProduct,
             idProductAttribute,
+            idCustomization: 0,
             linkAction: "add-to-cart",
           },
+          resp: cartResp && typeof cartResp === "object" ? cartResp : { success: true },
         });
       }
 
@@ -664,6 +751,9 @@ function initQuickAddModal() {
     const productId = parseInt(btn.dataset.productId, 10);
     if (!productId) return;
 
+    const productPageUrl = btn.dataset.productUrl || "";
+    const tileName = (btn.dataset.productName || "").trim();
+
     openModal();
     setLoading();
     setTitle("Dodaj do koszyka");
@@ -680,11 +770,10 @@ function initQuickAddModal() {
         if (defCombo) currentSelections = { ...defCombo.attributes };
       }
 
-      setTitle(currentData.name);
+      setTitle(tileName || currentData.name);
       renderModal();
     } catch {
-      overlay.querySelector(".tc-qam__inner").innerHTML = `
-        <div class="tc-qam__message">Nie można załadować produktu. Spróbuj ponownie.</div>`;
+      setLoadError(productPageUrl);
     }
   });
 

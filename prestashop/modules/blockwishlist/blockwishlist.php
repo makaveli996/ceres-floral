@@ -145,7 +145,6 @@ class BlockWishList extends Module
             ),
             'removeFromWishlistUrl' => $this->context->link->getModuleLink('blockwishlist', 'action', ['action' => 'deleteProductFromWishlist']),
             'wishlistUrl' => $this->context->link->getModuleLink('blockwishlist', 'view'),
-            'wishlistAddProductToCartUrl' => $this->context->link->getModuleLink('blockwishlist', 'action', ['action' => 'addProductToCart']),
             'productsAlreadyTagged' => $productsTagged ?: [],
         ]);
 
