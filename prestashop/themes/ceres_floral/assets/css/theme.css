@@ -8776,9 +8776,6 @@ body#checkout #hook-display-after-carrier > [class^=col].links .row > [class^=co
   text-align: center;
   margin-top: 15px;
 }
-.page-customer-account #content .no-account a {
-  color: var(--clr-yellow);
-}
 
 /*** Login page ***/
 .page-authentication #content,
@@ -12596,6 +12593,20 @@ body#checkout .additional-information {
 
 .modal-cancel {
   margin-right: 10px;
+}
+
+.forgot-password a,
+.no-account a {
+  color: var(--clr-green);
+}
+
+.forgot-password a:hover,
+.no-account a:hover {
+  text-decoration: underline;
+}
+
+.input-group-btn {
+  margin-left: 10px;
 }
 
 .container-xl {

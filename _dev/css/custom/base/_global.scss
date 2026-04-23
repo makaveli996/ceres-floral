@@ -422,3 +422,18 @@ body#checkout .additional-information {
 .modal-cancel {
   margin-right: 10px;
 }
+
+.forgot-password,
+.no-account {
+  a {
+    color: var(--clr-green);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.input-group-btn {
+  margin-left: 10px;
+}
