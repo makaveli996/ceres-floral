@@ -4188,7 +4188,7 @@ CREATE TABLE `ps_connections` (
   KEY `id_guest` (`id_guest`),
   KEY `date_add` (`date_add`),
   KEY `id_page` (`id_page`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4288,7 +4288,8 @@ INSERT INTO `ps_connections` VALUES
 (88,1,1,7,6,2886926337,'2026-04-22 16:46:18',''),
 (89,1,1,14,1,2886926337,'2026-04-22 17:00:47',''),
 (90,1,1,15,1,2886926337,'2026-04-22 17:01:10',''),
-(91,1,1,7,8,2886926337,'2026-04-22 22:38:39','');
+(91,1,1,7,8,2886926337,'2026-04-22 22:38:39',''),
+(92,1,1,7,1,2886926337,'2026-04-23 09:16:16','');
 /*!40000 ALTER TABLE `ps_connections` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4336,7 +4337,7 @@ CREATE TABLE `ps_connections_source` (
   KEY `orderby` (`date_add`),
   KEY `http_referer` (`http_referer`),
   KEY `request_uri` (`request_uri`)
-) ENGINE=InnoDB AUTO_INCREMENT=2964 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2965 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7308,7 +7309,8 @@ INSERT INTO `ps_connections_source` VALUES
 (2960,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:40:51'),
 (2961,91,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:40:55'),
 (2962,80,'http://ceres-floral.test:8090/','ceres-floral.test:8090/koszyk?action=show','','2026-04-22 22:46:35'),
-(2963,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 22:46:40');
+(2963,80,'http://ceres-floral.test:8090/koszyk?action=show','ceres-floral.test:8090/','','2026-04-22 22:46:40'),
+(2964,92,'','ceres-floral.test:8090/','','2026-04-23 09:16:16');
 /*!40000 ALTER TABLE `ps_connections_source` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -8732,7 +8734,7 @@ LOCK TABLES `ps_customer_session` WRITE;
 /*!40000 ALTER TABLE `ps_customer_session` DISABLE KEYS */;
 INSERT INTO `ps_customer_session` VALUES
 (1,3,'c0c776beb0a4e8cc66fe7a1ac01236a26d8fae2f','2026-04-14 21:06:41','2026-04-14 21:07:04'),
-(3,3,'cdca7b900ad28eab2cba51bce4a851b067e42066','2026-04-21 13:28:23','2026-04-22 22:46:40'),
+(3,3,'cdca7b900ad28eab2cba51bce4a851b067e42066','2026-04-21 13:28:23','2026-04-23 09:16:16'),
 (4,3,'fe0a2922f607d52d0d8f3f9b9664a170b20b5744','2026-04-21 16:00:39','2026-04-22 22:40:55');
 /*!40000 ALTER TABLE `ps_customer_session` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -20286,4 +20288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-22 20:47:00
+-- Dump completed on 2026-04-23  7:31:13
