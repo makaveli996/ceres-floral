@@ -40,7 +40,7 @@
   {/block}
 
   <div class="hidden-md-up text-xs-right up">
-    <a href="#header" class="btn btn-secondary">
+    <a href="#header" class="button">
       {l s='Back to top' d='Shop.Theme.Actions'}
       <i class="material-icons">&#xE316;</i>
     </a>

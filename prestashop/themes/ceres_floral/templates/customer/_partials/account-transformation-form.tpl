@@ -38,7 +38,7 @@
     </div>
     <footer class="form-footer">
       <input type="hidden" name="submitTransformGuestToCustomer" value="1">
-      <button class="btn btn-primary" type="submit">{l s='Create account' d='Shop.Theme.Actions'}</button>
+      <button class="button" type="submit">{l s='Create account' d='Shop.Theme.Actions'}</button>
     </footer>
   </form>
 {/block}

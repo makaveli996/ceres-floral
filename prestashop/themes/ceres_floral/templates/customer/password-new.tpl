@@ -81,7 +81,7 @@
 
           <div class="row form-group">
             <div class="offset-md-5">
-              <button class="btn btn-primary" type="submit" name="submit">
+              <button class="button" type="submit" name="submit">
                 {l s='Change Password' d='Shop.Theme.Actions'}
               </button>
             </div>

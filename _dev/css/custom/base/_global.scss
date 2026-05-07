@@ -278,9 +278,21 @@ body#checkout .additional-information {
 .cart-container,
 .cart-summary,
 .cart-grid-body .cart-grid-body-wrapper,
-.cart-grid-right .cart-grid-right-wrapper {
+.cart-grid-right .cart-grid-right-wrapper,
+.page-content #order-history,
+.page-content #invoice-address,
+.page-content #delivery-address,
+.page-content #order-products,
+.page-content .box,
+#content-hook_order_confirmation,
+#content-hook_payment_return,
+.page-order-confirmation #content {
   border: 1px solid #bac2b75d;
   border-radius: 5px;
+}
+
+#content-hook_payment_return .col-md-12 dl {
+  margin: 15px 0;
 }
 
 /* Widok /module/blockwishlist/view — ikony w kafelku z v-html: bez hovera .product-tile__actions miało pointer-events: none. */

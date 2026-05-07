@@ -42,7 +42,7 @@
         {/block}
         {if !empty($listing.rendered_facets)}
           <div class="col-xs-4 col-sm-3 hidden-md-up filter-button">
-            <button id="search_filter_toggler" class="btn btn-secondary js-search-toggler">
+            <button id="search_filter_toggler" class="button js-search-toggler">
               {l s='Filter' d='Shop.Theme.Actions'}
             </button>
           </div>

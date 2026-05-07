@@ -51,7 +51,7 @@
                   <span class="custom-file">
                     <span class="js-file-name">{l s='No selected file' d='Shop.Forms.Help'}</span>
                     <input class="file-input js-file-input" {if $field.required} required {/if} type="file" name="{$field.input_name}" id="field-{$field.input_name}">
-                    <button class="btn btn-primary">{l s='Choose file' d='Shop.Theme.Actions'}</button>
+                    <button class="button">{l s='Choose file' d='Shop.Theme.Actions'}</button>
                   </span>
                   {assign var=authExtensions value=' .'|implode:constant('ImageManager::EXTENSIONS_SUPPORTED')}
                   <small class="float-xs-right">.{$authExtensions}</small>
@@ -60,7 +60,7 @@
             {/foreach}
           </ul>
           <div class="clearfix">
-            <button class="btn btn-primary float-xs-right" type="submit" name="submitCustomizedData">{l s='Save Customization' d='Shop.Theme.Actions'}</button>
+            <button class="button float-xs-right" type="submit" name="submitCustomizedData">{l s='Save Customization' d='Shop.Theme.Actions'}</button>
           </div>
         </form>
       {/block}
