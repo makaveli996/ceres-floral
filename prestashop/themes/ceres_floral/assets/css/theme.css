@@ -12153,6 +12153,7 @@ button {
   --clr-green-2: #79897e;
   --clr-black-2: #1a1a1a;
   --clr-orange: #f7a626;
+  --clr-orange-2: #faad14;
 }
 
 *,
@@ -17589,6 +17590,7 @@ body:not(.page-index) .sticky-bar__text {
 
 .product-tile__badge {
   position: absolute;
+  text-transform: uppercase;
   top: 17px;
   left: 17px;
   z-index: 1;
@@ -17609,8 +17611,8 @@ body:not(.page-index) .sticky-bar__text {
 }
 
 .product-tile__badge--sale {
-  background: var(--clr-green);
-  color: var(--clr-yellow);
+  background: var(--clr-orange-2);
+  color: var(--clr-black-2);
 }
 
 .product-tile__badge--new {
@@ -17639,6 +17641,9 @@ body:not(.page-index) .sticky-bar__text {
 @media (max-width: 991.98px) {
   .product-tile__actions {
     transform: none;
+    top: auto;
+    bottom: 17px;
+    pointer-events: auto;
   }
 }
 .product-tile__action-btn {
@@ -17664,8 +17669,16 @@ body:not(.page-index) .sticky-bar__text {
   background: var(--clr-green-2);
 }
 
-.product-tile__action-btn--wishlist.is-active {
+.product-tile__action-btn--wishlist {
   background: var(--clr-green-2);
+}
+
+.product-tile__action-btn--wishlist:hover {
+  background: var(--clr-green);
+}
+
+.product-tile__action-btn--wishlist.is-active {
+  background: var(--clr-orange);
 }
 
 .product-tile:hover .product-tile__actions {

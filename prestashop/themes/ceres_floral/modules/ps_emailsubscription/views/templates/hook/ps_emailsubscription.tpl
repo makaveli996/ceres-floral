@@ -44,12 +44,6 @@
           <input type="hidden" name="blockHookName" value="{$hookName}">
           <input type="hidden" name="action" value="0">
 
-          {if $msg}
-            <p class="newsletter-banner__alert{if $nw_error} newsletter-banner__alert--error{else} newsletter-banner__alert--success{/if}">
-              {$msg}
-            </p>
-          {/if}
-
           <div class="newsletter-banner__gdpr">
             {capture name='tc_gdpr_consent_html'}{hook h='displayGDPRConsent' id_module=$id_module}{/capture}
             {if $smarty.capture.tc_gdpr_consent_html|trim}
@@ -61,6 +55,12 @@
               {hook h='displayNewsletterRegistration'}
             {/if}
           </div>
+
+          {if $msg}
+            <p class="newsletter-banner__alert{if $nw_error} newsletter-banner__alert--error{else} newsletter-banner__alert--success{/if}">
+              {$msg}
+            </p>
+          {/if}
 
         </form>
       </div>

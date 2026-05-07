@@ -70,6 +70,7 @@
   // Badge — top-left overlay (Figma: #414f42 bg, #f8f3dd text, pill)
   &__badge {
     position: absolute;
+    text-transform: uppercase;
     top: 17px;
     left: 17px;
     z-index: 1;
@@ -85,8 +86,8 @@
     white-space: nowrap;
 
     &--sale {
-      background: var(--clr-green);
-      color: var(--clr-yellow);
+      background: var(--clr-orange-2);
+      color: var(--clr-black-2);
     }
 
     &--new {
@@ -116,6 +117,9 @@
 
     @include md(lg) {
       transform: none;
+      top: auto;
+      bottom: 17px;
+      pointer-events: auto;
     }
   }
 
@@ -142,8 +146,14 @@
     }
 
     &--wishlist {
+      background: var(--clr-green-2);
+
+      &:hover {
+        background: var(--clr-green);
+      }
+
       &.is-active {
-        background: var(--clr-green-2);
+        background: var(--clr-orange);
       }
     }
   }
